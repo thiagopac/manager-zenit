@@ -1,0 +1,20 @@
+#<IfModule mod_headers.c>
+#Header set Cache-Control "no-cache, no-store, must-revalidate"
+#Header set Pragma "no-cache"
+#Header set Expires 0
+#</IfModule>
+
+#ico e js 1 mês de cache
+<FilesMatch "\.(?i:ico|js)$">
+
+  <IfModule mod_headers.c>
+    Header set Cache-Control "max-age=2628000, public, must-revalidate"
+  </IfModule>
+
+</FilesMatch>
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteBase /zenit/
+RewriteRule ^(.*)$ index.php?/$1 [L]

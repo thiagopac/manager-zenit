@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="Zenit Prod">
+    <serverData>
+      <paths name="Zenit">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="zenit" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Zenit Prod">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/zenit" local="$PROJECT_DIR$" web="/zenit" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
