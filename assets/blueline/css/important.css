@@ -1,0 +1,65 @@
+.bgColor15 {
+    background: #34495e!important;
+}
+
+.bgColor16 {
+    background: #9b59b6!important;
+}
+
+.bgColor17 {
+    background: #d35400!important;
+}
+
+.bgColor18 {
+    background: #16a085!important;
+}
+
+.bgColor19 {
+    background: #c0392b!important;
+}
+
+.form-group.filled label, .form-group.focus label {
+  color: #4a4a4a;
+}
+
+.tooltip-inner {
+  max-width:200px!important;
+}
+
+.dropdown-menu {
+  background-color: #a3a3a3;
+}
+
+form .comment-content {
+  height: 410px !important;
+}
+
+.comment-content h5, .comment-content input {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 2px;
+}
+
+.comment-content input#subject {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid #dedede;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 0;
+    height: 25px;
+}
+
+.synced-process-edit + .progress-task-percent {
+    color:#337ab7;
+    margin-left:-2px
+}
+
+.editable-container + .progress-task-percent {
+    visibility: hidden;
+}
+
+.img-rounded {
+    border-radius: 50% !important;
+}

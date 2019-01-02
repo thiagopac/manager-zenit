@@ -1,0 +1,30 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+ERROR - 2018-11-27 17:14:29 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 319
+ERROR - 2018-11-27 17:14:29 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 320
+ERROR - 2018-11-27 17:14:29 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 321
+ERROR - 2018-11-27 19:14:29 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 337
+ERROR - 2018-11-27 19:14:29 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 346
+ERROR - 2018-11-27 19:14:29 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 319
+ERROR - 2018-11-27 19:14:29 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 320
+ERROR - 2018-11-27 19:14:29 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 321
+ERROR - 2018-11-27 19:14:29 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 319
+ERROR - 2018-11-27 19:14:29 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 320
+ERROR - 2018-11-27 19:14:29 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 321
+ERROR - 2018-11-27 19:14:31 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 337
+ERROR - 2018-11-27 19:14:31 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 346
+ERROR - 2018-11-27 19:14:31 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 319
+ERROR - 2018-11-27 19:14:31 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 320
+ERROR - 2018-11-27 19:14:31 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 321
+ERROR - 2018-11-27 19:14:34 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 337
+ERROR - 2018-11-27 19:14:34 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 346
+ERROR - 2018-11-27 19:14:36 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 337
+ERROR - 2018-11-27 19:14:36 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 346
+ERROR - 2018-11-27 19:14:48 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 337
+ERROR - 2018-11-27 19:14:48 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 346
+ERROR - 2018-11-27 19:14:49 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 337
+ERROR - 2018-11-27 19:14:49 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 346
+ERROR - 2018-11-27 19:14:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 337
+ERROR - 2018-11-27 19:14:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 346
+ERROR - 2018-11-27 19:14:57 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 337
+ERROR - 2018-11-27 19:14:57 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/ownergy/zenit/system/libraries/Encrypt.php 346

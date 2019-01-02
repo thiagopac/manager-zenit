@@ -1,0 +1,49 @@
+{
+  "private": true,
+  "scripts": {
+    "dev":
+      "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch":
+      "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot":
+      "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production":
+      "node node_modules/cross-env/dist/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "name": "Zenit",
+  "version": "1.0.0",
+  "description": "Ownergy Solar",
+  "main": "app.js",
+  "keywords": ["Ownergy", "Solar", "Zenit"],
+  "author": "Thiago Pires",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "bootstrap-sass": "^3.3.5",
+    "datatables.net-bs": "^1.10.16",
+    "flatpickr": "^4.1.4",
+    "lodash.orderby": "^4.6.0",
+    "phone-formatter": "0.0.2",
+    "tippy.js": "^1.4.2",
+    "vue-kanban": "1.0.3",
+    "vue-notification": "^1.3.4",
+    "vue-perfect-scrollbar": "0.0.14",
+    "vue-template-compiler": "^2.5.13"
+  },
+  "devDependencies": {
+    "ajv": "^5.5.2",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-stage-2": "^6.24.1",
+    "cross-env": "^5.1.3",
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.6",
+    "laravel-mix": "^1.7.2",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.1",
+    "vue": "^2.5.13",
+    "vue-loader": "^13.6.1",
+    "webpack": "^3.10.0"
+  }
+}

@@ -1,0 +1,55 @@
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+
+.easyPieChart {
+    position: relative;
+    text-align: center;
+    width:70px;
+}
+
+.easyPieChart canvas {
+     margin-top: 21px;
+
+     text-align: center;
+
+}
+
+.chart {
+    float: left;
+    margin: 10px;
+}
+
+.percentage span {
+  text-align: center;
+  color: #505458;
+  font-weight: 600;
+  font-size: 0.9em;
+  margin-bottom: 0.3em;
+  margin-top: 40px;
+  position: absolute;
+  width: 85%;
+}
+
+
+.dark {
+    background: #505458;
+}
+
+.dark .percentage-light,
+.dark .label {
+    text-align: center;
+    color: #999;
+    font-weight: 100;
+    font-size: 1.2em;
+    margin-bottom: 0.3em;
+}
+
