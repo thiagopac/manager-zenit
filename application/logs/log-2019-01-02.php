@@ -1375,3 +1375,937 @@ ERROR - 2019-01-02 18:13:55 --> Severity: 8192  --> Function mcrypt_get_iv_size(
 ERROR - 2019-01-02 18:13:55 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
 ERROR - 2019-01-02 18:13:55 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
 ERROR - 2019-01-02 18:13:55 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:22:44 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:22:44 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:22:44 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 18:22:44 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 18:22:44 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:23:25 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:23:25 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:23:28 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:23:28 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:23:32 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:23:32 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:23:33 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:23:33 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:24:10 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:24:10 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:24:10 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:24:10 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:24:21 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:24:21 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:24:21 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:24:21 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:24:21 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:24:21 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:24:23 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:24:23 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:24:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:24:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:24:57 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:24:57 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:24:58 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:24:58 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:24:59 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:24:59 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:24:59 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:24:59 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:25:01 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:25:01 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:26:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:26:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:26:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:26:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:26:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:26:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:26:58 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:26:58 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:26:58 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:26:58 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:26:58 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:26:58 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:26:59 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:26:59 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:27:16 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:27:16 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:27:16 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:27:16 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:27:16 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:27:16 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:27:43 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:27:43 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:27:43 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:27:43 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:27:43 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:27:43 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:27:45 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:27:45 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:27:45 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 18:27:45 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 18:27:45 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:27:46 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:27:46 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:29:44 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:29:44 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:29:45 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:29:45 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:29:45 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:29:45 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 91
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Undefined variable: project /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 16:29:45 --> Severity: Notice  --> Trying to get property of non-object /Applications/AMPPS/www/zenit/application/views/blueline/projects/_project.php 93
+ERROR - 2019-01-02 18:29:55 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:29:55 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:29:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:29:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:29:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:29:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:30:07 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:30:07 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:17 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:17 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:17 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 18:36:17 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 18:36:17 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:36:18 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:18 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:18 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:18 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:20 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:20 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:20 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:20 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:27 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:27 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:29 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:29 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:29 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:29 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:43 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:43 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:43 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:43 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:43 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:43 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:45 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:45 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:46 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:46 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:48 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:48 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:49 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:49 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:50 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:50 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:50 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:50 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:50 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:50 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:53 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:53 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:36:54 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:36:54 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:37:16 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:37:16 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:37:16 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:37:16 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:37:16 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:37:16 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:37:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:37:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:37:53 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:37:53 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:37:53 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:37:53 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:11 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:11 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:12 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:12 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:12 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:12 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:21 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:21 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:22 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:22 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:28 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:28 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:28 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:28 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:38 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:38 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:38 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:38 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:45 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:45 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:50 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:50 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:38:57 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:38:57 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:39:02 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:39:02 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:39:02 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:39:02 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:39:02 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:39:02 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:39:25 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:39:25 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:39:25 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:39:25 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:39:25 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:39:25 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:39:30 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:39:30 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:39:30 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:39:30 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:39:30 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:39:30 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:39:37 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:39:37 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:39:48 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:39:48 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:40:11 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:40:11 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 16:40:11 --> Could not find the language line "messages_edit_lead_success"
+ERROR - 2019-01-02 16:40:11 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 16:40:11 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 16:40:11 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:40:11 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:40:11 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:40:11 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 18:40:11 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 18:40:11 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:40:11 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 18:40:11 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 18:40:11 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:40:12 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:40:12 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:40:12 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 18:40:12 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 18:40:12 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:40:27 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:40:27 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 16:40:32 --> Could not find the language line "messages_edit_lead_success"
+ERROR - 2019-01-02 16:40:32 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 16:40:32 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 16:40:32 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 18:40:32 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:40:48 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:40:48 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:41:41 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:41:41 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:41:41 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 18:41:41 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 18:41:41 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:41:41 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:41:41 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:41:41 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:41:41 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:43:09 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:43:09 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:43:09 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:43:09 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:43:09 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:43:09 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:43:40 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:43:40 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:43:41 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:43:41 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:43:41 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:43:41 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:43:49 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:43:49 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:43:49 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:43:49 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:43:49 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:43:49 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:44:02 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:44:02 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:44:02 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:44:02 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:44:02 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:44:02 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:44:13 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:44:13 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:44:14 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:44:14 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:44:14 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:44:14 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:46:17 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:46:17 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:46:18 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:46:18 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:46:18 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:46:18 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:46:22 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:46:22 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:46:31 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:46:31 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:46:34 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:46:34 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:46:34 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:46:34 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:46:34 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:46:34 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:46:36 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:46:36 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:16 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:16 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:16 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 18:47:16 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 18:47:16 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:47:16 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:16 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:16 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:16 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:16 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:16 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:32 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:32 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:33 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:33 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:36 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:36 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:36 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:36 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:40 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:40 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:40 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:40 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:40 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:40 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:43 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:43 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:45 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:45 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:45 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:45 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:45 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:45 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:48 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:48 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:54 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:54 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:55 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:55 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:58 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:58 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:58 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:58 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:47:58 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:47:58 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:48:01 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:48:01 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:48:03 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:48:03 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:48:03 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:48:03 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:48:03 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:48:03 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:48:49 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:48:49 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:49:33 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:49:33 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:49:33 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:49:33 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:49:33 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:49:33 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:49:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:49:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:49:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:49:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:49:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:49:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:50:06 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:50:06 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:50:06 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:50:06 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:50:06 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:50:06 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:52:42 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:52:42 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:52:42 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 18:52:42 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 18:52:42 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:52:42 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:52:42 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:52:42 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 18:52:42 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 18:52:42 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 18:52:42 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:52:42 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:52:48 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:52:48 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:52:48 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:52:48 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:52:53 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:52:53 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:52:53 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:52:53 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:52:53 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:52:53 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:03 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:03 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:03 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:03 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:03 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:03 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:05 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:05 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:15 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:15 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:15 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:15 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:15 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:15 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:15 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:15 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:18 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:18 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:18 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:18 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:19 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:19 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:20 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:20 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:20 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:20 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:57 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:57 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:57 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:57 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:53:57 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:53:57 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:09 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:09 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:10 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:10 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:10 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:10 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:17 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:17 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:17 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:17 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:17 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:17 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:26 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:26 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:26 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:26 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:26 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:26 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:27 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:27 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:27 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:27 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:27 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:27 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:48 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:48 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:48 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:48 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:48 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:48 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:51 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:51 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:54:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:54:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:12 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:12 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:12 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:12 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:12 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:12 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:15 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:15 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:27 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:27 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:34 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:34 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:34 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:34 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:34 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:34 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:48 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:48 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:51 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:51 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:51 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:51 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:51 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:51 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:53 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:53 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:53 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:53 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:53 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:53 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:59 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:59 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:59 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:59 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:55:59 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:55:59 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:56:01 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:56:01 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:56:02 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:56:02 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:56:03 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:56:03 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:56:03 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:56:03 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:56:03 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:56:03 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:56:05 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:56:05 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:56:05 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:56:05 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:56:05 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:56:05 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:56:06 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:56:06 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:56:34 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:56:34 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:56:34 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:56:34 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 18:56:34 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 18:56:34 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:00:28 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:00:28 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:00:28 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 19:00:28 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 19:00:28 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 19:00:29 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:00:29 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:00:29 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:00:29 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:00:40 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:00:40 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:00:40 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:00:40 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:00:40 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:00:40 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:00:43 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:00:43 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:00:43 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:00:43 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:00:43 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:00:43 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:00:45 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:00:45 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:00:46 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:00:46 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:00:46 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:00:46 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:04:50 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:04:50 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:04:50 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:04:50 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:04:50 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:04:50 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:06:01 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:06:01 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:06:01 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 19:06:01 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 19:06:01 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 19:13:24 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:13:24 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:13:24 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 19:13:24 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 19:13:24 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 19:13:48 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:13:48 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:13:50 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:13:50 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:13:51 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:13:51 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:13:51 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:13:51 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:13:51 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:13:51 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:14:18 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:14:18 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:14:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:14:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:14:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:14:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:14:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:14:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:14:54 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:14:54 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:14:57 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:14:57 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:14:57 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:14:57 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:14:57 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:14:57 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:14:58 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:14:58 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:34 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:34 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:34 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:34 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:34 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:34 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:36 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:36 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:41 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:41 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:41 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:41 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:41 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:41 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:42 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:42 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:45 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:45 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:46 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:46 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:46 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:46 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:46 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:46 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:50 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:50 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:50 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:50 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:15:50 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:15:50 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:16:42 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:16:42 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:16:43 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:16:43 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:16:43 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:16:43 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:16:53 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:16:53 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:17:21 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:17:21 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:18:39 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:18:39 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:18:39 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 19:18:39 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 19:18:39 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 19:18:40 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:18:40 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:18:40 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:18:40 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:18:42 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:18:42 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:19:50 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:19:50 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:19:50 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:19:50 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:19:50 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:19:50 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:19:51 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:19:51 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:02 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:02 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:02 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:02 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:02 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:02 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:08 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:08 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:27 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:27 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:27 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:27 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:27 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:27 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:28 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:28 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:37 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:37 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:38 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:38 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:38 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:38 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:39 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:39 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:56 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:56 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:20:57 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:20:57 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:21:11 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:21:11 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:21:11 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:21:11 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:21:11 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:21:11 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:21:12 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:21:12 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:22:04 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:22:04 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:22:04 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:22:04 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:22:04 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:22:04 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:22:05 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:22:05 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:22:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:22:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:22:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:22:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:22:52 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:22:52 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:23:09 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:23:09 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:23:09 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:23:09 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:23:09 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:23:09 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:23:42 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:23:42 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:23:42 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 319
+ERROR - 2019-01-02 19:23:42 --> Severity: 8192  --> Function mcrypt_create_iv() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 320
+ERROR - 2019-01-02 19:23:42 --> Severity: 8192  --> Function mcrypt_encrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 321
+ERROR - 2019-01-02 19:23:43 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:23:43 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:23:43 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:23:43 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:24:03 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:24:03 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:24:03 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:24:03 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:24:03 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:24:03 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:24:17 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:24:17 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:24:23 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:24:23 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:24:23 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:24:23 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:25:02 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:25:02 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:25:05 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:25:05 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:25:10 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:25:10 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:25:23 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:25:23 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:25:28 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:25:28 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 17:25:28 --> Severity: Notice  --> Undefined variable: access /Applications/AMPPS/www/zenit/application/views/blueline/clients/_company_from_lead.php 215
+ERROR - 2019-01-02 17:25:28 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /Applications/AMPPS/www/zenit/application/views/blueline/clients/_company_from_lead.php 215
+ERROR - 2019-01-02 17:25:28 --> Severity: Notice  --> Undefined variable: access /Applications/AMPPS/www/zenit/application/views/blueline/clients/_company_from_lead.php 215
+ERROR - 2019-01-02 17:25:28 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /Applications/AMPPS/www/zenit/application/views/blueline/clients/_company_from_lead.php 215
+ERROR - 2019-01-02 17:25:28 --> Severity: Notice  --> Undefined variable: access /Applications/AMPPS/www/zenit/application/views/blueline/clients/_company_from_lead.php 215
+ERROR - 2019-01-02 17:25:28 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /Applications/AMPPS/www/zenit/application/views/blueline/clients/_company_from_lead.php 215
+ERROR - 2019-01-02 17:25:28 --> Severity: Notice  --> Undefined variable: access /Applications/AMPPS/www/zenit/application/views/blueline/clients/_company_from_lead.php 215
+ERROR - 2019-01-02 17:25:28 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /Applications/AMPPS/www/zenit/application/views/blueline/clients/_company_from_lead.php 215
+ERROR - 2019-01-02 17:25:28 --> Severity: Notice  --> Undefined variable: access /Applications/AMPPS/www/zenit/application/views/blueline/clients/_company_from_lead.php 215
+ERROR - 2019-01-02 17:25:28 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /Applications/AMPPS/www/zenit/application/views/blueline/clients/_company_from_lead.php 215
+ERROR - 2019-01-02 17:25:28 --> Severity: Notice  --> Undefined variable: access /Applications/AMPPS/www/zenit/application/views/blueline/clients/_company_from_lead.php 215
+ERROR - 2019-01-02 17:25:28 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given /Applications/AMPPS/www/zenit/application/views/blueline/clients/_company_from_lead.php 215
+ERROR - 2019-01-02 19:25:44 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:25:44 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:26:22 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:26:22 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:26:23 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:26:23 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:26:23 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:26:23 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:26:25 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:26:25 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:27:04 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:27:04 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:27:04 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:27:04 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:27:04 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:27:04 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:27:07 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:27:07 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:27:46 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:27:46 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:27:46 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:27:46 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:27:46 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:27:46 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346
+ERROR - 2019-01-02 19:27:48 --> Severity: 8192  --> Function mcrypt_get_iv_size() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 337
+ERROR - 2019-01-02 19:27:48 --> Severity: 8192  --> Function mcrypt_decrypt() is deprecated /Applications/AMPPS/www/zenit/system/libraries/Encrypt.php 346

@@ -8,19 +8,18 @@
 			<a href="<?=base_url()?>leads/status/create" class="btn btn-primary" data-toggle="mainmodal" v-cloak>
 				<?=$this->lang->line('application_create_status');?>
 			</a>
-			<a v-if="stages.length > 1" href="<?=base_url()?>leads/import" class="btn btn-success" data-toggle="mainmodal" v-cloak>
-				<?=$this->lang->line('application_import_leads');?>
-			</a>
 			<input class="kanban-search pull-right" :class="(search != '') ? 'active' : ''" type="text" name="search" v-model="search" placeholder="<?=$this->lang->line('application_search');?>"
 			/>
-			<div class="select-wrapper pull-right" v-cloak>
-				<select class="kanban-tags" type="text" name="tagsearch" v-model="tagSearch" placeholder="<?=$this->lang->line('application_tags');?>">
+
+            <!--     FILTRO POR TAG / ESCONDIDO       -->
+			<!--<div class="select-wrapper pull-right" v-cloak>
+				<select class="kanban-tags" type="text" name="tagsearch" v-model="tagSearch" placeholder="<?/*=$this->lang->line('application_tags');*/?>">
 					<option value="" selected>
-						<?=$this->lang->line('application_all_tags');?>
+						<?/*=$this->lang->line('application_all_tags');*/?>
 					</option>
 					<option v-for="tag in getAllTags" :value="tag" v-cloak>{{ tag }}</option>
 				</select>
-			</div>
+			</div>-->
 			<kanban-board :stages="stages" :blocks="getLeads" @update-block="updateBlock" @delete-block="deleteBlock">
 				<div v-for="(stage, index) in stages" :slot="stage.name" v-cloak>
 					<div class="btn-group pull-right-responsive">
@@ -121,84 +120,112 @@
 										</span>
 										{{ block.position }}
 									</li>
-									<li v-if="block.address != '' || block.city != '' || block.zipcode != '' || block.country != ''">
-										<span>
-											<?=$this->lang->line('application_address');?>
-										</span>
-										{{ block.address}} {{ block.city }} {{ block.zipcode}} {{ block.country }}
-									</li>
-									<li v-if="block.email  != ''">
-										<span>
-											<?=$this->lang->line('application_email');?>
-										</span>
-										{{ block.email }}
-									</li>
-									<li v-if="block.website  != ''">
-										<span>
-											<?=$this->lang->line('application_website');?>
-										</span>
-										<a :href="block.website" target="_blank">{{ block.website }}</a>
-									</li>
-									<li v-if="block.phone  != ''">
-										<span>
-											<?=$this->lang->line('application_phone');?>
-										</span>
-										{{ block.phone }}
-									</li>
-									<li v-if="block.mobile  != ''">
-										<span>
-											<?=$this->lang->line('application_mobile');?>
-										</span>
-										{{ block.mobile }}
-									</li>
-									<li v-if="block.language  != ''">
-										<span>
-											<?=$this->lang->line('application_language');?>
-										</span>
-										{{ block.language }}
-									</li>
-									<li v-if="block.source != ''">
-										<span>
-											<?=$this->lang->line('application_source');?>
-										</span>
-										{{ block.source }}
-									</li>
-									<li v-if="block.tags" class="tags">
-										<span>
-											<?=$this->lang->line('application_tags');?>
-										</span>
-										<span v-for="tag in blockTags(block.tags)" class="label label-success">{{ tag }}</span>
-									</li>
+
+
+<!--									<li v-if="block.address != '' || block.city != '' || block.zipcode != '' || block.country != ''">-->
+<!--										<span>-->
+<!--											--><?//=$this->lang->line('application_address');?>
+<!--										</span>-->
+<!--										{{ block.address}} {{ block.city }} {{ block.zipcode}} {{ block.country }}-->
+<!--									</li>-->
+
+
+<!--									<li v-if="block.email  != ''">-->
+<!--										<span>-->
+<!--											--><?//=$this->lang->line('application_email');?>
+<!--										</span>-->
+<!--										{{ block.email }}-->
+<!--									</li>-->
+
+
+<!--									<li v-if="block.website  != ''">-->
+<!--										<span>-->
+<!--											--><?//=$this->lang->line('application_website');?>
+<!--										</span>-->
+<!--										<a :href="block.website" target="_blank">{{ block.website }}</a>-->
+<!--									</li>-->
+
+
+<!--									<li v-if="block.phone  != ''">-->
+<!--										<span>-->
+<!--											--><?//=$this->lang->line('application_phone');?>
+<!--										</span>-->
+<!--										{{ block.phone }}-->
+<!--									</li>-->
+
+
+<!--									<li v-if="block.mobile  != ''">-->
+<!--										<span>-->
+<!--											--><?//=$this->lang->line('application_mobile');?>
+<!--										</span>-->
+<!--										{{ block.mobile }}-->
+<!--									</li>-->
+
+
+<!--									<li v-if="block.language  != ''">-->
+<!--										<span>-->
+<!--											--><?//=$this->lang->line('application_language');?>
+<!--										</span>-->
+<!--										{{ block.language }}-->
+<!--									</li>-->
+
+
+<!--									<li v-if="block.source != ''">-->
+<!--										<span>-->
+<!--											--><?//=$this->lang->line('application_source');?>
+<!--										</span>-->
+<!--										{{ block.source }}-->
+<!--									</li>-->
+
+
+<!--									<li v-if="block.tags" class="tags">-->
+<!--										<span>-->
+<!--											--><?//=$this->lang->line('application_tags');?>
+<!--										</span>-->
+<!--										<span v-for="tag in blockTags(block.tags)" class="label label-success">{{ tag }}</span>-->
+<!--									</li>-->
+
+
 									<li v-if="block.description  != ''">
 										<span>
 											<?=$this->lang->line('application_description');?>
 										</span>
 										<p v-html="block.description"></p>
 									</li>
+
+
 									<li v-if="block.user_id  != 0">
 										<span>
 											<?=$this->lang->line('application_agent');?>
 										</span>
 										{{ block.user.firstname }} {{ block.user.lastname }}
 									</li>
+
+
 									<li v-if="block.created != ''">
 										<span>
 											<?=$this->lang->line('application_created');?>
 										</span>
 										{{ datetime(block.created) }}
 									</li>
-									<li v-if="block.modified != ''">
-										<span>
-											<?=$this->lang->line('application_modified');?>
-										</span>
-										{{ datetime(block.modified) }}
-									</li>
-									<li v-if="block.valid_until != ''">
-										<span>
-											<?=$this->lang->line('application_valid_until');?>
-										</span>
-										{{ datetime(block.valid_until) }}
-									</li>
+
+
+<!--									<li v-if="block.modified != ''">-->
+<!--										<span>-->
+<!--											--><?//=$this->lang->line('application_modified');?>
+<!--										</span>-->
+<!--										{{ datetime(block.modified) }}-->
+<!--									</li>-->
+
+
+<!--									<li v-if="block.valid_until != ''">-->
+<!--										<span>-->
+<!--											--><?//=$this->lang->line('application_valid_until');?>
+<!--										</span>-->
+<!--										{{ datetime(block.valid_until) }}-->
+<!--									</li>-->
+
+
 								</ul>
 							</div>
 
