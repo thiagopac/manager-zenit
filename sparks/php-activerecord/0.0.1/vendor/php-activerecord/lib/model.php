@@ -1827,7 +1827,7 @@ class Model
 	 * @param Closure $closure The closure to execute. To cause a rollback have your closure return false or throw an exception.
 	 * @return boolean True if the transaction was committed, False if rolled back.
 	 */
-	public static function transaction($closure)
+	public static function transaction($closurestr)
 	{
 		$connection = static::connection();
 
@@ -1835,7 +1835,7 @@ class Model
 		{
 			$connection->transaction();
 
-			if ($closure() === false)
+			if ($closurestr() === false)
 			{
 				$connection->rollback();
 				return false;

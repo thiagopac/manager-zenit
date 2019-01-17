@@ -760,7 +760,7 @@
 
 
 <div class="row tab-pane fade" role="tabpanel" id="milestones-tab">
-     <div class="col-xs-12 col-sm-12 col-lg-6">
+     <div class="col-xs-12 col-sm-12 col-lg-12">
          <div class="box-shadow">
             <div class="table-head"><?=$this->lang->line('application_milestones');?>
                  <span class=" pull-right">
@@ -858,44 +858,44 @@
                </div>
 
 
-
-            <div class="col-xs-12 col-sm-12 col-lg-6">
+        <!-- GRADE DE TAREFAS SEM PACOTE DE TRABALHO ESCONDIDO / ESCONDIDO -->
+            <!--<div class="col-xs-12 col-sm-12 col-lg-6">
             <div class="box-shadow">
              <div class="table-head">
-                <?=$this->lang->line('application_tasks_without_milestone');?>
+                <?/*=$this->lang->line('application_tasks_without_milestone');*/?>
             </div>
             <div class="subcont no-padding min-height-410">
             <ul id="task-list2" class="todo sortable-list">
-                <?php $count3 = 0; foreach ($tasksWithoutMilestone as $value):   $count3 =  $count3+1;  ?>
-                <li id="milestonetask_<?=$value->id;?>" class="<?=$value->status;?> priority<?=$value->priority;?> list-item">
-                    <a href="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$value->id;?>" class="ajax-silent task-check"></a>
-                    <input name="form-field-checkbox" class="checkbox-nolabel task-check dynamic-reload" data-reload="tile-pie" type="checkbox" data-link="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$value->id;?>" <?php if ($value->status == "done") {
+                <?php /*$count3 = 0; foreach ($tasksWithoutMilestone as $value):   $count3 =  $count3+1;  */?>
+                <li id="milestonetask_<?/*=$value->id;*/?>" class="<?/*=$value->status;*/?> priority<?/*=$value->priority;*/?> list-item">
+                    <a href="<?/*=base_url()*/?>projects/tasks/<?/*=$project->id;*/?>/check/<?/*=$value->id;*/?>" class="ajax-silent task-check"></a>
+                    <input name="form-field-checkbox" class="checkbox-nolabel task-check dynamic-reload" data-reload="tile-pie" type="checkbox" data-link="<?/*=base_url()*/?>projects/tasks/<?/*=$project->id;*/?>/check/<?/*=$value->id;*/?>" <?php /*if ($value->status == "done") {
                 echo "checked";
-            }?>/>
+            }*/?>/>
                     <span class="lbl">
-                        <p class="truncate name"><?=$value->name;?></p>
+                        <p class="truncate name"><?/*=$value->name;*/?></p>
                     </span>
                     <span class="pull-right">
-                    <?php if ($value->user_id != 0) {
-                ?><img class="img-circle list-profile-img tt"  title="<?=$value->user->firstname; ?> <?=$value->user->lastname; ?>"  src="<?=$value->user->userpic; ?>"><?php
-            } ?>
-                    <?php if ($value->public != 0) {
-                ?><span class="list-button"><i class="icon dripicons-preview tt" title="" data-original-title="<?=$this->lang->line('application_task_public'); ?>"></i></span><?php
-            } ?>
-                    <a href="<?=base_url()?>projects/tasks/<?=$project->id;?>/update/<?=$value->id;?>" class="edit-button" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
+                    <?php /*if ($value->user_id != 0) {
+                */?><img class="img-circle list-profile-img tt"  title="<?/*=$value->user->firstname; */?> <?/*=$value->user->lastname; */?>"  src="<?/*=$value->user->userpic; */?>"><?php
+/*            } */?>
+                    <?php /*if ($value->public != 0) {
+                */?><span class="list-button"><i class="icon dripicons-preview tt" title="" data-original-title="<?/*=$this->lang->line('application_task_public'); */?>"></i></span><?php
+/*            } */?>
+                    <a href="<?/*=base_url()*/?>projects/tasks/<?/*=$project->id;*/?>/update/<?/*=$value->id;*/?>" class="edit-button" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
                     </span>
 
                 </li>
-                <?php endforeach;?>
-                    <?php if ($count3 == 0) {
-                ?>
-                      <li class="notask list-item ui-state-disabled"><?=$this->lang->line('application_no_tasks_without_milestone'); ?></li>
+                <?php /*endforeach;*/?>
+                    <?php /*if ($count3 == 0) {
+                */?>
+                      <li class="notask list-item ui-state-disabled"><?/*=$this->lang->line('application_no_tasks_without_milestone'); */?></li>
                     <?php
-            }?>
+/*            }*/?>
                 </ul>
             </div>
             </div>
-            </div>
+            </div>-->
 
 
 </div>
