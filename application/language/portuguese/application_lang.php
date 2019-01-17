@@ -48,6 +48,7 @@ $lang['application_default_invoice_terms'] = 'Termos padrões da fatura';
 $lang['application_default_terms'] = 'Termos padrões';
 $lang['application_delete'] = 'Excluir';
 $lang['application_description'] = 'Descrição';
+$lang['application_observations'] = 'Observações';
 $lang['application_domain'] = 'Domínio';
 $lang['application_done'] = 'Concluído';
 $lang['application_download'] = 'Baixar';

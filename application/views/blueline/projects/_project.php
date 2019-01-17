@@ -104,7 +104,7 @@ if(isset($project)){ ?>
 </div>
 
  <div class="form-group">
-                        <label for="textfield"><?=$this->lang->line('application_description');?></label>
+                        <label for="textfield"><?=$this->lang->line('application_observations');?></label>
                         <textarea class="input-block-level form-control"  id="textfield" name="description"><?php if(isset($project)){echo $project->description;} ?></textarea>
 </div>
 
