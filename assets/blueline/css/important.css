@@ -63,3 +63,11 @@ form .comment-content {
 .img-rounded {
     border-radius: 50% !important;
 }
+
+.todo li.warning-task {
+    background: #ffefb5; !important;
+}
+
+.todo li.danger-task {
+    background: #fbc4c4; !important;
+}

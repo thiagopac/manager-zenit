@@ -9,15 +9,20 @@
 
       </div>
       <div class="col-md-11 col-xs-9 smallscreen">
-        <h1><span class="nobold">#<?=$core_settings->project_prefix;?><?=$project->reference;?></span> - <?=$project->name;?></h1>
+        <!--    Prefixo e ID do banco de dados retirado da view de projetos / ESCONDIDO      -->
+<!--          <h1><span class="nobold">#--><?//=$core_settings->project_prefix;?><!----><?//=$project->reference;?><!--</span> - --><?//=$project->name;?><!--</h1>-->
+          <h1><span class="nobold"><?=$project->name;?></h1>
          <p class="truncate description"><?=$project->description;?></p>
       </div>
 
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active hidden-xs"><a href="#projectdetails-tab" aria-controls="projectdetails-tab" role="tab" data-toggle="tab"><?=$this->lang->line('application_project_details');?></a></li>
+
+        <!--  ABA DE TAREFAS ESCONDIDA PARA LEVAR TAREFAS PARA PACOTES DE TRABALHO / ESCONDIDO  -->
         <li role="presentation" class="hidden-xs"><a href="#tasks-tab" id="task_menu_link" aria-controls="tasks-tab" role="tab" data-toggle="tab"><?php if ($mytasks != 0) {
     ?><span class="badge"><?=$mytasks?></span><?php
 } ?><?=$this->lang->line('application_tasks');?></a></li>
+        <!--  -->
 
         <li role="presentation" class="hidden-xs"><a href="#milestones-tab" aria-controls="tasks-tab" role="tab" data-toggle="tab"><?=$this->lang->line('application_milestones');?></a></li>
 
@@ -770,9 +775,7 @@
 <ul id="milestones-list" class="todo sortlist sortable-list2">
     <?php  $count = 0;
     foreach ($project->project_has_milestones as $milestone):
-            $count2 = 0; $count = $count+1; ?>
-
-            <?php
+            $count2 = 0; $count = $count+1;
 
               $tasksInMilestone = count($milestone->project_has_tasks);
               $taskSize = 100/$tasksInMilestone;
@@ -792,7 +795,7 @@
               $completion = is_nan($completion) ? 0 : $completion;
 
               $color = $completion == 100 ? "bgColor18" : "";
-            ?>
+    ?>
 
         <li id="milestoneLI_<?=$milestone->id;?>" class="hasItems">
             <h1 class="milestones__header ui-state-disabled <?=$color?>">
@@ -805,7 +808,17 @@
             </h1>
             <ul id="milestonelist_<?=$milestone->id;?>" class="sortable-list">
                 <?php  foreach ($milestone->project_has_tasks as $value):   $count2 =  $count2+1;  ?>
-                <li id="milestonetask_<?=$value->id;?>" class="<?=$value->status;?> priority<?=$value->priority;?> list-item">
+                <li id="milestonetask_<?=$value->id;?>" class="<?=$value->status;?> priority<?=$value->priority;?> list-item <?php
+
+                $start = strtotime($value->start_date);
+                $end = strtotime($value->due_date);
+                $current =  strtotime(date('Y-m-d H:i'));
+
+                $completed = (($current - $start) / ($end - $start)) * 100;
+
+                if ($completed >= 100) { echo "danger-task"; }else if($completed >= 60){ echo "warning-task"; }
+
+                ?>">
                     <a href="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$value->id;?>" class="ajax-silent task-check"></a>
                     <input name="form-field-checkbox" class="checkbox-nolabel task-check dynamic-reload" data-reload="tile-pie" data-reload2="milestone_completion_<?=$milestone->id;?>" type="checkbox" data-link="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$value->id;?>" <?php if ($value->status == "done") {
                 echo "checked";

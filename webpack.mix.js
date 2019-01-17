@@ -63,4 +63,4 @@ mix
     ],
     "./assets/blueline/js/app.js"
   )
-  .sass("./assets/blueline/css/bootstrap.scss", "./assets/blueline/css/app.css");
+  .sass("./assets/blueline/css/bootstrap.scss", "./assets/blueline/css/app.css", "./assets/blueline/css/important.css");

@@ -79,13 +79,13 @@ $public = "0";
     <div class="col-md-6">
             <div class="form-group">
                                       <label for="start_date"><?=$this->lang->line('application_start_date');?></label>
-                                      <input class="form-control datepicker not-required" name="start_date" id="start_date" type="text" value="<?php if(isset($task)){ echo $task->start_date;} ?>" />
+                                      <input class="form-control datepicker-time not-required" data-enable-time=true name="start_date" id="start_date" type="text" value="<?php if(isset($task)){ echo $task->start_date;} ?>" />
             </div>
     </div>
     <div class="col-md-6">
             <div class="form-group">
                                       <label for="due_date"><?=$this->lang->line('application_due_date');?></label>
-                                      <input class="form-control datepicker-linked not-required" name="due_date" id="due_date" type="text" value="<?php if(isset($task)){echo $task->due_date;} ?>" />
+                                      <input class="form-control datepicker-time datepicker-time-linked not-required" data-enable-time=true name="due_date" id="due_date" type="text" value="<?php if(isset($task)){echo $task->due_date;} ?>" />
             </div>
     </div>
 </div>

@@ -63,11 +63,11 @@ if(isset($project)){ ?>
 
 <div class="form-group">
                           <label for="start"><?=$this->lang->line('application_start_date');?> *</label>
-                          <input class="form-control datepicker" name="start" id="start" type="text" value="<?php if(isset($project)){echo $project->start;} ?>" required/>
+                          <input class="form-control datepicker-time" data-enable-time=true name="start" id="start" type="text" value="<?php if(isset($project)){echo $project->start;} ?>" required/>
 </div>
 <div class="form-group">
                           <label for="end"><?=$this->lang->line('application_deadline');?> *</label>
-                          <input class="form-control datepicker-linked" name="end" id="end" type="text" value="<?php if(isset($project)){echo $project->end;} ?>" required/>
+                          <input class="form-control datepicker-time datepicker-time-linked" data-enable-time=true name="end" id="end" type="text" value="<?php if(isset($project)){echo $project->end;} ?>" required/>
 </div>
 
 <!-- CRIAR CATEGORIA NO PROJETO / ALTERADO ESCONDIDO -->

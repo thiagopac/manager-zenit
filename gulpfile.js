@@ -27,7 +27,7 @@ elixir(function(mix) {
         "./assets/blueline/css/vue/*.scss",
         "./node_modules/tippy.js/src/scss/tippy.scss"
       ],
-      "assets/blueline/css/app.css"
+      "assets/blueline/css/app.css", "assets/blueline/css/important.css"
     )
     .webpack("./assets/blueline/js/vue_app.js", "./assets/blueline/js/vue_app_packed.js")
     .scripts(
