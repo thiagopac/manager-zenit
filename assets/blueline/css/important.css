@@ -1,21 +1,21 @@
 .bgColor15 {
-    background: #34495e!important;
+    background: #34495e     !important;
 }
 
 .bgColor16 {
-    background: #9b59b6!important;
+    background: #9b59b6 !important;
 }
 
 .bgColor17 {
-    background: #d35400!important;
+    background: #d35400 !important;
 }
 
 .bgColor18 {
-    background: #16a085!important;
+    background: #16a085 !important;
 }
 
 .bgColor19 {
-    background: #c0392b!important;
+    background: #c0392b !important;
 }
 
 .form-group.filled label, .form-group.focus label {
@@ -23,7 +23,7 @@
 }
 
 .tooltip-inner {
-  max-width:200px!important;
+  max-width:200px !important;
 }
 
 .dropdown-menu {
@@ -65,9 +65,30 @@ form .comment-content {
 }
 
 .todo li.warning-task {
-    background: #ffefb5; !important;
+    background: #fddf74 !important;
 }
 
 .todo li.danger-task {
-    background: #fbc4c4; !important;
+    background: #f37474 !important;
+}
+
+.todo li.done {
+    background: #44ab44 !important;;
+}
+
+ul.todo li.done .lbl p {
+    color: black !important;
+}
+
+.task-cell-start-date-end-date {
+    font-size: 13px !important;
+    margin-right: 20px !important;
+    left: 8px !important;
+}
+
+.milestone-right-elements {
+
+    display: inline-block !important;
+    float: right !important;
+    clear: left !important;
 }

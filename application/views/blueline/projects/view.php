@@ -771,7 +771,7 @@
             </div>
 
 
-<div class="subcont no-padding min-height-410">
+<div class="subcont no-padding min-he   ight-410">
 <ul id="milestones-list" class="todo sortlist sortable-list2">
     <?php  $count = 0;
     foreach ($project->project_has_milestones as $milestone):
@@ -801,11 +801,12 @@
             <h1 class="milestones__header ui-state-disabled <?=$color?>">
                <i class="ion-android-list milestone__header__icon"></i>
                 <?=$milestone->name?>
-
                 <span class="pull-right"><span id="milestone_completion_<?=$milestone->id;?>" style="margin-top: 0px; float: left!important;"> <?=$completion?>% <?=$this->lang->line('application_completed'); ?></span>
-                  <a href="<?=base_url()?>projects/milestones/<?=$milestone->project_id;?>/update/<?=$milestone->id;?>" data-toggle="mainmodal"><i class="icon dripicons-gear milestone__header__right__icon"></i></a>
+                  <a href="<?=base_url()?>projects/milestones/<?=$milestone->project_id;?>/update/<?=$milestone->id;?>" data-toggle="mainmodal"><i class="icon dripicons-plus milestone__header__right__icon"></i></a>
+                    <a href="<?=base_url()?>projects/milestones/<?=$milestone->project_id;?>/update/<?=$milestone->id;?>" data-toggle="mainmodal"><i class="icon dripicons-gear milestone__header__right__icon"></i></a>
                 </span>
             </h1>
+
             <ul id="milestonelist_<?=$milestone->id;?>" class="sortable-list">
                 <?php  foreach ($milestone->project_has_tasks as $value):   $count2 =  $count2+1;  ?>
                 <li id="milestonetask_<?=$value->id;?>" class="<?=$value->status;?> priority<?=$value->priority;?> list-item <?php
@@ -827,6 +828,7 @@
                         <p class="truncate name"><?=$value->name;?></p>
                     </span>
                     <span class="pull-right">
+                        <span class="task-cell-start-date-end-date"><?php if ($value->start_date != null){ ?><?=date("d/m/Y H:i", strtotime($value->start_date));?><?php } ?> <?php if ($value->start_date != null || $value->due_date != null){  ?>➔<?php } ?> <?php if ($value->due_date != null){ ?><?=date("d/m/Y H:i", strtotime($value->due_date));?><?php }else{ ?> <span style="visibility: hidden;"> <?=date("d/m/Y H:i", time());?> </span> <?php } ?></span>
                     <?php if ($value->user_id != 0) {
                 ?><img class="img-circle list-profile-img tt"  title="<?=$value->user->firstname; ?> <?=$value->user->lastname; ?>"  src="<?=$value->user->userpic; ?>"><?php
             } ?>
