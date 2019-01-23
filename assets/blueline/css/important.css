@@ -81,14 +81,40 @@ ul.todo li.done .lbl p {
 }
 
 .task-cell-start-date-end-date {
-    font-size: 13px !important;
     margin-right: 20px !important;
     left: 8px !important;
+    font-size: 11px!important;
+    font-family: Open Sans, Arial;
+    font-weight: 600!important;
 }
 
 .milestone-right-elements {
-
     display: inline-block !important;
     float: right !important;
     clear: left !important;
+}
+
+.milestone-new-task-btn {
+    font-size: 10px!important;
+    color: #fff !important;
+    text-transform: uppercase !important;
+    letter-spacing: .5px !important;
+    padding: 3px 8px 3px 8px;
+    margin-right: 10px;
+    border-radius: 2px;
+    border: 0;
+    word-spacing: 1px;
+    font-family: Open Sans, Arial;
+    font-weight: 700!important;
+    -webkit-box-shadow: 0 2px 1px 0 rgba(67, 69, 139, .15), 0 2px 5px 0 rgba(50, 50, 93, .1), 0 1px 2px 0 rgba(0, 0, 0, .08), 0 0 0 0 transparent;
+    box-shadow: 0 2px 1px 0 rgba(67, 69, 139, .15), 0 2px 5px 0 rgba(50, 50, 93, .1), 0 1px 2px 0 rgba(0, 0, 0, .08), 0 0 0 0 transparent;
+}
+
+ul.todo li .lbl p {
+    font-family: Open Sans, Arial !important;
+    font-size: 13px!important;
+}
+
+.todo a {
+    font-family: Open Sans, Arial !important;
 }

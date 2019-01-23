@@ -757,12 +757,13 @@ class Projects extends MY_Controller
         $this->theme_view = 'blank';
     }
 
-    public function tasks($id = false, $condition = false, $task_id = false)
+    public function tasks($id = false, $condition = false, $task_id = false, $milestone_id = false)
     {
         $this->view_data['submenu'] = array(
                                 $this->lang->line('application_back') => 'projects',
                                 $this->lang->line('application_overview') => 'projects/view/'.$id,
                                 );
+
         switch ($condition) {
             case 'add':
                 $this->content_view = 'projects/_tasks';
@@ -784,6 +785,7 @@ class Projects extends MY_Controller
                     $this->theme_view = 'modal';
                     $this->view_data['project'] = Project::find($id);
                     $this->view_data['title'] = $this->lang->line('application_add_task');
+                    $this->view_data['milestone_id'] = $milestone_id;
                     $this->view_data['form_action'] = 'projects/tasks/'.$id.'/add';
                     $this->content_view = 'projects/_tasks';
                 }

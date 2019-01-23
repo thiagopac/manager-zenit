@@ -235,7 +235,7 @@ class Tickets extends MY_Controller
             }
             $this->view_data['users'] = User::find('all', ['conditions' => ['status=?', 'active']]);
             $this->view_data['queues'] = Queue::find('all', ['conditions' => ['inactive=?', '0']]);
-            $this->view_data['types'] = Type::find('all', ['conditions' => ['inactive=?', '0']]);
+                $this->view_data['types'] = Type::find('all', ['conditions' => ['inactive=?', '0']]);
             $this->view_data['settings'] = Setting::first();
 
             if ($this->user->admin != 1) {

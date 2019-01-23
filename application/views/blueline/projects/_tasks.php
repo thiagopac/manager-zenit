@@ -68,6 +68,8 @@ $public = "0";
                     $milestones[$milestone->id] = $milestone->name;
                 endforeach;
         if(isset($task)){$milestone_selected = $task->milestone_id;}else{$milestone_selected = "";}
+        if(isset($milestone_id)){$milestone_selected = $milestone_id;}else{$milestone_selected = "";}
+//        $milestone_selected = 3;
         echo form_dropdown('milestone_id', $milestones, $milestone_selected, 'style="width:100%" class="chosen-select"');?>
 </div>
 
