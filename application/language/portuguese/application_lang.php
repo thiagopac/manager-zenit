@@ -876,3 +876,21 @@ $lang['application_new_comment_in_task'] = 'Novo comentário em tarefa';
 $lang['application_comment'] = 'Comentário';
 $lang['application_user_role'] = 'Cargo/Posição';
 $lang['application_task'] = 'Tarefa';
+
+
+
+$lang['test'] = 'Teste';
+
+
+
+$lang['application_add_area'] = 'Adicionar Área';
+$lang['application_areas'] = 'Áreas';
+$lang['application_area'] = 'Área';
+$lang['application_edit_area'] = 'Editar Área';
+$lang['application_no_areas_yet'] = 'Não existem áreas ainda';
+$lang['application_add_milestone_to_area'] = 'Adicionar pacote de trabalho para a área';
+
+$lang['application_department'] = 'Departamento';
+$lang['application_departments'] = 'Departamentos';
+$lang['application_add_department'] = 'Adicionar Departamento';
+$lang['application_edit_department'] = 'Editar Departamento';

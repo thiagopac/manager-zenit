@@ -18,13 +18,28 @@
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active hidden-xs"><a href="#projectdetails-tab" aria-controls="projectdetails-tab" role="tab" data-toggle="tab"><?=$this->lang->line('application_project_details');?></a></li>
 
-        <!--  ABA DE TAREFAS ESCONDIDA PARA LEVAR TAREFAS PARA PACOTES DE TRABALHO / ESCONDIDO  -->
-<!--        <li role="presentation" class="hidden-xs"><a href="#tasks-tab" id="task_menu_link" aria-controls="tasks-tab" role="tab" data-toggle="tab"><?php /*if ($mytasks != 0) {
-    */?><span class="badge"><?/*=$mytasks*/?></span><?php
-/*} */?><?/*=$this->lang->line('application_tasks');*/?></a></li>-->
-        <!--  -->
+          <li role="presentation" class="hidden-xs dropdown">
+              <a  href="#"
+                  class="dropdown-toggle"
+                  data-toggle="dropdown"
+                  aria-controls="myTabDrop1-contents"
+                  aria-expanded="false">
+                  <span id="departments-drop-menu"><?=$this->lang->line('application_departments');?></span>
+                  <span class="caret"></span>
+              </a>
+<!--              TENHO QUE LISTAR CADA DEPARTAMENTO PARA SUBSTITUIR O DEPARTAMENTO CLICADO NA LISTA DROP DOWN-->
 
-        <li role="presentation" class="hidden-xs"><a href="#milestones-tab" aria-controls="tasks-tab" role="tab" data-toggle="tab"><?=$this->lang->line('application_milestones');?></a></li>
+              
+              <ul class="dropdown-menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents" id="department-menu">
+                  <?php foreach ($departments as $department): ?>
+                  <li role="presentation">
+                      <a href="#milestones-tab" aria-controls="tasks-tab" role="tab" class="department-link" data-name="<?=$department->name?>" id="department_<?=$department->id?>" data-toggle="tab">
+                          <?=$department->name?>
+                      </a>
+                  </li>
+                  <?php endforeach; ?>
+              </ul>
+          </li>
 
          <!-- GRAFICO DE GANTT / ESCONDIDO -->
         <li role="presentation" class="hidden-xs"><a href="#gantt-tab" class="resize-gantt" aria-controls="gantt-tab" role="tab" data-toggle="tab"><?=$this->lang->line('application_gantt');?></a></li>
@@ -378,11 +393,25 @@
 
 
 <div class="row tab-pane fade" role="tabpanel" id="milestones-tab">
-     <div class="col-xs-12 col-sm-12 col-lg-12">
-         <div class="box-shadow">
-            <div class="table-head"><?=$this->lang->line('application_milestones');?>
+
+    <!--<div class="col-xs-12 col-sm-12 col-lg-12">
+        <div class="pull-right" style="padding-top: 20px;">
+            <a href="<?/*=base_url()*/?>projects/areas/<?/*=$project->id;*/?>/add" class="btn btn-danger" data-toggle="mainmodal">
+                <?/*=$this->lang->line('application_add_area');*/?>
+            </a>
+        </div>
+    </div>-->
+
+    <div id="department-areas">
+
+    <?php foreach ($departments as $department) {?>
+
+    <?php foreach ($department->department_has_areas as $area) {?>
+     <div class="col-xs-6 col-sm-6 col-lg-6 department_<?=$department->id?>">
+         <div id="areas-list" class="box-shadow">
+            <div class="table-head"><?=$area->name;?>
                  <span class=" pull-right">
-                      <a href="<?=base_url()?>projects/milestones/<?=$project->id;?>/add" class="btn btn-primary" data-toggle="mainmodal">
+                      <a href="<?=base_url()?>projects/milestones/<?=$project->id;?>/add/area_id/<?=$area->id?>" class="btn btn-success" data-toggle="mainmodal">
                           <?=$this->lang->line('application_add_milestone');?>
                       </a>
                  </span>
@@ -391,8 +420,9 @@
 
 <div class="subcont no-padding min-he   ight-410">
 <ul id="milestones-list" class="todo sortlist sortable-list2">
+
     <?php  $count = 0;
-    foreach ($project->project_has_milestones as $milestone):
+    foreach ($area->project_has_milestones as $milestone):
             $count2 = 0; $count = $count+1;
 
               $tasksInMilestone = count($milestone->project_has_tasks);
@@ -411,20 +441,18 @@
               $completion = round($multiplier * $taskSize, 1);
 
               $completion = is_nan($completion) ? 0 : $completion;
-
-              $color = $completion == 100 ? "bgColor18" : "";
     ?>
 
         <li id="milestoneLI_<?=$milestone->id;?>" class="hasItems">
-            <h1 class="milestones__header ui-state-disabled <?=$color?>">
+            <h1 class="milestones__header ui-state-disabled">
                <i class="ion-android-list milestone__header__icon"></i>
                 <?=$milestone->name?>
                 <span class="pull-right">
                     <span id="milestone_completion_<?=$milestone->id;?>" style="margin-top: -2px; float: left!important;">
-                        <a class="milestone-new-task-btn btn-primary" href="<?=base_url()?>projects/tasks/<?=$project->id;?>/add/milestone_id/<?=$milestone->id?>" data-toggle="mainmodal"><?=$this->lang->line('application_add_task')?></a>
+                        <a class="milestone-new-task-btn" href="<?=base_url()?>projects/tasks/<?=$project->id;?>/add/milestone_id/<?=$milestone->id?>" data-toggle="mainmodal"><?=$this->lang->line('application_add_task')?></a>
                         <?=$completion?>% <?=$this->lang->line('application_completed'); ?>
                     </span>
-                    <a href="<?=base_url()?>projects/milestones/<?=$milestone->project_id;?>/update/<?=$milestone->id;?>" data-toggle="mainmodal"><i class="icon dripicons-gear milestone__header__right__icon"></i></a>
+                    <a href="<?=base_url()?>projects/milestones/<?=$project->id;?>/update/<?=$milestone->id;?>" data-toggle="mainmodal"><i class="icon dripicons-gear milestone__header__right__icon"></i></a>
                 </span>
             </h1>
 
@@ -438,7 +466,7 @@
 
                 $completed = (($current - $start) / ($end - $start)) * 100;
 
-                if ($completed >= 100) { echo "danger-task"; }else if($completed >= 60){ echo "warning-task"; }
+                if (is_infinite($completed) == false) { if ($completed >= 100) { echo "danger-task"; }else if($completed >= 60){ echo "warning-task"; }}else{ echo "";}
 
                 ?>">
                     <a href="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$value->id;?>" class="ajax-silent task-check"></a>
@@ -470,6 +498,8 @@
           </li>
           <?php endforeach;?>
 
+
+
             <?php if ($count == 0) {
                 ?>
             <li class="notask list-item ui-state-disabled"><?=$this->lang->line('application_no_milestones_yet'); ?></li>
@@ -477,49 +507,12 @@
             } ?>
 </ul>
                 </div>
+
         </div>
                </div>
-
-
-        <!-- GRADE DE TAREFAS SEM PACOTE DE TRABALHO ESCONDIDO / ESCONDIDO -->
-            <!--<div class="col-xs-12 col-sm-12 col-lg-6">
-            <div class="box-shadow">
-             <div class="table-head">
-                <?/*=$this->lang->line('application_tasks_without_milestone');*/?>
-            </div>
-            <div class="subcont no-padding min-height-410">
-            <ul id="task-list2" class="todo sortable-list">
-                <?php /*$count3 = 0; foreach ($tasksWithoutMilestone as $value):   $count3 =  $count3+1;  */?>
-                <li id="milestonetask_<?/*=$value->id;*/?>" class="<?/*=$value->status;*/?> priority<?/*=$value->priority;*/?> list-item">
-                    <a href="<?/*=base_url()*/?>projects/tasks/<?/*=$project->id;*/?>/check/<?/*=$value->id;*/?>" class="ajax-silent task-check"></a>
-                    <input name="form-field-checkbox" class="checkbox-nolabel task-check dynamic-reload" data-reload="tile-pie" type="checkbox" data-link="<?/*=base_url()*/?>projects/tasks/<?/*=$project->id;*/?>/check/<?/*=$value->id;*/?>" <?php /*if ($value->status == "done") {
-                echo "checked";
-            }*/?>/>
-                    <span class="lbl">
-                        <p class="truncate name"><?/*=$value->name;*/?></p>
-                    </span>
-                    <span class="pull-right">
-                    <?php /*if ($value->user_id != 0) {
-                */?><img class="img-circle list-profile-img tt"  title="<?/*=$value->user->firstname; */?> <?/*=$value->user->lastname; */?>"  src="<?/*=$value->user->userpic; */?>"><?php
-/*            } */?>
-                    <?php /*if ($value->public != 0) {
-                */?><span class="list-button"><i class="icon dripicons-preview tt" title="" data-original-title="<?/*=$this->lang->line('application_task_public'); */?>"></i></span><?php
-/*            } */?>
-                    <a href="<?/*=base_url()*/?>projects/tasks/<?/*=$project->id;*/?>/update/<?/*=$value->id;*/?>" class="edit-button" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
-                    </span>
-
-                </li>
-                <?php /*endforeach;*/?>
-                    <?php /*if ($count3 == 0) {
-                */?>
-                      <li class="notask list-item ui-state-disabled"><?/*=$this->lang->line('application_no_tasks_without_milestone'); */?></li>
-                    <?php
-/*            }*/?>
-                </ul>
-            </div>
-            </div>
-            </div>-->
-
+    <?php } ?>
+    <?php } ?>
+    </div>
 
 </div>
 
@@ -938,6 +931,14 @@
       $(this).parents('li').slideUp();
     });
 
+
+    $("body").on('DOMSubtreeModified', "#milestones-tab", function() {
+        var departmentlink = window.localStorage.getItem('departmentlink');
+        var $el = $('.' + departmentlink).fadeIn(450);
+        $('#department-areas > div').not($el).hide();
+    });
+
+
     $(document).on("click", '.toggle-closed-tasks', function (e) {
       $("li.done").toggleClass("hidden");
       if(localStorage.hide_tasks == "1"){
@@ -1019,12 +1020,23 @@ dropzoneloader("<?php echo base_url()."projects/dropzone/".$project->id; ?>", "<
 
         });
 
+      $(".department-link").on("click", function(){
+
+          var $el = $('.' + this.id).fadeIn(450);
+          $('#department-areas > div').not($el).hide();
+          $('#departments-drop-menu').html($(this).data('name'));
+
+          window.localStorage.setItem("departmentlink", this.id);
+
+      });
+
+
         <?php if ($go_to_taskID) {
                           ?>
             $("#task_menu_link").click();
             $("#task_<?=$go_to_taskID; ?> p.name").click();
         <?php
-                      } ?>
+        } ?>
 
  });
 

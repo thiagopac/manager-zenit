@@ -394,7 +394,7 @@
 
                 <div class="subcont no-padding min-height-410">
                     <div class="task__quick-add">
-                        <?php $attributes = array('class' => 'quick-add-task', 'data-reload' => 'task-list', 'data-reload2' => 'milestones-list', 'data-reload3' => 'taskviewer-content', 'data-baseurl' => base_url().'projects/tasks/'.$project->id.'/', 'id' => '_task');
+                        <?php $attributes = array('class' => 'quick-add-task', 'data-reload' => 'task-list', 'data-reload2' => 'milestones-list', 'data-reload3' => 'areas-list', 'data-baseurl' => base_url().'projects/tasks/'.$project->id.'/', 'id' => '_task');
                         $formURL = base_url()."projects/quicktask";
                         echo form_open($formURL, $attributes); ?>
                         <input type="text" id="quick-add-task-name" autocomplete="off" name="name" placeholder="<?=$this->lang->line('application_add_new_task...');?>" />

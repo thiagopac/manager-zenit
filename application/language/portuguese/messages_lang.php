@@ -182,3 +182,8 @@ $lang['messages_edit_status_success'] = "Status salvo";
 $lang['messages_edit_status_error'] = "Erro ao salvar status";
 $lang['messages_leads_have_been_imported'] = "Leads importados";
 $lang['messages_leads_have_not_been_imported'] = "Erro ao importar Leads.    Verifique o arquivo CSV.";
+
+$lang['messages_delete_area_error'] = "Erro ao excluir Área";
+$lang['messages_delete_area_success'] = "Área excluída";
+$lang['messages_save_area_success'] = "Área salva";
+$lang['messages_save_area_error'] = "Erro ao salvar Área";

@@ -38,6 +38,7 @@ class Projects extends MY_Controller
                         $this->lang->line('application_closed') => 'projects/filter/closed'
                         );
     }
+
     public function index()
     {
         $options = array('conditions' => 'progress < 100', 'order' => 'id DESC', 'include' => array('company', 'project_has_workers'));
@@ -73,6 +74,7 @@ class Projects extends MY_Controller
         $end_of_week = strtotime('next Sunday', $now) + 86400; // END of the last day of the week
         $this->view_data['projects_opened_this_week'] = Project::find_by_sql('select count(id) AS "amount", DATE_FORMAT(FROM_UNIXTIME(`datetime`), "%w") AS "date_day", DATE_FORMAT(FROM_UNIXTIME(`datetime`), "%Y-%m-%d") AS "date_formatted" from projects where datetime >= "'.$beginning_of_week.'" AND datetime <= "'.$end_of_week.'" Group By date_formatted, `date_day`');
     }
+
     public function filter($condition)
     {
         $options = array('conditions' => 'progress < 100');
@@ -143,6 +145,7 @@ class Projects extends MY_Controller
         $end_of_week = strtotime('next Sunday', $now) + 86400; // END of the last day of the week
         $this->view_data['projects_opened_this_week'] = Project::find_by_sql('select count(id) AS "amount", DATE_FORMAT(FROM_UNIXTIME(`datetime`), "%w") AS "date_day", DATE_FORMAT(FROM_UNIXTIME(`datetime`), "%Y-%m-%d") AS "date_formatted" from projects where datetime >= "'.$beginning_of_week.'" AND datetime <= "'.$end_of_week.'" Group By date_formatted, `date_day`');
     }
+
     public function create()
     {
         if ($_POST) {
@@ -177,6 +180,7 @@ class Projects extends MY_Controller
             $this->content_view = 'projects/_project';
         }
     }
+
     public function update($id = false)
     {
         if ($_POST) {
@@ -217,6 +221,7 @@ class Projects extends MY_Controller
             $this->content_view = 'projects/_project';
         }
     }
+
     public function sortlist($sort = false, $list = false)
     {
         if ($sort) {
@@ -235,6 +240,7 @@ class Projects extends MY_Controller
         }
         $this->theme_view = 'blank';
     }
+
     public function sort_milestone_list($sort = false, $list = false)
     {
         if ($sort) {
@@ -249,6 +255,32 @@ class Projects extends MY_Controller
         }
         $this->theme_view = 'blank';
     }
+
+    public function sort_area_list($sort = false, $list = false)
+    {
+        if ($sort) {
+            $sort = explode("-", $sort);
+            $sortnumber = 1;
+            foreach ($sort as $value) {
+                $milestone = DepartmentHasArea::find_by_id($value);
+                $milestone->orderindex = $sortnumber;
+                $milestone->save();
+                $sortnumber = $sortnumber+1;
+            }
+        }
+        $this->theme_view = 'blank';
+    }
+
+    public function move_milestone_to_area($milestoneId = false, $listId = false)
+    {
+        if ($listId && $milestoneId) {
+            $milestone = ProjectHasMilestone::find_by_id($milestoneId);
+            $milestone->area_id = $listId;
+            $milestone->save();
+        }
+        $this->theme_view = 'blank';
+    }
+
     public function move_task_to_milestone($taskId = false, $listId = false)
     {
         if ($listId && $taskId) {
@@ -258,6 +290,7 @@ class Projects extends MY_Controller
         }
         $this->theme_view = 'blank';
     }
+
     public function task_change_attribute()
     {
         if ($_POST) {
@@ -270,6 +303,7 @@ class Projects extends MY_Controller
         }
         $this->theme_view = 'blank';
     }
+
     public function task_start_stop_timer($taskId)
     {
         $task = ProjectHasTask::find_by_id($taskId);
@@ -296,6 +330,18 @@ class Projects extends MY_Controller
         $task->save();
         $this->theme_view = 'blank';
     }
+
+    public function get_area_list($departmentId)
+    {
+        $area_list = "";
+        $department = Department::find_by_id($departmentId);
+        foreach ($department->department_has_areas as $value) {
+            $area_list .= '{value:'.$value->id.', text: "'.$value->name.'"},';
+        }
+        echo $area_list;
+        $this->theme_view = 'blank';
+    }
+
     public function get_milestone_list($projectId)
     {
         $milestone_list = "";
@@ -306,6 +352,7 @@ class Projects extends MY_Controller
         echo $milestone_list;
         $this->theme_view = 'blank';
     }
+
     public function copy($id = false)
     {
         if ($_POST) {
@@ -356,6 +403,7 @@ class Projects extends MY_Controller
                     ProjectHasMilestone::create($attributes);
                 }
 
+                //copia do projeto
 
             }
 
@@ -376,6 +424,7 @@ class Projects extends MY_Controller
             $this->content_view = 'projects/_copy';
         }
     }
+
     public function assign($id = false)
     {
         $this->load->helper('notification');
@@ -417,6 +466,7 @@ class Projects extends MY_Controller
             $this->content_view = 'projects/_assign';
         }
     }
+
     public function delete($id = false)
     {
         if ($this->user->admin == 0) {
@@ -439,6 +489,13 @@ class Projects extends MY_Controller
         }
         ProjectHasMilestone::table()->delete(array('id' => $toDelete));
 
+        $areas = DepartmentHasArea::find('all', array('conditions' => array('project_id=?',$id)));
+        $toDelete = array();
+        foreach ($areas as $value) {
+            array_push($toDelete, $value->id);
+        }
+        DepartmentHasArea::table()->delete(array('id' => $toDelete));
+
         $this->content_view = 'projects/all';
         if (!$project) {
             $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_delete_project_error'));
@@ -451,6 +508,7 @@ class Projects extends MY_Controller
             redirect('projects');
         }
     }
+
     public function timer_reset($id = false)
     {
         $project = Project::find($id);
@@ -459,6 +517,7 @@ class Projects extends MY_Controller
         $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_timer_reset'));
         redirect('projects/view/'.$id);
     }
+
     public function timer_set($id = false)
     {
         if ($_POST) {
@@ -478,11 +537,15 @@ class Projects extends MY_Controller
             $this->content_view = 'projects/_timer';
         }
     }
+
     public function view($id = false, $taskId = false)
     {
         $this->load->helper('file');
         $this->view_data['submenu'] = array();
         $this->view_data['project'] = Project::find($id);
+
+        $this->view_data['departments'] = Department::all();
+
         $this->view_data['go_to_taskID'] = $taskId;
         $this->view_data['first_project'] = Project::first();
         $this->view_data['last_project'] = Project::last();
@@ -583,6 +646,7 @@ class Projects extends MY_Controller
 
         $this->content_view = 'projects/view';
     }
+
     public function ganttChart($id)
     {
         $gantt_data = "[";
@@ -609,6 +673,7 @@ class Projects extends MY_Controller
 
         echo $gantt_data;
     }
+
     public function quicktask()
     {
         if ($_POST) {
@@ -621,6 +686,7 @@ class Projects extends MY_Controller
 
         $this->theme_view = 'blank';
     }
+
     public function generate_thumbs($id = false)
     {
         if ($id) {
@@ -652,6 +718,7 @@ class Projects extends MY_Controller
             redirect('projects/view/'.$id);
         }
     }
+
     public function dropzone($id = false)
     {
         $attr = array();
@@ -714,6 +781,7 @@ class Projects extends MY_Controller
 
         $this->theme_view = 'blank';
     }
+
     public function timesheets($taskid)
     {
         $this->view_data['timesheets'] = ProjectHasTimesheet::find("all", array("conditions" => array("task_id = ?", $taskid)));
@@ -724,6 +792,7 @@ class Projects extends MY_Controller
         $this->view_data['form_action'] = 'projects/timesheet_add';
         $this->content_view = 'projects/_timesheets';
     }
+
     public function timesheet_add()
     {
         if ($_POST) {
@@ -747,6 +816,7 @@ class Projects extends MY_Controller
         }
         $this->theme_view = 'blank';
     }
+
     public function timesheet_delete($timesheet_id)
     {
         $timesheet = ProjectHasTimesheet::find_by_id($timesheet_id);
@@ -757,12 +827,200 @@ class Projects extends MY_Controller
         $this->theme_view = 'blank';
     }
 
-    public function tasks($id = false, $condition = false, $task_id = false, $milestone_id = false)
+    public function areas($id = false, $condition = false, $area_id = false, $department_id = false)
+    {
+        $this->view_data['submenu'] = array(
+            $this->lang->line('application_back') => 'projects',
+            $this->lang->line('application_overview') => 'projects/view/'.$id,
+        );
+        switch ($condition) {
+            case 'add':
+                $this->content_view = 'projects/_areas';
+                if ($_POST) {
+                    unset($_POST['send']);
+                    unset($_POST['files']);
+
+                    $description = $_POST['description'];
+                    $_POST = array_map('htmlspecialchars', $_POST);
+                    $_POST['description'] = $description;
+                    $_POST['project_id'] = $id;
+                    $area = DepartmentHasArea::create($_POST);
+                    if (!$area) {
+                        $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_area_error'));
+                    } else {
+                        $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_area_success'));
+                    }
+                    redirect('projects/view/'.$id);
+                } else {
+                    $this->theme_view = 'modal';
+                    $this->view_data['project'] = Project::find($id);
+                    $this->view_data['bd_departments'] = Department::all();
+                    $this->view_data['department_id'] = $department_id;
+                    $this->view_data['title'] = $this->lang->line('application_add_area');
+                    $this->view_data['form_action'] = 'projects/areas/'.$id.'/add';
+                    $this->content_view = 'projects/_areas';
+                }
+                break;
+            case 'update':
+                $this->content_view = 'projects/areas';
+                $this->view_data['area'] = DepartmentHasArea::find($area_id);
+                if ($_POST) {
+                    unset($_POST['send']);
+                    unset($_POST['files']);
+                    $description = $_POST['description'];
+                    $_POST = array_map('htmlspecialchars', $_POST);
+                    $_POST['description'] = $description;
+                    $area_id = $_POST['id'];
+                    $area = DepartmentHasArea::find($area_id);
+                    $area->update_attributes($_POST);
+                    if (!$area) {
+                        $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_area_error'));
+                    } else {
+                        $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_area_success'));
+                    }
+                    redirect('projects/view/'.$id);
+                } else {
+                    $this->theme_view = 'modal';
+                    $this->view_data['project'] = Project::find($id);
+                    $this->view_data['title'] = $this->lang->line('application_edit_area');
+                    $this->view_data['form_action'] = 'projects/areas/'.$id.'/update/'.$area_id;
+                    $this->content_view = 'projects/_areas';
+                }
+                break;
+            case 'delete':
+                $area = DepartmentHasArea::find($area_id);
+
+                foreach ($area->project_has_milestones as $value) {
+                    $value->area_id = "";
+                    $value->save();
+                }
+
+                $area->delete();
+                if (!$area) {
+                    $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_delete_area_error'));
+                } else {
+                    $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_delete_area_success'));
+                }
+                redirect('projects/view/'.$id);
+                break;
+            default:
+                $this->view_data['project'] = Project::find($id);
+                $this->content_view = 'projects/areas';
+                break;
+        }
+    }
+
+    public function milestones($id = false, $condition = false, $milestone_id = false, $area_id = false)
     {
         $this->view_data['submenu'] = array(
                                 $this->lang->line('application_back') => 'projects',
                                 $this->lang->line('application_overview') => 'projects/view/'.$id,
                                 );
+        switch ($condition) {
+            case 'add':
+                $this->content_view = 'projects/_milestones';
+                if ($_POST) {
+                    unset($_POST['send']);
+                    unset($_POST['files']);
+                    $description = $_POST['description'];
+                    $_POST = array_map('htmlspecialchars', $_POST);
+                    $_POST['description'] = $description;
+                    $_POST['project_id'] = $id;
+                    $milestone = ProjectHasMilestone::create($_POST);
+                    if (!$milestone) {
+                        $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_milestone_error'));
+                    } else {
+                        $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_milestone_success'));
+                    }
+                    redirect('projects/view/'.$id);
+                } else {
+                    $this->theme_view = 'modal';
+                    $this->view_data['project'] = Project::find($id);
+                    $this->view_data['title'] = $this->lang->line('application_add_milestone');
+                    $this->view_data['area_id'] = $area_id;
+
+                    $chosenArea = DepartmentHasArea::find($area_id);
+                    $this->view_data['department_id'] = $chosenArea->department_id;
+                    $options = ['conditions' => ["department_id = $chosenArea->department_id"]];
+                    $areas = DepartmentHasArea::find('all',$options);
+                    $this->view_data['bd_areas'] = $areas;
+
+                    $this->view_data['form_action'] = 'projects/milestones/'.$id.'/add';
+                    $this->content_view = 'projects/_milestones';
+                }
+                break;
+            case 'update':
+                $this->content_view = 'projects/_milestones';
+                $this->view_data['milestone'] = ProjectHasMilestone::find($milestone_id);
+
+                if ($_POST) {
+
+                    unset($_POST['send']);
+                    unset($_POST['files']);
+                    if (!isset($_POST['public'])) {
+                        $_POST['public'] = 0;
+                    }
+                    $description = $_POST['description'];
+                    $_POST = array_map('htmlspecialchars', $_POST);
+                    $_POST['description'] = $description;
+                    $milestone_id = $_POST['id'];
+                    $milestone = ProjectHasMilestone::find($milestone_id);
+
+                    $areas = DepartmentHasArea::all();
+                    $this->view_data['bd_areas'] = $areas;
+
+                    $milestone->update_attributes($_POST);
+                    if (!milestone) {
+                        $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_milestone_error'));
+                    } else {
+                        $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_milestone_success'));
+                    }
+                    redirect('projects/view/'.$id);
+                } else {
+                    $project = Project::find($id);
+                    $this->theme_view = 'modal';
+                    $this->view_data['project'] = $project;
+                    $this->view_data['title'] = $this->lang->line('application_edit_milestone');
+                    $this->view_data['area_id'] = area_id;
+
+                    $milestone = ProjectHasMilestone::find($milestone_id);
+
+                    $selectedArea = DepartmentHasArea::find($milestone->area_id);
+
+                    $areas = DepartmentHasArea::all(array('conditions' => "department_id = $selectedArea->department_id"));
+                    $this->view_data['bd_areas'] = $areas;
+                    $this->view_data['form_action'] = 'projects/milestones/'.$id.'/update/'.$milestone_id;
+                    $this->content_view = 'projects/_milestones';
+                }
+                break;
+            case 'delete':
+                    $milestone = ProjectHasMilestone::find($milestone_id);
+
+                    foreach ($milestone->project_has_tasks as $value) {
+                        $value->milestone_id = "";
+                        $value->save();
+                    }
+                    $milestone->delete();
+                       if (!$milestone) {
+                           $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_delete_milestone_error'));
+                       } else {
+                           $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_delete_milestone_success'));
+                       }
+                    redirect('projects/view/'.$id);
+                break;
+            default:
+                $this->view_data['project'] = Project::find($id);
+                $this->content_view = 'projects/milestones';
+                break;
+        }
+    }
+
+    public function tasks($id = false, $condition = false, $task_id = false, $milestone_id = false)
+    {
+        $this->view_data['submenu'] = array(
+            $this->lang->line('application_back') => 'projects',
+            $this->lang->line('application_overview') => 'projects/view/'.$id,
+        );
 
         switch ($condition) {
             case 'add':
@@ -815,14 +1073,14 @@ class Projects extends MY_Controller
                             $task->time_spent = $task->time_spent+$diff;
                             $task->tracking = "";
                             $attributes = array(
-                                            'task_id' => $task->id,
-                                            'user_id' => $task->user_id,
-                                            'project_id' => $task->project_id,
-                                            'client_id' => 0,
-                                            'time' => $diff,
-                                            'start' => $timer_start,
-                                            'end' => $now
-                                            );
+                                'task_id' => $task->id,
+                                'user_id' => $task->user_id,
+                                'project_id' => $task->project_id,
+                                'client_id' => 0,
+                                'time' => $diff,
+                                'start' => $timer_start,
+                                'end' => $now
+                            );
                             $timesheet = ProjectHasTimesheet::create($attributes);
                         }
                     }
@@ -836,61 +1094,63 @@ class Projects extends MY_Controller
                     }
                     redirect('projects/view/'.$id);
                 } else {
+                    $project = Project::find($id);
                     $this->theme_view = 'modal';
-                    $this->view_data['project'] = Project::find($id);
+                    $this->view_data['project'] = $project;
                     $this->view_data['title'] = $this->lang->line('application_edit_task');
+                    $this->view_data['milestone_id'] = $milestone_id;
                     $this->view_data['form_action'] = 'projects/tasks/'.$id.'/update/'.$task_id;
                     $this->content_view = 'projects/_tasks';
                 }
                 break;
             case 'check':
-                    $this->theme_view = 'blank';
-                    $task = ProjectHasTask::find($task_id);
-                    if ($task->status == 'done') {
-                        $task->status = 'open';
-                    } else {
-                        $task->status = 'done';
+                $this->theme_view = 'blank';
+                $task = ProjectHasTask::find($task_id);
+                if ($task->status == 'done') {
+                    $task->status = 'open';
+                } else {
+                    $task->status = 'done';
+                }
+                if ($task->tracking > 0) {
+                    json_response("error", htmlspecialchars($this->lang->line('application_task_timer_must_be_stopped_first')));
+                }
+                $task->save();
+                $project = Project::find($id);
+                $tasks = ProjectHasTask::count(array('conditions' => 'project_id = '.$id));
+                $tasks_done = ProjectHasTask::count(array('conditions' => array('status = ? AND project_id = ?', 'done', $id)));
+                if ($project->progress_calc == 1) {
+                    if ($tasks) {
+                        $progress = round($tasks_done/$tasks*100);
                     }
-                    if ($task->tracking > 0) {
-                        json_response("error", htmlspecialchars($this->lang->line('application_task_timer_must_be_stopped_first')));
-                    }
-                    $task->save();
-                    $project = Project::find($id);
-                    $tasks = ProjectHasTask::count(array('conditions' => 'project_id = '.$id));
-                    $tasks_done = ProjectHasTask::count(array('conditions' => array('status = ? AND project_id = ?', 'done', $id)));
-                    if ($project->progress_calc == 1) {
-                        if ($tasks) {
-                            $progress = round($tasks_done/$tasks*100);
-                        }
 
-                        $attr = array('progress' => $progress);
-                        $project->update_attributes($attr);
-                    }
-                       if (!$task) {
-                           json_response("error", "Error while task toggle!");
-                       }
-                       json_response("success", "task_checked");
+                    $attr = array('progress' => $progress);
+                    $project->update_attributes($attr);
+                }
+                if (!$task) {
+                    json_response("error", "Error while task toggle!");
+                }
+                json_response("success", "task_checked");
                 break;
             case 'unlock':
-                    $this->theme_view = 'blank';
-                    $task = ProjectHasTask::find($task_id);
-                    $task->invoice_id = '0';
-                    $task->save();
-                    if ($task) {
-                        json_response("success", htmlspecialchars($this->lang->line('application_task_has_been_unlocked')));
-                    } else {
-                        json_response("error", htmlspecialchars($this->lang->line('application_task_has_not_been_unlocked')));
-                    }
+                $this->theme_view = 'blank';
+                $task = ProjectHasTask::find($task_id);
+                $task->invoice_id = '0';
+                $task->save();
+                if ($task) {
+                    json_response("success", htmlspecialchars($this->lang->line('application_task_has_been_unlocked')));
+                } else {
+                    json_response("error", htmlspecialchars($this->lang->line('application_task_has_not_been_unlocked')));
+                }
                 break;
             case 'delete':
-                    $task = ProjectHasTask::find($task_id);
-                    $task->delete();
-                       if (!$task) {
-                           $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_delete_task_error'));
-                       } else {
-                           $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_delete_task_success'));
-                       }
-                    redirect('projects/view/'.$id);
+                $task = ProjectHasTask::find($task_id);
+                $task->delete();
+                if (!$task) {
+                    $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_delete_task_error'));
+                } else {
+                    $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_delete_task_success'));
+                }
+                redirect('projects/view/'.$id);
                 break;
             default:
                 $this->view_data['project'] = Project::find($id);
@@ -898,84 +1158,7 @@ class Projects extends MY_Controller
                 break;
         }
     }
-    public function milestones($id = false, $condition = false, $milestone_id = false)
-    {
-        $this->view_data['submenu'] = array(
-                                $this->lang->line('application_back') => 'projects',
-                                $this->lang->line('application_overview') => 'projects/view/'.$id,
-                                );
-        switch ($condition) {
-            case 'add':
-                $this->content_view = 'projects/_milestones';
-                if ($_POST) {
-                    unset($_POST['send']);
-                    unset($_POST['files']);
-                    $description = $_POST['description'];
-                    $_POST = array_map('htmlspecialchars', $_POST);
-                    $_POST['description'] = $description;
-                    $_POST['project_id'] = $id;
-                    $milestone = ProjectHasMilestone::create($_POST);
-                    if (!$milestone) {
-                        $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_milestone_error'));
-                    } else {
-                        $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_milestone_success'));
-                    }
-                    redirect('projects/view/'.$id);
-                } else {
-                    $this->theme_view = 'modal';
-                    $this->view_data['project'] = Project::find($id);
-                    $this->view_data['title'] = $this->lang->line('application_add_milestone');
-                    $this->view_data['form_action'] = 'projects/milestones/'.$id.'/add';
-                    $this->content_view = 'projects/_milestones';
-                }
-                break;
-            case 'update':
-                $this->content_view = 'projects/_milestones';
-                $this->view_data['milestone'] = ProjectHasMilestone::find($milestone_id);
-                if ($_POST) {
-                    unset($_POST['send']);
-                    unset($_POST['files']);
-                    $description = $_POST['description'];
-                    $_POST = array_map('htmlspecialchars', $_POST);
-                    $_POST['description'] = $description;
-                    $milestone_id = $_POST['id'];
-                    $milestone = ProjectHasMilestone::find($milestone_id);
-                    $milestone->update_attributes($_POST);
-                    if (!$milestone) {
-                        $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_milestone_error'));
-                    } else {
-                        $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_milestone_success'));
-                    }
-                    redirect('projects/view/'.$id);
-                } else {
-                    $this->theme_view = 'modal';
-                    $this->view_data['project'] = Project::find($id);
-                    $this->view_data['title'] = $this->lang->line('application_edit_milestone');
-                    $this->view_data['form_action'] = 'projects/milestones/'.$id.'/update/'.$milestone_id;
-                    $this->content_view = 'projects/_milestones';
-                }
-                break;
-            case 'delete':
-                    $milestone = ProjectHasMilestone::find($milestone_id);
 
-                    foreach ($milestone->project_has_tasks as $value) {
-                        $value->milestone_id = "";
-                        $value->save();
-                    }
-                    $milestone->delete();
-                       if (!$milestone) {
-                           $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_delete_milestone_error'));
-                       } else {
-                           $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_delete_milestone_success'));
-                       }
-                    redirect('projects/view/'.$id);
-                break;
-            default:
-                $this->view_data['project'] = Project::find($id);
-                $this->content_view = 'projects/milestones';
-                break;
-        }
-    }
     public function notes($id = false)
     {
         if ($_POST) {
@@ -987,6 +1170,7 @@ class Projects extends MY_Controller
         }
         $this->theme_view = 'ajax';
     }
+
     public function media($id = false, $condition = false, $media_id = false)
     {
         $projecthasworker = ProjectHasWorker::all(array('conditions' => array('user_id = ? AND project_id = ?', $this->user->id, $id)));
@@ -1167,6 +1351,7 @@ class Projects extends MY_Controller
                 break;
         }
     }
+
     public function deletemessage($project_id, $media_id, $id)
     {
         $message = Message::find($id);
@@ -1180,6 +1365,7 @@ class Projects extends MY_Controller
         }
         redirect('projects/media/'.$project_id.'/view/'.$media_id);
     }
+
     public function tracking($id = false)
     {
         $project = Project::find($id);
@@ -1191,6 +1377,7 @@ class Projects extends MY_Controller
         }
         redirect('projects/view/'.$id);
     }
+
     public function sticky($id = false)
     {
         $project = Project::find($id);
@@ -1203,6 +1390,7 @@ class Projects extends MY_Controller
         }
         redirect('projects/view/'.$id);
     }
+
     public function download($media_id = false, $comment_file = false)
     {
         $this->load->helper('download');
@@ -1237,6 +1425,7 @@ class Projects extends MY_Controller
             show_error("File could not be found!", 400, "File download error");
         }
     }
+
     public function task_comment($id, $condition)
     {
         $this->load->helper('notification');
@@ -1368,6 +1557,7 @@ class Projects extends MY_Controller
             $this->content_view = 'projects/_invoice';
         }
     }
+
     public function activity($id = false, $condition = false, $activityID = false)
     {
         $this->load->helper('notification');

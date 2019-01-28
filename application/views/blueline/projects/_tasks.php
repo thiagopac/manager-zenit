@@ -1,5 +1,5 @@
 <?php
-$attributes = array('class' => 'dynamic-form', 'data-reload' => 'task-list', 'data-reload2' => 'milestones-list', 'data-reload3' => 'taskviewer-content', 'data-baseurl' => base_url(), 'id' => '_task');
+$attributes = array('class' => 'dynamic-form', 'data-reload' => 'task-list', 'data-reload2' => 'milestones-tab', 'data-baseurl' => base_url(), 'id' => '_milestone');
 echo form_open($form_action, $attributes);
 $public = "0";
 ?>
@@ -68,6 +68,9 @@ $public = "0";
                     $milestones[$milestone->id] = $milestone->name;
                 endforeach;
         if(isset($task)){$milestone_selected = $task->milestone_id;}else{$milestone_selected = "";}
+
+        $milestone_id = $milestone_id != null ? $milestone_id : $task->milestone_id;
+
         if(isset($milestone_id)){$milestone_selected = $milestone_id;}else{$milestone_selected = "";}
 //        $milestone_selected = 3;
         echo form_dropdown('milestone_id', $milestones, $milestone_selected, 'style="width:100%" class="chosen-select"');?>

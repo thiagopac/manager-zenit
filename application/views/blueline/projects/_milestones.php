@@ -1,7 +1,6 @@
 <?php   
-$attributes = array('class' => 'dynamic-form', 'data-reload' => 'task-list', 'data-reload2' => 'milestones-list', 'data-baseurl' => base_url(), 'id' => '_milestone');
-echo form_open($form_action, $attributes); 
-
+$attributes = array('class' => 'dynamic-form', 'data-reload' => 'task-list', 'data-reload2' => 'milestones-tab', 'data-baseurl' => base_url(), 'id' => '_milestone');
+echo form_open($form_action, $attributes);
 ?>
 
 <?php if(isset($milestone)){  ?>
@@ -11,6 +10,27 @@ echo form_open($form_action, $attributes);
         <label for="name"><?=$this->lang->line('application_name');?> *</label>
         <input id="name" type="text" name="name" class="form-control resetvalue" value="<?php if(isset($milestone)){echo $milestone->name;} ?>"  required/>
 </div>
+    <div class="form-group">
+        <label for="area_id"><?=$this->lang->line('application_area');?></label>
+        <?php   //$areas = array();
+        $areas['0'] = '-';
+
+//        foreach ($departments as $department):
+//
+//            foreach ($department->department_has_areas as $area):
+//                $areas[$area->id] = $area->name;
+//            endforeach;
+//
+//        endforeach;
+
+        foreach ($bd_areas as $area):
+            $areas[$area->id] = $area->name;
+        endforeach;
+
+        if(isset($milestone)){$area_selected = $milestone->area_id;}else{$area_selected = $area_id;}
+        echo form_dropdown('area_id', $areas, $area_selected, 'style="width:100%" class="chosen-select"');?>
+    </div>
+
 <div class="form-group">
         <label for="start_date"><?=$this->lang->line('application_start_date');?></label>
         <input class="form-control datepicker not-required" name="start_date" id="start_date" type="text" value="<?php if(isset($milestone)){echo $milestone->start_date;} ?>" />
