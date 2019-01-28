@@ -423,6 +423,11 @@
 
     <?php  $count = 0;
     foreach ($area->project_has_milestones as $milestone):
+
+        if ($milestone->project_id != $project->id){
+            continue;
+        }
+
             $count2 = 0; $count = $count+1;
 
               $tasksInMilestone = count($milestone->project_has_tasks);
