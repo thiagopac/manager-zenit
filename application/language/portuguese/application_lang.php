@@ -677,7 +677,8 @@ $lang['application_notifications'] = 'Notificações';
 $lang['application_only_show_own_tasks_for_non_super_admins'] = 'Mostrar apenas as próprias tarefas para cada usuário';
 $lang['application_clients_can_create_tasks'] = 'Clientes podem criar tarefas';
 $lang['application_permissions'] = 'Permissões';
-$lang['application_add_milestone'] = 'Adicionar Pacote de trabalho';
+$lang['application_add_milestone'] = 'Novo Pacote de trabalho';
+$lang['application_add_milestone_abbreviation'] = 'Novo Pac.';
 $lang['application_milestones'] = 'Pacotes de trabalho';
 $lang['application_milestone'] = 'Pacote de trabalho';
 $lang['application_edit_milestone'] = 'Editar Pacote de trabalho';
@@ -883,7 +884,7 @@ $lang['test'] = 'Teste';
 
 
 
-$lang['application_add_area'] = 'Adicionar Área';
+$lang['application_add_area'] = 'Nova Área';
 $lang['application_areas'] = 'Áreas';
 $lang['application_area'] = 'Área';
 $lang['application_edit_area'] = 'Editar Área';
@@ -894,3 +895,14 @@ $lang['application_department'] = 'Departamento';
 $lang['application_departments'] = 'Departamentos';
 $lang['application_add_department'] = 'Adicionar Departamento';
 $lang['application_edit_department'] = 'Editar Departamento';
+
+$lang['application_more'] = '+';
+$lang['application_more_department'] = '+ Depart.';
+$lang['application_more_area'] = '+ Área';
+$lang['application_more_milestone'] = '+ Pacote';
+$lang['application_more_task'] = '+ Tarefa';
+
+$lang['application_new_department'] = 'Novo Depart.';
+$lang['application_new_area'] = 'Nova Área';
+$lang['application_new_milestone'] = 'Novo Pacote';
+$lang['application_new_task'] = 'Nova Tarefa';

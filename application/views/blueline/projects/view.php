@@ -407,12 +407,12 @@
     <?php foreach ($departments as $department) {?>
 
     <?php foreach ($department->department_has_areas as $area) {?>
-     <div class="col-xs-6 col-sm-6 col-lg-6 department_<?=$department->id?>">
+     <div class="col-xs-12 col-sm-12 col-lg-6 department_<?=$department->id?>">
          <div id="areas-list" class="box-shadow">
             <div class="table-head"><?=$area->name;?>
                  <span class=" pull-right">
                       <a href="<?=base_url()?>projects/milestones/<?=$project->id;?>/add/area_id/<?=$area->id?>" class="btn btn-success" data-toggle="mainmodal">
-                          <?=$this->lang->line('application_add_milestone');?>
+                          <?=$this->lang->line('application_new_milestone');?>
                       </a>
                  </span>
             </div>
@@ -454,8 +454,8 @@
                 <?=$milestone->name?>
                 <span class="pull-right">
                     <span id="milestone_completion_<?=$milestone->id;?>" style="margin-top: -2px; float: left!important;">
-                        <a class="milestone-new-task-btn" href="<?=base_url()?>projects/tasks/<?=$project->id;?>/add/milestone_id/<?=$milestone->id?>" data-toggle="mainmodal"><?=$this->lang->line('application_add_task')?></a>
-                        <?=$completion?>% <?=$this->lang->line('application_completed'); ?>
+                        <a class="milestone-new-task-btn" href="<?=base_url()?>projects/tasks/<?=$project->id;?>/add/milestone_id/<?=$milestone->id?>" data-toggle="mainmodal"><?=$this->lang->line('application_new_task')?></a>
+                        <?=$completion?>%
                     </span>
                     <a href="<?=base_url()?>projects/milestones/<?=$project->id;?>/update/<?=$milestone->id;?>" data-toggle="mainmodal"><i class="icon dripicons-gear milestone__header__right__icon"></i></a>
                 </span>
