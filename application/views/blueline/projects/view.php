@@ -27,9 +27,7 @@
                   <span id="departments-drop-menu"><?=$this->lang->line('application_departments');?></span>
                   <span class="caret"></span>
               </a>
-<!--              TENHO QUE LISTAR CADA DEPARTAMENTO PARA SUBSTITUIR O DEPARTAMENTO CLICADO NA LISTA DROP DOWN-->
 
-              
               <ul class="dropdown-menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents" id="department-menu">
                   <?php foreach ($departments as $department): ?>
                   <li role="presentation">
@@ -57,28 +55,32 @@
 
         <li role="presentation" class="dropdown visible-xs">
             <a  href="#"
-                id="myTabDrop1"
                 class="dropdown-toggle"
                 data-toggle="dropdown"
                 aria-controls="myTabDrop1-contents"
                 aria-expanded="false">
-                <?=$this->lang->line('application_overview');?> <span class="caret"></span>
+                <span id="project-overview-dropdown-menu"><?=$this->lang->line('application_overview');?> </span>
+
+                <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
-              <li role="presentation"><a href="#projectdetails-tab" aria-controls="projectdetails-tab" role="tab" data-toggle="tab"><?=$this->lang->line('application_project_details');?></a></li>
-              <li role="presentation"><a href="#tasks-tab" aria-controls="tasks-tab" role="tab" data-toggle="tab"><?php if ($mytasks != 0) {
-        ?><span class="badge submenu-badge"><?=$mytasks?></span><?php
-    } ?><?=$this->lang->line('application_tasks');?></a></li>
-              <li role="presentation" ><a href="#milestones-tab" aria-controls="tasks-tab" role="tab" data-toggle="tab"><?=$this->lang->line('application_milestones');?></a></li>
-              <li role="presentation" ><a href="#gantt-tab" class="resize-gantt" aria-controls="gantt-tab" role="tab" data-toggle="tab"><?=$this->lang->line('application_gantt');?></a></li>
-              <li role="presentation"><a href="#media-tab" aria-controls="media-tab"  class="media-tab-trigger" role="tab" data-toggle="tab"><?=$this->lang->line('application_files');?></a></li>
-              <li role="presentation"><a href="#notes-tab" aria-controls="notes-tab" role="tab" data-toggle="tab"><?=$this->lang->line('application_notes');?></a></li>
-             <?php if ($invoice_access) {
-        ?>
-              <li role="presentation"><a href="#invoices-tab" aria-controls="invoices-tab" role="tab" data-toggle="tab"><?=$this->lang->line('application_invoices'); ?></a></li>
-             <?php
-    } ?>
-              <li role="presentation"><a href="#activities-tab" aria-controls="activities-tab" role="tab" data-toggle="tab"><?=$this->lang->line('application_activities');?></a></li>
+              <li role="presentation"><a href="#projectdetails-tab" aria-controls="projectdetails-tab" role="tab" class="project-overview-menu" data-name="<?=$this->lang->line('application_project_details');?>" data-toggle="tab"><?=$this->lang->line('application_project_details');?></a></li>
+             <!-- <li role="presentation"><a href="#tasks-tab" aria-controls="tasks-tab" role="tab" data-toggle="tab"><?php /*if ($mytasks != 0) {
+        */?><span class="badge submenu-badge"><?/*=$mytasks*/?></span><?php
+/*    } */?><?/*=$this->lang->line('application_tasks');*/?></a></li>-->
+<!--              <li role="presentation" ><a href="#milestones-tab" aria-controls="tasks-tab" role="tab" data-toggle="tab">--><?//=$this->lang->line('application_milestones');?><!--</a></li>-->
+                <?php foreach ($departments as $department): ?>
+                    <li role="presentation">
+                        <a href="#milestones-tab" aria-controls="tasks-tab" role="tab"  class="project-overview-menu" data-name="<?=$department->name?>" id="department_<?=$department->id?>" data-toggle="tab">
+                            <?=$department->name?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+              <li role="presentation" ><a href="#gantt-tab" class="resize-gantt project-overview-menu" aria-controls="gantt-tab" data-name="<?=$this->lang->line('application_gantt');?>" role="tab" data-toggle="tab"><?=$this->lang->line('application_gantt');?></a></li>
+              <li role="presentation"><a href="#media-tab" aria-controls="media-tab"  class="media-tab-trigger project-overview-menu" data-name="<?=$this->lang->line('application_files');?>"  role="tab" data-toggle="tab"><?=$this->lang->line('application_files');?></a></li>
+              <li role="presentation"><a href="#notes-tab" aria-controls="notes-tab" class="project-overview-menu" data-name="<?=$this->lang->line('application_notes');?>"  role="tab" data-toggle="tab"><?=$this->lang->line('application_notes');?></a></li>
+
+              <li role="presentation"><a href="#activities-tab" aria-controls="activities-tab" class="project-overview-menu" data-name="<?=$this->lang->line('application_activities');?>"  role="tab" data-toggle="tab"><?=$this->lang->line('application_activities');?></a></li>
             </ul>
         </li>
 
@@ -412,7 +414,7 @@
             <div class="table-head"><?=$area->name;?>
                  <span class=" pull-right">
                       <a href="<?=base_url()?>projects/milestones/<?=$project->id;?>/add/area_id/<?=$area->id?>" class="btn btn-success" data-toggle="mainmodal">
-                          <?=$this->lang->line('application_new_milestone');?>
+                          <?=$this->lang->line('application_more_milestone');?>
                       </a>
                  </span>
             </div>
@@ -446,6 +448,8 @@
               $completion = round($multiplier * $taskSize, 1);
 
               $completion = is_nan($completion) ? 0 : $completion;
+
+              $completion = round($completion);
     ?>
 
         <li id="milestoneLI_<?=$milestone->id;?>" class="hasItems">
@@ -454,7 +458,7 @@
                 <?=$milestone->name?>
                 <span class="pull-right">
                     <span id="milestone_completion_<?=$milestone->id;?>" style="margin-top: -2px; float: left!important;">
-                        <a class="milestone-new-task-btn" href="<?=base_url()?>projects/tasks/<?=$project->id;?>/add/milestone_id/<?=$milestone->id?>" data-toggle="mainmodal"><?=$this->lang->line('application_new_task')?></a>
+                        <a class="milestone-new-task-btn" href="<?=base_url()?>projects/tasks/<?=$project->id;?>/add/milestone_id/<?=$milestone->id?>" data-toggle="mainmodal"><?=$this->lang->line('application_more_task')?></a>
                         <?=$completion?>%
                     </span>
                     <a href="<?=base_url()?>projects/milestones/<?=$project->id;?>/update/<?=$milestone->id;?>" data-toggle="mainmodal"><i class="icon dripicons-gear milestone__header__right__icon"></i></a>
@@ -1032,6 +1036,12 @@ dropzoneloader("<?php echo base_url()."projects/dropzone/".$project->id; ?>", "<
           $('#departments-drop-menu').html($(this).data('name'));
 
           window.localStorage.setItem("departmentlink", this.id);
+
+      });
+
+      $(".project-overview-menu").on("click", function(){
+
+          $('#project-overview-dropdown-menu').html($(this).data('name'));
 
       });
 
