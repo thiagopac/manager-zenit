@@ -878,11 +878,7 @@ $lang['application_comment'] = 'Comentário';
 $lang['application_user_role'] = 'Cargo/Posição';
 $lang['application_task'] = 'Tarefa';
 
-
-
 $lang['test'] = 'Teste';
-
-
 
 $lang['application_add_area'] = 'Nova Área';
 $lang['application_areas'] = 'Áreas';
@@ -896,6 +892,7 @@ $lang['application_departments'] = 'Departamentos';
 $lang['application_add_department'] = 'Adicionar Departamento';
 $lang['application_edit_department'] = 'Editar Departamento';
 
+
 $lang['application_more'] = '+';
 $lang['application_more_department'] = '+ Depart.';
 $lang['application_more_area'] = '+ Área';
@@ -906,3 +903,5 @@ $lang['application_new_department'] = 'Novo Depart.';
 $lang['application_new_area'] = 'Nova Área';
 $lang['application_new_milestone'] = 'Novo Pacote';
 $lang['application_new_task'] = 'Nova Tarefa';
+
+$lang['application_parameterization'] = 'Parametrização';

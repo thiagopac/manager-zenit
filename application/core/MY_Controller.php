@@ -63,16 +63,7 @@ class My_Controller extends CI_Controller
         switch ($language) {
 
               case "english": $this->view_data['langshort'] = "en"; $this->view_data['timeformat'] = "h:i K"; $this->view_data['dateformat'] = "F j, Y"; $this->view_data['time24hours'] = "false"; break;
-              // case "dutch": $this->view_data['langshort'] = "nl"; $this->view_data['timeformat'] = "H:i"; $this->view_data['dateformat'] = "d-m-Y"; break;
-              // case "french": $this->view_data['langshort'] = "fr"; $this->view_data['timeformat'] = "H:i"; $this->view_data['dateformat'] = "d-m-Y"; break;
-              // case "german": $this->view_data['langshort'] = "de"; $this->view_data['timeformat'] = "H:i"; $this->view_data['dateformat'] = "d.m.Y"; break;
-              // case "italian": $this->view_data['langshort'] = "it"; $this->view_data['timeformat'] = "H:i"; $this->view_data['dateformat'] = "d/m/Y"; break;
-              // case "norwegian": $this->view_data['langshort'] = "no"; $this->view_data['timeformat'] = "H:i"; $this->view_data['dateformat'] = "d.m.Y"; break;
-              // case "polish": $this->view_data['langshort'] = "pl"; $this->view_data['timeformat'] = "H:i"; $this->view_data['dateformat'] = "d.m.Y"; break;
               case "portuguese": $this->view_data['langshort'] = "pt"; $this->view_data['timeformat'] = "H:i"; $this->view_data['dateformat'] = "d/m/Y"; break;
-              // case "portuguese_pt": $this->view_data['langshort'] = "pt"; $this->view_data['timeformat'] = "H:i"; $this->view_data['dateformat'] = "d/m/Y"; break;
-              // case "russian": $this->view_data['langshort'] = "ru"; $this->view_data['timeformat'] = "H:i"; $this->view_data['dateformat'] = "d.m.Y"; break;
-              // case "spanish": $this->view_data['langshort'] = "es"; $this->view_data['timeformat'] = "H:i"; $this->view_data['dateformat'] = "d/m/Y"; break;
               default: $this->view_data['langshort'] = "en"; $this->view_data['timeformat'] = "h:i K"; $this->view_data['dateformat'] = "F j, Y"; $this->view_data['time24hours'] = "false"; break;
 
         }

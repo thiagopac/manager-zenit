@@ -15,14 +15,6 @@ echo form_open($form_action, $attributes);
         <?php   //$areas = array();
         $areas['0'] = '-';
 
-//        foreach ($departments as $department):
-//
-//            foreach ($department->department_has_areas as $area):
-//                $areas[$area->id] = $area->name;
-//            endforeach;
-//
-//        endforeach;
-
         foreach ($bd_areas as $area):
             $areas[$area->id] = $area->name;
         endforeach;

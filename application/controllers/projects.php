@@ -544,7 +544,8 @@ class Projects extends MY_Controller
         $this->view_data['submenu'] = array();
         $this->view_data['project'] = Project::find($id);
 
-        $this->view_data['departments'] = Department::all();
+        $options = ['conditions' => ['status != ?', 'deleted']];
+        $this->view_data['departments'] = Department::all($options);
 
         $this->view_data['go_to_taskID'] = $taskId;
         $this->view_data['first_project'] = Project::first();
@@ -854,7 +855,8 @@ class Projects extends MY_Controller
                 } else {
                     $this->theme_view = 'modal';
                     $this->view_data['project'] = Project::find($id);
-                    $this->view_data['bd_departments'] = Department::all();
+                    $options = ['conditions' => ['status != ?', 'deleted']];
+                    $this->view_data['bd_departments'] = Department::all($options);
                     $this->view_data['department_id'] = $department_id;
                     $this->view_data['title'] = $this->lang->line('application_add_area');
                     $this->view_data['form_action'] = 'projects/areas/'.$id.'/add';

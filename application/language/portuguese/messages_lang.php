@@ -187,3 +187,9 @@ $lang['messages_delete_area_error'] = "Erro ao excluir Área";
 $lang['messages_delete_area_success'] = "Área excluída";
 $lang['messages_save_area_success'] = "Área salva";
 $lang['messages_save_area_error'] = "Erro ao salvar Área";
+
+$lang['messages_delete_department_error'] = "Erro ao excluir Departamento";
+$lang['messages_delete_department_success'] = "Departamento excluído";
+$lang['messages_save_department_success'] = 'Departamento salvo com sucesso';
+$lang['messages_save_department_error'] = 'Erro ao salvar Departamento';
+$lang['messages_create_department_exists'] = 'Já existe um departamento com este nome';
