@@ -1110,8 +1110,10 @@ class Projects extends MY_Controller
                 $task = ProjectHasTask::find($task_id);
                 if ($task->status == 'done') {
                     $task->status = 'open';
+                    $task->completion_date = null;
                 } else {
                     $task->status = 'done';
+                    $task->completion_date = date('Y-m-d H:i');;
                 }
                 if ($task->tracking > 0) {
                     json_response("error", htmlspecialchars($this->lang->line('application_task_timer_must_be_stopped_first')));

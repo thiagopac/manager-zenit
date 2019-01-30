@@ -39,7 +39,6 @@
               </ul>
           </li>
 
-         <!-- GRAFICO DE GANTT / ESCONDIDO -->
         <li role="presentation" class="hidden-xs"><a href="#gantt-tab" class="resize-gantt" aria-controls="gantt-tab" role="tab" data-toggle="tab"><?=$this->lang->line('application_gantt');?></a></li>
 
         <li role="presentation" class="hidden-xs"><a href="#media-tab" class="media-tab-trigger" aria-controls="media-tab" role="tab" data-toggle="tab"><?=$this->lang->line('application_files');?></a></li>
