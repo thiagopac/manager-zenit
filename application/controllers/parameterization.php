@@ -21,10 +21,7 @@ class Parameterization extends MY_Controller
         } else {
             redirect('login');
         }
-        if (!$this->user->admin) {
-            $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_no_access'));
-            redirect('dashboard');
-        }
+
         $this->view_data['submenu'] = [
             $this->lang->line('application_departments') => 'parameterization/departments',
             $this->lang->line('application_areas') => 'parameterization/areas',

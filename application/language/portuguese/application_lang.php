@@ -600,7 +600,7 @@ $lang['application_copy_tasks'] = 'Copiar tarefas';
 
 $lang['application_new_update_is_ready'] = 'Update está disponível Clique aqui para obter mais detalhes!';
 $lang['application_check'] = 'Verificar';
-$lang['application_direct_debit'] = 'Débito Directo';
+$lang['application_direct_debit'] = 'Débito Direto';
 $lang['application_registration'] = 'Registro';
 $lang['application_register'] = 'Register';
 $lang['application_default_client_module_access'] = 'Módulos de acesso do cliente após registro';
@@ -778,7 +778,7 @@ $lang['application_fullname'] = 'Nome Completo';
 $lang['application_token'] = 'Token';
 $lang['application_token_has_been_created'] = 'Seu novo pessoal token foi criada!';
 $lang['application_token_not_valid'] = 'O token não é válido!';
-$lang['application_no_permissions'] = 'Você não tem permissões para solicitar este!';
+$lang['application_no_permissions'] = 'Você não tem permissões';
 $lang['application_integrate'] = 'Integração de calendário';
 $lang['application_integrate_with_projects'] = 'Com Projetos';
 $lang['application_integrate_without_projects'] = 'Sem Projetos';
