@@ -185,10 +185,10 @@
 
 <?php } ?>
 
-        <div class="grid__col-12">
+        <div class="grid__col-12" id="task-grid">
                   <?php if(isset($tasks))
                   { ?>
-                    <div class="stdpad box-shadow">
+                    <div id="task-list" class="stdpad box-shadow">
                         <div class="table-head"><?=$this->lang->line('application_my_open_tasks');?></div>
 
 <!--                        CABEÇALHO COM DADOS DE TAREFAS -->
@@ -216,13 +216,27 @@
                                             echo "<h5>".$projectname."</h5>";
                                         }
                                     ?>
-                                    <li class="<?=$value->status;?> priority<?=$value->priority;?> list-item">
+                                    <li class="<?=$value->status;?> task_<?=$value->id;?> priority<?=$value->priority;?> list-item  <?php
+
+                                    $start = strtotime($value->start_date);
+                                    $end = strtotime($value->due_date);
+                                    $current =  strtotime(date('Y-m-d H:i'));
+
+                                    $completed = (($current - $start) / ($end - $start)) * 100;
+
+                                    if (is_infinite($completed) == false) { if ($completed >= 100) { echo "danger-task"; }else if($completed >= 60){ echo "warning-task"; }}else{ echo "";}
+
+                                    ?>">
                                         <span class="lbl-">
-                                            <p class="truncate"><input name="form-field-checkbox" type="checkbox" class="checkbox-nolabel task-check" data-link="<?=base_url()?>projects/tasks/<?=$value->project_id;?>/check/<?=$value->id;?>" <?=$value->status;?>/>
+                                            <p class="truncate">
+                                                <a href="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$value->id;?>" class="ajax-silent task-check"></a>
+                                                <input name="form-field-checkbox" class="checkbox-nolabel task-check dynamic-reload checkbox-task" id="task_<?=$value->id;?>" data-reload="" data-reload2="" type="checkbox" data-link="<?=base_url()?>projects/tasks/<?=$value->project_id;?>/check/<?=$value->id;?>" <?=$value->status;?>/>
+<!--                                                <input name="form-field-checkbox" type="checkbox" class="checkbox-nolabel task-check" data-link="--><?//=base_url()?><!--projects/tasks/--><?//=$value->project_id;?><!--/check/--><?//=$value->id;?><!--" --><?//=$value->status;?><!--/>-->
                                                 <a href="<?=base_url()?>projects/view/<?=$value->project_id;?>"><?=$value->name;?></a>
                                             </p>
                                         </span>
                                         <span class="pull-right hidden-xs" style="margin-top: -43px;">
+                                            <span class="task-cell-start-date-end-date"><?php if ($value->start_date != null){ ?><?=date("d/m/Y H:i", strtotime($value->start_date));?><?php } ?> <?php if ($value->start_date != null || $value->due_date != null){  ?>➔<?php } ?> <?php if ($value->due_date != null){ ?><?=date("d/m/Y H:i", strtotime($value->due_date));?><?php }else{ ?> <span style="visibility: hidden;"> <?=date("d/m/Y H:i", time());?> </span> <?php } ?></span>
                                               <?php if ($value->public != 0) {  ?><span class="list-button"><i class="icon dripicons-preview tt" title="" data-original-title="<?=$this->lang->line('application_task_public');?>"></i></span><?php } ?>
                                               <a href="<?=base_url()?>projects/tasks/<?=$value->project_id;?>/update/<?=$value->id;?>" class="edit-button" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
                                         </span>
@@ -395,6 +409,12 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+
+    $('#task-grid').on("click", '.checkbox-task', function(){
+
+        $('.' + this.id).toggleClass('done');
+    });
+
   $(document).on("click", '.calendar-style-toggle', function (e) {
       $(".calendar-style-toggle").toggleClass("hidden");
       $(".stdpad--calendar").toggleClass("stdpad--blue");

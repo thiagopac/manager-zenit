@@ -479,9 +479,7 @@
 
                 ?>">
                     <a href="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$value->id;?>" class="ajax-silent task-check"></a>
-                    <input name="form-field-checkbox" class="checkbox-nolabel task-check dynamic-reload" data-reload="tile-pie" data-reload2="milestone_completion_<?=$milestone->id;?>" type="checkbox" data-link="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$value->id;?>" <?php if ($value->status == "done") {
-                echo "checked";
-            }?>/>
+                    <input name="form-field-checkbox" class="checkbox-nolabel task-check dynamic-reload" data-reload="tile-pie" data-reload2="milestone_completion_<?=$milestone->id;?>" type="checkbox" data-link="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$value->id;?>" <?php if ($value->status == "done") {echo "checked";}?>/>
                     <span class="lbl">
                         <p class="truncate name"><?=$value->name;?></p>
                     </span>

@@ -1,5 +1,5 @@
 <?php
-$attributes = array('class' => 'dynamic-form', 'data-reload' => 'task-list', 'data-reload2' => 'milestones-tab', 'data-baseurl' => base_url(), 'id' => '_milestone');
+$attributes = array('class' => 'dynamic-form', 'data-reload' => 'task-list', 'data-reload2' => 'milestones-tab', 'data-reload3' => 'milestones-tab', 'data-baseurl' => base_url(), 'id' => '_milestone');
 echo form_open($form_action, $attributes);
 $public = "0";
 ?>
