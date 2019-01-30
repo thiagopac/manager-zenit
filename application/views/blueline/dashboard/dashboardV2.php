@@ -471,74 +471,80 @@ $(document).ready(function(){
 
   });
 
+
+    <!-- DASHBOARD - GRÁFICO DE ESTATÍSTICAS: RENDIMENTO - DESPESAS = LUCRO -->
+  //  COMENTARIOS DOS JS
+
   //chartjs
-  <?php if($this->user->admin == "1"){ ?>
-  var ctx = document.getElementById("tileChart");
-  var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: [<?=$labels?>],
-      datasets: [{
-        label: "<?=$this->lang->line("application_owed");?>",
-        backgroundColor: "rgba(215,112,173,0.3)",
-        borderColor: "rgba(215,112,173,1)",
-        pointBorderColor: "rgba(0,0,0,0)",
-        pointBackgroundColor: "#ffffff",
-        pointHoverBackgroundColor: "rgba(237, 85, 101, 0.5)",
-        pointHitRadius: 25,
-        pointRadius: 1,
-        data: [<?=$line2?>], /* Demo Data => [387, 1108, 987, 2100, 2900, 1023, 1897, 1438, 4100,2861,1000,3872], */
-      },{
-        label: "<?=$this->lang->line("application_received");?>",
-        backgroundColor: "rgba(79,193,233,0.6)",
-        borderColor: "rgba(79, 193, 233, 1)",
-        pointBorderColor: "rgba(0,0,0,0)",
-        pointBackgroundColor: "#ffffff",
-        pointHoverBackgroundColor: "rgba(79, 193, 233, 1)",
-        pointHitRadius: 25,
-        pointRadius: 1,
-        data: [<?=$line1?>], /* Demo Data => [1702, 2310, 1900, 3800, 4123, 3000, 3210, 5439, 3000,4000,3234,5539], */
-      },
-      ]
-    },
-    options: {
-      tooltips:{
-        xPadding: 10,
-        yPadding: 10,
-        cornerRadius:2,
-        mode: 'label',
-        multiKeyBackground: 'rgba(0,0,0,0.2)'
-      },
-      legend:{
-        display: false
-      },
-      scales: {
-        yAxes: [{
-          display: false,
-          ticks: {
-                      beginAtZero:true
-                  }
-        }],
-        xAxes: [{
-          display: false
-        }]
-      }
-    }
-  });
+  <?php //if($this->user->admin == "1"){ ?>
+  // var ctx = document.getElementById("tileChart");
+  //var myChart = new Chart(ctx, {
+  //  type: 'line',
+  //  data: {
+  //    labels: [<?//=$labels?>//],
+  //    datasets: [{
+  //      label: "<?//=$this->lang->line("application_owed");?>//",
+  //      backgroundColor: "rgba(215,112,173,0.3)",
+  //      borderColor: "rgba(215,112,173,1)",
+  //      pointBorderColor: "rgba(0,0,0,0)",
+  //      pointBackgroundColor: "#ffffff",
+  //      pointHoverBackgroundColor: "rgba(237, 85, 101, 0.5)",
+  //      pointHitRadius: 25,
+  //      pointRadius: 1,
+  //      data: [<?//=$line2?>//], /!* Demo Data => [387, 1108, 987, 2100, 2900, 1023, 1897, 1438, 4100,2861,1000,3872], *!/
+  //    },{
+  //      label: "<?//=$this->lang->line("application_received");?>//",
+  //      backgroundColor: "rgba(79,193,233,0.6)",
+  //      borderColor: "rgba(79, 193, 233, 1)",
+  //      pointBorderColor: "rgba(0,0,0,0)",
+  //      pointBackgroundColor: "#ffffff",
+  //      pointHoverBackgroundColor: "rgba(79, 193, 233, 1)",
+  //      pointHitRadius: 25,
+  //      pointRadius: 1,
+  //      data: [<?//=$line1?>//], /!* Demo Data => [1702, 2310, 1900, 3800, 4123, 3000, 3210, 5439, 3000,4000,3234,5539], *!/
+  //    },
+  //    ]
+  //  },
+  //  options: {
+  //    tooltips:{
+  //      xPadding: 10,
+  //      yPadding: 10,
+  //      cornerRadius:2,
+  //      mode: 'label',
+  //      multiKeyBackground: 'rgba(0,0,0,0.2)'
+  //    },
+  //    legend:{
+  //      display: false
+  //    },
+  //    scales: {
+  //      yAxes: [{
+  //        display: false,
+  //        ticks: {
+  //                    beginAtZero:true
+  //                }
+  //      }],
+  //      xAxes: [{
+  //        display: false
+  //      }]
+  //    }
+  //  }
+  //});
 
   //Count up settings
-  var options = {
-    useEasing : true,
-    useGrouping : true,
-    <?=get_money_format();?>
-    
-  };
-  var number1 = new CountUp("number1", 0, <?php if(empty($payments)){echo 0;}else{echo $payments; }?>, 2, 1.5, options);
-  number1.start();
+  //var options = {
+  //  useEasing : true,
+  //  useGrouping : true,
+  ////  <?////=get_money_format();?>
+  //  
+  //};
+  //var number1 = new CountUp("number1", 0, <?php //if(empty($payments)){echo 0;}else{echo $payments; }?>//, 2, 1.5, options);
+  // number1.start();
 
-  var number2 = new CountUp("number2", 0, <?php if(empty($paymentsoutstanding)){echo 0;}else{echo $paymentsoutstanding; }?>, 2, 1.5, options);
-  number2.start();
-<?php } ?>
+  //var number2 = new CountUp("number2", 0, <?php //if(empty($paymentsoutstanding)){echo 0;}else{echo $paymentsoutstanding; }?>//, 2, 1.5, options);
+  // number2.start();
+<?php //} ?>
+
+
 
   function tick(){
     $('ul.dash-messages li:first').slideUp('slow', function () { $(this).appendTo($('ul.dash-messages')).fadeIn('slow'); });

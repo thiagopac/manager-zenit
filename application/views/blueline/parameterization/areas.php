@@ -15,6 +15,7 @@
 		<div class="table-div responsive">
 			<table id="users" class="data-no-search table" cellspacing="0" cellpadding="0">
 				<thead>
+                    <th class="hidden-xs hidden-lg hidden-md hidden-sm hidden-print hidden"></th>
                     <th style="width:80px" class="hidden-xs">
                         <?=$this->lang->line('application_id');?>
                     </th>

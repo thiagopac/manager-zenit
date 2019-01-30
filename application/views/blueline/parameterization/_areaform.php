@@ -22,7 +22,7 @@ echo form_open_multipart($form_action, $attributes);
     </div>
     <div class="form-group">
         <label for="textfield"><?=$this->lang->line('application_description');?></label>
-        <textarea class="input-block-level summernote-modal"  id="textfield" name="description"><?php if(isset($area)){echo $area->description;} ?></textarea>
+        <textarea class="input-block-level summernote-modal"  id="description" name="description"><?php if(isset($area)){echo $area->description;} ?></textarea>
     </div>
     <div class="modal-footer">
         <input type="submit" class="btn btn-primary" value="

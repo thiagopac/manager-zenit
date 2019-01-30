@@ -77,8 +77,6 @@ $message_icon = false;
                   if (strtolower($value->name) == 'messages') {
                       $message_icon = true;
                   } ?>
-
-
                <li id="<?=strtolower($value->name); ?>" class="<?php if ($act_uri == strtolower($value->name)) {
                       echo 'active';
                   } ?>">
