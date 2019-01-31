@@ -501,13 +501,6 @@ class Projects extends MY_Controller
         }
         ProjectHasMilestone::table()->delete(array('id' => $toDelete));
 
-        $areas = DepartmentHasArea::find('all', array('conditions' => array('project_id=?',$id)));
-        $toDelete = array();
-        foreach ($areas as $value) {
-            array_push($toDelete, $value->id);
-        }
-        DepartmentHasArea::table()->delete(array('id' => $toDelete));
-
         $this->content_view = 'projects/all';
         if (!$project) {
             $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_delete_project_error'));
