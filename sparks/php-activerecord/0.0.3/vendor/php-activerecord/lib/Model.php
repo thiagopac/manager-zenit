@@ -1842,7 +1842,7 @@ class Model
 		{
 			$connection->transaction();
 
-			if ($closure() === false)
+			if (is_callable($closure)() === false)
 			{
 				$connection->rollback();
 				return false;

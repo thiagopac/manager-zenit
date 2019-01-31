@@ -42,9 +42,11 @@ $public = "0";
         <label for="user"><?=$this->lang->line('application_assign_to_agent');?></label>
         <?php $users = array();
                 $users['0'] = '-';
-                 foreach ($project->project_has_workers as $workers):
-                    $users[$workers->user_id] = $workers->user->firstname.' '.$workers->user->lastname;
-                endforeach;
+
+        foreach ($existinUsers as $worker):
+            $users[$worker->id] = $worker->firstname.' '.$worker->lastname;
+        endforeach;
+
         if(isset($task)){$user = $task->user_id;}else{$user = $this->user->id;}
         echo form_dropdown('user_id', $users, $user, 'style="width:100%" class="chosen-select"');?>
 </div>

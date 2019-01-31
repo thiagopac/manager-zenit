@@ -191,17 +191,6 @@
                     <div id="task-list" class="stdpad box-shadow">
                         <div class="table-head"><?=$this->lang->line('application_my_open_tasks');?></div>
 
-<!--                        CABEÇALHO COM DADOS DE TAREFAS -->
-<!--                        <table class="table" id="tickets" rel="--><?//=base_url()?><!--" cellspacing="0" cellpadding="0">-->
-<!--                            <thead>-->
-<!--                            <th class="hidden-xs no_sort" style="width:5px; padding-right: 5px;"><i class="icon dripicons-star"></i></th>-->
-<!--                            <th>--><?//=$this->lang->line('application_subject');?><!--</th>-->
-<!---->
-<!--                            <th class="hidden-xs hidden-md">--><?//=$this->lang->line('application_queue');?><!--</th>-->
-<!--                            <th class="hidden-xs">--><?//=$this->lang->line('application_client');?><!--</th>-->
-<!--                            <th class="hidden-xs hidden-md">--><?//=$this->lang->line('application_owner');?><!--</th>-->
-<!--                            </thead>-->
-<!--                        </table>-->
                         <div id="main-nano-wrapper" class="nano">
                             <div class="nano-content">
                                 <ul id="jp-container" class="todo jp-container">
@@ -210,12 +199,14 @@
                                     $projectname = "";
                                     foreach ($tasks as $value):
                                         $count = $count+1;
-                                        if(is_object($value->project) && $projectname != $value->project->name)
+                                        if(is_object($value->project) && $projectname != $value->project->name && in_array($value->project, $this->user->projects))
                                         {
                                             $projectname = $value->project->name;
                                             echo "<h5>".$projectname."</h5>";
                                         }
                                     ?>
+
+                                    <?php if (in_array($value->project, $this->user->projects)) { ?>
                                     <li class="<?=$value->status;?> task_<?=$value->id;?> priority<?=$value->priority;?> list-item  <?php
 
                                     $start = strtotime($value->start_date);
@@ -241,6 +232,7 @@
                                               <a href="<?=base_url()?>projects/tasks/<?=$value->project_id;?>/update/<?=$value->id;?>" class="edit-button" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
                                         </span>
                                     </li>
+                                        <?php } ?>
                                     <?php
                                     endforeach;
                                     if($count == 0)

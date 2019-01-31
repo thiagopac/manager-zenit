@@ -44,7 +44,7 @@ class Projects extends MY_Controller
         $options = array('conditions' => 'progress < 100', 'order' => 'id DESC', 'include' => array('company', 'project_has_workers'));
         if ($this->user->admin == 0) {
             $comp_array = array();
-            $thisUserHasNoCompanies = (array) $this->user->companies;
+//            $thisUserHasNoCompanies = (array) $this->user->companies;
             if (!empty($thisUserHasNoCompanies)) {
                 foreach ($this->user->companies as $value) {
                     array_push($comp_array, $value->id);
@@ -60,19 +60,20 @@ class Projects extends MY_Controller
 
                 $this->view_data['project'] = $result;
             } else {
-                $this->view_data['project'] = $this->user->projects;
+                $this->view_data['project'] = $this->user->projects; //só projetos que o colaborador está atribuído
+//                $this->view_data['project'] = Project::all($options); //todos os projetos
             }
         } else {
             $this->view_data['project'] = Project::all($options);
         }
         $this->content_view = 'projects/all';
         $this->view_data['projects_assigned_to_me'] = ProjectHasWorker::find_by_sql('select count(distinct(projects.id)) AS "amount" FROM projects, project_has_workers WHERE projects.progress != "100" AND (projects.id = project_has_workers.project_id AND project_has_workers.user_id = "'.$this->user->id.'") ');
-        $this->view_data['tasks_assigned_to_me'] = ProjectHasTask::count(array('conditions' => 'user_id = '.$this->user->id.' and status = "open"'));
+        $this->view_data['tasks_assigned_to_me'] = count(ProjectHasTask::find_by_sql('SELECT * FROM `project_has_tasks` AS task INNER JOIN project_has_workers AS worker ON worker.project_id = task.project_id WHERE task.user_id = "'.$this->user->id.'" AND worker.user_id = "'.$this->user->id.'"'));
 
-        $now = time();
-        $beginning_of_week = strtotime('last Monday', $now); // BEGINNING of the week
-        $end_of_week = strtotime('next Sunday', $now) + 86400; // END of the last day of the week
-        $this->view_data['projects_opened_this_week'] = Project::find_by_sql('select count(id) AS "amount", DATE_FORMAT(FROM_UNIXTIME(`datetime`), "%w") AS "date_day", DATE_FORMAT(FROM_UNIXTIME(`datetime`), "%Y-%m-%d") AS "date_formatted" from projects where datetime >= "'.$beginning_of_week.'" AND datetime <= "'.$end_of_week.'" Group By date_formatted, `date_day`');
+//        $now = time();
+//        $beginning_of_week = strtotime('last Monday', $now); // BEGINNING of the week
+//        $end_of_week = strtotime('next Sunday', $now) + 86400; // END of the last day of the week
+//        $this->view_data['projects_opened_this_week'] = Project::find_by_sql('select count(id) AS "amount", DATE_FORMAT(FROM_UNIXTIME(`datetime`), "%w") AS "date_day", DATE_FORMAT(FROM_UNIXTIME(`datetime`), "%Y-%m-%d") AS "date_formatted" from projects where datetime >= "'.$beginning_of_week.'" AND datetime <= "'.$end_of_week.'" Group By date_formatted, `date_day`');
     }
 
     public function filter($condition)
@@ -81,15 +82,16 @@ class Projects extends MY_Controller
         if ($this->user->admin == 0) {
             switch ($condition) {
                 case 'open':
-                    $options = 'progress < 100';
+                    $options = array('conditions' => 'progress < 100');
                     break;
                 case 'closed':
-                    $options = 'progress = 100';
+                    $options = array('conditions' => 'progress = 100');
                     break;
                 case 'all':
-                    $options = '(progress = 100 OR progress < 100)';
+                    $options = array('conditions' => 'progress = 100 OR progress < 100');
                     break;
             }
+            $this->view_data['project'] = Project::all($options);
 
             $project_array = array();
             if ($this->user->projects) {
@@ -106,16 +108,19 @@ class Projects extends MY_Controller
                 }
 
 
-                $projects_by_client_admin = Project::find('all', array('conditions' => array($options.' AND company_id in (?)', $comp_array), 'include' => array('company', 'project_has_workers')));
+//                $projects_by_client_admin = Project::find('all', array('conditions' => array($options.' AND company_id in (?)', $comp_array), 'include' => array('company', 'project_has_workers')));
+
+
 
                 //merge projects by client admin and assigned to projects
-                $result = array_merge($projects_by_client_admin, $this->user->projects);
+//                $result = array_merge($projects_by_client_admin, $this->user->projects);
+                $result = array_merge($this->user->projects);
                 //duplicate objects will be removed
                 $result = array_map("unserialize", array_unique(array_map("serialize", $result)));
                 //array is sorted on the bases of id
                 sort($result);
 
-                $this->view_data['project'] = $result;
+//                $this->view_data['project'] = $result;
             } else {
                 $this->view_data['project'] = Project::find('all', array('conditions' => array($options.' AND id in (?)', $project_array), 'include' => array('company', 'project_has_workers')));
             }
@@ -372,38 +377,45 @@ class Projects extends MY_Controller
             $project_reference = Setting::first();
             $project_reference->update_attributes(array('project_reference' => $new_project_reference));
 
+//            $options = ['conditions' => ['project_id = ?', $project->id]];
+//            $workersOfProject = ProjectHasWorker::all($options);
+
             if ($tasks) {
                 unset($_POST['tasks']);
-                $source_project    = Project::find_by_id($id);
-                foreach ($source_project->project_has_tasks as $row) {
+                $source_project = Project::find_by_id($id);
+
+
+                foreach ($source_project->project_has_milestones as $existingMilestone) {
                     $attributes = array(
                         'project_id' => $project->id,
-                        'name' => $row->name,
-                        'user_id' => '',
-                        'status' => 'open',
-                        'public' => $row->public,
-                        'datetime' => $project->start,
-                        'due_date' => $project->end,
-                        'description' => $row->description,
-                        'value' => $row->value,
-                        'priority' => $row->priority,
+                        'name' => $existingMilestone->name,
+                        'description' => $existingMilestone->description,
+                        'orderindex' => $existingMilestone->orderindex,
+                        'area_id' => $existingMilestone->area_id,
+                        'public' => $existingMilestone->public,
                         );
-                    ProjectHasTask::create($attributes);
+                    $milestone = ProjectHasMilestone::create($attributes);
+
+                    $options = ['conditions' => ['milestone_id = ?', $existingMilestone->id]];
+                    $tasksOfMilestone = ProjectHasTask::all($options);
+
+                    foreach ($tasksOfMilestone as $existingTask) {
+                        $attributes = array(
+                            'project_id' => $project->id,
+                            'milestone_id' => $milestone->id,
+                            'name' => $existingTask->name,
+                            'user_id' => $existingTask->user_id,
+                            'status' => 'open',
+                            'public' => $existingTask->public,
+                            'description' => $existingTask->description,
+                            'value' => $existingTask->value,
+                            'priority' => $existingTask->priority,
+                            'milestone_order' => $existingTask->milestone_order,
+                        );
+                        ProjectHasTask::create($attributes);
+                    }
                 }
 
-                foreach ($source_project->project_has_milestones as $row) {
-                    $attributes = array(
-                        'project_id' => $project->id,
-                        'name' => $row->name,
-                        'description' => $row->description,
-                        'due_date' => $project->end,
-                        'orderindex' => '0',
-                        'start_date' => $project->start,
-                        );
-                    ProjectHasMilestone::create($attributes);
-                }
-
-                //copia do projeto
 
             }
 
@@ -1047,6 +1059,8 @@ class Projects extends MY_Controller
                     $this->view_data['title'] = $this->lang->line('application_add_task');
                     $this->view_data['milestone_id'] = $milestone_id;
                     $this->view_data['form_action'] = 'projects/tasks/'.$id.'/add';
+
+                    $this->view_data['existinUsers'] = User::all();
                     $this->content_view = 'projects/_tasks';
                 }
                 break;
@@ -1102,6 +1116,7 @@ class Projects extends MY_Controller
                     $this->view_data['title'] = $this->lang->line('application_edit_task');
                     $this->view_data['milestone_id'] = $milestone_id;
                     $this->view_data['form_action'] = 'projects/tasks/'.$id.'/update/'.$task_id;
+                    $this->view_data['existinUsers'] = User::all();
                     $this->content_view = 'projects/_tasks';
                 }
                 break;
