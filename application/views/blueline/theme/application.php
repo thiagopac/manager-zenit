@@ -212,14 +212,22 @@ $message_icon = false;
     } ?></i>
               <div class="fc-dropdown notification-center">
                   <div class="notification-center__header">
-                      <a href="#" class="active"><?=$this->lang->line('application_alerts');?> (<?=$notification_count;?>)</a>
+                      <a href="#" class="active"><?=$this->lang->line('application_notifications');?> (<?=$notification_count;?>)</a>
                       <!-- <a href="#"><?=$this->lang->line('application_announcements');?></a> -->
                   </div>
-                   <ul class="notificationlist">
+                   <ul class="notificationlist" style="overflow-y: scroll; ">
                         <?php
-                              foreach ($notification_list as $value): ?>
-                                   <li class="">
-                                        <p class="truncate"><?=$value;?></p>
+                              foreach ($notification_list as $notification): ?>
+
+
+                                   <li class="Read-dot visible" style="<?=$notification->status != 'new' ? 'background: #f3f3f3' : '';?>">
+                                       <div class="col col-1"><span class="dot"></span></div>
+
+                                       <a href="<?=$notification->url == null ? "#" : $notification->url; ?>" style="cursor: <?=$notification->url == null ? 'default' : 'pointer' ?>;font-weight:normal;"><p class="truncate <?=$notification->status?>" style="white-space: normal"><?=$notification->message;?></p></a>
+
+                                        <p align="right" href="<?=$notification->url == null ? "#" : $notification->url; ?>" style="font-weight:normal;">Marcar lido</p>
+
+
                                    </li>
                         <?php endforeach;?>
                         <?php if ($notification_count == 0) {
@@ -230,36 +238,6 @@ $message_icon = false;
                    </ul>
               </div>
 
-            <?php if (isset($projects_icon)) {
-                                  ?>
-            <i class="icon dripicons-stopwatch topbar__icon fc-dropdown--trigger" data-placement="bottom" title="<?=$this->lang->line('application_running_timers'); ?>"><?php if ($task_notifications) {
-                                      ?><span class="topbar__icon_alert"></span><?php
-                                  } ?></i>
-            <div class="fc-dropdown notification-center shortcut-menu">
-            <div class="notification-center__header">
-                      <a href="#" class="active"><?=$this->lang->line('application_running_timers'); ?></a>
-                  </div>
-                  <ul class="notificationlist task__notifications details">
-                <?php foreach ($task_notifications as $value) {
-                                      $task_count = 1; ?>
-                      <li>
-                            <span><?=$value->project->name; ?></span>
-                            <a style="color: #555555" href="<?=base_url(); ?>projects/view/<?=$value->project_id; ?>/<?=$value->id; ?>"><?=$value->name; ?></a>
-                            <?php $timertime = (time() - $value->tracking) + $value->time_spent; ?>
-                            <span id="notification_timer<?=$value->id; ?>" class="pull-right badge timer__badge resume"></span>
-                                <script>$( document ).ready(function() { startTimer("resume", "<?=$timertime; ?>", "#notification_timer<?=$value->id; ?>"); });</script>
-                      </li>
-                 <?php
-                                  } ?>
-                 <?php if (!isset($task_count)) {
-                                      ?>
-                                   <li> <p class="truncate"><?=$this->lang->line('application_no_timers_running'); ?></p></li>
-                        <?php
-                                  } ?>
-                 </ul>
-            </div>
-            <?php
-                              } ?>
             <?php if ($message_icon) {
                                   ?>
               <span class="hidden-xs">

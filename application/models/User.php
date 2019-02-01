@@ -12,6 +12,7 @@ class User extends ActiveRecord\Model
          ['project_has_timesheets'],
          ['quotes'],
          ['quoterequests'],
+         ['notifications'],
     ];
     public static $belongs_to = [
      ['queue', 'primary_key' => 'queue'],

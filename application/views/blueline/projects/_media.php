@@ -15,17 +15,17 @@ echo form_open_multipart($form_action, $attributes);
         <label for="description"><?=$this->lang->line('application_description');?></label>
         <input id="description" type="text" name="description" class="form-control" value="<?php if(isset($media)){echo $media->description;} ?>" />
 </div>
-<div class="form-group">
-        <label for="phase"><?=$this->lang->line('application_phase');?></label>
-        <?php $options = explode(',', $project->phases); 
+<!--<div class="form-group">
+        <label for="phase"><?/*=$this->lang->line('application_phase');*/?></label>
+        <?php /*$options = explode(',', $project->phases);
                 $options2 = array();
                 foreach ($options as $value): 
                 $options2[$value] = $value;
                 endforeach;
                 $phase = FALSE;
                 if(isset($media)){ $phase = $media->phase;} 
-                echo form_dropdown('phase', $options2, $phase, 'style="width:100%" class="chosen-select"'); ?>
-</div> 
+                echo form_dropdown('phase', $options2, $phase, 'style="width:100%" class="chosen-select"'); */?>
+</div> -->
 <?php if(!isset($media)){ ?>
 
 <div class="form-group">

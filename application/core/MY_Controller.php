@@ -140,22 +140,7 @@ class My_Controller extends CI_Controller
                 }
 
 
-                if (in_array("invoices", $this->view_data['module_permissions'])) {
-                    $overdueInvoices = Invoice::overdueByDate($comp_array, $date);
-                    foreach ($overdueInvoices as $key => $value) {
-                        $line = str_replace("{invoice_number}", '<a href="'.base_url().'invoices/view/'.$value->id.'">#'.$this->view_data['core_settings']->invoice_prefix.$value->reference.'</a>', $this->lang->line('event_invoice_overdue'));
-                        $notification_list[$value->due_date.".".$value->id] = $line;
-                    }
-                }
-                if (in_array("subscriptions", $this->view_data['module_permissions'])) {
-                    $outstandingInvoices = Subscription::newInvoiceOutstanding($comp_array, $date);
-                    foreach ($outstandingInvoices as $key2 => $value2) {
-                        $eventline = str_replace("{subscription_number}", '<a href="'.base_url().'subscriptions/view/'.$value2->id.'">#'.$this->view_data['core_settings']->subscription_prefix.$value2->reference.'</a>', $this->lang->line('event_subscription_new_invoice'));
-                        $notification_list[$value2->next_payment.".".$value2->id] = $eventline;
-                    }
-                }
-
-                if (in_array("projects", $this->view_data['module_permissions'])) {
+               /* if (in_array("projects", $this->view_data['module_permissions'])) {
                     $overdueProjects = Project::overdueByDate($this->user->id, $comp_array, $date);
                     //task notification
                     $this->view_data['projects_icon'] = true;
@@ -174,7 +159,13 @@ class My_Controller extends CI_Controller
                             $notification_list[$value2->end.".".$value2->id] = $eventline;
                         }
                     }
-                }
+                }*/
+
+//               for ($i = 0; $i < 20; $i++){
+//                   $notification_list[$i] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bonum incolumis acies: misera caecitas. Ab hoc autem quaedam non melius quam veteres, quaedam omnino relicta.";
+//                }
+
+                $notification_list = Notification::get_notifications($this->user);
 
                 krsort($notification_list);
                 $this->view_data["notification_list"] = $notification_list;

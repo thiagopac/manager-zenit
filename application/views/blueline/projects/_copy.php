@@ -92,10 +92,10 @@ if(isset($project)){ ?>
                           </div>
 </div>
 
-<div class="form-group">
-                          <label for="phases"><?=$this->lang->line('application_phases');?> *</label>
-                          <input type="text" name="phases" class="form-control" id="phases"  value="<?php if(isset($project)){echo $project->phases;}else{echo "Planejamento, Desenvolvimento, Testes";} ?>" required/>
-</div>
+<!--<div class="form-group">
+                          <label for="phases"><?/*=$this->lang->line('application_phases');*/?> *</label>
+                          <input type="text" name="phases" class="form-control" id="phases"  value="<?php /*if(isset($project)){echo $project->phases;}else{echo "Planejamento, Desenvolvimento, Testes";} */?>"/>
+</div>-->
 
  <div class="form-group">
                         <label for="textfield"><?=$this->lang->line('application_description');?></label>

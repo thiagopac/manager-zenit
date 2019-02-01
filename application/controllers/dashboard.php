@@ -230,7 +230,7 @@ class Dashboard extends MY_Controller
                       },";
         }
 
-        $reminders = Reminder::find('all', ['conditions' => ['user_id = ?', $this->user->id]]);
+        /*$reminders = Reminder::find('all', ['conditions' => ['user_id = ?', $this->user->id]]);
 
         foreach ($reminders as $value) {
             $datetime = new DateTime($value->datetime);
@@ -248,7 +248,7 @@ class Dashboard extends MY_Controller
 
         $this->view_data['project_events'] = $project_events;
         $this->view_data['events_list'] = $event_list;
-        $this->view_data['event_count_for_today'] = $event_count_for_today;
+        $this->view_data['event_count_for_today'] = $event_count_for_today;*/
 
         $this->content_view = 'dashboard/dashboardV2';
     }
