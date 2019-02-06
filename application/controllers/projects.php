@@ -461,7 +461,7 @@ class Projects extends MY_Controller
                 $worker = ProjectHasWorker::create($atributes);
 //                send_notification($worker->user->email, $this->lang->line('application_notification_project_assign_subject'), $this->lang->line('application_notification_project_assign').'<br><strong>'.$project->name.'</strong>');
 
-                $attributes = array('user_id' => $worker->user->id, 'message' => $this->lang->line('application_notification_project_assign').'<br><strong>'.$project->name.'</strong>', 'url' => base_url().'projects/view/'.$project->id);
+                $attributes = array('user_id' => $worker->user->id, 'message' => $this->lang->line('application_notification_project_assign').' ['.$project->name.']', 'url' => base_url().'projects/view/'.$project->id);
                 Notification::create($attributes);
             }
 
@@ -1243,7 +1243,7 @@ class Projects extends MY_Controller
                         foreach ($this->view_data['project']->project_has_workers as $workers) {
 //                            send_notification($workers->user->email, "[".$this->view_data['project']->name."] Novo comentário", 'Novo comentário no arquivo: '.$this->view_data['media']->name.'<br><strong>'.$this->view_data['project']->name.'</strong>');
 
-                            $attributes = array('user_id' => $workers->user->id, 'message' => 'Novo comentário no arquivo: '.$this->view_data['media']->name.'<br><strong>'.$this->view_data['project']->name.'</strong>', 'url' => base_url().'projects/view/'.$this->view_data['project']->id);
+                            $attributes = array('user_id' => $workers->user->id, 'message' => 'Novo comentário no arquivo: '.$this->view_data['media']->name.' ['.$this->view_data['project']->name.']', 'url' => base_url().'projects/view/'.$this->view_data['project']->id);
                             Notification::create($attributes);
                         }
                         if (isset($this->view_data['project']->company->client->email)) {
@@ -1520,7 +1520,7 @@ class Projects extends MY_Controller
                         	if(in_array('101', $access)){
 
                         		// send_notification($project->company->client->email, "[".$project->name."] ".$_POST['subject'], $_POST['message'].'<br><strong>'.$project->name.'</strong>');
-                            send_notification($project->company->client->email, "[".$project->name."] ".$this->lang->line('application_new_comment_in_task')." ".$_POST['subject'], "<b>".$this->lang->line('application_task_name').":</b> ".$task->name." <br><b>".$this->lang->line('application_comment').":</b> ".$_POST['message'].'<br><br><strong>'.$project->name.'</strong>');
+                            send_notification($project->company->client->email, "[".$project->name."] ".$this->lang->line('application_new_comment_in_task')." ".$_POST['subject'], "<b>".$this->lang->line('application_task_name').":</b> ".$task->name." <br><b>".$this->lang->line('application_comment').":</b> ".$_POST['message'].' ['.$project->name.']');
                         	}
                         }
                     }
@@ -1622,7 +1622,7 @@ class Projects extends MY_Controller
                         foreach ($project->project_has_workers as $workers) {
 //                            send_notification($workers->user->email, "[".$project->name."] ".$_POST['subject'], "<b>".$_POST['subject']."</b><br>".$_POST['message'].'<br><strong>'.$project->name.'</strong>');
 
-                            $attributes = array('user_id' => $workers->user->id, 'message' => "<b>".$_POST['subject']."</b><br>".$_POST['message'].'<br><strong>'.$project->name.'</strong>', 'url' => base_url().'projects/view/'.$project->id);
+                            $attributes = array('user_id' => $workers->user->id, 'message' => "<b>".$_POST['subject']."</b><br>".$_POST['message'].' ['.$project->name.']', 'url' => base_url().'projects/view/'.$project->id);
                             Notification::create($attributes);
                         }
                         if ($project->company->client->email != null) {
