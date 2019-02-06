@@ -207,26 +207,25 @@ $message_icon = false;
                   <div class="grid__col-6 shortcut--item"><i class="ion-ios-pricetags shortcut--icon"></i> <?=$this->lang->line('application_create_ticket');?></div>
                   <div class="grid__col-6 shortcut--item"><i class="ion-ios-email shortcut--icon"></i> <?=$this->lang->line('application_write_messages');?></div>
             </div>
-          <i class="icon dripicons-bell topbar__icon fc-dropdown--trigger" data-placement="bottom" title="<?=$this->lang->line('application_alerts');?>"><?php if ($notification_count > 0) {
-        ?><span class="topbar__icon_alert"></span><?php
+          <i class="icon dripicons-bell topbar__icon fc-dropdown--trigger" data-placement="bottom" title="<?=$this->lang->line('application_alerts');?>"><?php if ($unread_notifications > 0) {
+        ?><span class="badge counter" style="background: #ed5564; display: initial; font-style: normal; font-weight: 300;"><?=$unread_notifications?></span><?php
     } ?></i>
               <div class="fc-dropdown notification-center">
                   <div class="notification-center__header">
                       <a href="#" class="active"><?=$this->lang->line('application_notifications');?> (<?=$notification_count;?>)</a>
                       <!-- <a href="#"><?=$this->lang->line('application_announcements');?></a> -->
                   </div>
-                   <ul class="notificationlist" style="overflow-y: scroll; ">
+                   <ul style="overflow-y: scroll; ">
                         <?php
                               foreach ($notification_list as $notification): ?>
-
-
-                                   <li class="Read-dot visible" style="<?=$notification->status != 'new' ? 'background: #f3f3f3' : '';?>">
+                                   <li id="notification_<?=$notification->id?>" class="<?=$notification->status == 'new' ? 'new-notification' : '';?>">
                                        <div class="col col-1"><span class="dot"></span></div>
-
                                        <a href="<?=$notification->url == null ? "#" : $notification->url; ?>" style="cursor: <?=$notification->url == null ? 'default' : 'pointer' ?>;font-weight:normal;"><p class="truncate <?=$notification->status?>" style="white-space: normal"><?=$notification->message;?></p></a>
 
-                                        <p align="right" href="<?=$notification->url == null ? "#" : $notification->url; ?>" style="font-weight:normal;">Marcar lido</p>
-
+                                       <div class="two-columns">
+                                           <div style=""><?php $data['core_settings'] = Setting::first();echo date($data['core_settings']->date_format . ' ' . $data['core_settings']->date_time_format, strtotime($notification->created_at))?></div>
+                                           <div><?php if ($notification->status == 'new') : ?><span class="ajax-silent mark_read" data-href="<?=base_url()?>notifications/notification/<?=$notification->id;?>/read" style="cursor: pointer" id="<?=$notification->id?>">Marcar lido<span><? endif; ?></div>
+                                       </div>
 
                                    </li>
                         <?php endforeach;?>
@@ -322,3 +321,23 @@ $message_icon = false;
 
  </body>
 </html>
+<script>
+    $(document).ready(function(){
+
+        $('span.mark_read').on('click', function (event) {
+
+            $.ajax({ url: $(this).data('href') });
+            $(this).toggleClass('hidden');
+            $("#notification_" + this.id ).toggleClass('new-notification');
+
+            if ($('.counter').html() != "1"){
+                $('.counter').html($('.counter').html()-1);
+            }else{
+                $('.counter').toggleClass('hidden')
+            }
+
+
+        });
+
+    });
+</script>

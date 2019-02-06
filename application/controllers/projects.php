@@ -1040,6 +1040,18 @@ class Projects extends MY_Controller
                     $_POST['description'] = $description;
                     $_POST['project_id'] = $id;
                     $task = ProjectHasTask::create($_POST);
+
+                    $project = Project::find_by_id($id);
+
+                    if ($task->user_id != null){
+                        $attributes = array('user_id' => $_POST['user_id'], 'message' => '<b>'.$this->user->firstname.'</b>'.' atribuiu um ticket à você. ['.$project->name.']', 'status' => 'new', 'url' => base_url().'projects/view/'.$id);
+                        Notification::create($attributes);
+
+//                        var_dump($newNotification);
+//                        exit;
+                    }
+
+
                     if (!$task) {
                         $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_task_error'));
                     } else {
@@ -1073,7 +1085,17 @@ class Projects extends MY_Controller
                     $task_id = $_POST['id'];
                     $task = ProjectHasTask::find($task_id);
 
-                    if ($task->user_id != $_POST['user_id']) {
+                    $project = Project::find_by_id($task->project_id);
+
+                    if ($task->user_id != $_POST['user_id']){
+                        $attributes = array('user_id' => $_POST['user_id'], 'message' => '<b>'.$this->user->firstname.'</b>'.' atribuiu um ticket à você. ['.$project->name.']', 'url' => base_url().'projects/view/'.$id);
+                        $newNotification = Notification::create($attributes);
+
+//                        var_dump($newNotification);
+//                        exit;
+                    }
+
+                    /*if ($task->user_id != $_POST['user_id']) {
                         //stop timer and add time to timesheet
                         if ($task->tracking != 0) {
                             $now = time();
@@ -1092,7 +1114,7 @@ class Projects extends MY_Controller
                             );
                             $timesheet = ProjectHasTimesheet::create($attributes);
                         }
-                    }
+                    }*/
 
 
                     $task->update_attributes($_POST);

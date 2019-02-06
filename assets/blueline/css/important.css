@@ -141,3 +141,14 @@ ul.todo li .lbl p {
     font-weight: 400;
 }
 
+.new-notification {
+    background: whitesmoke !important;
+}
+
+.two-columns {
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    font-size: 11px;
+    color: grey
+}

@@ -55,4 +55,13 @@ class Notifications extends MY_Controller
         }
         exit;
     }
+
+    public function notification($id = false)
+    {
+        $options = ['conditions' => ['id = ?', $id]];
+        $notification = Notification::find($options);
+        $notification->status = "read";
+        $notification->save();
+
+    }
 }

@@ -18,3 +18,4 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteBase /zenit/
 RewriteRule ^(.*)$ index.php?/$1 [L]
+

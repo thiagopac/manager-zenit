@@ -8,7 +8,7 @@ class Notification extends ActiveRecord\Model {
   );
 
     public static function get_notifications($user){
-        $options = ['conditions' => ['user_id = ? ORDER BY created_at DESC', $user->id]];
+        $options = ['conditions' => ['user_id = ? ORDER BY created_at ASC', $user->id]];
         $notifications = Notification::all($options);
 
         return $notifications;

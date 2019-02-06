@@ -167,7 +167,17 @@ class My_Controller extends CI_Controller
 
                 $notification_list = Notification::get_notifications($this->user);
 
-                krsort($notification_list);
+                $hasUnredNotifications = 0;
+
+                foreach ($notification_list as $notification){
+                    if ($notification->status == "new"){
+                        $hasUnredNotifications = $hasUnredNotifications +1;
+                    }
+                }
+
+                $this->view_data["unread_notifications"] = $hasUnredNotifications;
+
+                    krsort($notification_list);
                 $this->view_data["notification_list"] = $notification_list;
                 $this->view_data["notification_count"] = count($notification_list);
             } else {

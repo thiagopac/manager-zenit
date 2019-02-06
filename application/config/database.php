@@ -13,7 +13,7 @@
               $active_group = 'default';
               $active_record = TRUE;
 
-              $db['default']['hostname'] = '127.0.0.1';
+              $db['default']['hostname'] = 'localhost';
               $db['default']['username'] = 'owner398_user';
               $db['default']['password'] = 'ownergy@3459';
               $db['default']['database'] = 'owner398_zenit';
