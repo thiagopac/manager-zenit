@@ -457,8 +457,12 @@ class Projects extends MY_Controller
 
             foreach ($added as $value) {
                 $atributes = array('project_id' => $id, 'user_id' => $value);
+
                 $worker = ProjectHasWorker::create($atributes);
-                send_notification($worker->user->email, $this->lang->line('application_notification_project_assign_subject'), $this->lang->line('application_notification_project_assign').'<br><strong>'.$project->name.'</strong>');
+//                send_notification($worker->user->email, $this->lang->line('application_notification_project_assign_subject'), $this->lang->line('application_notification_project_assign').'<br><strong>'.$project->name.'</strong>');
+
+                $attributes = array('user_id' => $worker->user->id, 'message' => $this->lang->line('application_notification_project_assign').'<br><strong>'.$project->name.'</strong>', 'url' => base_url().'projects/view/'.$project->id);
+                Notification::create($attributes);
             }
 
             foreach ($removed as $value) {
@@ -1043,12 +1047,9 @@ class Projects extends MY_Controller
 
                     $project = Project::find_by_id($id);
 
-                    if ($task->user_id != null){
-                        $attributes = array('user_id' => $_POST['user_id'], 'message' => '<b>'.$this->user->firstname.'</b>'.' atribuiu um ticket à você. ['.$project->name.']', 'status' => 'new', 'url' => base_url().'projects/view/'.$id);
+                    if ($task->user_id != null && $task_id->due_date != null){
+                        $attributes = array('user_id' => $_POST['user_id'], 'message' => '<b>'.$this->user->firstname.'</b>'.' efetuou uma alteração em um ticket atribuído à você. ['.$project->name.']', 'status' => 'new', 'url' => base_url().'projects/view/'.$id);
                         Notification::create($attributes);
-
-//                        var_dump($newNotification);
-//                        exit;
                     }
 
 
@@ -1087,12 +1088,9 @@ class Projects extends MY_Controller
 
                     $project = Project::find_by_id($task->project_id);
 
-                    if ($task->user_id != $_POST['user_id']){
+                    if ($task->user_id != $_POST['user_id']  &&  $task_id->due_date != null){
                         $attributes = array('user_id' => $_POST['user_id'], 'message' => '<b>'.$this->user->firstname.'</b>'.' atribuiu um ticket à você. ['.$project->name.']', 'url' => base_url().'projects/view/'.$id);
-                        $newNotification = Notification::create($attributes);
-
-//                        var_dump($newNotification);
-//                        exit;
+                        Notification::create($attributes);
                     }
 
                     /*if ($task->user_id != $_POST['user_id']) {
@@ -1243,7 +1241,10 @@ class Projects extends MY_Controller
                         $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_message_success'));
 
                         foreach ($this->view_data['project']->project_has_workers as $workers) {
-                            send_notification($workers->user->email, "[".$this->view_data['project']->name."] Novo comentário", 'Novo comentário no arquivo: '.$this->view_data['media']->name.'<br><strong>'.$this->view_data['project']->name.'</strong>');
+//                            send_notification($workers->user->email, "[".$this->view_data['project']->name."] Novo comentário", 'Novo comentário no arquivo: '.$this->view_data['media']->name.'<br><strong>'.$this->view_data['project']->name.'</strong>');
+
+                            $attributes = array('user_id' => $workers->user->id, 'message' => 'Novo comentário no arquivo: '.$this->view_data['media']->name.'<br><strong>'.$this->view_data['project']->name.'</strong>', 'url' => base_url().'projects/view/'.$this->view_data['project']->id);
+                            Notification::create($attributes);
                         }
                         if (isset($this->view_data['project']->company->client->email)) {
                             $access = explode(',', $this->view_data['project']->company->client->access);
@@ -1324,7 +1325,11 @@ class Projects extends MY_Controller
                         // $activity = ProjectHasActivity::create($attributes);
 
                         foreach ($this->view_data['project']->project_has_workers as $workers) {
-                            send_notification($workers->user->email, "[".$this->view_data['project']->name."] ".$this->lang->line('application_new_media_subject'), $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>');
+//                            send_notification($workers->user->email, "[".$this->view_data['project']->name."] ".$this->lang->line('application_new_media_subject'), $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>');
+
+                            $attributes = array('user_id' => $workers->user->id, 'message' => $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>', 'url' => base_url().'projects/view/'.$this->view_data['project']->id);
+                            Notification::create($attributes);
+
                         }
                         if (isset($this->view_data['project']->company->client->email)) {
                             $access = explode(',', $this->view_data['project']->company->client->access);
@@ -1615,7 +1620,10 @@ class Projects extends MY_Controller
                     } else {
                         $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_success'));
                         foreach ($project->project_has_workers as $workers) {
-                            send_notification($workers->user->email, "[".$project->name."] ".$_POST['subject'], "<b>".$_POST['subject']."</b><br>".$_POST['message'].'<br><strong>'.$project->name.'</strong>');
+//                            send_notification($workers->user->email, "[".$project->name."] ".$_POST['subject'], "<b>".$_POST['subject']."</b><br>".$_POST['message'].'<br><strong>'.$project->name.'</strong>');
+
+                            $attributes = array('user_id' => $workers->user->id, 'message' => "<b>".$_POST['subject']."</b><br>".$_POST['message'].'<br><strong>'.$project->name.'</strong>', 'url' => base_url().'projects/view/'.$project->id);
+                            Notification::create($attributes);
                         }
                         if ($project->company->client->email != null) {
                             $access = explode(',', $project->company->client->access);

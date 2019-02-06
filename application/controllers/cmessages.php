@@ -129,6 +129,7 @@ class cMessages extends MY_Controller {
 					if( $receiverart == "u"){
 						$receiver = User::find($receiverid);
 						$receiveremail = $receiver->email;
+                        $receiverId = $receiver->id;
 
 					}
 				}
@@ -141,8 +142,12 @@ class cMessages extends MY_Controller {
        		else{
        				$this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_write_message_success'));
        				$this->load->helper('notification');
-       				send_notification($receiveremail, $message->subject, $this->lang->line('application_notification_new_message').'<br><hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>'.$_POST['message'].'<hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>');
-       			}
+//       				send_notification($receiveremail, $message->subject, $this->lang->line('application_notification_new_message').'<br><hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>'.$_POST['message'].'<hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>');
+
+                    $attributes = array('user_id' => $receiverId, 'message' => $this->lang->line('application_notification_new_message').' de <b>'.$this->client->firstname.'</b>', 'url' => base_url().'messages');
+                    Notification::create($attributes);
+
+            }
 			if($ajax != "reply"){ redirect('cmessages'); }else{
 					$this->theme_view = 'ajax';
 				}

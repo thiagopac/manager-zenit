@@ -116,8 +116,12 @@ class cProjects extends MY_Controller {
        				if(!$message){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_message_error'));}
        				else{$this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_message_success'));
        					foreach ($this->view_data['project']->project_has_workers as $workers){
-            			    send_notification($workers->user->email, "[".$this->view_data['project']->name."] Novo comentário", 'Novo comentário no arquivo: '.$this->view_data['media']->name.'<br><strong>'.$this->view_data['project']->name.'</strong>');
-            			}
+//            			    send_notification($workers->user->email, "[".$this->view_data['project']->name."] Novo comentário", 'Novo comentário no arquivo: '.$this->view_data['media']->name.'<br><strong>'.$this->view_data['project']->name.'</strong>');
+
+                            $attributes = array('user_id' => $workers->user->id, 'message' => 'Novo comentário no arquivo: '.$this->view_data['media']->name.'<br><strong>'.$this->view_data['project']->name.'</strong>', 'url' => base_url().'projects/view/'.$this->view_data['project']->id);
+                            Notification::create($attributes);
+
+                        }
 
        				}
        				redirect('cprojects/media/'.$id.'/view/'.$media_id);
@@ -171,7 +175,10 @@ class cProjects extends MY_Controller {
 							// $activity = ProjectHasActivity::create($attributes);
 
     		       		foreach ($this->view_data['project']->project_has_workers as $workers){
-            				send_notification($workers->user->email, "[".$this->view_data['project']->name."] ".$this->lang->line('application_new_media_subject'), $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>');
+//            				send_notification($workers->user->email, "[".$this->view_data['project']->name."] ".$this->lang->line('application_new_media_subject'), $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>');
+
+                            $attributes = array('user_id' => $workers->user->id, 'message' => $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>', 'url' => base_url().'projects/view/'.$this->view_data['project']->id);
+                            Notification::create($attributes);
             			}
             			if(isset($this->view_data['project']->company->client->email)){
             				send_notification($this->view_data['project']->company->client->email, "[".$this->view_data['project']->name."] ".$this->lang->line('application_new_media_subject'), $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>');
@@ -543,7 +550,10 @@ class cProjects extends MY_Controller {
 		       		else{
 		       		    $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_success'));
 		       		    foreach ($project->project_has_workers as $workers){
-            			    send_notification($workers->user->email, "[".$project->name."] ".$_POST['subject'], "<b>".$_POST['subject']."</b><br>".$_POST['message'].'<br><strong>'.$project->name.'</strong>');
+//            			    send_notification($workers->user->email, "[".$project->name."] ".$_POST['subject'], "<b>".$_POST['subject']."</b><br>".$_POST['message'].'<br><strong>'.$project->name.'</strong>');
+
+                            $attributes = array('user_id' => $workers->user->id, 'message' => "<b>".$_POST['subject']."</b><br>".$_POST['message'].'<br><strong>'.$project->name.'</strong>', 'url' => base_url().'projects/view/'.$project->id);
+                            Notification::create($attributes);
             			}
             			if($project->company->client->email != null){
             					send_notification($project->company->client->email, "[".$project->name."] ".$_POST['subject'], "<b>".$_POST['subject']."</b><br>".$_POST['message'].'<br><strong>'.$project->name.'</strong>');
