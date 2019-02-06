@@ -905,3 +905,5 @@ $lang['application_new_milestone'] = 'Novo Pacote';
 $lang['application_new_task'] = 'Nova Tarefa';
 
 $lang['application_parameterization'] = 'Parametrização';
+
+$lang['application_no_notifications_yet'] = 'Nenhuma notificação ainda';

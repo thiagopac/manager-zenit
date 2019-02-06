@@ -461,7 +461,7 @@ class Projects extends MY_Controller
                 $worker = ProjectHasWorker::create($atributes);
 //                send_notification($worker->user->email, $this->lang->line('application_notification_project_assign_subject'), $this->lang->line('application_notification_project_assign').'<br><strong>'.$project->name.'</strong>');
 
-                $attributes = array('user_id' => $worker->user->id, 'message' => $this->lang->line('application_notification_project_assign').' ['.$project->name.']', 'url' => base_url().'projects/view/'.$project->id);
+                $attributes = array('user_id' => $worker->user->id, 'message' => '<p>'.$this->lang->line('application_notification_project_assign').'</p>['.$project->name.']', 'url' => base_url().'projects/view/'.$project->id);
                 Notification::create($attributes);
             }
 
@@ -1047,8 +1047,8 @@ class Projects extends MY_Controller
 
                     $project = Project::find_by_id($id);
 
-                    if ($task->user_id != null && $task_id->due_date != null){
-                        $attributes = array('user_id' => $_POST['user_id'], 'message' => '<b>'.$this->user->firstname.'</b>'.' efetuou uma alteração em um ticket atribuído à você. ['.$project->name.']', 'status' => 'new', 'url' => base_url().'projects/view/'.$id);
+                    if ($task->user_id != null && $task->due_date != null){
+                        $attributes = array('user_id' => $_POST['user_id'], 'message' => '<p><b>'.$this->user->firstname.'</b>'.' efetuou uma alteração em um ticket atribuído à você. </p>['.$project->name.']', 'status' => 'new', 'url' => base_url().'projects/view/'.$id);
                         Notification::create($attributes);
                     }
 
@@ -1088,8 +1088,8 @@ class Projects extends MY_Controller
 
                     $project = Project::find_by_id($task->project_id);
 
-                    if ($task->user_id != $_POST['user_id']  &&  $task_id->due_date != null){
-                        $attributes = array('user_id' => $_POST['user_id'], 'message' => '<b>'.$this->user->firstname.'</b>'.' atribuiu um ticket à você. ['.$project->name.']', 'url' => base_url().'projects/view/'.$id);
+                    if ($task->user_id != $_POST['user_id']  &&  $task->due_date != null){
+                        $attributes = array('user_id' => $_POST['user_id'], 'message' => '<p><b>'.$this->user->firstname.'</b>'.' atribuiu um ticket à você. </p>['.$project->name.']', 'url' => base_url().'projects/view/'.$id);
                         Notification::create($attributes);
                     }
 

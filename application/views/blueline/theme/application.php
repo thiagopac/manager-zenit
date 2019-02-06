@@ -220,7 +220,7 @@ $message_icon = false;
                               foreach ($notification_list as $notification): ?>
                                    <li id="notification_<?=$notification->id?>" class="<?=$notification->status == 'new' ? 'new-notification' : '';?>">
                                        <div class="col col-1"><span class="dot"></span></div>
-                                       <a href="<?=$notification->url == null ? "#" : $notification->url; ?>" style="cursor: <?=$notification->url == null ? 'default' : 'pointer' ?>;font-weight:normal;"><p class="truncate <?=$notification->status?>" style="white-space: normal"><?=$notification->message;?></p></a>
+                                       <a href="<?=$notification->url == null ? "#" : $notification->url; ?>" style="cursor: <?=$notification->url == null ? 'default' : 'pointer' ?>;font-weight:normal; color: black;"><p class="truncate <?=$notification->status?>" style="white-space: normal"><?=$notification->message;?></p></a>
 
                                        <div class="two-columns">
                                            <div style=""><?php $data['core_settings'] = Setting::first();echo date($data['core_settings']->date_format . ' ' . $data['core_settings']->date_time_format, strtotime($notification->created_at))?></div>
@@ -231,7 +231,7 @@ $message_icon = false;
                         <?php endforeach;?>
                         <?php if ($notification_count == 0) {
                                   ?>
-                                   <li> <p class="truncate"><?=$this->lang->line('application_no_events_yet'); ?></p></li>
+                                   <li> <p class="truncate"><?=$this->lang->line('application_no_notifications_yet'); ?></p></li>
                         <?php
                               } ?>
                    </ul>
