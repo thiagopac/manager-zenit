@@ -62,7 +62,7 @@ class Notifications extends MY_Controller
         $notification = Notification::find($options);
 
 
-        $response = Notification::sendPushNotification();
+        $response = Notification::sendPushNotification("thiago.pires@ownergy.com.br", "Mensagem exemplo do Zenit");
         $return["allresponses"] = $response;
         $return = json_encode($return);
 
