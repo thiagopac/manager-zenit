@@ -86,8 +86,6 @@ class User extends ActiveRecord\Model
             $update->last_login = time();
             $update->save();
 
-            Notification::addDeviceForPushNotification($update);
-
             return $user;
         } elseif ($client && $client->validate_password($password) && $client->inactive == '0') {
             User::login($client->id, 'client_id');
