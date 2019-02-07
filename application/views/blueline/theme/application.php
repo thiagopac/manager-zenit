@@ -31,6 +31,17 @@ $message_icon = false;
 
     <link rel="SHORTCUT ICON" href="<?=base_url()?>assets/blueline/img/favicon.ico"/>
 
+    <link rel="manifest" href="/manifest.json" />
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+          OneSignal.init({
+              appId: "85f73cb6-8fa9-43fa-9be3-cecd49dbe2f1",
+          });
+        });
+    </script>
+
     <title><?=$core_settings->company;?></title>
 
     <?php
@@ -224,7 +235,7 @@ $message_icon = false;
 
                                        <div class="two-columns">
                                            <div style=""><?php $data['core_settings'] = Setting::first();echo date($data['core_settings']->date_format . ' ' . $data['core_settings']->date_time_format, strtotime($notification->created_at))?></div>
-                                           <div><?php if ($notification->status == 'new') : ?><span class="ajax-silent mark_read" data-href="<?=base_url()?>notifications/notification/<?=$notification->id;?>/read" style="cursor: pointer" id="<?=$notification->id?>">Marcar lido<span><? endif; ?></div>
+                                           <div><?php if ($notification->status == 'new') : ?><span class="ajax-silent mark_read" data-href="<?=base_url()?>notifications/read/<?=$notification->id;?>/read" style="cursor: pointer" id="<?=$notification->id?>">Marcar lido<span><? endif; ?></div>
                                        </div>
 
                                    </li>
