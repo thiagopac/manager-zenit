@@ -149,7 +149,7 @@ class cMessages extends MY_Controller {
                     Notification::create($attributes);
                     array_push($push_receivers, $receiveremail);
 
-                    Notification::sendPushNotification($push_receivers, 'Nova mensagem no chat');
+                    Notification::sendPushNotification($push_receivers, $this->client->firstname.' te enviou uma mensagem', base_url().'messages');
             }
 			if($ajax != "reply"){ redirect('cmessages'); }else{
 					$this->theme_view = 'ajax';

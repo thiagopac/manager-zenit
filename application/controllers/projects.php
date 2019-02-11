@@ -468,7 +468,7 @@ class Projects extends MY_Controller
                 array_push($push_receivers, $worker->user->email);
             }
 
-            Notification::sendPushNotification($push_receivers, $project->name.' - Novo projeto atribuído');
+            Notification::sendPushNotification($push_receivers, $project->name.' - Novo projeto atribuído', base_url().'projects/view/'.$project->id);
 
             foreach ($removed as $value) {
                 $atributes = array('project_id' => $id, 'user_id' => $value);
@@ -1059,7 +1059,7 @@ class Projects extends MY_Controller
                         $attributes = array('user_id' => $_POST['user_id'], 'message' => '<p><b>'.$this->user->firstname.'</b>'.' efetuou uma alteração em um ticket atribuído à você. </p>['.$project->name.']', 'status' => 'new', 'url' => base_url().'projects/view/'.$id);
                         Notification::create($attributes);
                         array_push($push_receivers, $user->email);
-                        Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' efetuou uma alteração em um ticket atribuído à você.');
+                        Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' efetuou uma alteração em um ticket atribuído à você', base_url().'projects/view/'.$id);
                     }
 
 
@@ -1108,7 +1108,7 @@ class Projects extends MY_Controller
 
                         array_push($push_receivers, $user->email);
 
-                        Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' atribuiu um ticket à você.');
+                        Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' atribuiu um ticket à você', base_url().'projects/view/'.$id);
                     }
 
                     /*if ($task->user_id != $_POST['user_id']) {
@@ -1269,7 +1269,7 @@ class Projects extends MY_Controller
                             array_push($push_receivers, $workers->user->email);
                         }
 
-                        Notification::sendPushNotification($push_receivers, $this->view_data['project']->name.' - Novo comentário em arquivo');
+                        Notification::sendPushNotification($push_receivers, $this->view_data['project']->name.' - Novo comentário em arquivo', base_url().'projects/view/'.$this->view_data['project']->id);
 
                         if (isset($this->view_data['project']->company->client->email)) {
                             $access = explode(',', $this->view_data['project']->company->client->access);
@@ -1360,7 +1360,7 @@ class Projects extends MY_Controller
                             array_push($push_receivers, $workers->user->email);
                         }
 
-                        Notification::sendPushNotification($push_receivers, $this->view_data['project']->name.' - Novo arquivo no projeto');
+                        Notification::sendPushNotification($push_receivers, $this->view_data['project']->name.' - Novo arquivo no projeto', base_url().'projects/view/'.$this->view_data['project']->id);
 
                         if (isset($this->view_data['project']->company->client->email)) {
                             $access = explode(',', $this->view_data['project']->company->client->access);
@@ -1662,7 +1662,7 @@ class Projects extends MY_Controller
                             array_push($push_receivers, $workers->user->email);
                         }
 
-                        Notification::sendPushNotification($push_receivers, $project->name.' - Nova atividade no projeto');
+                        Notification::sendPushNotification($push_receivers, $project->name.' - Nova atividade no projeto', base_url().'projects/view/'.$project->id);
 
                         if ($project->company->client->email != null) {
                             $access = explode(',', $project->company->client->access);

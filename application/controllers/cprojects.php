@@ -124,7 +124,7 @@ class cProjects extends MY_Controller {
                             array_push($push_receivers, $workers->user->email);
                         }
 
-                        Notification::sendPushNotification($push_receivers, $this->view_data['project']->name.' - Novo comentário em arquivo');
+                        Notification::sendPushNotification($push_receivers, $this->view_data['project']->name.' - Novo comentário em arquivo', base_url().'projects/view/'.$this->view_data['project']->id);
 
        				}
        				redirect('cprojects/media/'.$id.'/view/'.$media_id);
@@ -185,7 +185,7 @@ class cProjects extends MY_Controller {
                             array_push($push_receivers, $workers->user->email);
             			}
 
-                        Notification::sendPushNotification($push_receivers, $this->view_data['project']->name.' - Novo arquivo no projeto');
+                        Notification::sendPushNotification($push_receivers, $this->view_data['project']->name.' - Novo arquivo no projeto', base_url().'projects/view/'.$this->view_data['project']->id);
 
             			if(isset($this->view_data['project']->company->client->email)){
             				send_notification($this->view_data['project']->company->client->email, "[".$this->view_data['project']->name."] ".$this->lang->line('application_new_media_subject'), $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>');
@@ -560,12 +560,12 @@ class cProjects extends MY_Controller {
 		       		    foreach ($project->project_has_workers as $workers){
 //            			    send_notification($workers->user->email, "[".$project->name."] ".$_POST['subject'], "<b>".$_POST['subject']."</b><br>".$_POST['message'].'<br><strong>'.$project->name.'</strong>');
 
-                            $attributes = array('user_id' => $workers->user->id, 'message' => "<b>".$_POST['subject']."</b><br>".$_POST['message'].' ['.$project->name.']', 'url' => base_url().'projects/view/'.$project->id);
+                            $attributes = array('user_id' => $workers->user->id, 'message' => "<b>".$_POST['subject']."</b><br>".$_POST['message'].' ['.$project->name.']', 'url' => base_url().'projects/projects/'.$project->id);
                             Notification::create($attributes);
                             array_push($push_receivers, $workers->user->email);
             			}
 
-                        Notification::sendPushNotification($push_receivers, $project->name.' - Nova atividade no projeto');
+                        Notification::sendPushNotification($push_receivers, $project->name.' - Nova atividade no projeto', base_url().'projects/projects/'.$project->id);
 
             			if($project->company->client->email != null){
             					send_notification($project->company->client->email, "[".$project->name."] ".$_POST['subject'], "<b>".$_POST['subject']."</b><br>".$_POST['message'].'['.$project->name.']');

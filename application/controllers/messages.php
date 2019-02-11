@@ -150,6 +150,7 @@ class messages extends MY_Controller
                 unset($_POST['previousmessage']);
             }
             $message = Privatemessage::create($_POST);
+            $push_receivers = array();
             if (!$message) {
                 $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_write_message_error'));
             } else {
@@ -163,7 +164,8 @@ class messages extends MY_Controller
                     send_notification($receiveremail, $message->subject, $this->lang->line('application_notification_new_message').'<br><hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>'.$_POST['message'].'<hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>', $attachment);
                 }
 
-
+                array_push($push_receivers, $receiveremail);
+                Notification::sendPushNotification($push_receivers, $this->user->firstname.' te enviou uma mensagem', base_url().'messages');
             }
 
 //            var_dump($_POST);
