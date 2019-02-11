@@ -31,16 +31,13 @@ $message_icon = false;
 
     <link rel="SHORTCUT ICON" href="<?=base_url()?>assets/blueline/img/favicon.ico"/>
 
-    <link rel="manifest" href="/manifest.json" />
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <script>
-        var OneSignal = window.OneSignal || [];
-        OneSignal.push(function() {
-          OneSignal.init({
-              appId: "85f73cb6-8fa9-43fa-9be3-cecd49dbe2f1",
-          });
-        });
-    </script>
+      <link rel="manifest" href="/manifest.json" />
+      <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+      <script>
+
+
+
+      </script>
 
     <title><?=$core_settings->company;?></title>
 
@@ -276,25 +273,6 @@ $message_icon = false;
               </a>
           </li>
 
-<!-- MENU DE IDIOMAS / ESCONDIDO -->
-          <!-- <li class="fc-dropdown__submenu--trigger">
-              <span class="icon-wrapper"><i class="icon dripicons-chevron-left"></i></span> <?=$current_language;?>
-                <ul class="fc-dropdown__submenu">
-                    <span class="fc-dropdown__title"><?=$this->lang->line('application_languages');?></span>
-                    <?php foreach ($installed_languages as $entry) {
-                                  ?>
-                                   <li>
-                                       <a href="<?=base_url()?>agent/language/<?=$entry; ?>">
-                                          <img src="<?=base_url()?>assets/blueline/img/<?=$entry; ?>.png" class="language-img b-lazy"> <?=ucwords($entry); ?>
-                                        </a>
-                                   </li>
-
-                       <?php
-                              } ?>
-                </ul>
-
-          </li> -->
-
             <li class="profile-dropdown__logout">
                     <a href="<?=site_url('logout');?>" title="<?=$this->lang->line('application_logout');?>">
                          <?=$this->lang->line('application_logout');?> <i class="icon dripicons-power pull-right"></i>
@@ -330,6 +308,7 @@ $message_icon = false;
  </div> <!-- Mainwrapper end -->
 
 
+<span id="<?=$this->user->email?>" class="user-email hidden"></span>
  </body>
 </html>
 <script>
@@ -349,6 +328,31 @@ $message_icon = false;
 
 
         });
+
+
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+            OneSignal.init({
+                appId: "b9fad76b-873f-4f47-9d0f-d341c4d222a1",
+            });
+
+            OneSignal.setExternalUserId("<?=$this->user->email;?>");
+        });
+
+        // OneSignal.push(["getNotificationPermission", function(permission) {
+        //     console.log("Site Notification Permission:", permission);
+        //     // (Output) Site Notification Permission: default
+        // }]);
+
+        // OneSignal.push(function() {
+        //     /* These examples are all valid */
+        //     var isPushSupported = OneSignal.isPushNotificationsSupported();
+        //     if (isPushSupported) {
+        //         console.log("supported");
+        //     } else {
+        //         console.log("not supported");
+        //     }
+        // });
 
     });
 </script>

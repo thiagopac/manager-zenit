@@ -138,7 +138,8 @@ class cMessages extends MY_Controller {
         		unset($_POST['previousmessage']);
 			}
 			$message = Privatemessage::create($_POST);
-       		if(!$message){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_write_message_error'));}
+            $push_receivers = array();
+            if(!$message){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_write_message_error'));}
        		else{
        				$this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_write_message_success'));
        				$this->load->helper('notification');
@@ -146,7 +147,9 @@ class cMessages extends MY_Controller {
 
                     $attributes = array('user_id' => $receiverId, 'message' => $this->lang->line('application_notification_new_message').' de <b>'.$this->client->firstname.'</b>', 'url' => base_url().'messages');
                     Notification::create($attributes);
+                    array_push($push_receivers, $receiveremail);
 
+                    Notification::sendPushNotification($push_receivers, 'Nova mensagem no chat');
             }
 			if($ajax != "reply"){ redirect('cmessages'); }else{
 					$this->theme_view = 'ajax';

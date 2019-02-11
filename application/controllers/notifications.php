@@ -62,18 +62,18 @@ class Notifications extends MY_Controller
         $notification = Notification::find($options);
 
 
-        $response = Notification::sendPushNotification("thiago.pires@ownergy.com.br", "Mensagem exemplo do Zenit");
-        $return["allresponses"] = $response;
-        $return = json_encode($return);
-
-        $data = json_decode($response, true);
-        var_dump($data);
-        $id = $data['id'];
-        var_dump($id);
-
-        var_dump("\n\nJSON received:\n");
-        var_dump($return);
-        var_dump("\n");
+//        $response = Notification::sendPushNotification(array("thiago.pires@ownergy.com.br"), "Você leu uma notificação");
+//        $return["allresponses"] = $response;
+//        $return = json_encode($return);
+//
+//        $data = json_decode($response, true);
+//        var_dump($data);
+//        $id = $data['id'];
+//        var_dump($id);
+//
+//        var_dump("\n\nJSON received:\n");
+//        var_dump($return);
+//        var_dump("\n");
 
         $notification->status = "read";
         $notification->save();
