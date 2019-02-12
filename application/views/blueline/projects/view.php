@@ -311,19 +311,19 @@
             <div id="main-nano-wrapper" class="nano">
               <div class="nano-content">
                 <ul class="activity__list">
-                                <?php foreach ($project->project_has_activities as $value) {
+                                <?php foreach ($project->project_has_activities as $activity) {
         ?>
                                     <li>
                                         <h3 class="activity__list--header">
-                                            <?php echo time_ago($value->datetime); ?>
+                                            <?php echo time_ago($activity->datetime); ?>
                                         </h3>
                                         <p class="activity__list--sub truncate">
-                                            <?php if (is_object($value->user)) {
-            echo $value->user->firstname." ".$value->user->lastname.' <a href="'.base_url().'projects/view/'.$value->project->id.'">'.$value->project->name."</a>";
+                                            <?php if (is_object($activity->user)) {
+            echo $activity->user->firstname." ".$activity->user->lastname.' <a href="'.base_url().'projects/view/'.$activity->project->id.'">'.$activity->project->name."</a>";
         } ?>
                                         </p>
                                         <div class="activity__list--body">
-                                            <?=character_limiter(str_replace(array("\r\n", "\r", "\n",), "", strip_tags($value->message)), 260); ?>
+                                            <?=character_limiter(str_replace(array("\r\n", "\r", "\n",), "", strip_tags($activity->message)), 260); ?>
                                         </div>
                                     </li>
                                 <?php $activities = true;
@@ -411,15 +411,16 @@
      <div class="col-xs-12 col-sm-12 col-lg-6 department_<?=$department->id?>">
          <div id="areas-list" class="box-shadow">
             <div class="table-head"><?=$area->name;?>
-                 <span class=" pull-right">
+                 <span class=" pull-right-responsive">
                       <a href="<?=base_url()?>projects/milestones/<?=$project->id;?>/add/area_id/<?=$area->id?>" class="btn btn-success" data-toggle="mainmodal">
                           <?=$this->lang->line('application_more_milestone');?>
                       </a>
+                     <i style="font-size: 17px; vertical-align: middle;" class="icon dripicons-chevron-up collapse-expand" id="department_<?=$department->id?>_area_<?=$area->id?>"></i>
                  </span>
             </div>
 
 
-<div class="subcont no-padding min-he   ight-410">
+<div class="subcont no-padding collapse" id="collapsible_department_<?=$department->id?>_area_<?=$area->id?>">
 <ul id="milestones-list" class="todo sortlist sortable-list2">
 
     <?php  $count = 0;
@@ -436,9 +437,9 @@
               $completion = 0;
               $multiplier = 0;
 
-              foreach ($milestone->project_has_tasks as $value){
+              foreach ($milestone->project_has_tasks as $task){
 
-                if ($value->status == "done") {
+                if ($task->status == "done") {
                   $multiplier ++;
                 }
 
@@ -465,11 +466,11 @@
             </h1>
 
             <ul id="milestonelist_<?=$milestone->id;?>" class="sortable-list">
-                <?php  foreach ($milestone->project_has_tasks as $value):   $count2 =  $count2+1;  ?>
-                <li id="milestonetask_<?=$value->id;?>" class="<?=$value->status;?> priority<?=$value->priority;?> list-item <?php
+                <?php  foreach ($milestone->project_has_tasks as $task):   $count2 =  $count2+1;  ?>
+                <li id="milestonetask_<?=$task->id;?>" class="<?=$task->status;?> priority<?=$task->priority;?> task-row list-item <?php
 
-                $start = strtotime($value->start_date);
-                $end = strtotime($value->due_date);
+                $start = strtotime($task->start_date);
+                $end = strtotime($task->due_date);
                 $current =  strtotime(date('Y-m-d H:i'));
 
                 $completed = (($current - $start) / ($end - $start)) * 100;
@@ -477,20 +478,20 @@
                 if (is_infinite($completed) == false) { if ($completed >= 100) { echo "danger-task"; }else if($completed >= 60){ echo "warning-task"; }}else{ echo "";}
 
                 ?>">
-                    <a href="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$value->id;?>" class="ajax-silent task-check"></a>
-                    <input name="form-field-checkbox" class="checkbox-nolabel task-check dynamic-reload" data-reload="tile-pie" data-reload2="milestone_completion_<?=$milestone->id;?>" type="checkbox" data-link="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$value->id;?>" <?php if ($value->status == "done") {echo "checked";}?>/>
+                    <a href="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$task->id;?>" class="ajax-silent task-check"></a>
+                    <input name="form-field-checkbox" class="checkbox-nolabel task-check dynamic-reload" data-reload="tile-pie" data-reload2="milestone_completion_<?=$milestone->id;?>" type="checkbox" data-link="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$task->id;?>" <?php if ($task->status == "done") {echo "checked";}?>/>
                     <span class="lbl">
-                        <p class="truncate name"><?=$value->name;?></p>
+                        <p class="truncate name"><?=$task->name;?></p>
                     </span>
                     <span class="pull-right">
-                        <span class="task-cell-start-date-end-date"><?php if ($value->start_date != null){ ?><?=date("d/m/Y H:i", strtotime($value->start_date));?><?php } ?> <?php if ($value->start_date != null || $value->due_date != null){  ?>➔<?php } ?> <?php if ($value->due_date != null){ ?><?=date("d/m/Y H:i", strtotime($value->due_date));?><?php }else{ ?> <span style="visibility: hidden;"> <?=date("d/m/Y H:i", time());?> </span> <?php } ?></span>
-                    <?php if ($value->user_id != 0) {
-                ?><img class="img-circle list-profile-img tt"  title="<?=$value->user->firstname; ?> <?=$value->user->lastname; ?>"  src="<?=$value->user->userpic; ?>"><?php
+                        <span class="task-cell-start-date-end-date"><?php if ($task->start_date != null){ ?><?=date("d/m/Y H:i", strtotime($task->start_date));?><?php } ?> <?php if ($task->start_date != null || $task->due_date != null){  ?>➔<?php } ?> <?php if ($task->due_date != null){ ?><?=date("d/m/Y H:i", strtotime($task->due_date));?><?php }else{ ?> <span style="visibility: hidden;"> <?=date("d/m/Y H:i", time());?> </span> <?php } ?></span>
+                    <?php if ($task->user_id != 0) {
+                ?><img class="img-circle list-profile-img tt" title="<?=$task->user->firstname; ?> <?=$task->user->lastname; ?>"  src="<?=$task->user->userpic; ?>"><?php
             } ?>
-                    <?php if ($value->public != 0) {
+                    <?php if ($task->public != 0) {
                 ?><span class="list-button"><i class="icon dripicons-preview tt" title="" data-original-title="<?=$this->lang->line('application_task_public'); ?>"></i></span><?php
             } ?>
-                    <a href="<?=base_url()?>projects/tasks/<?=$project->id;?>/update/<?=$value->id;?>" class="edit-button" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
+                    <a href="<?=base_url()?>projects/tasks/<?=$project->id;?>/update/<?=$task->id;?>" class="edit-button" id="a_milestonetask_<?=$task->id;?>" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
                     </span>
 
                 </li>
@@ -549,7 +550,7 @@
                                 }]},  ';
             foreach ($project->project_has_milestones as $milestone):
               $counter = 0;
-                   foreach ($milestone->project_has_tasks as $value):
+                   foreach ($milestone->project_has_tasks as $task):
                          $milestone_Name = "";
                           if ($counter == 0) {
                               $milestone_Name = $milestone->name;
@@ -565,15 +566,15 @@
                           }
 
                          $counter++;
-                         $start = ($value->start_date) ? $value->start_date : $milestone->start_date;
-                         $end = ($value->due_date) ? $value->due_date : $milestone->due_date;
-                         $class = ($value->status == "done") ? "ganttGrey" : "";
+                         $start = ($task->start_date) ? $task->start_date : $milestone->start_date;
+                         $end = ($task->due_date) ? $task->due_date : $milestone->due_date;
+                         $class = ($task->status == "done") ? "ganttGrey" : "";
                          $gantt_data .= '
                           {
-                            name: "", desc: "'.htmlspecialchars($value->name).'", values: [';
+                            name: "", desc: "'.htmlspecialchars($task->name).'", values: [';
 
                           $gantt_data .= '{
-                          label: "'.htmlspecialchars($value->name).'", from: "'.$start.'", to: "'.$end.'", customClass: "'.$class.'"
+                          label: "'.htmlspecialchars($task->name).'", from: "'.$start.'", to: "'.$end.'", customClass: "'.$class.'"
                           }';
                           $gantt_data .= ']
                           },  ';
@@ -587,7 +588,7 @@
                                 }]}, ';
             foreach ($project->project_has_workers as $worker):
               $counter = 0;
-                   foreach ($worker->getAllTasksInProject($project->id, $worker->user->id) as $value):
+                   foreach ($worker->getAllTasksInProject($project->id, $worker->user->id) as $task):
                          $user_name = "";
                         if ($counter == 0) {
                             $user_name = $worker->user->firstname." ".$worker->user->lastname;
@@ -602,15 +603,15 @@
                                 },  ';
                         }
                          $counter++;
-                         $start = ($value->start_date) ? $value->start_date : $project->start;
-                         $end = ($value->due_date) ? $value->due_date : $project->end;
-                         $class = ($value->status == "done") ? "ganttGrey" : "";
+                         $start = ($task->start_date) ? $task->start_date : $project->start;
+                         $end = ($task->due_date) ? $task->due_date : $project->end;
+                         $class = ($task->status == "done") ? "ganttGrey" : "";
                          $gantt_data2 .= '
                           {
-                            name: "", desc: "'.htmlspecialchars($value->name).'", values: [';
+                            name: "", desc: "'.htmlspecialchars($task->name).'", values: [';
 
                           $gantt_data2 .= '{
-                          label: "'.htmlspecialchars($value->name).'", from: "'.$start.'", to: "'.$end.'", customClass: "'.$class.'", dataObj: {"id": '.$value->id.'}
+                          label: "'.htmlspecialchars($task->name).'", from: "'.$start.'", to: "'.$end.'", customClass: "'.$class.'", dataObj: {"id": '.$task->id.'}
                           }';
                           $gantt_data2 .= ']
                           },  ';
@@ -660,22 +661,22 @@
     <div class=" min-height-410 media-view-container">
     <div class="mediaPreviews dropzone"></div>
     <?php
-          foreach ($project->project_has_files as $value):
-          $type = explode("/", $value->type);
-          $thumb = "./files/media/thumb_".$value->savename;
+          foreach ($project->project_has_files as $file):
+          $type = explode("/", $file->type);
+          $thumb = "./files/media/thumb_".$file->savename;
 
             if (file_exists($thumb)) {
-                $filename = base_url()."files/media/thumb_".$value->savename;
+                $filename = base_url()."files/media/thumb_".$file->savename;
             } else {
-                $filename = base_url()."files/media/".$value->savename;
+                $filename = base_url()."files/media/".$file->savename;
             }
     ?>
       <div class="media-galery box-shadow">
-           <a href="<?=base_url()?>projects/media/<?=$project->id;?>/view/<?=$value->id;?>">
+           <a href="<?=base_url()?>projects/media/<?=$project->id;?>/view/<?=$file->id;?>">
               <div class="overlay">
 
-                <?=$value->name;?><br><br>
-                <i class="ion-android-download"></i> <?=$value->download_counter;?>
+                <?=$file->name;?><br><br>
+                <i class="ion-android-download"></i> <?=$file->download_counter;?>
 
               </div>
             </a>
@@ -686,7 +687,7 @@
                         <img class="b-lazy"
                            src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
                            data-src="<?=$filename?>"
-                           alt="<?=$value->name;?>"
+                           alt="<?=$file->name;?>"
                         />
                   <?php break; ?>
 
@@ -699,7 +700,7 @@
 
                   <?php } ?>
             </div>
-            <div class="media-galery--footer"><?=$value->name;?></div>
+            <div class="media-galery--footer"><?=$file->name;?></div>
       </div>
 
   <?php endforeach; ?>
@@ -721,20 +722,20 @@
           </tr></thead>
 
         <tbody>
-        <?php foreach ($project->project_has_files as $value):?>
+        <?php foreach ($project->project_has_files as $file):?>
 
-        <tr id="<?=$value->id;?>">
-          <td class="hidden"><?=human_to_unix($value->date);?></td>
-          <td onclick=""><?=$value->name;?></td>
-          <td class="hidden-xs"><?=$value->filename;?></td>
-          <td class="hidden-xs"><?=$value->phase;?></td>
-          <td class="hidden-xs"><span class="label label-info tt" title="<?=$this->lang->line('application_download_counter');?>" ><?=$value->download_counter;?></span></td>
+        <tr id="<?=$file->id;?>">
+          <td class="hidden"><?=human_to_unix($file->date);?></td>
+          <td onclick=""><?=$file->name;?></td>
+          <td class="hidden-xs"><?=$file->filename;?></td>
+          <td class="hidden-xs"><?=$file->phase;?></td>
+          <td class="hidden-xs"><span class="label label-info tt" title="<?=$this->lang->line('application_download_counter');?>" ><?=$file->download_counter;?></span></td>
           <td class="option " width="10%">
-                <button type="button" class="btn-option btn-xs po tt green" title="<?=$this->lang->line('application_delete'); ?>" data-toggle="popover" data-placement="left" data-content="<a class='btn btn-danger po-delete ajax-silent' href='<?=base_url()?>projects/media/<?=$project->id;?>/delete/<?=$value->id;?>'><?=$this->lang->line('application_yes_im_sure');?></a>
+                <button type="button" class="btn-option btn-xs po tt green" title="<?=$this->lang->line('application_delete'); ?>" data-toggle="popover" data-placement="left" data-content="<a class='btn btn-danger po-delete ajax-silent' href='<?=base_url()?>projects/media/<?=$project->id;?>/delete/<?=$file->id;?>'><?=$this->lang->line('application_yes_im_sure');?></a>
                   <button class='btn po-close'><?=$this->lang->line('application_no');?></button>
-                  <input type='hidden' name='td-id' class='id' value='<?=$value->id;?>'>" data-original-title="<b><?=$this->lang->line('application_really_delete');?></b>">
+                  <input type='hidden' name='td-id' class='id' value='<?=$file->id;?>'>" data-original-title="<b><?=$this->lang->line('application_really_delete');?></b>">
                   <i class="icon dripicons-cross"></i></button>
-                <a href="<?=base_url()?>projects/media/<?=$project->id;?>/update/<?=$value->id;?>" title="<?=$this->lang->line('application_edit'); ?>" class="btn-option tt green" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
+                <a href="<?=base_url()?>projects/media/<?=$project->id;?>/update/<?=$file->id;?>" title="<?=$this->lang->line('application_edit'); ?>" class="btn-option tt green" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
              </td>
 
         </tr>
@@ -771,83 +772,6 @@
 
 </div>
 
-<?php if ($invoice_access) {
-        ?>
-<div class="row tab-pane fade" role="tabpanel" id="invoices-tab">
- <div class="col-xs-12 col-sm-12"><br>
- <a href="<?=base_url()?>projects/invoice/<?=$project->id; ?>" class="btn btn-primary" data-toggle="mainmodal"><?=$this->lang->line('application_create_invoice'); ?></a>
- <div class="box-shadow">
- <div class="table-head"><?=$this->lang->line('application_invoices'); ?> <span class=" pull-right"></span></div>
-<div class="table-div">
- <table class="data table" id="invoices" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
-    <thead>
-      <th width="70px" class="hidden-xs"><?=$this->lang->line('application_invoice_id'); ?></th>
-      <th><?=$this->lang->line('application_client'); ?></th>
-      <th class="hidden-xs"><?=$this->lang->line('application_issue_date'); ?></th>
-      <th class="hidden-xs"><?=$this->lang->line('application_due_date'); ?></th>
-      <th><?=$this->lang->line('application_status'); ?></th>
-      <th class="hidden-xs"><?=$this->lang->line('application_value'); ?></th>
-      <th class="hidden-xs"><?=$this->lang->line('application_action'); ?></th>
-    </thead>
-    <?php foreach ($project_has_invoices as $value):?>
-
-    <tr id="<?=$value->id; ?>" >
-      <td class="hidden-xs" onclick=""><?=$core_settings->invoice_prefix; ?><?=$value->reference; ?></td>
-      <td onclick=""><span class="label label-info"><?php if (is_object($value->company)) {
-            echo $value->company->name;
-        } ?></span></td>
-      <td class="hidden-xs"><span><?php $unix = human_to_unix($value->issue_date.' 00:00');
-        echo '<span class="hidden">'.$unix.'</span> ';
-        echo date($core_settings->date_format, $unix); ?></span></td>
-      <td class="hidden-xs"><span class="label <?php if ($value->status == "Paid") {
-            echo 'label-success';
-        }
-        if ($value->due_date <= date('Y-m-d') && $value->status != "Paid") {
-            echo 'label-important tt" title="'.$this->lang->line('application_overdue');
-        } ?>"><?php $unix = human_to_unix($value->due_date.' 00:00');
-        echo '<span class="hidden">'.$unix.'</span> ';
-        echo date($core_settings->date_format, $unix); ?></span> <span class="hidden"><?=$unix; ?></span></td>
-      <td onclick=""><span class="label <?php $unix = human_to_unix($value->sent_date.' 00:00');
-        if ($value->status == "Paid") {
-            echo 'label-success';
-        } elseif ($value->status == "Sent") {
-            echo 'label-warning tt" title="'.date($core_settings->date_format, $unix);
-        } ?>"><?=$this->lang->line('application_'.$value->status); ?></span></td>
-      <td class="hidden-xs"><?php if (isset($value->sum)) {
-            echo display_money($value->sum, $value->currency);
-        } ?> </td>
-
-      <td class="option hidden-xs" width="8%">
-                <button type="button" class="btn-option delete po" data-toggle="popover" data-placement="left" data-content="<a class='btn btn-danger po-delete ajax-silent' href='<?=base_url()?>invoices/delete/<?=$value->id; ?>'><?=$this->lang->line('application_yes_im_sure'); ?></a>
-                  <button class='btn po-close'><?=$this->lang->line('application_no'); ?></button>
-                  <input type='hidden' name='td-id' class='id' value='<?=$value->id; ?>'>" data-original-title="<b><?=$this->lang->line('application_really_delete'); ?></b>"><i class="icon dripicons-cross"></i>
-                </button>
-                <a href="<?=base_url()?>invoices/update/<?=$value->id; ?>" class="btn-option" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
-      </td>
-    </tr>
-
-    <?php endforeach; ?>
-    </table>
-        <?php if (!$project_has_invoices) {
-            ?>
-        <div class="no-files">
-            <i class="icon dripicons-document"></i><br>
-
-            <?=$this->lang->line('application_no_invoices_yet'); ?>
-        </div>
-         <?php
-        } ?>
-        </div>
-    </div>
-  </div>
-
-
-</div>
-<?php
-    } ?>
-
-
-
 <div class="row tab-pane fade" role="tabpanel" id="activities-tab">
 <div class="col-xs-12 col-sm-12">
         <div class="box-shadow">
@@ -876,16 +800,16 @@
                       </div>
                        </form>
                       </li>
-<?php foreach ($project->project_has_activities as $value):?>
+<?php foreach ($project->project_has_activities as $activity):?>
                       <?php
                       $writer = false;
 
-                      if ($value->user_id != 0) {
-                          $writer = $value->user->firstname." ".$value->user->lastname;
-                          $image = $value->user->userpic;
+                      if ($activity->user_id != 0) {
+                          $writer = $activity->user->firstname." ".$activity->user->lastname;
+                          $image = $activity->user->userpic;
                       } else {
-                          $writer = $value->client->firstname." ".$value->client->lastname;
-                          $image = $value->client->userpic;
+                          $writer = $activity->client->firstname." ".$activity->client->lastname;
+                          $image = $activity->client->userpic;
                       }?>
                       <li class="comment-item">
                       <div class="comment-pic">
@@ -898,15 +822,15 @@
                       } ?>
                       </div>
                       <div class="comment-content">
-                          <h5><?=$value->subject;?></h5>
-                            <p><small class="text-muted"><span class="comment-writer"><?=$writer?></span> <span class="datetime"><?php  echo date($core_settings->date_format.' '.$core_settings->date_time_format, $value->datetime); ?></span></small>
-                            <?php if ($value->user_id == $this->user->id) {
+                          <h5><?=$activity->subject;?></h5>
+                            <p><small class="text-muted"><span class="comment-writer"><?=$writer?></span> <span class="datetime"><?php  echo date($core_settings->date_format.' '.$core_settings->date_time_format, $activity->datetime); ?></span></small>
+                            <?php if ($activity->user_id == $this->user->id) {
                           ?>
-                            <a class="pull-right li-delete ajax-silent" href="<?=base_url(); ?>projects/activity/<?=$value->project_id; ?>/delete/<?=$value->id; ?>"><i class="icon dripicons-trash"></i></a>
+                            <a class="pull-right li-delete ajax-silent" href="<?=base_url(); ?>projects/activity/<?=$activity->project_id; ?>/delete/<?=$activity->id; ?>"><i class="icon dripicons-trash"></i></a>
                             <?php
                       } ?>
                             </p>
-                            <p><?=$value->message;?></p>
+                            <p><?=$activity->message;?></p>
                       </div>
                       </li>
   <?php endforeach;?>
@@ -1040,6 +964,15 @@ dropzoneloader("<?php echo base_url()."projects/dropzone/".$project->id; ?>", "<
 
           $('#project-overview-dropdown-menu').html($(this).data('name'));
 
+      });
+
+      $(".collapse-expand").on("click", function(){
+          $('#collapsible_'+this.id).toggleClass('collapse');
+          $(this).toggleClass('dripicons-chevron-up dripicons-chevron-down');
+      });
+
+      $(".task-row").dblclick(function() {
+          $('#a_'+this.id).click();
       });
 
 

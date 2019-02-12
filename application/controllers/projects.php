@@ -1056,10 +1056,10 @@ class Projects extends MY_Controller
                     $user = User::find_by_id($_POST['user_id']);
 
                     if ($task->user_id != null && $task->due_date != null){
-                        $attributes = array('user_id' => $_POST['user_id'], 'message' => '<p><b>'.$this->user->firstname.'</b>'.' efetuou uma alteração em um ticket atribuído à você. </p>['.$project->name.']', 'status' => 'new', 'url' => base_url().'projects/view/'.$id);
+                        $attributes = array('user_id' => $_POST['user_id'], 'message' => '<p><b>'.$this->user->firstname.'</b>'.' efetuou uma alteração em um ticket atribuído a você. </p>['.$project->name.']', 'status' => 'new', 'url' => base_url().'projects/view/'.$id);
                         Notification::create($attributes);
                         array_push($push_receivers, $user->email);
-                        Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' efetuou uma alteração em um ticket atribuído à você', base_url().'projects/view/'.$id);
+                        Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' efetuou uma alteração em um ticket atribuído a você', base_url().'projects/view/'.$id);
                     }
 
 
@@ -1103,12 +1103,12 @@ class Projects extends MY_Controller
                     $user = User::find_by_id($_POST['user_id']);
 
                     if ($task->user_id != $_POST['user_id']  &&  $task->due_date != null){
-                        $attributes = array('user_id' => $_POST['user_id'], 'message' => '<p><b>'.$this->user->firstname.'</b>'.' atribuiu um ticket à você. </p>['.$project->name.']', 'url' => base_url().'projects/view/'.$id);
+                        $attributes = array('user_id' => $_POST['user_id'], 'message' => '<p><b>'.$this->user->firstname.'</b>'.' atribuiu uma tarefa à você. </p>['.$project->name.']', 'url' => base_url().'projects/view/'.$id);
                         Notification::create($attributes);
 
                         array_push($push_receivers, $user->email);
 
-                        Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' atribuiu um ticket à você', base_url().'projects/view/'.$id);
+                        Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' atribuiu uma tarefa à você', base_url().'projects/view/'.$id);
                     }
 
                     /*if ($task->user_id != $_POST['user_id']) {

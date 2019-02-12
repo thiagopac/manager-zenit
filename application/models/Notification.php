@@ -23,7 +23,7 @@ class Notification extends ActiveRecord\Model {
             'app_id' => "b9fad76b-873f-4f47-9d0f-d341c4d222a1",
             'include_external_user_ids' => $emails,
             'contents' => $content,
-            'url' => $url
+            'web_url' => $url
         );
 
         $fields = json_encode($fields);

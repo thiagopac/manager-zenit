@@ -197,20 +197,23 @@
                                     <?php
                                     $count = 0;
                                     $projectname = "";
-                                    foreach ($tasks as $value):
+                                    foreach ($tasks as $task):
+
+                                        if ($task->start_date == null || $task->due_date == null){ continue; }
+
                                         $count = $count+1;
-                                        if(is_object($value->project) && $projectname != $value->project->name && in_array($value->project, $this->user->projects))
+                                        if(is_object($task->project) && $projectname != $task->project->name && in_array($task->project, $this->user->projects))
                                         {
-                                            $projectname = $value->project->name;
+                                            $projectname = $task->project->name;
                                             echo "<h5>".$projectname."</h5>";
                                         }
                                     ?>
 
-                                    <?php if (in_array($value->project, $this->user->projects)) { ?>
-                                    <li class="<?=$value->status;?> task_<?=$value->id;?> priority<?=$value->priority;?> list-item  <?php
+                                    <?php if (in_array($task->project, $this->user->projects)) { ?>
+                                    <li id="mytask_<?=$task->id;?>" class="<?=$task->status;?> task_<?=$task->id;?> priority<?=$task->priority;?> list-item task-row <?php
 
-                                    $start = strtotime($value->start_date);
-                                    $end = strtotime($value->due_date);
+                                    $start = strtotime($task->start_date);
+                                    $end = strtotime($task->due_date);
                                     $current =  strtotime(date('Y-m-d H:i'));
 
                                     $completed = (($current - $start) / ($end - $start)) * 100;
@@ -220,16 +223,17 @@
                                     ?>">
                                         <span class="lbl-">
                                             <p class="truncate">
-                                                <a href="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$value->id;?>" class="ajax-silent task-check"></a>
-                                                <input name="form-field-checkbox" class="checkbox-nolabel task-check dynamic-reload checkbox-task" id="task_<?=$value->id;?>" data-reload="" data-reload2="" type="checkbox" data-link="<?=base_url()?>projects/tasks/<?=$value->project_id;?>/check/<?=$value->id;?>" <?=$value->status;?>/>
-<!--                                                <input name="form-field-checkbox" type="checkbox" class="checkbox-nolabel task-check" data-link="--><?//=base_url()?><!--projects/tasks/--><?//=$value->project_id;?><!--/check/--><?//=$value->id;?><!--" --><?//=$value->status;?><!--/>-->
-                                                <a href="<?=base_url()?>projects/view/<?=$value->project_id;?>"><?=$value->name;?></a>
+                                                <a href="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$task->id;?>" class="ajax-silent task-check"></a>
+                                                <input name="form-field-checkbox" class="checkbox-nolabel task-check dynamic-reload checkbox-task" id="task_<?=$task->id;?>" data-reload="" data-reload2="" type="checkbox" data-link="<?=base_url()?>projects/tasks/<?=$task->project_id;?>/check/<?=$task->id;?>" <?=$task->status;?>/>
+<!--                                                <input name="form-field-checkbox" type="checkbox" class="checkbox-nolabel task-check" data-link="--><?//=base_url()?><!--projects/tasks/--><?//=$task->project_id;?><!--/check/--><?//=$task->id;?><!--" --><?//=$task->status;?><!--/>-->
+                                                <a href="<?=base_url()?>projects/view/<?=$task->project_id;?>"><?=$task->name;?></a>
                                             </p>
                                         </span>
                                         <span class="pull-right hidden-xs" style="margin-top: -43px;">
-                                            <span class="task-cell-start-date-end-date"><?php if ($value->start_date != null){ ?><?=date("d/m/Y H:i", strtotime($value->start_date));?><?php } ?> <?php if ($value->start_date != null || $value->due_date != null){  ?>➔<?php } ?> <?php if ($value->due_date != null){ ?><?=date("d/m/Y H:i", strtotime($value->due_date));?><?php }else{ ?> <span style="visibility: hidden;"> <?=date("d/m/Y H:i", time());?> </span> <?php } ?></span>
-                                              <?php if ($value->public != 0) {  ?><span class="list-button"><i class="icon dripicons-preview tt" title="" data-original-title="<?=$this->lang->line('application_task_public');?>"></i></span><?php } ?>
-                                              <a href="<?=base_url()?>projects/tasks/<?=$value->project_id;?>/update/<?=$value->id;?>" class="edit-button" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
+                                            <span class="hidden-sm hidden-xs" style="margin-right: 10px; left: 8px !important; font-size: 11px!important; font-family: Open Sans, Arial; font-weight: 300!important;">[<?=$task->project->name?>]</span>
+                                            <span class="task-cell-start-date-end-date"><?php if ($task->start_date != null){ ?><?=date("d/m/Y H:i", strtotime($task->start_date));?><?php } ?> <?php if ($task->start_date != null || $task->due_date != null){  ?>➔<?php } ?> <?php if ($task->due_date != null){ ?><?=date("d/m/Y H:i", strtotime($task->due_date));?><?php }else{ ?> <span style="visibility: hidden;"> <?=date("d/m/Y H:i", time());?> </span> <?php } ?></span>
+                                              <?php if ($task->public != 0) {  ?><span class="list-button"><i class="icon dripicons-preview tt" title="" data-original-title="<?=$this->lang->line('application_task_public');?>"></i></span><?php } ?>
+                                              <a href="<?=base_url()?>projects/tasks/<?=$task->project_id;?>/update/<?=$task->id;?>" id="a_mytask_<?=$task->id;?>" class="edit-button" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
                                         </span>
                                     </li>
                                         <?php } ?>
@@ -583,6 +587,10 @@ $(document).ready(function(){
 <?php if($this->user->admin == "1"){ ?>
   <script type="text/javascript">
     $(document).ready(function(){
+
+        $(".task-row").dblclick(function() {
+            $('#a_'+this.id).click();
+        });
 
       <?php if ($firstlogin) : ?>
         $.get('<?= base_url() ?>agent/welcome', function(data) {
