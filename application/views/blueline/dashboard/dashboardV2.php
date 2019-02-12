@@ -210,7 +210,7 @@
                                     ?>
 
                                     <?php if (in_array($task->project, $this->user->projects)) { ?>
-                                    <li id="mytask_<?=$task->id;?>" class="<?=$task->status;?> task_<?=$task->id;?> priority<?=$task->priority;?> list-item task-row <?php
+                                    <li data-href="<?=base_url()?>projects/view/<?=$task->project->id?>" id="mytask_<?=$task->id;?>" class="<?=$task->status;?> task_<?=$task->id;?> priority<?=$task->priority;?> list-item task-row <?php
 
                                     $start = strtotime($task->start_date);
                                     $end = strtotime($task->due_date);
@@ -588,8 +588,12 @@ $(document).ready(function(){
   <script type="text/javascript">
     $(document).ready(function(){
 
+        // $(".task-row").dblclick(function() {
+        //     $('#a_'+this.id).click();
+        // });
+
         $(".task-row").dblclick(function() {
-            $('#a_'+this.id).click();
+            location.href = $(this).data("href");
         });
 
       <?php if ($firstlogin) : ?>
