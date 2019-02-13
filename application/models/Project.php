@@ -10,7 +10,6 @@ class Project extends ActiveRecord\Model {
     array("project_has_milestones", 'order' => 'orderindex'),
     array('project_has_files'),
     array('project_has_workers'),
-    array('project_has_invoices'),
     array('project_has_timesheets'),
     array('project_has_activities',
            'order'    => 'datetime DESC'),

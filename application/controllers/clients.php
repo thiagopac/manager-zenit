@@ -12,13 +12,9 @@ class Clients extends MY_Controller
             redirect('cprojects');
         } elseif ($this->user) {
             $this->view_data['project_access'] = false;
-            $this->view_data['invoice_access'] = false;
             foreach ($this->view_data['menu'] as $key => $value) {
                 if ($value->link == 'clients') {
                     $access = true;
-                }
-                if ($value->link == 'invoices') {
-                    $this->view_data['invoice_access'] = true;
                 }
                 if ($value->link == 'projects') {
                     $this->view_data['project_access'] = true;
@@ -424,7 +420,6 @@ class Clients extends MY_Controller
                 redirect('clients');
             }
         }
-        $this->view_data['invoices'] = Invoice::find('all', ['conditions' => ['estimate != ? AND company_id = ? AND estimate_status != ?', 1, $id, 'Declined']]);
         $this->content_view = 'clients/view';
     }
 

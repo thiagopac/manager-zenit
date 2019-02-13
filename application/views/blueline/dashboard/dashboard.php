@@ -21,18 +21,6 @@
 
             <div class="col-xs-12 col-sm-12 col-md-4">
 
-              <div class="stdpad-small orange">
-                  <div class="icon"><i class="ion-ios-paper-outline"></i></div>
-                    <div class="stats">
-                     <div class="number"><?=$invoices_open;?><small> / <?=$invoices_all;?></small></div> <div class="text"><?=$this->lang->line('application_open_invoices');?></div>
-
-                    </div>
-
-                </div>
-                            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-4">
-
                 <div class="stdpad-small blue">
 
                     <div class="icon"><i class="ion-ios-analytics-outline"></i></div>

@@ -300,7 +300,9 @@ $message_icon = false;
 
     <!-- Js Files -->
 
-        <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/app.js"></script>
+<!--        <script type="text/javascript" src="--><?//=base_url()?><!--assets/blueline/js/app.js"></script>-->
+    <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/app.js"></script>
+
         <script>
             flatdatepicker(false, langshort);
         </script>

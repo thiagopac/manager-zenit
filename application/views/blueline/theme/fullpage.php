@@ -59,7 +59,6 @@
     <div>
      <?php if ($this->session->flashdata('message')) {
         $exp = explode(':', $this->session->flashdata('message'))?>
-	    <div id="quotemessage" class="alert alert-success"><span><?=$exp[1]?></span></div>
 	    <?php
     } ?>
 <?=$yield?>

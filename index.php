@@ -4,7 +4,7 @@ if (function_exists('date_default_timezone_set') and function_exists('date_defau
     @date_default_timezone_set(@date_default_timezone_get());
 }
 
-include_once './vendor/autoload.php';
+//include_once './vendor/autoload.php';
 
 /*
  *---------------------------------------------------------------

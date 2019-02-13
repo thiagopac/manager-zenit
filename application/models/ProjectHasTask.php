@@ -7,7 +7,6 @@ class ProjectHasTask extends ActiveRecord\Model
     public static $belongs_to = [
      ['user'],
      ['project'],
-     ['invoice'],
      ['project_has_milestone', 'foreign_key' => 'milestone_id'],
      ['client', 'class_name' => 'client', 'foreign_key' => 'client_id'],
      ['creator', 'class_name' => 'client', 'foreign_key' => 'created_by_client'],

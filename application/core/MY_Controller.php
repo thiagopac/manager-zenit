@@ -128,8 +128,6 @@ class My_Controller extends CI_Controller
                 $this->view_data['widgets']        = Module::find('all', array('conditions' => array('id in (?) AND type = ?', $access, 'widget')));
                 $this->view_data['user_online']    = User::all(array('conditions' => array('last_active+(30 * 60) > ? AND status = ?', time(), "active")));
                 $this->view_data['client_online']    = Client::all(array('conditions' => array('last_active+(30 * 60) > ? AND inactive = ?', time(), "0")));
-                $this->view_data['quotations_new']    = Quote::count(array('conditions' => array('status = ?', "New")));
-                $this->view_data['quotations_new']    = $this->view_data['quotations_new']+Quoterequest::count(array('conditions' => array('status = ?', "New")));
 
                 $this->view_data['sticky']            = Project::find_by_sql("select distinct(projects.name), projects.id, projects.tracking, projects.progress from projects, project_has_workers where projects.sticky = 1 AND projects.id = project_has_workers.project_id AND project_has_workers.user_id=".$this->user->id);
 
@@ -187,7 +185,6 @@ class My_Controller extends CI_Controller
                 $email = 'c'.$this->client->id;
                 $this->view_data['menu'] = Module::find('all', array('order' => 'sort asc', 'conditions' => array('id in (?) AND type = ?', $access, 'client')));
                 $update = Client::find($this->client->id);
-                $this->view_data['estimates_new'] = Invoice::find_by_sql("select count(id) as amount from invoices where (`estimate_status`='Sent' or `estimate_status`='Revised') and company_id =".$this->client->company_id);
             }
 
             //Update user last active

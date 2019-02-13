@@ -17,11 +17,7 @@ class Projects extends MY_Controller
                 redirect('cprojects');
             }
         } elseif ($this->user) {
-            $this->view_data['invoice_access'] = false;
             foreach ($this->view_data['menu'] as $key => $value) {
-                if ($value->link == "invoices") {
-                    $this->view_data['invoice_access'] = true;
-                }
                 if ($value->link == "projects") {
                     $access = true;
                 }
@@ -564,10 +560,7 @@ class Projects extends MY_Controller
         $this->view_data['go_to_taskID'] = $taskId;
         $this->view_data['first_project'] = Project::first();
         $this->view_data['last_project'] = Project::last();
-        $this->view_data['project_has_invoices'] = Invoice::all(array('conditions' => array('project_id = ? AND estimate != ?', $id, 1)));
-        if (!isset($this->view_data['project_has_invoices'])) {
-            $this->view_data['project_has_invoices'] = array();
-        }
+
         $tasks = ProjectHasTask::count(array('conditions' => 'project_id = '.$id));
         $this->view_data['alltasks'] = $tasks;
         $this->view_data['opentasks'] = ProjectHasTask::count(array('conditions' => array('status != ? AND project_id = ?', 'done', $id)));
@@ -820,7 +813,6 @@ class Projects extends MY_Controller
                         "task_id" => $_POST["task_id"],
                         "start" => $_POST["start"],
                         "end" => $_POST["end"],
-                        "invoice_id" => 0,
                         "description" => "",
                     );
             $timesheet = ProjectHasTimesheet::create($attr);
@@ -1184,7 +1176,6 @@ class Projects extends MY_Controller
             case 'unlock':
                 $this->theme_view = 'blank';
                 $task = ProjectHasTask::find($task_id);
-                $task->invoice_id = '0';
                 $task->save();
                 if ($task) {
                     json_response("success", htmlspecialchars($this->lang->line('application_task_has_been_unlocked')));
@@ -1559,72 +1550,6 @@ class Projects extends MY_Controller
                     exit;
                 }
                 break;
-        }
-    }
-
-    public function invoice($id = false)
-    {
-        if ($_POST) {
-            unset($_POST['send']);
-            unset($_POST['_wysihtml5_mode']);
-            unset($_POST['files']);
-            $project = Project::find_by_id($id);
-            $values = array("project_id" => $id,
-                            "company_id" => $project->company_id,
-                            "status" => "Open",
-                            "reference" => $_POST["reference"],
-                            "issue_date" => $_POST["issue_date"],
-                            "due_date" => $_POST["due_date"],
-                            "terms" => $_POST["terms"],
-                            "currency" => $_POST["currency"],
-                            "discount" => $_POST["discount"],
-                            "tax" => $_POST["tax"],
-                            "second_tax" => $_POST["second_tax"]
-                            );
-            $invoice = Invoice::create($values);
-            $new_invoice_reference = $_POST['reference']+1;
-            if (is_array($_POST["tasks"])) {
-                foreach ($_POST["tasks"] as $value) {
-                    $task = ProjectHasTask::find_by_id($value);
-                    $task->invoice_id = $invoice->id;
-                    $task->save();
-                    $seconds = $task->time_spent;
-                    $H = floor($seconds / 3600);
-                    $i = ($seconds / 60) % 60;
-                    $s = $seconds % 60;
-                    $hours = sprintf('%0.2f', $H+($i/60));
-                    $item_values = array("invoice_id" => $invoice->id,
-                                        "item_id" => 0,
-                                        "amount" => $hours,
-                                        "value" => $task->value,
-                                        "name" => $task->name,
-                                        "description" => $task->description,
-                                        "type" => "task",
-                                        "task_id" => $task->id);
-                    $newItem = InvoiceHasItem::create($item_values);
-                }
-            }
-
-
-            $invoice_reference = Setting::first();
-            $invoice_reference->update_attributes(array('invoice_reference' => $new_invoice_reference));
-            if (!$invoice) {
-                $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_create_invoice_error'));
-            } else {
-                $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_create_invoice_success'));
-            }
-            redirect('invoices/view/'.$invoice->id);
-        } else {
-            $this->view_data['invoices'] = Invoice::all();
-            $this->view_data['next_reference'] = Invoice::last();
-            $this->view_data['project'] = Project::find_by_id($id);
-            $this->view_data['done_tasks'] = ProjectHasTask::getDoneTasks($id);
-
-
-            $this->theme_view = 'modal';
-            $this->view_data['title'] = $this->lang->line('application_create_invoice');
-            $this->view_data['form_action'] = 'projects/invoice/'.$id;
-            $this->content_view = 'projects/_invoice';
         }
     }
 

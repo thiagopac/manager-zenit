@@ -10,8 +10,6 @@ class User extends ActiveRecord\Model
          ['projects', 'through' => 'project_has_workers'],
          ['project_has_tasks'],
          ['project_has_timesheets'],
-         ['quotes'],
-         ['quoterequests'],
          ['notifications'],
     ];
     public static $belongs_to = [

@@ -125,9 +125,6 @@ function receipt_notification($clientId, $subject = false, $paymentId = false)
     $instance->load->helper('file');
     $instance->load->library('parser');
     $settings = Setting::first();
-    $payment = InvoiceHasPayment::find_by_id($paymentId);
-    $unixDate = human_to_unix($payment->date . ' 00:00');
-    $paymentDate = date($settings->date_format, $unixDate);
     $client = Client::find_by_id($clientId);
 
     $instance->email->from($settings->email, $settings->company);
@@ -139,11 +136,6 @@ function receipt_notification($clientId, $subject = false, $paymentId = false)
                       'link' => base_url(),
                       'logo' => '<img src="' . base_url() . '' . $settings->logo . '" alt="' . $settings->company . '"/>',
                       'invoice_logo' => '<img src="' . base_url() . '' . $settings->invoice_logo . '" alt="' . $settings->company . '"/>',
-                      'payment_date' => $paymentDate,
-                      'invoice_id' => $settings->invoice_prefix . $payment->invoice->reference,
-                      'payment_method' => $instance->lang->line('application_' . $payment->type),
-                      'payment_reference' => $payment->reference,
-                      'payment_amount' => display_money($payment->amount, $payment->invoice->currency),
                       'client_firstname' => $client->firstname,
                       'client_lastname' => $client->lastname,
                       'client_company' => $client->company->name,

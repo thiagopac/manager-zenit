@@ -70,24 +70,6 @@ class Dashboard extends MY_Controller
         // Projects Stats
         $this->view_data['projects_open'] = Project::count(['conditions' => ['progress < ?', 100]]);
         $this->view_data['projects_all'] = Project::count();
-        // Invoices Stats
-                $this->view_data['invoices_open'] = Invoice::count(['conditions' => ['status != ? AND status != ? AND estimate != ?', 'Paid', 'Canceled', 1]]); // Get all but canceled and Paid invoices
-                $this->view_data['invoices_all'] = Invoice::count(['conditions' => ['status != ? AND estimate != ?', 'Canceled', 1]]); // Get all but canceled invoices
-
-            $this->view_data['stats'] = Invoice::getStatisticForYear($year);
-        $this->view_data['stats_expenses'] = Invoice::getExpensesStatisticForYear($year);
-        $this->view_data['payments'] = Invoice::paymentsForMonth($currentYearMonth);
-        $this->view_data['paymentsOutstandingMonth'] = Invoice::outstandingPayments($currentYearMonth);
-        $this->view_data['paymentsoutstanding'] = Invoice::outstandingPayments();
-        $this->view_data['totalExpenses'] = Invoice::totalExpensesForYear($year);
-        $this->view_data['totalIncomeForYear'] = Invoice::totalIncomeForYear($year);
-        $this->view_data['totalProfit'] = $this->view_data['totalIncomeForYear'] - $this->view_data['totalExpenses'];
-
-        $this->view_data['paymentsForThisMonthInPercent'] = ($this->view_data['payments'] == 0) ? 0 : @round($this->view_data['payments'] / $this->view_data['paymentsOutstandingMonth'] * 100);
-        $this->view_data['openProjectsPercent'] = ($this->view_data['projects_open'] == 0) ? 0 : @round($this->view_data['projects_open'] / $this->view_data['projects_all'] * 100);
-        $this->view_data['openInvoicePercent'] = ($this->view_data['invoices_open'] == 0) ? 0 : @round($this->view_data['invoices_open'] / $this->view_data['invoices_all'] * 100);
-        $this->view_data['paymentsOutstandingPercent'] = ($this->view_data['paymentsoutstanding'] == 0) ? 0 : @round($this->view_data['paymentsoutstanding'] / $this->view_data['totalIncomeForYear'] * 100);
-        $this->view_data['paymentsOutstandingPercent'] = ($this->view_data['paymentsOutstandingPercent'] > 100) ? 100 : $this->view_data['paymentsOutstandingPercent'];
 
         //Format main statistic labels and values
         $line1 = '';

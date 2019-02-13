@@ -60,8 +60,7 @@ class Client extends ActiveRecord\Model
     }
 
     public static $has_many = [
-    ['projects'],
-    ['invoices']
+    ['projects']
     ];
 
     public static $belongs_to = [

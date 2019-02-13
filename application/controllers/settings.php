@@ -39,7 +39,6 @@ class Settings extends MY_Controller
             'devider1' => 'devider',
 
             $this->lang->line('application_email_templates') => 'settings/templates',
-            $this->lang->line('application_pdf_templates') => 'settings/invoice_templates',
 
             'devider2' => 'devider',
             // opções de configuração do zenit suprimidas / ESCONDIDO
@@ -72,14 +71,9 @@ class Settings extends MY_Controller
         $this->view_data['iconlist'] = [
             'settings' => 'dripicons-toggles',
             'settings/templates' => 'dripicons-duplicate',
-            'settings/invoice_templates' => 'dripicons-document',
             'settings/calendar' => 'dripicons-calendar',
-            'settings/paypal' => 'dripicons-store',
-            'settings/payment_gateways' => 'dripicons-card',
-            'settings/bank_transfer' => 'dripicons-wallet',
             'settings/users' => 'dripicons-user-group',
             'settings/registration' => 'dripicons-document-edit',
-            'settings/updates' => 'dripicons-cloud-download',
             'settings/backup' => 'dripicons-stack',
             'settings/cronjob' => 'dripicons-media-loop',
             'settings/ticket' => 'dripicons-ticket',

@@ -8,7 +8,6 @@
 		</div>
 		<hr/>
 		<div class="btn-group margintop5 nav-tabs" data-toggle="buttons-radio">
-         <a href="<?=base_url()?>settings/templates" class="btn btn-mini"><?=$this->lang->line('application_invoice_email_template');?></a>
          <a href="<?=base_url()?>settings/templates/credentials" class="btn btn-mini active"><?=$this->lang->line('application_credentials_email_template');?></a>
         </div> 
         <script type="text/javascript">$(document).ready(function() { 
