@@ -174,7 +174,7 @@ class Projects extends MY_Controller
                 $this->view_data['companies'] = Company::find('all', array('conditions' => array('inactive=?','0')));
             }
             $this->view_data['next_reference'] = Project::last();
-            $this->view_data['category_list'] = Project::get_categories();
+//            $this->view_data['category_list'] = Project::get_categories();
             $this->theme_view = 'modal';
             $this->view_data['title'] = $this->lang->line('application_create_project');
             $this->view_data['form_action'] = 'projects/create';

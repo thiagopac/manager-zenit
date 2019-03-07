@@ -467,6 +467,8 @@ $(document).ready(function(){
                   $(element).tooltip({ container: "body", trigger: 'hover', delay: { "show": 100, "hide": 50 }})
                   }
 
+                  element.css('background-color', event.bgColor);
+
               },
               eventClick: function(event) {
                 if (event.url && event.modal == 'true') {
@@ -580,7 +582,6 @@ $(document).ready(function(){
 
 
 
-
 });
 </script>
 
@@ -596,35 +597,7 @@ $(document).ready(function(){
             location.href = $(this).data("href");
         });
 
-      <?php if ($firstlogin) : ?>
-        $.get('<?= base_url() ?>agent/welcome', function(data) {
-            $("#mainModal").modal();
-            $("#mainModal").html(data);
-        });
 
-      <?php endif; ?>
-      var url = "<?=base_url()?>settings/checkForUpdates";
-
-      $('#hideUpdate').click(function(){
-        var versionnumber = $("#versionnumber").html();
-            var updatename = 'hideUpdate'+versionnumber;
-            localStorage.setItem('hideupdate', updatename);
-            $(".update-panel").velocity({'opacity': '0', 'height': '0px', 'padding-top': '0px'}, "easeOutQuint");
-      });
-
-
-    <?php if($this->user->admin == "1"){ ?>
-      $.getJSON(url, function(data) { console.log(data.newUpdate);
-          if(data.newUpdate == true){
-            var updateid = 'hideUpdate'+data.lastupdate;
-            if(localStorage.getItem('hideupdate') != updateid){
-                $("#versionnumber").html(data.lastupdate);
-                $(".update-panel").velocity({'opacity': '1', 'height': '122px', 'padding-top': '15px'}, "easeOutQuint");
-              }
-          }
-          });
-
-  <?php } ?>
     });
   </script>
   <?php } ?>

@@ -41,15 +41,6 @@ class Settings extends MY_Controller
             $this->lang->line('application_email_templates') => 'settings/templates',
 
             'devider2' => 'devider',
-            // opções de configuração do zenit suprimidas / ESCONDIDO
-            // $this->lang->line('application_paypal') => 'settings/paypal',
-
-            // opções de configuração do zenit suprimidas / ESCONDIDO
-            // $this->lang->line('application_payment_gateways') => 'settings/payment_gateways',
-
-            // opções de configuração do zenit suprimidas / ESCONDIDO
-            // $this->lang->line('application_bank_transfer') => 'settings/bank_transfer',
-            // 'devider3' => 'devider',
 
             $this->lang->line('application_cronjob') => 'settings/cronjob',
             $this->lang->line('application_backup') => 'settings/backup',

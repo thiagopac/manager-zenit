@@ -24,15 +24,7 @@ if ($this->input->cookie('fc2language') != '') {
 }
 switch ($systemlanguage) {
       case 'english': $lang = 'en'; break;
-      // case 'dutch': $lang = 'nl'; break;
-      // case 'french': $lang = 'fr'; break;
-      // case 'german': $lang = 'de'; break;
-      // case 'italian': $lang = 'it'; break;
-      // case 'norwegian': $lang = 'no'; break;
-      // case 'polish': $lang = 'pl'; break;
       case 'portuguese': $lang = 'pt'; break;
-      // case 'russian': $lang = 'ru'; break;
-      // case 'spanish': $lang = 'es'; break;
       default: $lang = 'en'; break;
 }
 
@@ -83,11 +75,17 @@ $(document).ready(function() {
                   if(event.source.className[0] == "google-event"){
                     element.attr('target', "_blank");
                   }
+
+                  // if(event.source.className[0] == "project-event"){
+                  //     element.css('background-color', event.bgColor);
+                  // }
+
                   if(event.modal == 'true'){
                     element.attr('data-toggle', "mainmodal");
                   }
+
                   if(event.description != ''){
-                    element.attr('title', event.description);
+                    // element.attr('title', event.description);
 
                     var tooltip = event.description;
                   $(element).attr("data-original-title", tooltip)
@@ -95,7 +93,7 @@ $(document).ready(function() {
                   }
 
 
-
+                  element.css('background-color', event.bgColor);
 
               },
               eventClick: function(event) {

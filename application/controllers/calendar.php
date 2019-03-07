@@ -70,8 +70,9 @@ class Calendar extends MY_Controller
                           start: '" . $value->start . "',
                           end: '" . $value->end . "',
                           url: '" . base_url() . 'projects/view/' . $value->id . "',
-                          className: 'project-event ".$value->category."',
-                          description: '" . addslashes($descr) . "'
+                          className: 'project-event',
+                          description: '" . addslashes($descr) . "',
+                          bgColor: '".$value->color."',
                       },";
         }
 
@@ -88,7 +89,6 @@ class Calendar extends MY_Controller
                           className: '" . $value->classname . " ',
                           modal: 'true',
                           description: '" . addslashes(preg_replace("/\r|\n/", '', $value->description)) . "',
-
                       },";
         }
 
@@ -107,9 +107,10 @@ class Calendar extends MY_Controller
                           start: '" . $pht->start_date . "',
                           end: '" . $pht->due_date . "',
                           url: '" . base_url() . 'projects/tasks/' . $project->id .'/update/' . $pht->id . "',
-                          className: 'project-event ".$project->category."',
+                          className: 'project-event',
                           modal: 'true',
-                          description: '" . addslashes($descr) . "'
+                          description: '" . addslashes($descr) . "',
+                          bgColor: '".$project->color."',
                       },";
 
             }

@@ -150,10 +150,6 @@
                   <ul class="details col-xs-12 col-sm-12">
                     <li><span><?=$this->lang->line('application_project_id');?></span> <?=$core_settings->project_prefix;?><?=$project->reference;?></li>
 
-                    <!-- CATEGORIA DO PROJETO / ESCONDIDO -->
-                    <!-- <?php if($project->category != "") :?>
-                        <li><span><?=$this->lang->line('application_category');?></span> <?=$project->category;?></li>
-                    <?php endif; ?> -->
                     <li><span><?=$this->lang->line('application_client');?></span> <?php if (!is_object($project->company)) {
         ?> <a href="#" class="label label-default"><?php echo $this->lang->line('application_no_client_assigned');
     } else {
@@ -411,11 +407,11 @@
      <div class="col-xs-12 col-sm-12 col-lg-6 department_<?=$department->id?>">
          <div id="areas-list" class="box-shadow">
             <div class="table-head"><?=$area->name;?>
-                 <span class=" pull-right-responsive">
+                 <span class=" pull-right">
                       <a href="<?=base_url()?>projects/milestones/<?=$project->id;?>/add/area_id/<?=$area->id?>" class="btn btn-success" data-toggle="mainmodal">
                           <?=$this->lang->line('application_more_milestone');?>
                       </a>
-                     <i style="font-size: 17px; vertical-align: middle;" class="icon dripicons-chevron-up collapse-expand" id="department_<?=$department->id?>_area_<?=$area->id?>"></i>
+                     <i style="font-size: 17px; vertical-align: middle; padding-right: 4px; padding-left: 4px;" class="icon dripicons-chevron-up collapse-expand" id="department_<?=$department->id?>_area_<?=$area->id?>"></i>
                  </span>
             </div>
 
@@ -966,7 +962,7 @@ dropzoneloader("<?php echo base_url()."projects/dropzone/".$project->id; ?>", "<
 
       });
 
-      $(".collapse-expand").on("click", function(){
+      $("body").on('click', '.collapse-expand', function() {
           $('#collapsible_'+this.id).toggleClass('collapse');
           $(this).toggleClass('dripicons-chevron-up dripicons-chevron-down');
       });

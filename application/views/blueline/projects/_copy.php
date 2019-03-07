@@ -70,26 +70,11 @@ if(isset($project)){ ?>
                           <input class="form-control datepicker-linked" name="end" id="end" type="text" value="<?php if(isset($project)){echo $project->end;} ?>" required/>
 </div>
 
-<!-- <div class="form-group">
-                          <label for="category"><?=$this->lang->line('application_category');?></label>
-                          <input type="text" name="category" class="form-control typeahead" id="category"  value="<?php if(isset($project)){echo $project->category;} ?>"/>
-</div> -->
-
 <!-- CRIAR CATEGORIA NO PROJETO AGORA SETA COR PARA Projectcategorylist / ALTERADO ESCONDIDO -->
 <div class="form-group">
-                          <label for="color"><?=$this->lang->line('application_project_color');?></label>
-                          <div class="project_color" style="margin: 10px;">
-                            <?php $i = 1;
-                                  while ($i <= 19) {
-                                      ?>
-                                <span class="color-selector bgColor<?=$i?> <?php if ($project->category == "bgColor".$i) {
-                                          echo "selected";
-                                      } ?>"><input type="radio" name="category" id="category" value="bgColor<?=$i?>" <?php if ($project->category == "bgColor".$i) {
-                                          echo "selected";
-                                      } ?>></span>
-                            <?php $i++;
-                                  } ?>
-                          </div>
+    <label for="color"><?=$this->lang->line('application_project_color');?></label>
+    <input id="color" name="color" type="text" class="form-control colorpickerinput" value="<?=(isset($project)) ? $project->color : '#5071ab';?>" />
+    <span class="color color-previewer" style="background-color:<?=(isset($value)) ? $value->color : '#5071ab';?>"></span>
 </div>
 
 <!--<div class="form-group">
@@ -116,3 +101,38 @@ if(isset($project)){ ?>
         </div>
 
 <?php echo form_close(); ?>
+
+<script>
+    $(function() {
+        var colors = {
+            '#161b1f': '#161b1f',
+            '#d8dce3': '#d8dce3',
+            '#11a7db': '#11a7db',
+            '#2aa96b': '#2aa96b',
+            '#5bc0de': '#5bc0de',
+            '#f0ad4e': '#f0ad4e',
+            '#ed5564': '#ed5564'
+        };
+        var sliders = {
+            saturation: {
+                maxLeft: 200,
+                maxTop: 200
+            },
+            hue: {
+                maxTop: 200
+            },
+            alpha: {
+                maxTop: 200
+            }
+        };
+        $('.colorpickerinput').colorpicker({
+            customClass: 'colorpicker-2x',
+            colorSelectors: colors,
+            align: 'left',
+            sliders: sliders
+        }).on('changeColor', function(e) {
+            $('.color-previewer')
+                .css('background', e.color);
+
+        });
+    });

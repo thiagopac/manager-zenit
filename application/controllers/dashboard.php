@@ -185,8 +185,9 @@ class Dashboard extends MY_Controller
                           start: '" . $value->start . "',
                           end: '" . $value->end . "',
                           url: '" . base_url() . 'projects/view/' . $value->id . "',
-                          className: 'project-event ".$value->category."',
-                          description: '" . addslashes($descr) . "'
+                          className: 'project-event',
+                          description: '" . addslashes($descr) . "',
+                          bgColor: '".$value->color."',
                       },";
         }
 
@@ -226,11 +227,11 @@ class Dashboard extends MY_Controller
 								description: '" . addslashes(preg_replace("/\r|\n/", '', strip_tags($value->body))) . "',
 
 							},";
-        }
+        }*/
 
         $this->view_data['project_events'] = $project_events;
         $this->view_data['events_list'] = $event_list;
-        $this->view_data['event_count_for_today'] = $event_count_for_today;*/
+        $this->view_data['event_count_for_today'] = $event_count_for_today;
 
         $this->content_view = 'dashboard/dashboardV2';
     }

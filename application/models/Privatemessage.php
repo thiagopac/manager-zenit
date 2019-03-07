@@ -70,7 +70,7 @@ class Privatemessage extends ActiveRecord\Model
             default:
                 $rule = 'LEFT JOIN clients ON CONCAT("c",clients.id) = privatemessages.sender
 				LEFT JOIN users ON CONCAT("u",users.id) = privatemessages.sender
-				GROUP by privatemessages.conversation HAVING privatemessages.recipient = "' . $prefix . $user_id . '" AND privatemessages.`status`="New" ORDER BY privatemessages.`time` DESC LIMIT ' . $limit . $max_value;
+				GROUP by privatemessages.conversation HAVING privatemessages.recipient = "' . $prefix . $user_id . '" ORDER BY privatemessages.`time` DESC LIMIT ' . $limit . $max_value;
             break;
         }
         $messages = Privatemessage::find_by_sql('SELECT privatemessages.id, privatemessages.`status`, privatemessages.subject, privatemessages.attachment, privatemessages.attachment_link, privatemessages.message, privatemessages.sender, privatemessages.recipient, privatemessages.`time`, clients.`userpic` as userpic_c, users.`userpic` as userpic_u , users.`email` as email_u , clients.`email` as email_c , CONCAT(users.firstname," ", users.lastname) as sender_u, CONCAT(clients.firstname," ", clients.lastname) as sender_c

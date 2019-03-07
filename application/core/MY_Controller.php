@@ -15,7 +15,7 @@ class My_Controller extends CI_Controller
 
         /* XSS Filtering */
         if (!empty($_POST)) {
-            $fieldList = array("description","message", "terms", "note", "invoice_terms", "estimate_terms", "bank_transfer_text", "smtp_pass", "password", "ticket_config_pass", "css-area");
+            $fieldList = array("description","message", "terms", "note", "smtp_pass", "password", "ticket_config_pass", "css-area");
             $ignoreXSS = array("mail_body");
             function remove_bad_tags_from($field)
             {

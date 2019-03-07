@@ -70,16 +70,17 @@ echo form_open_multipart($form_action, $attributes);
 				<?=$this->lang->line('application_password');?> *</label>
 			<input id="name" type="text" name="password" class="form-control" value="" required/>
 		</div>
-		<div class="form-group">
+<!-- WEBSITE DO CLIENTE / ESCONDIDO -->
+		<!--<div class="form-group">
 			<label for="website">
-				<?=$this->lang->line('application_website');?>
+				<?/*=$this->lang->line('application_website');*/?>
 			</label>
 			<div class="input-group">
-				<input id="website" type="text" name="website" class="form-control" value="<?php if (isset($lead)) {
+				<input id="website" type="text" name="website" class="form-control" value="<?php /*if (isset($lead)) {
         echo $lead->website;
-    } ?>" />
+    } */?>" />
 			</div>
-		</div>
+		</div>-->
 		<div class="form-group">
 			<label for="phone">
 				<?=$this->lang->line('application_phone');?>
@@ -121,14 +122,6 @@ echo form_open_multipart($form_action, $attributes);
     }?>" />
 		</div>
 		<div class="form-group">
-			<label for="country">
-				<?=$this->lang->line('application_country');?>
-			</label>
-			<input id="country" type="text" name="country" class="form-control" value="<?php if (isset($lead)) {
-        echo $lead->country;
-    }?>" />
-		</div>
-		<div class="form-group">
 			<label for="province">
 				<?=$this->lang->line('application_province');?>
 			</label>
@@ -136,12 +129,21 @@ echo form_open_multipart($form_action, $attributes);
         echo $lead->state;
     }?>" />
 		</div>
-		<div class="form-group">
+    <div class="form-group">
+        <label for="country">
+            <?=$this->lang->line('application_country');?>
+        </label>
+        <input id="country" type="text" name="country" class="form-control" value="<?php if (isset($lead)) {
+            echo $lead->country;
+        }?>" />
+    </div>
+    <!-- IMPOSTO SOBRE O VALOR AGREGADO - IVA / ESCONDIDO -->
+		<!--<div class="form-group">
 			<label for="vat">
-				<?=$this->lang->line('application_vat');?>
+				<?/*=$this->lang->line('application_vat');*/?>
 			</label>
 			<input id="vat" type="text" name="vat" class="form-control" value="" />
-		</div>
+		</div>-->
 
 		<div class="form-group">
 			<label for="terms">
@@ -149,60 +151,62 @@ echo form_open_multipart($form_action, $attributes);
 			</label>
 			<textarea id="terms" name="terms" class="textarea summernote-modal form-control" style="height:100px"></textarea>
 		</div>
-		<div class="row">
+
+    <!-- REDES SOCIAIS DO CLIENTE / ESCONDIDO -->
+		<!--<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="twitter">Twitter</label>
-					<input id="twitter" type="text" name="twitter" class="form-control" value="<?php if (property_exists($lead, 'twitter')) {
+					<input id="twitter" type="text" name="twitter" class="form-control" value="<?php /*if (property_exists($lead, 'twitter')) {
         echo $lead->twitter;
-    }?>" />
+    }*/?>" />
 				</div>
 				<div class="form-group">
 					<label for="skype">Skype</label>
-					<input id="skype" type="text" name="skype" class="form-control" value="<?php if (property_exists($lead, 'skype')) {
+					<input id="skype" type="text" name="skype" class="form-control" value="<?php /*if (property_exists($lead, 'skype')) {
         echo $lead->skype;
-    }?>" />
+    }*/?>" />
 				</div>
 				<div class="form-group">
 					<label for="linkedin">LinkedIn</label>
-					<input id="linkedin" type="text" name="linkedin" class="form-control" value="<?php if (property_exists($lead, 'linkedin')) {
+					<input id="linkedin" type="text" name="linkedin" class="form-control" value="<?php /*if (property_exists($lead, 'linkedin')) {
         echo $lead->linkedin;
-    }?>" />
+    }*/?>" />
 				</div>
 				<div class="form-group">
 					<label for="facebook">Facebook</label>
-					<input id="facebook" type="text" name="facebook" class="form-control" value="<?php if (property_exists($lead, 'facebook')) {
+					<input id="facebook" type="text" name="facebook" class="form-control" value="<?php /*if (property_exists($lead, 'facebook')) {
         echo $lead->facebook;
-    }?>" />
+    }*/?>" />
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="instagram">Instagram</label>
-					<input id="instagram" type="text" name="instagram" class="form-control" value="<?php if (property_exists($lead, 'instagram')) {
+					<input id="instagram" type="text" name="instagram" class="form-control" value="<?php /*if (property_exists($lead, 'instagram')) {
         echo $lead->instagram;
-    }?>" />
+    }*/?>" />
 				</div>
 				<div class="form-group">
 					<label for="googleplus">Google Plus</label>
-					<input id="googleplus" type="text" name="googleplus" class="form-control" value="<?php if (property_exists($lead, 'googleplus')) {
+					<input id="googleplus" type="text" name="googleplus" class="form-control" value="<?php /*if (property_exists($lead, 'googleplus')) {
         echo $lead->googleplus;
-    }?>" />
+    }*/?>" />
 				</div>
 				<div class="form-group">
 					<label for="youtube">Youtube</label>
-					<input id="youtube" type="text" name="youtube" class="form-control" value="<?php if (property_exists($lead, 'youtube')) {
+					<input id="youtube" type="text" name="youtube" class="form-control" value="<?php /*if (property_exists($lead, 'youtube')) {
         echo $lead->youtube;
-    }?>" />
+    }*/?>" />
 				</div>
 				<div class="form-group">
 					<label for="pinterest">Pinterest</label>
-					<input id="pinterest" type="text" name="pinterest" class="form-control" value="<?php if (property_exists($lead, 'pinterest')) {
+					<input id="pinterest" type="text" name="pinterest" class="form-control" value="<?php /*if (property_exists($lead, 'pinterest')) {
         echo $lead->pinterest;
-    }?>" />
+    }*/?>" />
 				</div>
 			</div>
-		</div>
+		</div>-->
 
 		<div class="form-group">
 			<label>

@@ -47,10 +47,10 @@ $message_icon = false;
     ?>
 
     <!-- Head CSS and JS -->
-    <script src="<?=base_url()?>assets/blueline/js/plugins/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/app.css"/>
-    <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/user.css"/>
+      <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/app.css"/>
+    <link rel="stylesheet" href="https://diagramclub.github.io/styles/user.css"/>
     <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/important.css"/>
     <?=get_theme_colors($core_settings);?>
 
@@ -299,9 +299,7 @@ $message_icon = false;
     <div class="modal fade" id="mainModal" data-easein="flipXIn" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="mainModalLabel" aria-hidden="true"></div>
 
     <!-- Js Files -->
-
-<!--        <script type="text/javascript" src="--><?//=base_url()?><!--assets/blueline/js/app.js"></script>-->
-    <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/app.js"></script>
+    <script type="text/javascript" src="https://diagramclub.github.io/js/app.js"></script>
 
         <script>
             flatdatepicker(false, langshort);
@@ -340,21 +338,6 @@ $message_icon = false;
 
             OneSignal.setExternalUserId("<?=$this->user->email;?>");
         });
-
-        // OneSignal.push(["getNotificationPermission", function(permission) {
-        //     console.log("Site Notification Permission:", permission);
-        //     // (Output) Site Notification Permission: default
-        // }]);
-
-        // OneSignal.push(function() {
-        //     /* These examples are all valid */
-        //     var isPushSupported = OneSignal.isPushNotificationsSupported();
-        //     if (isPushSupported) {
-        //         console.log("supported");
-        //     } else {
-        //         console.log("not supported");
-        //     }
-        // });
 
     });
 </script>

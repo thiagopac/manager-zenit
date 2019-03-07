@@ -76,9 +76,6 @@
                   <ul class="details col-xs-12 col-sm-12 col-md-6">
                     <li><span><?=$this->lang->line('application_project_id');?>:</span> <?=$core_settings->project_prefix;?><?=$project->reference;?></li>
 
-                    <!-- CATEGORIA DO PROJETO SENDO MOSTRADA PARA O CLIENTE / ESCONDIDO -->
-                    <!-- <li><span><?=$this->lang->line('application_category');?>:</span> <?=$project->category;?></li> -->
-
                     <li><span><?=$this->lang->line('application_client');?>:</span> <?php if (!is_object($project->company)) {
         ?> <a href="#" class="label label-default"><?php echo $this->lang->line('application_no_client_assigned');
     } else {

@@ -40,17 +40,17 @@ class Project extends ActiveRecord\Model {
         return $projects;
       }
 
-      public static function get_categories(){
-          $categories = Project::find_by_sql("SELECT 
-              `category` 
-              FROM 
-                `projects`
-              GROUP BY 
-                `category`
-            ");
-
-        return $categories;
-      }
+//      public static function get_categories(){
+//          $categories = Project::find_by_sql("SELECT
+//              `category`
+//              FROM
+//                `projects`
+//              GROUP BY
+//                `category`
+//            ");
+//
+//        return $categories;
+//      }
 
       public static function getAllTasksTime($projectID){
        $taskTime = ProjectHasTask::find_by_sql("SELECT 
@@ -63,10 +63,10 @@ class Project extends ActiveRecord\Model {
         $tracking = $taskTime[0]->summary;
         $tracking = ($tracking) ? $tracking : 0;
         $tracking = floor($tracking/60);
-    $tracking_hours = floor($tracking/60);
-    $tracking_minutes = $tracking-($tracking_hours*60);
-    $CI =& get_instance();
-    $time_spent = $tracking_hours." ".$CI->lang->line('application_hours')." ".$tracking_minutes." ".$CI->lang->line('application_minutes');
+        $tracking_hours = floor($tracking/60);
+        $tracking_minutes = $tracking-($tracking_hours*60);
+        $CI =& get_instance();
+        $time_spent = $tracking_hours." ".$CI->lang->line('application_hours')." ".$tracking_minutes." ".$CI->lang->line('application_minutes');
 
         return $time_spent;
     }
