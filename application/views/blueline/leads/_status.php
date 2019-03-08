@@ -14,6 +14,13 @@ if (isset($status)) {
         echo $status->name;
     }?>" required/>
 	</div>
+    <div class="form-group">
+        <label for="duration">
+            <?=$this->lang->line('application_duration');?> (<?=$this->lang->line('application_in_days');?>) *</label>
+        <input id="duration" type="number" min="0" max="99" size="2" name="duration" class="form-control" value="<?php if (isset($status)) {
+            echo $status->duration;
+        }?>" required/>
+    </div>
 	<div class="form-group">
 		<label for="description">
 			<?=$this->lang->line('application_description');?>

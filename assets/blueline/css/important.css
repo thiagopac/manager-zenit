@@ -152,3 +152,16 @@ ul.todo li .lbl p {
     font-size: 11px;
     color: grey
 }
+
+.static-color-preview{
+    width:6px;
+    height:6px;
+    position:initial;
+    margin-right:5px;
+    box-shadow:none;
+    -webkit-box-shadow:none;
+    display: inline-block;
+    border-radius: 50%;
+    right: 25px;
+    margin-top: -21px;
+}

@@ -289,6 +289,7 @@ class Leads extends MY_Controller
                     $_POST = array_map('htmlspecialchars', $_POST);
                     $status = LeadStatus::find_by_id($_POST['id']);
                     $status->name = $_POST['name'];
+                    $status->duration = $_POST['duration'];
                     $status->description = $description;
                     $status->color = $_POST['color'];
                     $status->save();

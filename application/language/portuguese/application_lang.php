@@ -907,3 +907,6 @@ $lang['application_new_task'] = 'Nova Tarefa';
 $lang['application_parameterization'] = 'Parametrização';
 
 $lang['application_no_notifications_yet'] = 'Nenhuma notificação ainda';
+
+$lang['application_duration'] = 'Duração';
+$lang['application_in_days'] = 'em dias';

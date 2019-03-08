@@ -108,7 +108,7 @@
                         <tr id="
 							<?=$value->id;?>">
                             <td class="hidden-xs">
-                                <span class="color color-previewer" style="background-color:<?=$value->color?>;width:9px;height:9px;position: initial;margin-right:5px"></span>
+                                <span class="static-color-preview" style="background-color:<?=$value->color?>"></span>
                                 <?=$core_settings->project_prefix;?>
                                 <?=$value->reference;?>
                             </td>
