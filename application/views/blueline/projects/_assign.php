@@ -21,9 +21,9 @@ if(isset($project)){ ?>
 
 
 <div class="modal-footer">
-        <input type="submit" name="send" class="btn btn-primary" value="<?=$this->lang->line('application_save');?>"/>
-        <a class="btn btn-default" data-dismiss="modal"><?=$this->lang->line('application_close');?></a>
-        </div>
+    <input type="submit" name="send" class="btn btn-primary" value="<?=$this->lang->line('application_save');?>"/>
+    <a class="btn btn-default" data-dismiss="modal"><?=$this->lang->line('application_close');?></a>
+</div>
 
 
 <?php echo form_close(); ?>

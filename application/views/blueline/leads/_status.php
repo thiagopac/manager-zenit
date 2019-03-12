@@ -37,9 +37,30 @@ if (isset($status)) {
 		<span class="color color-previewer" style="background-color:<?=(isset($status)) ? $status->color : '#1261cb';?>"></span>
 	</div>
 
+
+
+<div class="form-group">
+    <label for="users"><?=$this->lang->line('application_lead_status_user_notification');?></label>
+    <?php
+        $options = array();
+        $user = array();
+
+        foreach ($users as $value):
+            $options[$value->id] = $value->firstname.' '.$value->lastname;
+        endforeach;
+
+        if(isset($status)){}else{$user = "";}
+
+        foreach ($status->lead_status_has_receivers as $workers):
+            $user[$workers->user_id] = $workers->user_id;
+        endforeach;
+
+        echo form_dropdown('user_id[]', $options, $user, 'style="width:100%" class="chosen-select" data-placeholder="'.$this->lang->line('application_select_agents').'" multiple tabindex="3"');
+    ?>
+</div>
+
 	<div class="modal-footer">
-		<input type="submit" name="send" class="btn btn-primary silent-submit" data-section="lead" value="<?=$this->lang->line('application_save');?>"
-		/>
+        <input type="submit" name="send" class="btn btn-primary silent-submit" data-section="lead" value="<?=$this->lang->line('application_save');?>"/>
 		<a class="btn" data-dismiss="modal">
 			<?=$this->lang->line('application_close');?>
 		</a>

@@ -59,20 +59,21 @@
 						 v-if="block.private != 0"></i>
 						<span class="block-title">{{ block.name }}</span>
 						<div class="pull-right switcher-button-container">
-							<i class="status-icon switcher-button ionicons" :class="(block.icon != null && block.icon != '') ? block.icon : 'ion-ios-pricetag'"
+
+							<!--<i class="status-icon switcher-button ionicons" :class="(block.icon != null && block.icon != '') ? block.icon : 'ion-ios-pricetag'"
 							 @click="openThisSwitch(block.id)"></i>
 							<transition name="fade-slide-down">
 								<div v-if="openSwitch == block.id" class="switcher-group">
 									<i v-if="block.icon != null && block.icon != ''" class="status-icon ionicons ion-ios-pricetag tippy" data-position="left"
 									 title="" @click="setIcon(block.id, '')"></i>
-									<i v-if="block.icon != 'cold'" class="status-icon ionicons cold tippy" data-position="left" title="<?=htmlspecialchars(addslashes($this->lang->line('application_cold')));?>"
+									<i v-if="block.icon != 'cold'" class="status-icon ionicons cold tippy" data-position="left" title="<?/*=htmlspecialchars(addslashes($this->lang->line('application_cold')));*/?>"
 									 @click="setIcon(block.id, 'cold')"></i>
-									<i v-if="block.icon != 'hot'" class="status-icon ionicons hot tippy" data-position="left" title="<?=htmlspecialchars(addslashes($this->lang->line('application_hot')));?>"
+									<i v-if="block.icon != 'hot'" class="status-icon ionicons hot tippy" data-position="left" title="<?/*=htmlspecialchars(addslashes($this->lang->line('application_hot')));*/?>"
 									 @click="setIcon(block.id, 'hot')"></i>
-									<i v-if="block.icon != 'won'" class="status-icon ionicons won tippy" data-position="left" title="<?=htmlspecialchars(addslashes($this->lang->line('application_won')));?>"
+									<i v-if="block.icon != 'won'" class="status-icon ionicons won tippy" data-position="left" title="<?/*=htmlspecialchars(addslashes($this->lang->line('application_won')));*/?>"
 									 @click="setIcon(block.id, 'won')"></i>
 								</div>
-							</transition>
+							</transition>-->
 						</div>
 					</div>
 
@@ -133,12 +134,6 @@
 										</span>
 										{{ block.email }}
 									</li>
-									<li v-if="block.website  != ''">
-										<span>
-											<?=$this->lang->line('application_website');?>
-										</span>
-										<a :href="block.website" target="_blank">{{ block.website }}</a>
-									</li>
 									<li v-if="block.phone  != ''">
 										<span>
 											<?=$this->lang->line('application_phone');?>
@@ -175,9 +170,15 @@
 										</span>
 										<p v-html="block.description"></p>
 									</li>
+                                    <li v-if="block.owner  != ''">
+										<span>
+											<?=$this->lang->line('application_lead_owner');?>
+										</span>
+                                        {{ block.owner }}
+                                    </li>
 									<li v-if="block.user_id  != 0">
 										<span>
-											<?=$this->lang->line('application_agent');?>
+											<?=$this->lang->line('application_registration_responsible');?>
 										</span>
 										{{ block.user.firstname }} {{ block.user.lastname }}
 									</li>
@@ -321,10 +322,6 @@
 						 :title="(block.address != '' || block.city != '' || block.zipcode != '' || block.country != '') ? block.address+' '+block.city+' '+block.zipcode+' '+block.country : ''">
 							<i class="icon dripicons-direction"></i>
 						</a>
-						<a class="col-xs-2 center tippy" :class="(block.website != '') ? '' : 'grayout'" :href="block.website" :title="block.website"
-						 target="_blank">
-							<i class="icon dripicons-web"></i>
-						</a>
 						<a class="col-xs-2 center tippy" :class="(block.email != '') ? '' : 'grayout'" :href="'mailto:'+block.email" :title="block.email" target="_blank">
 							<i class="icon dripicons-mail"></i>
 						</a>
@@ -336,6 +333,9 @@
 						 :title="block.mobile">
 							<i class="icon dripicons-device-mobile"></i>
 						</a>
+                        <a class="col-xs-2 center tippy" :class="(block.private != '1') ? '' : ''" :title="block.private == '1' ? 'Privado' : 'Público'">
+                            <i :class="block.private == 1 ? 'icon dripicons-lock' : 'icon dripicons-lock-open'"></i>
+                        </a>
 						<a class="col-xs-2 center tippy" href="#" @click="openThisBlock(block.id)" title="<?=$this->lang->line('application_details');?>">
 							<i class="icon dripicons-dots-3"></i>
 						</a>

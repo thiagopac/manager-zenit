@@ -166,7 +166,7 @@ function reminder_notification($class, $user = false, $module = false, $reminder
                                         'address' => $module->address,
                                         'city' => $module->city,
                                         'zipcode' => $module->zipcode,
-                                        'website' => $module->website,
+                                        'owner' => $module->owner,
                                         'phone' => '<a href="tel:' . $module->phone . '">' . $module->phone . '</a>',
                                         'mobile' => '<a href="tel:' . $module->phone . '">' . $module->mobile . '</a>',
                                         'company' => $module->company,

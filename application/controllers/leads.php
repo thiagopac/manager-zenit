@@ -171,6 +171,20 @@ class Leads extends MY_Controller
         if ($_POST) {
             $item = Lead::find_by_id($_POST['id']);
             $field = array($_POST['field'] => $_POST['value'], 'order' => $_POST['order']);
+
+            $destinationLeadStatus = LeadStatus::find($_POST['value']);
+            $statusReceivers = LeadStatusHasReceiver::find('all', ['conditions' => ['lead_status_id=?', $_POST['value']]]);
+            $currentLead = $item;
+
+            $push_receivers = array();
+
+            foreach ($statusReceivers as $statusReceiver){
+                $user = User::find($statusReceiver->user_id);
+                array_push($push_receivers, $user->email);
+            }
+
+            $notification = Notification::sendPushNotification($push_receivers, $this->user->firstname.' moveu o lead '.$currentLead->name.' para o estágio '.$destinationLeadStatus->name, base_url().'leads/');
+
             $item = $item->update_attributes($field);
             json_response("success", "Block has been updated!", '');
         } else {
@@ -261,11 +275,25 @@ class Leads extends MY_Controller
                     unset($_POST['send']);
                     unset($_POST['files']);
                     $description = $_POST['description'];
-                    $_POST = array_map('htmlspecialchars', $_POST);
-                    $_POST['description'] = $description;
+                    $name = $_POST['name'];
+                    $duration = $_POST['duration'];
                     $order = LeadStatus::find('all', array('order' => "`order` desc", 'limit' => 1));
-                    $_POST['order'] = $order[0]->order+1;
-                    $status = LeadStatus::create($_POST);
+                    $color = $_POST['color'];
+
+                    $atributes = array('name' => $name, 'description' => $description, 'order' => $order[0]->order+1, 'duration' => $duration, 'color' => $color);
+
+                    $status = LeadStatus::create($atributes);
+
+                    if (!isset($_POST["user_id"])) {
+                        $_POST["user_id"] = array();
+                    }
+
+                    foreach ($_POST["user_id"] as $value) {
+                        $atributes = array('lead_status_id' => $status->id, 'user_id' => $value);
+
+                        LeadStatusHasReceiver::create($atributes);
+                    }
+
                     if (!$status) {
                         $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_create_status_error'));
                     } else {
@@ -275,6 +303,7 @@ class Leads extends MY_Controller
                 } else {
                     $this->theme_view = 'modal';
                     $this->view_data['title'] = $this->lang->line('application_create_status');
+                    $this->view_data['users'] = User::find('all', array('conditions' => array('status=?','active')));
                     //$this->view_data['status'] = LeadStatus::all();
                     $this->view_data['form_action'] = 'leads/status/create';
                     $this->content_view = 'leads/_status';
@@ -286,12 +315,38 @@ class Leads extends MY_Controller
                     unset($_POST['send']);
                     unset($_POST['files']);
                     $description = $_POST['description'];
-                    $_POST = array_map('htmlspecialchars', $_POST);
                     $status = LeadStatus::find_by_id($_POST['id']);
+                    $status_id = addslashes($_POST['id']);
                     $status->name = $_POST['name'];
                     $status->duration = $_POST['duration'];
                     $status->description = $description;
                     $status->color = $_POST['color'];
+
+                    if (!isset($_POST["user_id"])) {
+                        $_POST["user_id"] = array();
+                    }
+
+                    $query = array();
+
+                    foreach ($status->lead_status_has_receivers as $receiver) {
+                        array_push($query, $receiver->user_id);
+                    }
+
+                    $added = array_diff($_POST["user_id"], $query);
+                    $removed = array_diff($query, $_POST["user_id"]);
+
+                    foreach ($added as $value) {
+                        $atributes = array('lead_status_id' => $status_id, 'user_id' => $value);
+
+                        LeadStatusHasReceiver::create($atributes);
+                    }
+
+                    foreach ($removed as $value) {
+                        $atributes = array('lead_status_id' => $status_id, 'user_id' => $value);
+                        $worker = LeadStatusHasReceiver::find($atributes);
+                        $worker->delete();
+                    }
+
                     $status->save();
                     if (!$status) {
                         $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_edit_status_error'));
@@ -301,8 +356,10 @@ class Leads extends MY_Controller
                     redirect('leads');
                 } else {
                     $this->theme_view = 'modal';
+                    $lead_status = LeadStatus::find_by_id($id);
+                    $this->view_data['users'] = User::find('all', array('conditions' => array('status=?','active')));
                     $this->view_data['title'] = $this->lang->line('application_create_status');
-                    $this->view_data['status'] = LeadStatus::find_by_id($id);
+                    $this->view_data['status'] = $lead_status;
                     $this->view_data['form_action'] = 'leads/status/edit';
                     $this->content_view = 'leads/_status';
                 }
@@ -329,6 +386,7 @@ class Leads extends MY_Controller
                     }
                     $leads_delete = Lead::table()->delete(array('status_id' => array($status->id)));
                     $reminders = Reminder::table()->delete(['source_id' => $leads_ids, 'module' => 'lead']);
+                    $receivers_delete = LeadStatusHasReceiver::table()->delete(array('lead_status_id' => array($status->id)));
 
                     $status->delete();
                     json_response("success", "Status has been deleted!", '');

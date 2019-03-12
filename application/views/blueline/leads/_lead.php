@@ -55,14 +55,6 @@ if (isset($lead)) {
         } ?>" />
 	</div>
 	<div class="form-group">
-		<label for="company">
-			<?=$this->lang->line('application_website');?>
-		</label>
-		<input id="website" type="text" name="website" class="form-control" value="<?php if (isset($lead)) {
-            echo $lead->website;
-        } ?>" />
-	</div>
-	<div class="form-group">
 		<label for="position">
 			<?=$this->lang->line('application_position');?>
 		</label>
@@ -155,9 +147,17 @@ if (isset($lead)) {
         } ?>
 		</textarea>
 	</div>
+    <div class="form-group">
+        <label for="company">
+            <?=$this->lang->line('application_lead_owner');?>
+        </label>
+        <input id="owner" type="text" name="owner" class="form-control" value="<?php if (isset($lead)) {
+            echo $lead->owner;
+        } ?>" />
+    </div>
 	<div class="form-group">
 		<label for="users">
-			<?=$this->lang->line('application_agent');?>
+			<?=$this->lang->line('application_registration_responsible');?>
 		</label>
 		<?php $options = [];
                     $user = [];
@@ -172,25 +172,38 @@ if (isset($lead)) {
         echo form_dropdown('user_id', $options, $user_id, 'style="width:100%" class="chosen-select"'); ?>
 	</div>
 	<ul class="accesslist">
-		<li>
-			<input type="checkbox" class="checkbox" id="private" name="private" value="1" data-labelauty="<?=$this->lang->line('application_private_lead');?>"
-		<?php if (isset($lead) && $lead->private != 0) {
-            echo 'checked';
-        } ?>> </li>
-		</ul>
-
-		<div class="modal-footer">
-			<?php if (isset($lead)) : ?>
-			<a href="<?=base_url()?>clients/company/createfromlead/<?=$lead->id?>" data-toggle="mainmodal" class="btn btn-success pull-left">
-				<?=$this->lang->line('application_convert_to_client');?>
-			</a>
-			<?php endif; ?>
-			<input type="submit" name="send" class="btn btn-primary silent-submit" data-section="lead" value="<?=$this->lang->line('application_save');?>"
-			/>
-			<a class="btn" data-dismiss="modal">
-				<?=$this->lang->line('application_close');?>
-			</a>
-		</div>
 
 
-		<?php echo form_close(); ?>
+        <?php
+
+        //se for um colaborador com e-mail @ownergy.com.br ele poderá ver essa opção para marcar ou desmarcar
+        list($this->user->email, $domain) = explode('@', $this->user->email);
+        if ($domain == 'ownergy.com.br') { ?>
+
+            <li>
+                <input type="checkbox" class="checkbox" id="private" name="private" value="1" data-labelauty="<?=$this->lang->line('application_private_lead');?>"
+                    <?php if (isset($lead) && $lead->private != 0) { echo 'checked'; } ?>
+                >
+            </li>
+
+
+        <?php } ?>
+
+
+    </ul>
+
+    <div class="modal-footer">
+        <?php if (isset($lead)) : ?>
+        <a href="<?=base_url()?>clients/company/createfromlead/<?=$lead->id?>" data-toggle="mainmodal" class="btn btn-success pull-left">
+            <?=$this->lang->line('application_convert_to_client');?>
+        </a>
+        <?php endif; ?>
+        <input type="submit" name="send" class="btn btn-primary silent-submit" data-section="lead" value="<?=$this->lang->line('application_save');?>"
+        />
+        <a class="btn" data-dismiss="modal">
+            <?=$this->lang->line('application_close');?>
+        </a>
+    </div>
+
+
+    <?php echo form_close(); ?>
