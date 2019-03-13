@@ -181,9 +181,15 @@ class Leads extends MY_Controller
             foreach ($statusReceivers as $statusReceiver){
                 $user = User::find($statusReceiver->user_id);
                 array_push($push_receivers, $user->email);
+
+                $notificationAttributes = array('user_id' => $user->id, 'message' => '<b>'.$this->user->firstname.'</b> moveu <b>'.$currentLead->name.'</b> para <b>'.$destinationLeadStatus->name.'</b>');
+                Notification::create($notificationAttributes);
             }
 
-            $notification = Notification::sendPushNotification($push_receivers, $this->user->firstname.' moveu o lead '.$currentLead->name.' para o estágio '.$destinationLeadStatus->name, base_url().'leads/');
+            Notification::sendPushNotification($push_receivers, $this->user->firstname.' moveu '.$currentLead->name.' para '.$destinationLeadStatus->name, base_url().'leads/');
+
+            $historyAttributes = array('lead_id' => $_POST['id'], 'message' => '<b>'.$this->user->firstname.'</b> moveu <b>'.$currentLead->name.'</b> para <b>'.$destinationLeadStatus->name.'</b>');
+            LeadHistory::create($historyAttributes);
 
             $item = $item->update_attributes($field);
             json_response("success", "Block has been updated!", '');

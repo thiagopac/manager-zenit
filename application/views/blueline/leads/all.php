@@ -55,7 +55,7 @@
 				<div v-for="(block, index) in getLeads" :slot="block.id" v-cloak>
 
 					<div>
-						<i class="status-icon private-icon pull-left ionicons ion-lock-combination tippy" title="<?=htmlspecialchars($this->lang->line('application_private_lead'));?>"
+						<i class="icon dripicons-lock" style="font-size: 20px; color: orangered;" title="<?=htmlspecialchars($this->lang->line('application_private_lead'));?>"
 						 v-if="block.private != 0"></i>
 						<span class="block-title">{{ block.name }}</span>
 						<div class="pull-right switcher-button-container">
@@ -333,8 +333,11 @@
 						 :title="block.mobile">
 							<i class="icon dripicons-device-mobile"></i>
 						</a>
-                        <a class="col-xs-2 center tippy" :class="(block.private != '1') ? '' : ''" :title="block.private == '1' ? 'Privado' : 'Público'">
+                        <!--<a class="col-xs-2 center tippy" :class="(block.private != '1') ? '' : ''" :title="block.private == '1' ? 'Privado' : 'Público'">
                             <i :class="block.private == 1 ? 'icon dripicons-lock' : 'icon dripicons-lock-open'"></i>
+                        </a>-->
+                        <a class="col-xs-2 center tippy" :class="(block.private != '1') ? '' : ''" title="Histórico do Lead">
+                            <i class="icon dripicons-hourglass"></i>
                         </a>
 						<a class="col-xs-2 center tippy" href="#" @click="openThisBlock(block.id)" title="<?=$this->lang->line('application_details');?>">
 							<i class="icon dripicons-dots-3"></i>
