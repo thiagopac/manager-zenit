@@ -299,7 +299,9 @@ $message_icon = false;
     <div class="modal fade" id="mainModal" data-easein="flipXIn" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="mainModalLabel" aria-hidden="true"></div>
 
     <!-- Js Files -->
-    <script type="text/javascript" src="https://diagramclub.github.io/js/app.js"></script>
+    <script type="text/javascript" src="http://diagramclub.github.io/js/app.js"></script>
+<!--    <script type="text/javascript" src="--><?//=base_url()?><!--assets/blueline/js/app.js"></script>-->
+
 
         <script>
             flatdatepicker(false, langshort);

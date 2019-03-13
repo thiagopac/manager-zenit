@@ -913,3 +913,5 @@ $lang['application_in_days'] = 'em dias';
 $lang['application_lead_owner'] = 'Dono do Lead';
 $lang['application_registration_responsible'] = 'Responsável pelo registro';
 $lang['application_lead_status_user_notification'] = 'Notificar colaboradores ao Lead atingir estágio';
+$lang['application_history'] = 'Histórico';
+$lang['application_no_history'] = 'Nenhum histórico';

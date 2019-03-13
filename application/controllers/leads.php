@@ -43,6 +43,12 @@ class Leads extends MY_Controller
         $data = array('leads' => object_to_array($leads, true), 'stages' => object_to_array($stages));
         json_response("success", "", $data);
     }
+    public function history($id = false)
+    {
+        $history = LeadHistory::find_by_sql('select id, lead_id, message, DATE_FORMAT(created_at, "%d/%m/%Y %H:%i ") as created_at from lead_history where lead_id = '.$id.' ORDER BY created_at DESC');
+        $data = array('history' => object_to_array($history, false));
+        json_response("success", "", $data);
+    }
     public function comments($id = false)
     {
         $comments = LeadHasComment::find('all', array('conditions' => array("lead_id = ? ORDER BY `datetime` DESC", $id), 'include' => array('user')));
@@ -188,7 +194,7 @@ class Leads extends MY_Controller
 
             Notification::sendPushNotification($push_receivers, $this->user->firstname.' moveu '.$currentLead->name.' para '.$destinationLeadStatus->name, base_url().'leads/');
 
-            $historyAttributes = array('lead_id' => $_POST['id'], 'message' => '<b>'.$this->user->firstname.'</b> moveu <b>'.$currentLead->name.'</b> para <b>'.$destinationLeadStatus->name.'</b>');
+            $historyAttributes = array('lead_id' => $_POST['id'], 'message' => $this->user->firstname.' moveu '.$currentLead->name.' para '.$destinationLeadStatus->name);
             LeadHistory::create($historyAttributes);
 
             $item = $item->update_attributes($field);
@@ -222,6 +228,10 @@ class Leads extends MY_Controller
             $_POST['modified'] = date("Y-m-d H:i");
             $_POST['order'] = -50+rand(1, 5);
             $item = Lead::create($_POST);
+
+            $historyAttributes = array('lead_id' => $item->id, 'message' => $this->user->firstname.' criou o lead '.$item->name);
+            LeadHistory::create($historyAttributes);
+
             if (!$item) {
                 $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_create_lead_error'));
             } else {

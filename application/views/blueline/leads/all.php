@@ -55,8 +55,8 @@
 				<div v-for="(block, index) in getLeads" :slot="block.id" v-cloak>
 
 					<div>
-						<i class="icon dripicons-lock" style="font-size: 20px; color: orangered;" title="<?=htmlspecialchars($this->lang->line('application_private_lead'));?>"
-						 v-if="block.private != 0"></i>
+<!--						<i class="icon dripicons-lock" style="font-size: 20px; color: orangered;" title="--><?//=htmlspecialchars($this->lang->line('application_private_lead'));?><!--"-->
+<!--						 v-if="block.private != 0"></i>-->
 						<span class="block-title">{{ block.name }}</span>
 						<div class="pull-right switcher-button-container">
 
@@ -105,6 +105,12 @@
 									<i class="icon dripicons-bell tippy" title="<?=$this->lang->line('application_reminder');?>"></i>
 								</a>
 							</li>
+
+                            <li :class="(openHistory == block.id) ? 'active' : '' ">
+                                <a @click="loadHistory(block.id)" href="#history">
+                                    <i class="icon dripicons-hourglass tippy" title="<?=$this->lang->line('application_history');?>"></i>
+                                </a>
+                            </li>
 
 							<li>
 								<a data-toggle="mainmodal" :href="'<?=base_url()?>leads/edit/'+block.id">
@@ -313,6 +319,36 @@
 								</transition-group>
 							</div>
 
+                            <div class="tab-pane tab4" v-if="openHistory == block.id" :class="(openHistory == block.id) ? 'in active animated slideInRight' : '' ">
+
+
+                                <div class="center" v-show="historyLoading">
+                                    <div class="pulse"></div>
+                                    <div class="pulse-inner"></div>
+                                </div>
+
+                                <div class="center" v-if="history == '' && !historyLoading">
+                                    <p class="shadow-icon">
+                                        <i class="ionicons ion-ios-people-outline"></i>
+                                    </p>
+                                    <span class="shadow-text">
+										<?=$this->lang->line('application_no_history');?>
+									</span>
+                                </div>
+
+                                <div v-if="!historyLoading">
+                                    <transition-group name="list" tag="ul" class="lead-comments" appear>
+                                        <li v-for="comment in history" v-bind:key="comment.id">
+                                            <span style="font-weight: bold" class="username"> {{ comment.created_at }}</span>
+                                            <div class="username">
+                                                <p>{{ comment.message }}</p>
+                                            </div>
+                                        </li>
+                                    </transition-group>
+                                </div>
+
+                            </div>
+
 						</div>
 					</div>
 					<div class="row block-actions">
@@ -333,12 +369,12 @@
 						 :title="block.mobile">
 							<i class="icon dripicons-device-mobile"></i>
 						</a>
-                        <!--<a class="col-xs-2 center tippy" :class="(block.private != '1') ? '' : ''" :title="block.private == '1' ? 'Privado' : 'Público'">
-                            <i :class="block.private == 1 ? 'icon dripicons-lock' : 'icon dripicons-lock-open'"></i>
-                        </a>-->
-                        <a class="col-xs-2 center tippy" :class="(block.private != '1') ? '' : ''" title="Histórico do Lead">
-                            <i class="icon dripicons-hourglass"></i>
+                        <a class="col-xs-2 center tippy" :class="(block.private != '1') ? '' : ''" :title="block.private == '1' ? 'Privado' : 'Público'">
+                            <i :class="block.private == 1 ? 'icon dripicons-lock orangered' : 'icon dripicons-lock-open green'"></i>
                         </a>
+                        <!--<a class="col-xs-2 center tippy" :class="(block.private != '1') ? '' : ''" title="Histórico do Lead">
+                            <i class="icon dripicons-hourglass"></i>
+                        </a>-->
 						<a class="col-xs-2 center tippy" href="#" @click="openThisBlock(block.id)" title="<?=$this->lang->line('application_details');?>">
 							<i class="icon dripicons-dots-3"></i>
 						</a>

@@ -165,3 +165,11 @@ ul.todo li .lbl p {
     right: 25px;
     margin-top: -21px;
 }
+
+.orangered {
+    color: orangered;
+}
+
+.green {
+    color: green;
+}
