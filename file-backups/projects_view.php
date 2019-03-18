@@ -1113,7 +1113,7 @@
                   <button class='btn po-close'><?=$this->lang->line('application_no');?></button>
                   <input type='hidden' name='td-id' class='id' value='<?=$value->id;?>'>" data-original-title="<b><?=$this->lang->line('application_really_delete');?></b>">
                                             <i class="icon dripicons-cross"></i></button>
-                                        <a href="<?=base_url()?>projects/media/<?=$project->id;?>/update/<?=$value->id;?>" title="<?=$this->lang->line('application_edit'); ?>" class="btn-option tt green" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
+                                        <a href="<?=base_url()?>projects/media/<?=$project->id;?>/update/<?=$value->id;?>" title="<?=$this->lang->line('application_edit'); ?>" class="btn-option tt" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
                                     </td>
 
                                 </tr>

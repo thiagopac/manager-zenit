@@ -185,7 +185,7 @@ function reminder_notification($class, $user = false, $module = false, $reminder
                                     'invoice_logo' => '<img src="' . base_url() . '' . $settings->invoice_logo . '" alt="' . $settings->company . '"/>',
                                     'company' => $settings->company,
 
-                                    'icon' => '<img alt="Reminder" height="auto" src="' . base_url() . 'assets/blueline/images/bell-circle-red.png" width="70">',
+                                    'icon' => '<img alt="Lembrete" height="auto" src="' . base_url() . 'assets/blueline/images/bell-circle-red.png" width="70">',
                                     'button_text' => $instance->lang->line('application_go_to_lead'),
                                     'button_link' => base_url() . 'leads/'
                                     ];

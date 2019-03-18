@@ -27,10 +27,14 @@ class Notifications extends MY_Controller
         $core_settings->save();
 
         // Get expenses which require new invoice
-        $reminders = Reminder::find('all', ['conditions' => ['done = ? AND email_notification = ? AND sent_at = ? ORDER BY `datetime` ASC', 0, 1, '']]);
+        $reminders = Reminder::find('all', ['conditions' => ['done = ? AND email_notification = ? AND sent_at = ? ORDER BY `datetime` ASC', 0, 1, 0]]);
+        $reminders_push = Reminder::find('all', ['conditions' => ['done = ? AND push_notification = ? AND push_sent_at = ? ORDER BY `datetime` ASC', 0, 1, 0]]);
 
         // Stop if expenses count is 0
         $reminders_count = count($reminders);
+        $reminders_push_count = count($reminders_push);
+
+
         if ($reminders_count > 0) {
             log_message('error', '[notification cronjob] ' . $reminders_count . ' reminders to process...');
 
@@ -52,6 +56,38 @@ class Notifications extends MY_Controller
                     $reminder->save();
                 }
             }
+        }
+
+        if ($reminders_push_count > 0) {
+            log_message('error', '[push notification cronjob] ' . $reminders_push_count . ' push reminders to process...');
+
+            foreach ($reminders_push as $reminder) {
+
+                $push_receivers = array();
+
+                $now = new DateTime();
+                $reminder_time = new DateTime($reminder->datetime);
+                $diff = $now->diff($reminder_time);
+                /* Continue if alarm time has not reached yet */
+                if ($diff->invert == 0) {
+                    continue;
+                }
+                $class = ucfirst($reminder->module);
+                $module = $class::find_by_id($reminder->source_id);
+                $user = User::find_by_id($reminder->user_id);
+
+                array_push($push_receivers, $user->email);
+
+                Notification::sendPushNotification($push_receivers, '[Lembrete] - '.$reminder->title, base_url());
+
+                $attributes = array('user_id' => $user->id, 'message' => '<b>[Lembrete]</b> - '.$reminder->title, 'url' => base_url());
+                Notification::create($attributes);
+
+                $reminder = Reminder::find_by_id($reminder->id);
+                $reminder->push_sent_at = $now;
+                $reminder->save();
+            }
+
         }
         exit;
     }

@@ -2,10 +2,9 @@
     exit('No direct script access allowed');
 }
 
-class Leads extends MY_Controller
-{
-    public function __construct()
-    {
+class Leads extends MY_Controller{
+
+    public function __construct(){
         parent::__construct();
         $access = false;
         if ($this->client) {
@@ -26,41 +25,66 @@ class Leads extends MY_Controller
                         $this->lang->line('application_all_items') => 'leads'
                         );
     }
-    public function index()
-    {
+
+    public function index(){
         $this->content_view = 'leads/all';
-        $reminders = Lead::table()->delete(['status_id' => [0]]);
+//        $reminders = Lead::table()->delete(['status_id' => [0]]);
     }
-    public function search($search)
-    {
+
+    public function search($search){
         $this->view_data['search'] = $search;
         $this->content_view = 'leads/all';
     }
-    public function all()
-    {
-        $leads = Lead::find('all', array('conditions' => array("status_id != ? AND private in (?) ORDER BY `order`", 0, array(0,$this->user->id)), 'include' => array('user')));
+
+    public function all(){
+
+        list($this->user->email, $domain) = explode('@', $this->user->email);
+
+        $condition = $domain == 'ownergy.com.br' ? 1 : 0;
+
+        $leads = Lead::find('all', array('conditions' => array("status_id != ? AND private in (?) ORDER BY `order`", 0, array(0,$condition)), 'include' => array('user')));
+
+        foreach ($leads as $lead){
+
+            $status = LeadStatus::find($lead->status_id);
+
+            $limit_date = date('Y-m-d', strtotime($lead->last_landing. ' + '.$status->duration.'days'));
+
+            $start = strtotime($lead->last_landing);
+            $end = strtotime($limit_date);
+            $current =  strtotime(date('Y-m-d H:i'));
+
+            $completed = (($current - $start) / ($end - $start)) * 100;
+
+            if (is_infinite($completed) == false) { if ($completed >= 100) { $lead->completed = "danger-lead"; }else if($completed >= 60){ $lead->completed = "warning-lead"; }}else{ $lead->completed = "";}
+        }
+
         $stages = LeadStatus::find('all', array('order' => "`order` ASC"));
         $data = array('leads' => object_to_array($leads, true), 'stages' => object_to_array($stages));
         json_response("success", "", $data);
     }
+
     public function history($id = false)
     {
-        $history = LeadHistory::find_by_sql('select id, lead_id, message, DATE_FORMAT(created_at, "%d/%m/%Y %H:%i ") as created_at from lead_history where lead_id = '.$id.' ORDER BY created_at DESC');
+        $history = LeadHistory::find_by_sql('select id, lead_id, message, DATE_FORMAT(created_at, "%d/%m/%Y às %H:%i ") as created_at from lead_history where lead_id = '.$id.' ORDER BY id DESC');
         $data = array('history' => object_to_array($history, false));
         json_response("success", "", $data);
     }
+
     public function comments($id = false)
     {
         $comments = LeadHasComment::find('all', array('conditions' => array("lead_id = ? ORDER BY `datetime` DESC", $id), 'include' => array('user')));
         $data = array('comments' => object_to_array($comments, true));
         json_response("success", "", $data);
     }
+
     public function reminders($id = false)
     {
         $reminders = Reminder::find('all', array('conditions' => array("module = 'lead' AND source_id = ? ORDER BY `done` ASC, `datetime` ASC", $id), 'include' => array('user')));
         $data = array('reminders' => object_to_array($reminders, true));
         json_response("success", "", $data);
     }
+
     public function duereminders()
     {
         $datetime = new datetime();
@@ -70,6 +94,7 @@ class Leads extends MY_Controller
         $data = array('due_reminders' => object_to_array($due_reminders, true));
         json_response("success", "", $data);
     }
+
     public function reminder($action = false, $id = false)
     {
         switch ($action) {
@@ -120,6 +145,7 @@ class Leads extends MY_Controller
                 break;
         }
     }
+
     public function togglereminder($id = false)
     {
         $reminder = Reminder::find_by_id($id);
@@ -127,6 +153,7 @@ class Leads extends MY_Controller
         $reminder->save();
         json_response("success");
     }
+
     public function addcomment()
     {
         if ($_POST) {
@@ -172,15 +199,28 @@ class Leads extends MY_Controller
             json_response("error", "Error while sending data to server!", '');
         }
     }
+
     public function updateblock()
     {
         if ($_POST) {
             $item = Lead::find_by_id($_POST['id']);
             $field = array($_POST['field'] => $_POST['value'], 'order' => $_POST['order']);
 
-            $destinationLeadStatus = LeadStatus::find($_POST['value']);
-            $statusReceivers = LeadStatusHasReceiver::find('all', ['conditions' => ['lead_status_id=?', $_POST['value']]]);
             $currentLead = $item;
+
+            $destinationLeadStatus = null;
+
+            if (is_numeric($_POST['value'])){
+                $destinationLeadStatus = LeadStatus::find($_POST['value']);
+            }else{
+
+                $destinationLeadStatus->name = "perdidos";
+
+//                $historyAttributes = array('lead_id' => $_POST['id'], 'message' => $this->user->firstname.' moveu '.$currentLead->name.' para '.$destinationLeadStatus->name);
+//                LeadHistory::create($historyAttributes);
+            }
+
+            $statusReceivers = LeadStatusHasReceiver::find('all', ['conditions' => ['lead_status_id=?', $_POST['value']]]);
 
             $push_receivers = array();
 
@@ -188,7 +228,7 @@ class Leads extends MY_Controller
                 $user = User::find($statusReceiver->user_id);
                 array_push($push_receivers, $user->email);
 
-                $notificationAttributes = array('user_id' => $user->id, 'message' => '<b>'.$this->user->firstname.'</b> moveu <b>'.$currentLead->name.'</b> para <b>'.$destinationLeadStatus->name.'</b>');
+                $notificationAttributes = array('user_id' => $user->id, 'message' => '<b>'.$this->user->firstname.'</b> moveu <b>'.$currentLead->name.'</b> para <b>'.$destinationLeadStatus->name.'</b>', 'url' => base_url().'leads/');
                 Notification::create($notificationAttributes);
             }
 
@@ -197,34 +237,40 @@ class Leads extends MY_Controller
             $historyAttributes = array('lead_id' => $_POST['id'], 'message' => $this->user->firstname.' moveu '.$currentLead->name.' para '.$destinationLeadStatus->name);
             LeadHistory::create($historyAttributes);
 
+            $item->last_landing = date("Y-m-d H:i");
+
             $item = $item->update_attributes($field);
             json_response("success", "Block has been updated!", '');
         } else {
             json_response("error", "Request has no post data!", '');
         }
     }
+
     public function icon($id = false, $icon = false)
     {
         $item = Lead::find_by_id($id);
         if ($item) {
             $item->icon = $icon;
             $item->modified = date("Y-m-d H:i");
+            $item->last_landing = date("Y-m-d H:i");
             $item->save();
             json_response("success", "Block has been updated!", '');
         } else {
             json_response("error", "Request has no post data!", '');
         }
     }
+
     public function create()
     {
         if ($_POST) {
             unset($_POST['send']);
             unset($_POST['files']);
-            $_POST['private'] = (isset($_POST['private'])) ? $this->user->id : 0;
+            $_POST['private'] = (isset($_POST['private'])) ? 1 : 0;
             $description = $_POST['description'];
             $_POST = array_map('htmlspecialchars', $_POST);
             $_POST['description'] = $description;
             $_POST['created'] = date("Y-m-d H:i");
+            $_POST['last_landing'] = date("Y-m-d H:i");
             $_POST['modified'] = date("Y-m-d H:i");
             $_POST['order'] = -50+rand(1, 5);
             $item = Lead::create($_POST);
@@ -249,17 +295,78 @@ class Leads extends MY_Controller
             $this->content_view = 'leads/_lead';
         }
     }
+
     public function edit($id = false)
     {
         if ($_POST) {
             unset($_POST['send']);
             unset($_POST['files']);
-            $_POST['private'] = (isset($_POST['private'])) ? $this->user->id : 0;
+            $_POST['private'] = (isset($_POST['private'])) ? 1 : 0;
             $description = $_POST['description'];
             $_POST = array_map('htmlspecialchars', $_POST);
             $_POST['description'] = $description;
             $_POST['modified'] = date("Y-m-d H:i");
+            $_POST['last_landing'] = date("Y-m-d H:i");
             $lead = Lead::find_by_id($_POST['id']);
+            $destinationLeadStatus = LeadStatus::find($_POST['status_id']);
+
+            $changedDataHistory = "";
+
+            if ($lead->company != $_POST['company']){
+                $changedDataHistory .= "Cliente; ";
+            }
+
+            if (trim($lead->description) != trim($_POST['description'])){
+                $changedDataHistory .= "Descrição; ";
+            }
+
+            if ($lead->private != $_POST['private']){
+                $changedDataHistory .= "Privacidade; ";
+            }
+
+            if ($lead->address != $_POST['address'] || $lead->city != $_POST['city'] || $lead->state != $_POST['state'] || $lead->country != $_POST['country'] || $lead->zipcode != $_POST['zipcode']){
+                $changedDataHistory .= "Dados de endereço; ";
+            }
+
+            if ($lead->email != $_POST['email'] || $lead->phone != $_POST['phone'] || $lead->mobile != $_POST['mobile']){
+                $changedDataHistory .= "Dados de contato; ";
+            }
+
+            if ($lead->owner != $_POST['owner']){
+                $changedDataHistory .= "Dado do lead; ";
+            }
+
+            if ($lead->user_id != $_POST['user_id']){
+                $changedDataHistory .= "Responsável pelo lead; ";
+            }
+
+            if ($changedDataHistory != ""){
+                $changedDataHistoryFull = array('lead_id' => $lead->id, 'message' => $this->user->firstname.' alterou os seguintes dados de '.$lead->name.': '.$changedDataHistory);
+                LeadHistory::create($changedDataHistoryFull);
+            }
+
+
+            if ($lead->status_id != $_POST['status_id']){
+
+                $historyAttributes = array('lead_id' => $lead->id, 'message' => $this->user->firstname.' moveu '.$lead->name.' para '.$destinationLeadStatus->name);
+                LeadHistory::create($historyAttributes);
+            }
+
+
+            $statusReceivers = LeadStatusHasReceiver::find('all', ['conditions' => ['lead_status_id=?', $_POST['status_id']]]);
+
+            $push_receivers = array();
+
+            foreach ($statusReceivers as $statusReceiver){
+                $user = User::find($statusReceiver->user_id);
+                array_push($push_receivers, $user->email);
+
+                $notificationAttributes = array('user_id' => $user->id, 'message' => '<b>'.$this->user->firstname.'</b> moveu <b>'.$lead->name.'</b> para <b>'.$destinationLeadStatus->name.'</b>', 'url' => base_url().'leads/');
+                Notification::create($notificationAttributes);
+            }
+
+            Notification::sendPushNotification($push_receivers, $this->user->firstname.' moveu '.$lead->name.' para '.$destinationLeadStatus->name, base_url().'leads/');
+
             $lead->update_attributes($_POST);
             if (!$lead) {
                 $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_edit_lead_error'));
@@ -280,8 +387,13 @@ class Leads extends MY_Controller
     }
     public function delete($id = false)
     {
-            $reminders = Reminder::table()->delete(['source_id' => [$id], 'module' => ['lead']]);
-            json_response('success', 'Lead has been removed!', '');
+        $reminders = Reminder::table()->delete(['source_id' => [$id], 'module' => ['lead']]);
+        json_response('success', 'Lead has been removed!', '');
+
+//        $currentLead = Lead::find_by_id($id);
+
+//        $notificationAttributes = array('user_id' => $this->user->id, 'message' => '<b>'.$this->user->firstname.'</b> moveu <b>'.$currentLead->name.'</b> para <b> perdidos </b>', 'url' => base_url().'leads/');
+//        Notification::create($notificationAttributes);
     }
     public function status($action = false, $id = false, $attr = false)
     {
@@ -400,7 +512,7 @@ class Leads extends MY_Controller
                     foreach ($leads as $lead) {
                         $leads_ids[] = $lead->id;
                     }
-                    $leads_delete = Lead::table()->delete(array('status_id' => array($status->id)));
+//                    $leads_delete = Lead::table()->delete(array('status_id' => array($status->id)));
                     $reminders = Reminder::table()->delete(['source_id' => $leads_ids, 'module' => 'lead']);
                     $receivers_delete = LeadStatusHasReceiver::table()->delete(array('lead_status_id' => array($status->id)));
 
@@ -451,7 +563,7 @@ class Leads extends MY_Controller
         if ($_POST) {
             unset($_POST['send']);
             unset($_POST['files']);
-            $_POST['private'] = (isset($_POST['private'])) ? $this->user->id : 0;
+            $_POST['private'] = (isset($_POST['private'])) ? 1 : 0;
             $config['upload_path'] = './files/media/';
             $config['encrypt_name'] = true;
             $config['allowed_types'] = '*';
@@ -560,5 +672,13 @@ class Leads extends MY_Controller
             unlink("./files/media/".$csv_file);
             redirect("/leads");
         }
+    }
+
+    public function lost(){
+
+        $options = ['conditions' => ['status_id = ? ORDER BY ID DESC', '0']];
+        $lost_leads = Lead::all($options);
+        $this->view_data['leads'] = $lost_leads;
+        $this->content_view = 'leads/lost';
     }
 }

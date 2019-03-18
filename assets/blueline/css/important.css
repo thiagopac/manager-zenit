@@ -173,3 +173,11 @@ ul.todo li .lbl p {
 .green {
     color: green;
 }
+
+.warning-lead {
+    background: #fde9a1 !important;
+}
+
+.danger-lead {
+    background: #ffb3b3 !important;
+}

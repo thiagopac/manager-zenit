@@ -50,18 +50,18 @@ $public = "0";
         if(isset($task)){$user = $task->user_id;}else{$user = $this->user->id;}
         echo form_dropdown('user_id', $users, $user, 'style="width:100%" class="chosen-select"');?>
 </div>
-<?php if($project->company_id != 0){?>
+<?php /*if($project->company_id != 0){*/?><!--
  <div class="form-group">
-        <label for="client"><?=$this->lang->line('application_assign_to_client');?></label>
-        <?php $clients = array();
+        <label for="client"><?/*=$this->lang->line('application_assign_to_client');*/?></label>
+        <?php /*$clients = array();
                 $clients['0'] = '-';
                  foreach ($project->company->clients as $workers):
                     $clients[$workers->id] = $workers->firstname.' '.$workers->lastname;
                 endforeach;
         if(isset($task)){$client = $task->client_id;}else{$client = 0;}
-        echo form_dropdown('client_id', $clients, $client, 'style="width:100%" class="chosen-select"');?>
+        echo form_dropdown('client_id', $clients, $client, 'style="width:100%" class="chosen-select"');*/?>
 </div>
-<?php } ?>
+--><?php /*} */?>
  <div class="form-group">
         <label for="milestone_id"><?=$this->lang->line('application_milestone');?></label>
         <?php   $milestones = array();
@@ -101,15 +101,15 @@ $public = "0";
                         <textarea class="input-block-level summernote-modal" id="textfield" name="description"><?php if(isset($task)){echo $task->description;} ?></textarea>
 </div>
 
-<div class="form-group">
-<label for="textfield"><?=$this->lang->line('application_visibility');?></label>
+<!--<div class="form-group">
+<label for="textfield"><?/*=$this->lang->line('application_visibility');*/?></label>
 <ul class="accesslist">
 
                         <li>
-                        <input name="public" class="checkbox" data-labelauty="<?=$this->lang->line('application_task_public');?>" value="1" type="checkbox" <?php if($public == "1"){ ?> checked="checked" <?php } ?> />
+                        <input name="public" class="checkbox" data-labelauty="<?/*=$this->lang->line('application_task_public');*/?>" value="1" type="checkbox" <?php /*if($public == "1"){ */?> checked="checked" <?php /*} */?> />
                         </li>
 </ul>
-</div>
+</div>-->
 
         <div class="modal-footer">
           <?php if(isset($task)){ ?>

@@ -14,6 +14,9 @@
 			<input class="kanban-search pull-right" :class="(search != '') ? 'active' : ''" type="text" name="search" v-model="search" placeholder="<?=$this->lang->line('application_search');?>"
 			/>
 			<div class="select-wrapper pull-right" v-cloak>
+                <a href="<?=base_url()?>leads/lost" class="btn btn-danger">
+                    <?=$this->lang->line('application_show_lost_leads');?>
+                </a>
 				<select class="kanban-tags" type="text" name="tagsearch" v-model="tagSearch" placeholder="<?=$this->lang->line('application_tags');?>">
 					<option value="" selected>
 						<?=$this->lang->line('application_all_tags');?>
@@ -23,6 +26,14 @@
 			</div>
 			<kanban-board :stages="stages" :blocks="getLeads" @update-block="updateBlock" @delete-block="deleteBlock">
 				<div v-for="(stage, index) in stages" :slot="stage.name" v-cloak>
+
+                    <?php list($this->user->email, $domain) = explode('@', $this->user->email);
+                           $condition = $domain == 'ownergy.com.br' ? 1 : 0;
+                    ?>
+
+                    <?php if($condition == 1) { ?>
+
+
 					<div class="btn-group pull-right-responsive">
 						<i class="options icon dripicons-dots-3 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"></i>
 						<ul class="dropdown-menu pull-right" role="menu">
@@ -31,11 +42,17 @@
 									<?=$this->lang->line('application_edit');?>
 								</a>
 							</li>
+
+                            <?php if ($this->user->admin == 1)  { //apenas administradores apagam estágios ?>
+
 							<li>
 								<a @click="deleteStatus(stage.id, index)" href="#">
 									<?=$this->lang->line('application_delete');?>
 								</a>
 							</li>
+
+                            <?php } ?>
+
 							<li v-if="index > 0">
 								<a @click="moveStatus(stage.id, index, 'left')" href="#">
 									<i class="icon dripicons-arrow-thin-left"></i>
@@ -50,6 +67,8 @@
 							</li>
 						</ul>
 					</div>
+
+					<?php } ?>
 				</div>
 
 				<div v-for="(block, index) in getLeads" :slot="block.id" v-cloak>
@@ -152,18 +171,18 @@
 										</span>
 										{{ block.mobile }}
 									</li>
-									<li v-if="block.language  != ''">
+									<!--<li v-if="block.language  != ''">
 										<span>
-											<?=$this->lang->line('application_language');?>
+											<?/*=$this->lang->line('application_language');*/?>
 										</span>
 										{{ block.language }}
-									</li>
-									<li v-if="block.source != ''">
+									</li>-->
+									<!--<li v-if="block.source != ''">
 										<span>
-											<?=$this->lang->line('application_source');?>
+											<?/*=$this->lang->line('application_source');*/?>
 										</span>
 										{{ block.source }}
-									</li>
+									</li>-->
 									<li v-if="block.tags" class="tags">
 										<span>
 											<?=$this->lang->line('application_tags');?>
@@ -200,11 +219,11 @@
 										</span>
 										{{ datetime(block.modified) }}
 									</li>
-									<li v-if="block.valid_until != ''">
+									<li v-if="block.last_landing != ''">
 										<span>
-											<?=$this->lang->line('application_valid_until');?>
+											<?=$this->lang->line('application_last_landing');?>
 										</span>
-										{{ datetime(block.valid_until) }}
+										{{ datetime(block.last_landing) }}
 									</li>
 								</ul>
 							</div>
@@ -229,7 +248,7 @@
 												<div class="progress-bar" role="progressbar" :aria-valuenow="uploadProcess" aria-valuemin="0" aria-valuemax="100" :style="'width:'+ uploadProcess+'%'"></div>
 											</div>
 										</div>
-										<span v-if="!uploadProcess" class="remove tippy" @click="removeAttachment" title="<?=$this->lang->line('application_delete');?>">
+										<span v-if="!uploadProcess" class="progress-bar tippy" @click="removeAttachment" title="<?=$this->lang->line('application_delete');?>">
 											<i class="ionicons ion-close-round"></i>
 										</span>
 										<img v-if="attachment.image" :src="attachment.image" />
@@ -351,7 +370,7 @@
 
 						</div>
 					</div>
-					<div class="row block-actions">
+					<div class="row block-actions" :class="block.completed">
 
 						<a class="col-xs-2 center tippy" :class="(block.address != '' || block.city != '' || block.zipcode != '' || block.country != '') ? '' : 'grayout'"
 						 :href="'https://maps.google.com?q='+block.address+'+'+block.city+'+'+block.zipcode+'+'+block.country" target="_blank"
@@ -376,7 +395,7 @@
                             <i class="icon dripicons-hourglass"></i>
                         </a>-->
 						<a class="col-xs-2 center tippy" href="#" @click="openThisBlock(block.id)" title="<?=$this->lang->line('application_details');?>">
-							<i class="icon dripicons-dots-3"></i>
+							<i class="icon dripicons-expand-2"></i>
 						</a>
 					</div>
 

@@ -29,22 +29,22 @@ if (isset($lead)) {
             echo $lead->name;
         } ?>" required/>
 	</div>
-	<div class="form-group">
+	<!--<div class="form-group">
 		<label for="source">
-			<?=$this->lang->line('application_source');?>
+			<?/*=$this->lang->line('application_source');*/?>
 		</label>
-		<input id="source" type="text" list="sourcelist" name="source" class="form-control" value="<?php if (isset($lead)) {
+		<input id="source" type="text" list="sourcelist" name="source" class="form-control" value="<?php /*if (isset($lead)) {
             echo $lead->source;
-        } ?>"/>
+        } */?>"/>
 		<datalist id="sourcelist">
-			<?php foreach ($sources as $value):  ?>
-			<option value="<?=$value->source?>">
-				<?php endforeach; ?>
+			<?php /*foreach ($sources as $value):  */?>
+			<option value="<?/*=$value->source*/?>">
+				<?php /*endforeach; */?>
 				<option value="Facebook">
                 <option value="Google">
 		</datalist>
 
-	</div>
+	</div>-->
 	
 	<div class="form-group">
 		<label for="company">
@@ -156,7 +156,7 @@ if (isset($lead)) {
         } ?>" />
     </div>
 	<div class="form-group">
-		<label for="users">
+		<label for="leads">
 			<?=$this->lang->line('application_registration_responsible');?>
 		</label>
 		<?php $options = [];

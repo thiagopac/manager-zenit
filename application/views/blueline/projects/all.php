@@ -156,7 +156,7 @@
                             </td>
                             <td class="option" width="8%">
                                 <button type="button" title="
-										<?=$this->lang->line('application_delete'); ?>" class="btn-option delete po tt green" data-toggle="popover" data-placement="left" data-content="
+										<?=$this->lang->line('application_delete'); ?>" class="btn-option delete po tt" data-toggle="popover" data-placement="left" data-content="
 										<a class='btn btn-danger po-delete ajax-silent' href='
 											<?=base_url()?>projects/delete/
 											<?=$value->id;?>'>
@@ -174,7 +174,7 @@
                                 </button>
                                 <a href="
 											<?=base_url()?>projects/update/
-											<?=$value->id;?>" class="btn-option tt green" title="
+											<?=$value->id;?>" class="btn-option tt" title="
 											<?=$this->lang->line('application_edit_project'); ?>" data-toggle="mainmodal">
                                     <i class="icon dripicons-gear"></i>
                                 </a>
