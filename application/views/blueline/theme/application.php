@@ -49,7 +49,10 @@ $message_icon = false;
     <!-- Head CSS and JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
-      <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/app.css"/>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/app.css"/>
     <link rel="stylesheet" href="https://diagramclub.github.io/styles/user.css"/>
     <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/important.css"/>
     <?=get_theme_colors($core_settings);?>
@@ -215,7 +218,7 @@ $message_icon = false;
                   <div class="grid__col-6 shortcut--item"><i class="ion-ios-pricetags shortcut--icon"></i> <?=$this->lang->line('application_create_ticket');?></div>
                   <div class="grid__col-6 shortcut--item"><i class="ion-ios-email shortcut--icon"></i> <?=$this->lang->line('application_write_messages');?></div>
             </div>
-          <i class="icon dripicons-bell topbar__icon fc-dropdown--trigger" data-placement="bottom" title="<?=$this->lang->line('application_alerts');?>"><?php if ($unread_notifications > 0) {
+          <i class="far fa-bell topbar__icon fc-dropdown--trigger" data-placement="bottom" title="<?=$this->lang->line('application_alerts');?>"><?php if ($unread_notifications > 0) {
         ?><span class="badge counter" style="background: #ed5564; display: initial; font-style: normal; font-weight: 300;"><?=$unread_notifications?></span><?php
     } ?></i>
               <div class="fc-dropdown notification-center">
@@ -249,7 +252,7 @@ $message_icon = false;
                                   ?>
               <span class="hidden-xs">
                   <a href="<?=site_url('messages'); ?>" title="<?=$this->lang->line('application_messages'); ?>">
-                     <i class="icon dripicons-inbox topbar__icon"></i>
+                     <i class="far fa-envelope topbar__icon"></i>
                   </a>
               </span>
             <?php

@@ -74,16 +74,16 @@
                 <li class="pull-right">
                     <?php if ($project->sticky == 0) {
                         ?>
-                        <a class="tt green" title="<?=$this->lang->line('application_add_to_quick_access'); ?>" href="<?=base_url()?>projects/sticky/<?=$project->id; ?>"><i class="icon dripicons-star"></i></a>
+                        <a class="tt" title="<?=$this->lang->line('application_add_to_quick_access'); ?>" href="<?=base_url()?>projects/sticky/<?=$project->id; ?>"><i class="icon dripicons-star"></i></a>
                         <?php
                     } else {
                         ?>
-                        <a class="tt green" title="<?=$this->lang->line('application_add_to_quick_access'); ?>" href="<?=base_url()?>projects/sticky/<?=$project->id; ?>"><i class="icon dripicons-star"></i></a>
+                        <a class="tt" title="<?=$this->lang->line('application_add_to_quick_access'); ?>" href="<?=base_url()?>projects/sticky/<?=$project->id; ?>"><i class="icon dripicons-star"></i></a>
                         <?php
                     } ?>
                 </li>
                 <li class="pull-right">
-                    <a href="<?=base_url()?>projects/update/<?=$project->id;?>" data-toggle="mainmodal" class="tt green" title="<?=$this->lang->line('application_edit_project'); ?>" data-target="#mainModal"><i class="icon dripicons-gear"></i></a>
+                    <a href="<?=base_url()?>projects/update/<?=$project->id;?>" data-toggle="mainmodal" class="tt" title="<?=$this->lang->line('application_edit_project'); ?>" data-target="#mainModal"><i class="icon dripicons-gear"></i></a>
                 </li>
                 <li class="pull-right">
                     <?php if (!empty($project->tracking)) {
@@ -94,7 +94,7 @@
                     <?php
                     } else {
                     ?>
-                        <a href="<?=base_url()?>projects/tracking/<?=$project->id; ?>" class="tt green" title="<?=$this->lang->line('application_start_timer'); ?>"><i class="icon dripicons-clock"></i> </a>
+                        <a href="<?=base_url()?>projects/tracking/<?=$project->id; ?>" class="tt" title="<?=$this->lang->line('application_start_timer'); ?>"><i class="icon dripicons-clock"></i> </a>
                         <?php
                     } ?>
                 </li>
@@ -1109,7 +1109,7 @@
                                     <td class="hidden-xs"><?=$value->phase;?></td>
                                     <td class="hidden-xs"><span class="label label-info tt" title="<?=$this->lang->line('application_download_counter');?>" ><?=$value->download_counter;?></span></td>
                                     <td class="option " width="10%">
-                                        <button type="button" class="btn-option btn-xs po tt green" title="<?=$this->lang->line('application_delete'); ?>" data-toggle="popover" data-placement="left" data-content="<a class='btn btn-danger po-delete ajax-silent' href='<?=base_url()?>projects/media/<?=$project->id;?>/delete/<?=$value->id;?>'><?=$this->lang->line('application_yes_im_sure');?></a>
+                                        <button type="button" class="btn-option btn-xs po tt" title="<?=$this->lang->line('application_delete'); ?>" data-toggle="popover" data-placement="left" data-content="<a class='btn btn-danger po-delete ajax-silent' href='<?=base_url()?>projects/media/<?=$project->id;?>/delete/<?=$value->id;?>'><?=$this->lang->line('application_yes_im_sure');?></a>
                   <button class='btn po-close'><?=$this->lang->line('application_no');?></button>
                   <input type='hidden' name='td-id' class='id' value='<?=$value->id;?>'>" data-original-title="<b><?=$this->lang->line('application_really_delete');?></b>">
                                             <i class="icon dripicons-cross"></i></button>
