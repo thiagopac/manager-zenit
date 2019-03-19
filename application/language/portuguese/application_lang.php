@@ -919,3 +919,9 @@ $lang['application_show_lost_leads'] = 'Mostrar leads perdidos';
 $lang['application_lost_leads'] = 'Leads perdidos';
 $lang['application_private'] = 'Privado';
 $lang['application_last_landing'] = 'Última movimentação';
+$lang['application_send_push_notification'] = 'Enviar notificação push';
+
+$lang['application_push_notification_settings'] = 'Configuração de Notificações Push (One Signal)';
+$lang['application_push_notification_active'] = 'Notificação Push ativa';
+$lang['application_push_notification_rest_api_key'] = 'Push Rest API Key';
+$lang['application_push_notification_app_id'] = 'Push App ID';

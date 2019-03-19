@@ -129,22 +129,6 @@ echo form_open_multipart($form_action, $attributes);
 
 			</div>
             <!--      MENU DE TEMPLATES NAS CONFIGURAÇÕES / ESCONDIDO      -->
-			<!--<div class="form-group">
-				<label>
-					<?/*=$this->lang->line('application_default_template');*/?>
-				</label>
-				<?php /*$options = [];
-            if ($handle = opendir('application/views/')) {
-                while (false !== ($entry = readdir($handle))) {
-                    if ($entry != '.' && $entry != '..' && $entry != 'index.html') {
-                        $options[$entry] = ucwords($entry);
-                    }
-                }
-                closedir($handle);
-            }
-            echo form_dropdown('template', $options, $settings->template, 'style="width:250px" class="chosen-select"'); */?>
-
-			</div>-->
 
 			<div class="form-header">
 				<?=$this->lang->line('application_reference_prefix');?>
@@ -441,6 +425,41 @@ echo form_open_multipart($form_action, $attributes);
 					</div>
 				</div>-->
 			</div>
+            <div class="form-header">
+                <?=$this->lang->line('application_push_notification_settings');?>
+            </div>
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>
+                            <?=$this->lang->line('application_push_notification_active');?>
+                        </label>
+                        <input name="push_active" type="checkbox" class="checkbox" data-labelauty="<?=$this->lang->line('application_push_notification_active');?>"
+                               value="1" <?php if ($settings->push_active == '1') {
+                            ?> checked="checked"
+                            <?php
+                        } ?>>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            <?=$this->lang->line('application_push_notification_app_id');?>
+                        </label>
+                        <input type="text" name="push_app_id" class="form-control" value="<?=$settings->push_app_id;?>">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            <?=$this->lang->line('application_push_notification_rest_api_key');?>
+                        </label>
+                        <input type="text" name="push_rest_api_key" class="required form-control" value="<?=$settings->push_rest_api_key;?>">
+                    </div>
+                </div>
+            </div>
 
             <!-- CAMPO DE TEXTO PADRÃO DE FATURA / ESCONDIDO -->
 			<!--<div class="form-header">

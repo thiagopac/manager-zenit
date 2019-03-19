@@ -431,7 +431,7 @@
 								</td>
 								<td class="hidden-xs">
 									<span class="label">
-										<?php $unix = human_to_unix($value->issue_date . ' 00:00');
+										<?php $unix = human_to_unix($value->issue_date);
                     echo date($core_settings->date_format, $unix); ?>
 									</span>
 								</td>
@@ -442,12 +442,12 @@
                     if ($value->due_date <= date('Y-m-d') && $value->status != 'Paid ') {
                         echo 'label-important tt" title="' . $this->lang->line('application_overdue');
                     } ?>">
-										<?php $unix = human_to_unix($value->due_date . ' 00:00');
+										<?php $unix = human_to_unix($value->due_date);
                     echo date($core_settings->date_format, $unix); ?>
 									</span>
 								</td>
 								<td>
-									<span class="label <?php $unix = human_to_unix($value->sent_date . ' 00:00');
+									<span class="label <?php $unix = human_to_unix($value->sent_date);
                     if ($value->status == ' Paid ') {
                         echo 'label-success';
                     } elseif ($value->status == 'Sent ') {

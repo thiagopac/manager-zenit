@@ -139,8 +139,8 @@
                                 } else {
                                 ?><a class="label label-success" href="<?=base_url()?>clients/view/<?=$project->company->id; ?>"><?php echo $project->company->name;
                                     } ?></a></li>
-                        <li><span><?=$this->lang->line('application_start_date');?></span> <?php  $unix = human_to_unix($project->start.' 00:00'); echo date($core_settings->date_format, $unix);?></li>
-                        <li><span><?=$this->lang->line('application_deadline');?></span> <?php  $unix = human_to_unix($project->end.' 00:00'); echo date($core_settings->date_format, $unix);?></li>
+                        <li><span><?=$this->lang->line('application_start_date');?></span> <?php  $unix = human_to_unix($project->start); echo date($core_settings->date_format, $unix);?></li>
+                        <li><span><?=$this->lang->line('application_deadline');?></span> <?php  $unix = human_to_unix($project->end); echo date($core_settings->date_format, $unix);?></li>
                         <li><span><?=$this->lang->line('application_project');?> - <?=$this->lang->line('application_time_spent');?></span> <?=$time_spent;?> <a href="<?=base_url()?>projects/timer_reset/<?=$project->id;?>" class="tt" title="<?=$this->lang->line('application_reset_timer');?>"><i class="icon dripicons-time-reverse"></i></a> <a href="<?=base_url()?>projects/timer_set/<?=$project->id;?>" data-toggle="mainmodal" class="tt" style="    margin-left: 7px;" title="<?=$this->lang->line('application_timer_set');?>"><i class="icon dripicons-clock"></i></a></li>
                         <li><span><?=$this->lang->line('application_tasks');?> - <?=$this->lang->line('application_time_spent');?></span> <?=Project::getAllTasksTime($project->id);?> </li>
 
@@ -606,7 +606,7 @@
                                 ?>
                                 <li>
                                     <span><?=$this->lang->line('application_start_date'); ?></span>
-                                    <?php  $unix = human_to_unix($value->start_date.' 00:00');
+                                    <?php  $unix = human_to_unix($value->start_date);
                                     echo date($core_settings->date_format, $unix); ?>
                                 </li>
                                 <?php
@@ -615,7 +615,7 @@
                                 ?>
                                 <li> <?php $overdue = ($value->due_date < date("Y-m-d", time())) ? "label label-important" : ""; ?>
                                     <span><?=$this->lang->line('application_due_date'); ?></span>
-                                    <span class="<?=$overdue?>"><?php  $unix = human_to_unix($value->due_date.' 00:00');
+                                    <span class="<?=$overdue?>"><?php  $unix = human_to_unix($value->due_date);
                                         echo date($core_settings->date_format, $unix); ?></span>
                                 </li>
                                 <?php
@@ -1127,7 +1127,7 @@
                             ?>
                             <div class="no-files">
                                 <i class="icon dripicons-cloud-upload"></i><br>
-                                No files have been uploaded yet!
+                                Nenhum arquivo enviado ainda
                             </div>
                             <?php
                         } ?>
@@ -1175,7 +1175,7 @@
                                     <td onclick=""><span class="label label-info"><?php if (is_object($value->company)) {
                                                 echo $value->company->name;
                                             } ?></span></td>
-                                    <td class="hidden-xs"><span><?php $unix = human_to_unix($value->issue_date.' 00:00');
+                                    <td class="hidden-xs"><span><?php $unix = human_to_unix($value->issue_date);
                                             echo '<span class="hidden">'.$unix.'</span> ';
                                             echo date($core_settings->date_format, $unix); ?></span></td>
                                     <td class="hidden-xs"><span class="label <?php if ($value->status == "Paid") {
@@ -1183,10 +1183,10 @@
                                         }
                                         if ($value->due_date <= date('Y-m-d') && $value->status != "Paid") {
                                             echo 'label-important tt" title="'.$this->lang->line('application_overdue');
-                                        } ?>"><?php $unix = human_to_unix($value->due_date.' 00:00');
+                                        } ?>"><?php $unix = human_to_unix($value->due_date);
                                             echo '<span class="hidden">'.$unix.'</span> ';
                                             echo date($core_settings->date_format, $unix); ?></span> <span class="hidden"><?=$unix; ?></span></td>
-                                    <td onclick=""><span class="label <?php $unix = human_to_unix($value->sent_date.' 00:00');
+                                    <td onclick=""><span class="label <?php $unix = human_to_unix($value->sent_date);
                                         if ($value->status == "Paid") {
                                             echo 'label-success';
                                         } elseif ($value->status == "Sent") {

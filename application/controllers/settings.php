@@ -121,6 +121,10 @@ class Settings extends MY_Controller
                 $_POST['invoice_logo'] = 'files/media/' . $data['upload_data']['file_name'];
             }
 
+            if ($_POST['push_active'] != '1') {
+                $_POST['push_active'] = '0';
+            }
+
             unset($_POST['userfile'], $_POST['userfile2'], $_POST['file-name'], $_POST['file-name2'], $_POST['_wysihtml5_mode'], $_POST['send']);
 
             $settings = Setting::first();

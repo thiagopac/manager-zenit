@@ -110,7 +110,7 @@
           <?php
     } else {
         ?>
-            <a href="<?=base_url()?>projects/tracking/<?=$project->id; ?>" class="tt" title="<?=$this->lang->line('application_start_timer'); ?>"><i class="icon dripicons-clock"></i> </a>
+<!--            <a href="--><?//=base_url()?><!--projects/tracking/--><?//=$project->id; ?><!--" class="tt" title="--><?//=$this->lang->line('application_start_timer'); ?><!--"><i class="icon dripicons-clock"></i> </a>-->
           <?php
     } ?>
        </li>
@@ -155,8 +155,8 @@
     } else {
         ?><a class="label label-success" href="<?=base_url()?>clients/view/<?=$project->company->id; ?>"><?php echo $project->company->name;
     } ?></a></li>
-                    <li><span><?=$this->lang->line('application_start_date');?></span> <?php  $unix = human_to_unix($project->start.' 00:00'); echo date($core_settings->date_format, $unix);?></li>
-                    <li><span><?=$this->lang->line('application_deadline');?></span> <?php  $unix = human_to_unix($project->end.' 00:00'); echo date($core_settings->date_format, $unix);?></li>
+                    <li><span><?=$this->lang->line('application_start_date');?></span> <?php  $unix = human_to_unix($project->start); echo date($core_settings->date_format, $unix);?></li>
+                    <li><span><?=$this->lang->line('application_deadline');?></span> <?php  $unix = human_to_unix($project->end); echo date($core_settings->date_format, $unix);?></li>
 <!--                    <li><span>--><?//=$this->lang->line('application_project');?><!-- - --><?//=$this->lang->line('application_time_spent');?><!--</span> --><?//=$time_spent;?><!-- <a href="--><?//=base_url()?><!--projects/timer_reset/--><?//=$project->id;?><!--" class="tt" title="--><?//=$this->lang->line('application_reset_timer');?><!--"><i class="icon dripicons-time-reverse"></i></a> <a href="--><?//=base_url()?><!--projects/timer_set/--><?//=$project->id;?><!--" data-toggle="mainmodal" class="tt" style="    margin-left: 7px;" title="--><?//=$this->lang->line('application_timer_set');?><!--"><i class="icon dripicons-clock"></i></a></li>-->
 <!--                    <li><span>--><?//=$this->lang->line('application_tasks');?><!-- - --><?//=$this->lang->line('application_time_spent');?><!--</span> --><?//=Project::getAllTasksTime($project->id);?><!-- </li>-->
 
@@ -745,7 +745,7 @@
                        ?>
         <div class="no-files">
             <i class="icon dripicons-cloud-upload"></i><br>
-            No files have been uploaded yet!
+            Nenhum arquivo enviado ainda
         </div>
          <?php
                    } ?>

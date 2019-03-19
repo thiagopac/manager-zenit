@@ -15,12 +15,18 @@ class Notification extends ActiveRecord\Model {
     }
 
     function sendPushNotification($emails, $message, $url) {
+
+
+        $settings = Setting::first();
+
+        if ($settings->push_active == 0){ return; }
+
         $content = array(
             "en" => $message
         );
 
         $fields = array(
-            'app_id' => "b9fad76b-873f-4f47-9d0f-d341c4d222a1",
+            'app_id' => "$settings->push_app_id",
             'include_external_user_ids' => $emails,
             'contents' => $content,
             'web_url' => $url
@@ -32,7 +38,7 @@ class Notification extends ActiveRecord\Model {
         curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json; charset=utf-8',
-            'Authorization: Basic YWM0ZmE3MDEtODgzNC00NmJlLWEzNGEtYTE0ZjkyZGUwMGU0'
+            'Authorization: Basic '.$settings->push_rest_api_key.''
         ));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);

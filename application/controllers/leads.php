@@ -105,6 +105,7 @@ class Leads extends MY_Controller{
                     $data['title'] = $_POST['title'];
                     $data['body'] = $_POST['message'];
                     $data['email_notification'] = (isset($_POST['email_notification'])) ? 1 : 0;
+                    $data['push_notification'] = (isset($_POST['push_notification'])) ? 1 : 0;
                     $data['user_id'] = $this->user->id;
                     $datetime = new datetime($_POST['datetime']);
                     $data['datetime'] = $datetime->format('Y-m-d H:i:s T');
@@ -123,6 +124,7 @@ class Leads extends MY_Controller{
                     $data['title'] = $_POST['title'];
                     $data['body'] = $_POST['message'];
                     $data['email_notification'] = (isset($_POST['email_notification'])) ? 1 : 0;
+                    $data['push_notification'] = (isset($_POST['push_notification'])) ? 1 : 0;
                     $data['user_id'] = $this->user->id;
                     $datetime = new datetime($_POST['datetime']);
                     $data['datetime'] = $datetime->format('Y-m-d H:i:s T');

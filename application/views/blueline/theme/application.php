@@ -32,7 +32,9 @@ $message_icon = false;
     <link rel="SHORTCUT ICON" href="<?=base_url()?>assets/blueline/img/favicon.ico"/>
 
       <link rel="manifest" href="/manifest.json" />
+  <?php if ($core_settings->push_active == 1) { ?>
       <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+  <?php } ?>
       <script>
 
 
@@ -65,8 +67,7 @@ $message_icon = false;
 
     <script>
      var csfrData = {};
-     csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']
-                       = '<?php echo $this->security->get_csrf_hash(); ?>';
+     csfrData['<?php echo $this->security->get_csrf_token_name(); ?>'] = '<?php echo $this->security->get_csrf_hash(); ?>';
    </script>
 
   </head>
@@ -219,7 +220,7 @@ $message_icon = false;
                   <div class="grid__col-6 shortcut--item"><i class="ion-ios-email shortcut--icon"></i> <?=$this->lang->line('application_write_messages');?></div>
             </div>
           <i class="far fa-bell topbar__icon fc-dropdown--trigger" data-placement="bottom" title="<?=$this->lang->line('application_alerts');?>"><?php if ($unread_notifications > 0) {
-        ?><span class="badge counter" style="background: #ed5564; display: initial; font-style: normal; font-weight: 300;"><?=$unread_notifications?></span><?php
+        ?><span class="badge counter" style="background: #ed5564; display: initial; font-style: normal; font-weight: 300; font-family: monospace;""><?=$unread_notifications?></span><?php
     } ?></i>
               <div class="fc-dropdown notification-center">
                   <div class="notification-center__header">
@@ -312,8 +313,6 @@ $message_icon = false;
 
  </div> <!-- Mainwrapper end -->
 
-
-<span id="<?=$this->user->email?>" class="user-email hidden"></span>
  </body>
 </html>
 <script>
@@ -334,15 +333,18 @@ $message_icon = false;
 
         });
 
+        <?php if ($core_settings->push_active == 1) { ?>
 
         var OneSignal = window.OneSignal || [];
         OneSignal.push(function() {
             OneSignal.init({
-                appId: "b9fad76b-873f-4f47-9d0f-d341c4d222a1",
+                appId: "<?=$core_settings->push_app_id;?>",
             });
 
             OneSignal.setExternalUserId("<?=$this->user->email;?>");
         });
+
+        <?php } ?>
 
     });
 </script>

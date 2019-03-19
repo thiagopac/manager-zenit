@@ -31,6 +31,10 @@ if (isset($reminder)) {
 	</div>
 
 	<ul class="accesslist">
+        <li>
+            <input type="checkbox" class="checkbox" id="push_notification" name="push_notification" value="1" data-labelauty="<?=$this->lang->line('application_send_push_notification');?>"
+                <?=(isset($reminder) && $reminder->push_notification != 0) ? "checked" : "";?>>
+        </li>
 		<li>
 			<input type="checkbox" class="checkbox" id="email_notification" name="email_notification" value="1" data-labelauty="<?=$this->lang->line('application_send_reminder_email');?>"
 			 <?=(isset($reminder) && $reminder->email_notification != 0) ? "checked" : "";?>>

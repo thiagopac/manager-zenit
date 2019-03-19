@@ -58,15 +58,15 @@ class cProjects extends MY_Controller {
 		$tasks_done = ProjectHasTask::count(array('conditions' => array('status = ? AND project_id = ? AND public = ?', 'done', $id, 1)));
 		@$this->view_data['opentaskspercent'] = $tasks_done/$tasks*100;
 
-		$this->view_data['time_days'] = round((human_to_unix($this->view_data['project']->end.' 00:00') - human_to_unix($this->view_data['project']->start.' 00:00')) / 3600 / 24);
+		$this->view_data['time_days'] = round((human_to_unix($this->view_data['project']->end) - human_to_unix($this->view_data['project']->start.' 00:00')) / 3600 / 24);
 		$this->view_data['time_left'] = $this->view_data['time_days'];
 		$this->view_data['timeleftpercent'] = 100;
 
-		if(human_to_unix($this->view_data['project']->start.' 00:00') < time() && human_to_unix($this->view_data['project']->end.' 00:00') > time()){
-			$this->view_data['time_left'] = round((human_to_unix($this->view_data['project']->end.' 00:00') - time()) / 3600 / 24);
+		if(human_to_unix($this->view_data['project']->start) < time() && human_to_unix($this->view_data['project']->end) > time()){
+			$this->view_data['time_left'] = round((human_to_unix($this->view_data['project']->end) - time()) / 3600 / 24);
 			$this->view_data['timeleftpercent'] = $this->view_data['time_left']/$this->view_data['time_days']*100;
 		}
-		if(human_to_unix($this->view_data['project']->end.' 00:00') < time()){
+		if(human_to_unix($this->view_data['project']->end) < time()){
 			$this->view_data['time_left'] = 0;
 			$this->view_data['timeleftpercent'] = 0;
 		}
