@@ -1073,19 +1073,22 @@ class Projects extends MY_Controller
                 }
                 break;
             case 'update':
-//                $this->_output("asdasdasd");
                 $this->content_view = 'projects/_tasks';
-                $this->view_data['task'] = ProjectHasTask::find($task_id);
+
+                $editingTask = ProjectHasTask::find($task_id);
+
+                $this->view_data['task'] = $editingTask;
                 if ($_POST) {
                     unset($_POST['send']);
                     unset($_POST['files']);
                     if (!isset($_POST['public'])) {
                         $_POST['public'] = 0;
                     }
+
                     $description = $_POST['description'];
-                    $_POST = array_map('htmlspecialchars', $_POST);
+
                     $_POST['description'] = $description;
-                    $task_id = $_POST['id'];
+
                     $task = ProjectHasTask::find($task_id);
 
                     $project = Project::find_by_id($task->project_id);
@@ -1094,6 +1097,14 @@ class Projects extends MY_Controller
 
                     $user = User::find_by_id($_POST['user_id']);
 
+                    if (!empty($_POST['sucessors_ids'])) {
+                        $_POST['sucessors'] = implode(',', $_POST['sucessors_ids']);
+                    } else {
+                        $_POST['sucessors'] = implode(',', $_POST['sucessors_ids']);
+                    }
+
+                    unset($_POST['sucessors_ids']);
+
                     if ($task->user_id != $_POST['user_id']  &&  $task->due_date != null){
                         $attributes = array('user_id' => $_POST['user_id'], 'message' => '<p><b>'.$this->user->firstname.'</b>'.' atribuiu uma tarefa à você. </p>['.$project->name.']', 'url' => base_url().'projects/view/'.$id);
                         Notification::create($attributes);
@@ -1101,6 +1112,31 @@ class Projects extends MY_Controller
                         array_push($push_receivers, $user->email);
 
                         Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' atribuiu uma tarefa à você', base_url().'projects/view/'.$id);
+                    }
+
+                    if (($_POST['status'] == 'done' && $task->status != $_POST['status']) && ($task->sucessors != null && $task->sucessors != '')){
+
+                        $sucessors = explode(',', $task->sucessors);
+
+                        foreach ($sucessors as $sucessorId){
+
+                            if (is_numeric($sucessorId)){
+
+                                $sucessor = ProjectHasTask::find($sucessorId);
+
+                                $attributes = array('user_id' => $sucessor->user_id, 'message' => '<p><b>'.$this->user->firstname.'</b>'.' concluiu a tarefa  <b>'.$task->name.'</b> e você já pode iniciar a tarefa <b>'.$sucessor->name.'</b> </p>['.$project->name.']', 'url' => base_url().'projects/view/'.$id);
+                                Notification::create($attributes);
+
+                                $sucessor_owner = User::find_by_id($sucessor->user_id);
+
+                                array_push($push_receivers, $sucessor_owner->email);
+
+                                $sucessor->update_attributes(['start_date' => date('Y-m-d H:i:s')]);
+
+                            }
+                        }
+
+                        Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' concluiu a tarefa '.$task->name.' e você já pode iniciar a tarefa '.$sucessor->name, base_url().'projects/view/'.$id);
                     }
 
                     /*if ($task->user_id != $_POST['user_id']) {
@@ -1136,16 +1172,35 @@ class Projects extends MY_Controller
                     $project = Project::find($id);
                     $this->theme_view = 'modal';
                     $this->view_data['project'] = $project;
+                    $this->view_data['tasks'] = ProjectHasTask::find('all', ['order' => 'id asc', 'conditions' => ['project_id = ? AND id != ?', $project->id, $task_id]]);
                     $this->view_data['title'] = $this->lang->line('application_edit_task');
                     $this->view_data['milestone_id'] = $milestone_id;
                     $this->view_data['form_action'] = 'projects/tasks/'.$id.'/update/'.$task_id;
                     $this->view_data['existinUsers'] = User::all();
+
+                    $sucessorsIds = explode(',', $editingTask->sucessors);
+
+                    $sucessors = array();
+
+                    foreach ($sucessorsIds as $sucessorId) {
+
+                        if (is_numeric($sucessorId)){
+                            $value = ProjectHasTask::find($sucessorId);
+                            $sucessors[$value->id] = $value->id;
+                        }
+                    }
+
+                    $this->view_data['sucessors'] = $sucessors;
                     $this->content_view = 'projects/_tasks';
+
+
                 }
                 break;
             case 'check':
+
                 $this->theme_view = 'blank';
-                $task = ProjectHasTask::find($task_id);
+                $task = ProjectHasTask::find_by_id($task_id);
+                $project = Project::find_by_id($task->project_id);
                 if ($task->status == 'done') {
                     $task->status = 'open';
                     $task->completion_date = null;
@@ -1156,6 +1211,33 @@ class Projects extends MY_Controller
                 if ($task->tracking > 0) {
                     json_response("error", htmlspecialchars($this->lang->line('application_task_timer_must_be_stopped_first')));
                 }
+
+                if ($task->status == 'done' && ($task->sucessors != null && $task->sucessors != '')){
+
+                    $push_receivers = array();
+
+                    $sucessors = explode(',', $task->sucessors);
+
+                    foreach ($sucessors as $sucessorId){
+
+                        if (is_numeric($sucessorId)){
+                            $sucessor = ProjectHasTask::find($sucessorId);
+
+                            $attributes = array('user_id' => $sucessor->user_id, 'message' => '<p><b>'.$this->user->firstname.'</b>'.' concluiu a tarefa  <b>'.$task->name.'</b> e você já pode iniciar a tarefa <b>'.$sucessor->name.'</b> </p>['.$project->name.']', 'url' => base_url().'projects/view/'.$id);
+                            Notification::create($attributes);
+
+                            $sucessor_owner = User::find_by_id($sucessor->user_id);
+
+                            array_push($push_receivers, $sucessor_owner->email);
+
+                            $sucessor->update_attributes(['start_date' => date('Y-m-d H:i:s')]);
+                        }
+
+                    }
+
+                    Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' concluiu a tarefa '.$task->name.' e você já pode iniciar a tarefa '.$sucessor->name, base_url().'projects/view/'.$id);
+                }
+
                 $task->save();
                 $project = Project::find($id);
                 $tasks = ProjectHasTask::count(array('conditions' => 'project_id = '.$id));

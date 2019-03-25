@@ -13,7 +13,7 @@ echo form_open($form_action, $attributes);
     <div class="form-group">
         <label for="area_id"><?=$this->lang->line('application_area');?></label>
         <?php   //$areas = array();
-        $areas['0'] = '-';
+//        $areas['0'] = '-';
 
         foreach ($bd_areas as $area):
             $areas[$area->id] = $area->name;
@@ -23,14 +23,14 @@ echo form_open($form_action, $attributes);
         echo form_dropdown('area_id', $areas, $area_selected, 'style="width:100%" class="chosen-select"');?>
     </div>
 
-<div class="form-group">
-        <label for="start_date"><?=$this->lang->line('application_start_date');?></label>
-        <input class="form-control datepicker not-required" name="start_date" id="start_date" type="text" value="<?php if(isset($milestone)){echo $milestone->start_date;} ?>" />
+<!--<div class="form-group">
+        <label for="start_date"><?/*=$this->lang->line('application_start_date');*/?></label>
+        <input class="form-control datepicker not-required" name="start_date" id="start_date" type="text" value="<?php /*if(isset($milestone)){echo $milestone->start_date;} */?>" />
 </div>
 <div class="form-group">
-        <label for="due_date"><?=$this->lang->line('application_due_date');?></label>
-        <input class="form-control datepicker-linked not-required" name="due_date" id="due_date" type="text" value="<?php if(isset($milestone)){echo $milestone->due_date;} ?>" />
-</div>
+        <label for="due_date"><?/*=$this->lang->line('application_due_date');*/?></label>
+        <input class="form-control datepicker-linked not-required" name="due_date" id="due_date" type="text" value="<?php /*if(isset($milestone)){echo $milestone->due_date;} */?>" />
+</div>-->
 
 <div class="form-group">
         <label for="textfield"><?=$this->lang->line('application_description');?></label>

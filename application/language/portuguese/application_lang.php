@@ -925,3 +925,6 @@ $lang['application_push_notification_settings'] = 'Configuração de Notificaç�
 $lang['application_push_notification_active'] = 'Notificação Push ativa';
 $lang['application_push_notification_rest_api_key'] = 'Push Rest API Key';
 $lang['application_push_notification_app_id'] = 'Push App ID';
+
+$lang['application_sucessor_tasks'] = 'Tarefas sucessoras';
+$lang['application_select_tasks'] = 'Selecione as tarefas';

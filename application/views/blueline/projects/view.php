@@ -468,7 +468,7 @@
                 $start = strtotime($task->start_date);
                 $end = strtotime($task->due_date);
                 $current =  strtotime(date('Y-m-d H:i'));
-
+//
                 $completed = (($current - $start) / ($end - $start)) * 100;
 
                 if (is_infinite($completed) == false) { if ($completed >= 100) { echo "danger-task"; }else if($completed >= 60){ echo "warning-task"; }}else{ echo "";}

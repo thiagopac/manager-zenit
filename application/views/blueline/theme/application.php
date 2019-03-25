@@ -57,6 +57,7 @@ $message_icon = false;
     <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/app.css"/>
     <link rel="stylesheet" href="https://diagramclub.github.io/styles/user.css"/>
     <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/important.css"/>
+
     <?=get_theme_colors($core_settings);?>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -219,7 +220,7 @@ $message_icon = false;
                   <div class="grid__col-6 shortcut--item"><i class="ion-ios-pricetags shortcut--icon"></i> <?=$this->lang->line('application_create_ticket');?></div>
                   <div class="grid__col-6 shortcut--item"><i class="ion-ios-email shortcut--icon"></i> <?=$this->lang->line('application_write_messages');?></div>
             </div>
-          <i class="far fa-bell topbar__icon fc-dropdown--trigger" data-placement="bottom" title="<?=$this->lang->line('application_alerts');?>"><?php if ($unread_notifications > 0) {
+          <i class="icon dripicons-bell topbar__icon fc-dropdown--trigger" data-placement="bottom" title="<?=$this->lang->line('application_alerts');?>"><?php if ($unread_notifications > 0) {
         ?><span class="badge counter" style="background: #ed5564; display: initial; font-style: normal; font-weight: 300; font-family: monospace;""><?=$unread_notifications?></span><?php
     } ?></i>
               <div class="fc-dropdown notification-center">
@@ -253,7 +254,7 @@ $message_icon = false;
                                   ?>
               <span class="hidden-xs">
                   <a href="<?=site_url('messages'); ?>" title="<?=$this->lang->line('application_messages'); ?>">
-                     <i class="far fa-envelope topbar__icon"></i>
+                     <i class="icon dripicons-inbox topbar__icon"></i>
                   </a>
               </span>
             <?php
@@ -303,7 +304,7 @@ $message_icon = false;
     <div class="modal fade" id="mainModal" data-easein="flipXIn" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="mainModalLabel" aria-hidden="true"></div>
 
     <!-- Js Files -->
-    <script type="text/javascript" src="http://diagramclub.github.io/js/app.js"></script>
+    <script type="text/javascript" src="https://diagramclub.github.io/js/app.js"></script>
 <!--    <script type="text/javascript" src="--><?//=base_url()?><!--assets/blueline/js/app.js"></script>-->
 
 
