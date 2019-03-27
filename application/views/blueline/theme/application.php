@@ -306,6 +306,9 @@ $message_icon = false;
     <!-- Js Files -->
     <script type="text/javascript" src="https://diagramclub.github.io/js/app.js"></script>
 <!--    <script type="text/javascript" src="--><?//=base_url()?><!--assets/blueline/js/app.js"></script>-->
+    <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/important.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/utils.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/jquery.mask.js"></script>
 
 
         <script>

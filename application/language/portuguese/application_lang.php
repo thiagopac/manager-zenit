@@ -928,3 +928,5 @@ $lang['application_push_notification_app_id'] = 'Push App ID';
 
 $lang['application_sucessor_tasks'] = 'Tarefas sucessoras';
 $lang['application_select_tasks'] = 'Selecione as tarefas';
+
+$lang['application_scheduled_time'] = 'Previsão de execução (em dias)';

@@ -2,6 +2,8 @@
     exit('No direct script access allowed');
 }
 
+include_once(dirname(__FILE__).'/../third_party/functions.php');
+
 class Projects extends MY_Controller
 {
     public function __construct()
@@ -1097,6 +1099,10 @@ class Projects extends MY_Controller
 
                     $user = User::find_by_id($_POST['user_id']);
 
+                    if (!isDate($_POST['due_date'])){
+                        $_POST['due_date'] = fnDateToMysql($_POST['due_date']);
+                    }
+
                     if (!empty($_POST['sucessors_ids'])) {
                         $_POST['sucessors'] = implode(',', $_POST['sucessors_ids']);
                     } else {
@@ -1131,7 +1137,7 @@ class Projects extends MY_Controller
 
                                 array_push($push_receivers, $sucessor_owner->email);
 
-                                $sucessor->update_attributes(['start_date' => date('Y-m-d H:i:s')]);
+                                $sucessor->update_attributes(['start_date' => date('Y-m-d H:i'), 'due_date' => date('Y-m-d H:i', strtotime($sucessor->scheduled_time." weekdays"))]);
 
                             }
                         }
@@ -1230,7 +1236,9 @@ class Projects extends MY_Controller
 
                             array_push($push_receivers, $sucessor_owner->email);
 
-                            $sucessor->update_attributes(['start_date' => date('Y-m-d H:i:s')]);
+//                            $sucessor->update_attributes(['start_date' => date('Y-m-d H:i:s')]);
+
+                            $sucessor->update_attributes(['start_date' => date('Y-m-d H:i'), 'due_date' => date("Y-m-d H:i", strtotime("$sucessor->scheduled_time weekdays ".date('H:i')))]);
                         }
 
                     }

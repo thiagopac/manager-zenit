@@ -7,26 +7,42 @@ $public = "0";
 <?php if(isset($task)){ $public = $task->public; ?>
   <input id="id" type="hidden" name="id" value="<?php echo $task->id; ?>" />
 <?php } ?>
- <div class="form-group">
-        <label for="name"><?=$this->lang->line('application_task_name');?> *</label>
-        <input id="name" type="text" name="name" class="form-control resetvalue" value="<?php if(isset($task)){echo $task->name;} ?>"  required/>
-</div>
+
 
 <div class="form-group">
-    <label for="milestone_id"><?=$this->lang->line('application_milestone');?></label>
-    <?php   $milestones = array();
-//    $milestones['0'] = '-';
-    foreach ($project->project_has_milestones as $milestone):
-        $milestones[$milestone->id] = $milestone->name;
-    endforeach;
-    if(isset($task)){$milestone_selected = $task->milestone_id;}else{$milestone_selected = "";}
-
-    $milestone_id = $milestone_id != null ? $milestone_id : $task->milestone_id;
-
-    if(isset($milestone_id)){$milestone_selected = $milestone_id;}else{$milestone_selected = "";}
-    $disabled = $this->user->admin == 0 ? 'disabled' : '';
-    echo form_dropdown('milestone_id', $milestones, $milestone_selected, "style='width:100%' class='chosen-select' $disabled ");?>
+    <label for="name"><?=$this->lang->line('application_task_name');?> *</label>
+    <input id="name" type="text" name="name" class="form-control resetvalue" value="<?php if(isset($task)){echo $task->name;} ?>" <?=$this->user->admin == 0 ? "disabled" : "";?> required/>
 </div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="milestone_id"><?=$this->lang->line('application_milestone');?></label>
+            <?php   $milestones = array();
+            //    $milestones['0'] = '-';
+            foreach ($project->project_has_milestones as $milestone):
+                $milestones[$milestone->id] = $milestone->name;
+            endforeach;
+            if(isset($task)){$milestone_selected = $task->milestone_id;}else{$milestone_selected = "";}
+
+            $milestone_id = $milestone_id != null ? $milestone_id : $task->milestone_id;
+
+            if(isset($milestone_id)){$milestone_selected = $milestone_id;}else{$milestone_selected = "";}
+            $disabled = $this->user->admin == 0 ? 'disabled' : '';
+            echo form_dropdown('milestone_id', $milestones, $milestone_selected, "style='width:100%' class='chosen-select' $disabled ");?>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="scheduled_time"><?=$this->lang->line('application_scheduled_time');?> </label>
+            <input id="scheduled_time" type="number" min="0" max="99" size="2" name="scheduled_time" class="form-control resetvalue" <?=$this->user->admin == 0 ? "disabled" : "";?> value="<?php if(isset($task)){echo $task->scheduled_time;} ?>" />
+        </div>
+    </div>
+</div>
+
+
 
 <div class="form-group">
     <label for="user"><?=$this->lang->line('application_assign_to_agent');?></label>
@@ -45,7 +61,7 @@ $public = "0";
 </div>
 
 <div class="form-group">
-    <label for="users"><?=$this->lang->line('application_sucessor_tasks');?></label>
+    <label for="sucessors_ids"><?=$this->lang->line('application_sucessor_tasks');?></label>
     <?php
     $options = array();
     $sucessor = array();
@@ -115,7 +131,7 @@ $public = "0";
 
         <div class="modal-footer">
           <?php if(isset($task)){ ?>
-            <a href="<?=base_url()?>projects/tasks/<?=$task->project_id;?>/delete/<?=$task->id;?>" class="btn btn-danger pull-left button-loader  <?=$this->user->admin == 0 ? "hidden" : "";?>" ><?=$this->lang->line('application_delete');?></a>
+            <a href="<?=base_url()?>projects/tasks/<?=$task->project_id;?>/delete/<?=$task->id;?>" class="btn btn-danger pull-left button-loader <?=$this->user->admin == 0 ? "hidden" : "";?>" ><?=$this->lang->line('application_delete');?></a>
           <?php }else{  ?>
          <a class="btn btn-default pull-left" data-dismiss="modal"><?=$this->lang->line('application_close');?></a>
         <i class="icon dripicons-loading spin-it" id="showloader" style="display:none"></i>
@@ -124,3 +140,44 @@ $public = "0";
         <button name="send" class="btn btn-primary send button-loader"><?=$this->lang->line('application_save');?></button>
         </div>
 <?php echo form_close(); ?>
+
+<script>
+jQuery(document).ready(function($) {
+
+    $('#start_date').on("change",function() {
+        var date = new Date(this.value);
+
+        var intScheduleTime = parseInt($('#scheduled_time').val());
+
+        var finalDate = date.addbizDays(intScheduleTime);
+
+        var options = {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+
+        $('.datepicker-time-linked').val(finalDate.toLocaleString("pt-BR", options));
+    });
+
+
+    Date.prototype.addDays = function(days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+
+
+    Date.prototype.addbizDays=function(n){
+        var D=this;
+        var num=Math.abs(n);
+        var tem,count=0;
+        var dir= (n<0)? -1: 1;
+        while(count< num){
+            D= new Date(D.setDate(D.getDate()+dir));
+            tem=D.getDay();
+            if(tem!=0 && tem!=6) ++count;
+        }
+        return D;
+    }
+
+
+});
+
+</script>
