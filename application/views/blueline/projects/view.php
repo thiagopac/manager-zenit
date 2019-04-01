@@ -473,7 +473,7 @@
 
                 $barSize = $completed >= 100 ? 100 : $completed;
 
-                $barSize = $barSize * 100;
+//                $barSize = $barSize * 100;
 
                 if (is_infinite($completed) == false) { if ($completed >= 100) { echo "danger-task"; }else if($completed >= 60){ echo "warning-task"; }}else{ echo "";}
 
