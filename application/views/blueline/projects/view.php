@@ -471,6 +471,10 @@
 //
                 $completed = (($current - $start) / ($end - $start)) * 100;
 
+                $barSize = $completed >= 100 ? 100 : $completed;
+
+                $barSize = $barSize * 100;
+
                 if (is_infinite($completed) == false) { if ($completed >= 100) { echo "danger-task"; }else if($completed >= 60){ echo "warning-task"; }}else{ echo "";}
 
                 ?>">
@@ -479,6 +483,12 @@
                     <span class="lbl">
                         <p class="truncate name"><?=$task->name;?></p>
                     </span>
+                    <?php if ($barSize < 100 && $end != null) { ?>
+                    <span style="width: 100px; background: lightgrey; height: 4px; position: absolute; margin-top: 17px;">
+                        <span style="width: <?=$barSize?>px; background: #f37474; height: 4px; position: absolute;">
+                        </span>
+                    </span>
+                    <?php } ?>
                     <span class="pull-right">
                         <span class="task-cell-start-date-end-date"><?php if ($task->start_date != null){ ?><?=date("d/m/Y H:i", strtotime($task->start_date));?><?php } ?> <?php if ($task->start_date != null || $task->due_date != null){  ?>➔<?php } ?> <?php if ($task->due_date != null){ ?><?=date("d/m/Y H:i", strtotime($task->due_date));?><?php }else{ ?> <span style="visibility: hidden;"> <?=date("d/m/Y H:i", time());?> </span> <?php } ?></span>
                     <?php if ($task->user_id != 0) {
@@ -857,6 +867,9 @@
       $(this).parents('li').slideUp();
     });
 
+    // var notCollapsed = localStorage.getItem('not-colapsed');
+    // $('#'+notCollapsed).removeClass('collapse');
+
 
     $("body").on('DOMSubtreeModified', "#milestones-tab", function() {
         var departmentlink = window.localStorage.getItem('departmentlink');
@@ -965,6 +978,13 @@ dropzoneloader("<?php echo base_url()."projects/dropzone/".$project->id; ?>", "<
       $("body").on('click', '.collapse-expand', function() {
           $('#collapsible_'+this.id).toggleClass('collapse');
           $(this).toggleClass('dripicons-chevron-up dripicons-chevron-down');
+
+          // if ($('#collapsible_'+this.id).hasClass('collapse')){
+          //     window.localStorage.removeItem("not-collapsed", this.id);
+          // }else{
+          //     window.localStorage.setItem("not-collapsed", "collapsible_"+this.id);
+          // }
+
       });
 
       $(".task-row").dblclick(function() {

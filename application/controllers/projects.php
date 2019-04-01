@@ -1099,8 +1099,10 @@ class Projects extends MY_Controller
 
                     $user = User::find_by_id($_POST['user_id']);
 
-                    if (!isDate($_POST['due_date'])){
-                        $_POST['due_date'] = fnDateToMysql($_POST['due_date']);
+                    if ($_POST['due_date'] != '' & $_POST['due_date'] != null){
+                        if (!isDate($_POST['due_date'])){
+                            $_POST['due_date'] = fnDateToMysql($_POST['due_date']);
+                        }
                     }
 
                     if (!empty($_POST['sucessors_ids'])) {

@@ -125,7 +125,7 @@ ul.todo li.done .lbl p {
 ul.todo li .lbl p {
     font-family: Open Sans, Arial !important;
     font-size: 13px!important;
-    width: 60% !important;
+    width: 50% !important;
 }
 
 .todo a {
