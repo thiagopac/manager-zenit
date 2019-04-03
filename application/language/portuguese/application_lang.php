@@ -559,6 +559,7 @@ $lang['application_Seconds'] = 'segundos';
 $lang['application_pay_invoice'] = 'Pagamento de Faturas';
 
 $lang['application_money_format'] = 'Formato monetário';
+$lang['application_money_symbol'] = 'Símbolo monetário';
 $lang['application_currency_position'] = 'Posição da moeda';
 $lang['application_Overdue'] = 'Atrasado';
 $lang['application_second_tax'] = 'Segundo imposto';
@@ -793,6 +794,7 @@ $lang['application_position'] = 'Função do responsável';
 $lang['application_details'] = 'Detalhes';
 $lang['application_more'] = 'Mais';
 $lang['application_tags'] = 'Tags';
+$lang['application_edit_tags'] = 'Editar Tags';
 $lang['application_language'] = 'Idioma';
 $lang['application_lead'] = 'Funil de vendas';
 $lang['application_leads'] = 'Funil de vendas';
@@ -920,6 +922,7 @@ $lang['application_lost_leads'] = 'Leads perdidos';
 $lang['application_private'] = 'Privado';
 $lang['application_last_landing'] = 'Última movimentação';
 $lang['application_send_push_notification'] = 'Enviar notificação push';
+$lang['application_proposal_value'] = 'Valor da proposta';
 
 $lang['application_push_notification_settings'] = 'Configuração de Notificações Push (One Signal)';
 $lang['application_push_notification_active'] = 'Notificação Push ativa';
@@ -930,3 +933,8 @@ $lang['application_sucessor_tasks'] = 'Tarefas sucessoras';
 $lang['application_select_tasks'] = 'Selecione as tarefas';
 
 $lang['application_scheduled_time'] = 'Previsão de execução (em dias)';
+
+$lang['application_add_tag'] = 'Adicionar Tag';
+$lang['application_create_tag'] = 'Criar nova Tag';
+$lang['application_edit_tag'] = 'Editar Tag';
+$lang['application_select_tags'] = 'Selecione Tags';

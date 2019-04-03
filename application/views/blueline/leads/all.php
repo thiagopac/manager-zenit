@@ -1,6 +1,10 @@
 <div class="col-sm-13  col-md-12 main">
 	<div class="row">
-		
+
+        <?php list($this->user->email, $domain) = explode('@', $this->user->email);
+        $condition = $domain == 'ownergy.com.br' ? 1 : 0;
+        ?>
+
 		<div id="kanban-page">
 			<a v-if="stages.length > 1" href="<?=base_url()?>leads/create" class="btn btn-primary" data-toggle="mainmodal" v-cloak>
 			<?=$this->lang->line('application_create_lead');?>
@@ -13,10 +17,20 @@
 			</a>-->
 			<input class="kanban-search pull-right" :class="(search != '') ? 'active' : ''" type="text" name="search" v-model="search" placeholder="<?=$this->lang->line('application_search');?>"
 			/>
+
 			<div class="select-wrapper pull-right" v-cloak>
+
+                <?php if($condition == 1) { ?>
+
+                <a href="<?=base_url()?>leads/tags" class="btn btn-success">
+                    <?=$this->lang->line('application_edit_tags');?>
+                </a>
+
                 <a href="<?=base_url()?>leads/lost" class="btn btn-danger">
                     <?=$this->lang->line('application_show_lost_leads');?>
                 </a>
+
+                <?php } ?>
 				<select class="kanban-tags" type="text" name="tagsearch" v-model="tagSearch" placeholder="<?=$this->lang->line('application_tags');?>">
 					<option value="" selected>
 						<?=$this->lang->line('application_all_tags');?>
@@ -24,12 +38,11 @@
 					<option v-for="tag in getAllTags" :value="tag" v-cloak>{{ tag }}</option>
 				</select>
 			</div>
+
 			<kanban-board :stages="stages" :blocks="getLeads" @update-block="updateBlock" @delete-block="deleteBlock">
 				<div v-for="(stage, index) in stages" :slot="stage.name" v-cloak>
 
-                    <?php list($this->user->email, $domain) = explode('@', $this->user->email);
-                           $condition = $domain == 'ownergy.com.br' ? 1 : 0;
-                    ?>
+
 
                     <?php if($condition == 1) { ?>
 
@@ -141,7 +154,7 @@
 						<div class="tab-content">
 							<div class="tab-pane tab1" v-if="openDetails == block.id" :class="(openDetails == block.id) ? 'in active animated slideInLeft' : '' ">
 								<ul class="details">
-									<li v-if="block.position  != ''">
+									<li v-if="block.position != ''">
 										<span>
 											<?=$this->lang->line('application_position');?>
 										</span>
@@ -153,19 +166,19 @@
 										</span>
 										{{ block.address}} {{ block.city }} {{ block.zipcode}} {{ block.country }}
 									</li>
-									<li v-if="block.email  != ''">
+									<li v-if="block.email != ''">
 										<span>
 											<?=$this->lang->line('application_email');?>
 										</span>
 										{{ block.email }}
 									</li>
-									<li v-if="block.phone  != ''">
+									<li v-if="block.phone != ''">
 										<span>
 											<?=$this->lang->line('application_phone');?>
 										</span>
 										{{ block.phone }}
 									</li>
-									<li v-if="block.mobile  != ''">
+									<li v-if="block.mobile != ''">
 										<span>
 											<?=$this->lang->line('application_mobile');?>
 										</span>
@@ -189,19 +202,25 @@
 										</span>
 										<span v-for="tag in blockTags(block.tags)" class="label label-success">{{ tag }}</span>
 									</li>
-									<li v-if="block.description  != ''">
+									<li v-if="block.description != ''">
 										<span>
 											<?=$this->lang->line('application_description');?>
 										</span>
 										<p v-html="block.description"></p>
 									</li>
-                                    <li v-if="block.owner  != ''">
+                                    <li v-if="block.proposal_value != null">
+										<span>
+											<?=$this->lang->line('application_proposal_value');?>
+										</span>
+                                        <?=$core_settings->money_symbol." "; ?>{{ block.proposal_value }}
+                                    </li>
+                                    <li v-if="block.owner != ''">
 										<span>
 											<?=$this->lang->line('application_lead_owner');?>
 										</span>
                                         {{ block.owner }}
                                     </li>
-									<li v-if="block.user_id  != 0">
+									<li v-if="block.user_id != 0">
 										<span>
 											<?=$this->lang->line('application_registration_responsible');?>
 										</span>
@@ -303,7 +322,7 @@
 								</a>
 
 								<div class="center" v-show="reminders == '' && !remindersLoading">
-									<p class="shadow-icon">
+									<p class="shadow-'icon">
 										<i class="ionicons ion-ios-bell-outline"></i>
 									</p>
 									<span class="shadow-text">

@@ -127,16 +127,29 @@ if (isset($lead)) {
             echo $lead->country;
         }?>" />
 	</div>
-	<div class="form-group">
-		<label for="tags">
-			<?=$this->lang->line('application_tags');?>
-				<small>(
-					<?=$this->lang->line('application_separated_by_comma');?>)</small>
-		</label>
-		<input id="tags" type="text" name="tags" class="form-control" value="<?php if (isset($lead)) {
-            echo $lead->tags;
-        }?>" />
-	</div>
+    <div class="form-group">
+        <label for="tags">
+            <?=$this->lang->line('application_tags');?>
+        </label>
+        <?php
+        $options = array();
+        $selected_tags = array();
+
+        foreach ($tags as $value):
+            $options[$value] = $value;
+        endforeach;
+
+        if(isset($lead)){}else{$tag = "";}
+
+        $lead_tags = explode(',', $lead->tags);
+
+        foreach ($lead_tags as $tag):
+            $selected_tags[$tag] = $tag;
+        endforeach;
+
+        echo form_dropdown('tags_arr[]', $options, $selected_tags, 'style="width:100%" class="chosen-select" data-placeholder="'.$this->lang->line('application_select_tags').'" multiple tabindex="3"');
+        ?>
+    </div>
 	<div class="form-group">
 		<label for="description">
 			<?=$this->lang->line('application_description');?>
@@ -147,6 +160,18 @@ if (isset($lead)) {
         } ?>
 		</textarea>
 	</div>
+    <div class="form-group">
+        <label for="company">
+            <?=$this->lang->line('application_proposal_value');?>
+        </label>
+    <?php if(!empty($core_settings->money_symbol)){ ?>
+    <div class="input-group">
+        <div class="input-group-addon"><?=$core_settings->money_symbol;?></div> <?php } ?>
+        <input id="proposal_value" type="text" name="proposal_value" class="form-control" value="<?php if (isset($lead)) {
+            echo $lead->proposal_value;
+        } ?>" />
+        </div>
+    </div>
     <div class="form-group">
         <label for="company">
             <?=$this->lang->line('application_lead_owner');?>
@@ -180,11 +205,10 @@ if (isset($lead)) {
         list($this->user->email, $domain) = explode('@', $this->user->email);
         if ($domain == 'ownergy.com.br') { ?>
 
-            <li>
-                <input type="checkbox" class="checkbox" id="private" name="private" value="1" data-labelauty="<?=$this->lang->line('application_private_lead');?>"
-                    <?php if (isset($lead) && $lead->private != 0) { echo 'checked'; } ?>
-                >
-            </li>
+            <!--<li>
+                <input type="checkbox" class="checkbox" id="private" name="private" value="1" data-labelauty="<?/*=$this->lang->line('application_private_lead');*/?>"
+                    <?php /*if (isset($lead) && $lead->private != 0) { echo 'checked'; } */?>>
+            </li>-->
 
 
         <?php } ?>
@@ -207,3 +231,16 @@ if (isset($lead)) {
 
 
     <?php echo form_close(); ?>
+
+<script>
+    $(document).ready(function(){
+
+        $("#proposal_value").mask("000.000.000.000.000,00", {reverse: true});
+        $("#mobile").mask("(##)#####-####", {reverse: false});
+        $("#phone").mask("(##)####-####", {reverse: false});
+        $("#zipcode").mask("#####-####", {reverse: false});
+
+    });
+
+
+</script>

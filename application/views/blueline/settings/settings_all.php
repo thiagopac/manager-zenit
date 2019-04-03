@@ -358,7 +358,15 @@ echo form_open_multipart($form_action, $attributes);
 
 					</div>
 				</div>
-				<div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>
+                            <?=$this->lang->line('application_money_symbol');?>
+                        </label>
+                        <input type="text" name="money_symbol" value="<?=$settings->money_symbol;?>" class="form-control">
+                    </div>
+                </div>
+				<div class="col-md-6">
 					<div class="form-group">
 						<label>
 							<?=$this->lang->line('application_timezone');?>

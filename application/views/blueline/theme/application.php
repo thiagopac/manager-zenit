@@ -311,6 +311,7 @@ $message_icon = false;
     <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/jquery.mask.js"></script>
 
 
+
         <script>
             flatdatepicker(false, langshort);
         </script>

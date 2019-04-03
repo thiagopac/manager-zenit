@@ -193,3 +193,8 @@ $lang['messages_delete_department_success'] = "Departamento excluído";
 $lang['messages_save_department_success'] = 'Departamento salvo com sucesso';
 $lang['messages_save_department_error'] = 'Erro ao salvar Departamento';
 $lang['messages_create_department_exists'] = 'Já existe um departamento com este nome';
+
+$lang['messages_create_tag_success'] = "Tag criada";
+$lang['messages_create_tag_error'] = "Erro ao salvar tag";
+$lang['messages_edit_tag_success'] = "Tag salva";
+$lang['messages_edit_tag_error'] = "Erro ao salvar tag";

@@ -2,6 +2,8 @@
     exit('No direct script access allowed');
 }
 
+include_once(dirname(__FILE__).'/../third_party/functions.php');
+
 class Leads extends MY_Controller{
 
     public function __construct(){
@@ -42,7 +44,11 @@ class Leads extends MY_Controller{
 
         $condition = $domain == 'ownergy.com.br' ? 1 : 0;
 
-        $leads = Lead::find('all', array('conditions' => array("status_id != ? AND private in (?) ORDER BY `order`", 0, array(0,$condition)), 'include' => array('user')));
+        if ($condition == 0){
+            $leads = Lead::find('all', array('conditions' => array("status_id != ? AND user_id =? ORDER BY `order`", 0, $this->user->id), 'include' => array('user')));
+        }else{
+            $leads = Lead::find('all', array('conditions' => array("status_id != ? ORDER BY `order`", 0), 'include' => array('user')));
+        }
 
         foreach ($leads as $lead){
 
@@ -269,12 +275,20 @@ class Leads extends MY_Controller{
             unset($_POST['files']);
             $_POST['private'] = (isset($_POST['private'])) ? 1 : 0;
             $description = $_POST['description'];
-            $_POST = array_map('htmlspecialchars', $_POST);
             $_POST['description'] = $description;
             $_POST['created'] = date("Y-m-d H:i");
             $_POST['last_landing'] = date("Y-m-d H:i");
             $_POST['modified'] = date("Y-m-d H:i");
             $_POST['order'] = -50+rand(1, 5);
+
+            if (!empty($_POST['tags_arr'])) {
+                $_POST['tags'] = implode(',', $_POST['tags_arr']);
+            } else {
+                $_POST['tags'] = implode(',', $_POST['tags_arr']);
+            }
+
+            unset($_POST['tags_arr']);
+
             $item = Lead::create($_POST);
 
             $historyAttributes = array('lead_id' => $item->id, 'message' => $this->user->firstname.' criou o lead '.$item->name);
@@ -294,6 +308,14 @@ class Leads extends MY_Controller{
 
             $this->view_data['sources'] = Lead::find_by_sql("select source from leads group by source");
             $this->view_data['form_action'] = 'leads/create';
+
+            $tags = array();
+            $all_tags = Tag::all();
+            foreach ($all_tags as $tag){
+                array_push($tags, $tag->name);
+            }
+            $this->view_data['tags'] = $tags;
+
             $this->content_view = 'leads/_lead';
         }
     }
@@ -305,12 +327,19 @@ class Leads extends MY_Controller{
             unset($_POST['files']);
             $_POST['private'] = (isset($_POST['private'])) ? 1 : 0;
             $description = $_POST['description'];
-            $_POST = array_map('htmlspecialchars', $_POST);
             $_POST['description'] = $description;
             $_POST['modified'] = date("Y-m-d H:i");
             $_POST['last_landing'] = date("Y-m-d H:i");
             $lead = Lead::find_by_id($_POST['id']);
             $destinationLeadStatus = LeadStatus::find($_POST['status_id']);
+
+            if (!empty($_POST['tags_arr'])) {
+                $_POST['tags'] = implode(',', $_POST['tags_arr']);
+            } else {
+                $_POST['tags'] = implode(',', $_POST['tags_arr']);
+            }
+
+            unset($_POST['tags_arr']);
 
             $changedDataHistory = "";
 
@@ -377,14 +406,22 @@ class Leads extends MY_Controller{
             }
             redirect('leads');
         } else {
+            $editing_lead = Lead::find_by_id($id);
             $this->theme_view = 'modal';
             $this->view_data['title'] = $this->lang->line('application_edit_lead');
             $this->view_data['status'] = LeadStatus::all();
             $this->view_data['users'] = User::find('all', ['conditions' => ['status=?', 'active']]);
-            $this->view_data['lead'] = Lead::find_by_id($id);
+            $this->view_data['lead'] = $editing_lead;
             $this->view_data['sources'] = Lead::find_by_sql("select source from leads group by source");
             $this->view_data['form_action'] = 'leads/edit';
             $this->content_view = 'leads/_lead';
+
+            $tags = array();
+            $all_tags = Tag::all();
+            foreach ($all_tags as $tag){
+                array_push($tags, $tag->name);
+            }
+            $this->view_data['tags'] = $tags;
         }
     }
     public function delete($id = false)
@@ -683,4 +720,78 @@ class Leads extends MY_Controller{
         $this->view_data['leads'] = $lost_leads;
         $this->content_view = 'leads/lost';
     }
+
+
+    public function tags(){
+
+        $all_tags = Tag::all();
+        $this->view_data['tags'] = $all_tags;
+        $this->content_view = 'leads/tags';
+    }
+
+
+    public function edittag($action = false, $id = false)
+    {
+        switch ($action) {
+            case 'create':
+                if ($_POST) {
+                    $name = $_POST['name'];
+
+                    $atributes = array('name' => $name);
+
+                    $created_tag = Tag::create($atributes);
+
+                    if (!$created_tag) {
+                        $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_create_tag_error'));
+                    } else {
+                        $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_create_tag_success'));
+                    }
+                    redirect('leads/tags');
+                } else {
+                    $this->theme_view = 'modal';
+                    $this->view_data['title'] = $this->lang->line('application_create_tag');
+                    $this->view_data['form_action'] = 'leads/edittag/create';
+                    $this->content_view = 'leads/_tag';
+                }
+                break;
+
+            case 'edit':
+                if ($_POST) {
+
+                    $editing_tag = Tag::find_by_id($_POST['id']);
+
+                    $editing_tag->id = $_POST['id'];
+                    $editing_tag->name = $_POST['name'];
+
+                    $editing_tag->save();
+
+                    if (!$editing_tag) {
+                        $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_edit_tag_error'));
+                    } else {
+                        $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_edit_tag_success'));
+                    }
+                    redirect('leads/tags');
+                } else {
+                    $this->theme_view = 'modal';
+                    $editing_tag = Tag::find_by_id($id);
+                    $this->view_data['tag'] = $editing_tag;
+                    $this->view_data['title'] = $this->lang->line('application_edit_tag');
+                    $this->view_data['form_action'] = 'leads/edittag/edit';
+                    $this->content_view = 'leads/_tag';
+                }
+                break;
+
+            case 'delete':
+                $deleting_tag = Tag::find_by_id($id);
+
+                $deleting_tag->delete();
+                json_response("success", "Tag removida com sucesso", '');
+                break;
+
+            default:
+
+                break;
+        }
+    }
+
 }
