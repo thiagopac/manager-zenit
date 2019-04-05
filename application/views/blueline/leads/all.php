@@ -113,6 +113,9 @@
 						{{ block.company }}
 					</div>
 
+                    <div class="block-proposal-value">
+                        <span v-if="block.proposal_value != `` && block.proposal_value != null" class="label label-info"><?=$core_settings->money_symbol?> {{ block.proposal_value }}</span> <span v-if="(block.city != `` && block.state != ``) && (block.city != null && block.state != null)" class="label label-info">{{ block.city }}/{{ block.state }}</span>
+                    </div>
 					<div v-if="inDueReminders(block.id)" @click="openThisBlock(block.id); loadReminders(block.id);" class="pull-right switcher-button-container">
 						<i class="bell-icon icon dripicons-bell bell"></i>
 					</div>

@@ -11,5 +11,6 @@ class Lead extends ActiveRecord\Model
     public static $has_many = array(
         array("lead_has_comments", 'foreign_key' => 'lead_id'),
         array("lead_history", 'foreign_key' => 'lead_id'),
+        array("lead_has_warning_users", 'foreign_key' => 'lead_id'),
     );
 }

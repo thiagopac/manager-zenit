@@ -938,3 +938,5 @@ $lang['application_add_tag'] = 'Adicionar Tag';
 $lang['application_create_tag'] = 'Criar nova Tag';
 $lang['application_edit_tag'] = 'Editar Tag';
 $lang['application_select_tags'] = 'Selecione Tags';
+
+$lang['application_lead_warning_receiver'] = 'Quero receber alertas de movimentação deste lead';

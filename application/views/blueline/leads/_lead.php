@@ -210,6 +210,11 @@ if (isset($lead)) {
                     <?php /*if (isset($lead) && $lead->private != 0) { echo 'checked'; } */?>>
             </li>-->
 
+            <li>
+                <input type="checkbox" class="checkbox" id="lead_warning_user" name="lead_warning_user" value="1" data-labelauty="<?=$this->lang->line('application_lead_warning_receiver');?>"
+                    <?php if (isset($lead_warning_user)) { echo 'checked'; } ?>>
+            </li>
+
 
         <?php } ?>
 

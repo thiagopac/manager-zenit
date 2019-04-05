@@ -240,6 +240,17 @@ class Leads extends MY_Controller{
                 Notification::create($notificationAttributes);
             }
 
+            $warningUsers = LeadHasWarningUser::find('all', array('conditions' => array('lead_id = ?',$_POST['id'])));
+
+            //push será enviado para todos colaboradores que marcaram aquele lead com interesse em notificação de movimentação
+            foreach ($warningUsers as $warningUser){
+                $user = User::find($warningUser->user_id);
+                array_push($push_receivers, $user->email);
+
+                $notificationAttributes = array('user_id' => $user->id, 'message' => '<b>'.$this->user->firstname.'</b> moveu <b>'.$currentLead->name.'</b> para <b>'.$destinationLeadStatus->name.'</b>', 'url' => base_url().'leads/');
+                Notification::create($notificationAttributes);
+            }
+
             Notification::sendPushNotification($push_receivers, $this->user->firstname.' moveu '.$currentLead->name.' para '.$destinationLeadStatus->name, base_url().'leads/');
 
             $historyAttributes = array('lead_id' => $_POST['id'], 'message' => $this->user->firstname.' moveu '.$currentLead->name.' para '.$destinationLeadStatus->name);
@@ -325,7 +336,12 @@ class Leads extends MY_Controller{
         if ($_POST) {
             unset($_POST['send']);
             unset($_POST['files']);
+
             $_POST['private'] = (isset($_POST['private'])) ? 1 : 0;
+
+            $post_lead_has_warning_user = (isset($_POST['lead_warning_user'])) ? 1 : 0;
+            unset($_POST['lead_warning_user']);
+
             $description = $_POST['description'];
             $_POST['description'] = $description;
             $_POST['modified'] = date("Y-m-d H:i");
@@ -383,20 +399,52 @@ class Leads extends MY_Controller{
                 LeadHistory::create($historyAttributes);
             }
 
-
             $statusReceivers = LeadStatusHasReceiver::find('all', ['conditions' => ['lead_status_id=?', $_POST['status_id']]]);
 
-            $push_receivers = array();
+            if ($lead->status_id != $_POST['status_id']) {
 
-            foreach ($statusReceivers as $statusReceiver){
-                $user = User::find($statusReceiver->user_id);
-                array_push($push_receivers, $user->email);
+                $push_receivers = array();
 
-                $notificationAttributes = array('user_id' => $user->id, 'message' => '<b>'.$this->user->firstname.'</b> moveu <b>'.$lead->name.'</b> para <b>'.$destinationLeadStatus->name.'</b>', 'url' => base_url().'leads/');
-                Notification::create($notificationAttributes);
+                //push será enviado para todos colaboradores que estão selecionados na configuração de status
+                foreach ($statusReceivers as $statusReceiver) {
+                    $user = User::find($statusReceiver->user_id);
+                    array_push($push_receivers, $user->email);
+
+                    $notificationAttributes = array('user_id' => $user->id, 'message' => '<b>' . $this->user->firstname . '</b> moveu <b>' . $lead->name . '</b> para <b>' . $destinationLeadStatus->name . '</b>', 'url' => base_url() . 'leads/');
+                    Notification::create($notificationAttributes);
+                }
+
+                $warningUsers = LeadHasWarningUser::find('all', array('conditions' => array('lead_id = ?', $_POST['id'])));
+
+                //push será enviado para todos colaboradores que marcaram aquele lead com interesse em notificação de movimentação
+                foreach ($warningUsers as $warningUser) {
+                    $user = User::find($warningUser->user_id);
+                    array_push($push_receivers, $user->email);
+
+                    $notificationAttributes = array('user_id' => $user->id, 'message' => '<b>' . $this->user->firstname . '</b> moveu <b>' . $lead->name . '</b> para <b>' . $destinationLeadStatus->name . '</b>', 'url' => base_url() . 'leads/');
+                    Notification::create($notificationAttributes);
+                }
+
+                Notification::sendPushNotification($push_receivers, $this->user->firstname . ' moveu ' . $lead->name . ' para ' . $destinationLeadStatus->name, base_url() . 'leads/');
             }
 
-            Notification::sendPushNotification($push_receivers, $this->user->firstname.' moveu '.$lead->name.' para '.$destinationLeadStatus->name, base_url().'leads/');
+            $lead_has_warning_user = LeadHasWarningUser::find('first', array('conditions' => array('lead_id = ? AND user_id = ?',$_POST['id'], $this->user->id)));
+
+            if ($post_lead_has_warning_user == 0){
+                if ($lead_has_warning_user != null){
+                    $atributes = array('user_id' => $this->user->id, 'lead_id' => $_POST['id']);
+                    $deleted = LeadHasWarningUser::find($atributes);
+                    $deleted->delete();
+                }
+            }else{
+                if ($lead_has_warning_user != null){
+                    $atributes = array('user_id' => $this->user->id, 'lead_id' => $_POST['id']);
+                    LeadHasWarningUser::save($atributes);
+                }else{
+                    $atributes = array('user_id' => $this->user->id, 'lead_id' => $_POST['id']);
+                    LeadHasWarningUser::create($atributes);
+                }
+            }
 
             $lead->update_attributes($_POST);
             if (!$lead) {
@@ -413,6 +461,7 @@ class Leads extends MY_Controller{
             $this->view_data['users'] = User::find('all', ['conditions' => ['status=?', 'active']]);
             $this->view_data['lead'] = $editing_lead;
             $this->view_data['sources'] = Lead::find_by_sql("select source from leads group by source");
+            $this->view_data['lead_warning_user'] = LeadHasWarningUser::find('first', array('conditions' => array('lead_id = ? AND user_id = ?',$id, $this->user->id)));
             $this->view_data['form_action'] = 'leads/edit';
             $this->content_view = 'leads/_lead';
 
