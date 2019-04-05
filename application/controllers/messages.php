@@ -162,7 +162,9 @@ class messages extends MY_Controller
                 $this->load->helper('notification');
 
                  // ENVIO DE NOTIFICAÇÃO DE NOVAS MENSAGENS APENAS PARA QUEM NÃO TEM E-MAIL @OWNERGY / ESCONDIDO
-                list($user, $domain) = explode('@', $receiveremail);
+                $usermail = $receiveremail;
+
+                list($usermail, $domain) = explode('@', $usermail);
 
                 if ($domain != 'ownergy.com.br') {
                     send_notification($receiveremail, $message->subject, $this->lang->line('application_notification_new_message').'<br><hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>'.$_POST['message'].'<hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>', $attachment);

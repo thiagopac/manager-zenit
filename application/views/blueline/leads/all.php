@@ -1,7 +1,10 @@
 <div class="col-sm-13  col-md-12 main">
 	<div class="row">
 
-        <?php list($this->user->email, $domain) = explode('@', $this->user->email);
+        <?php
+        $user_email = $this->user->email;
+
+        list($user_email, $domain) = explode('@', $user_email);
         $condition = $domain == 'ownergy.com.br' ? 1 : 0;
         ?>
 

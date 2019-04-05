@@ -40,7 +40,9 @@ class Leads extends MY_Controller{
 
     public function all(){
 
-        list($this->user->email, $domain) = explode('@', $this->user->email);
+        $user_email = $this->user->email;
+
+        list($user_email, $domain) = explode('@', $user_email);
 
         $condition = $domain == 'ownergy.com.br' ? 1 : 0;
 

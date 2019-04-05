@@ -201,8 +201,10 @@ if (isset($lead)) {
 
         <?php
 
+        $user_email = $this->user->email;
+
         //se for um colaborador com e-mail @ownergy.com.br ele poderá ver essa opção para marcar ou desmarcar
-        list($this->user->email, $domain) = explode('@', $this->user->email);
+        list($user_email, $domain) = explode('@', $user_email);
         if ($domain == 'ownergy.com.br') { ?>
 
             <!--<li>
