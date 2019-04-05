@@ -76,7 +76,8 @@ class Agent extends MY_Controller
                             'firstname' => $_POST['firstname'],
                             'lastname' => $_POST['lastname'],
                             'email' => $_POST['email'],
-                            'signature' => $_POST['signature']
+                            'signature' => $_POST['signature'],
+                            'push_active' => $_POST['push_active']
                             ];
                 if (isset($_POST['title'])) {
                     $attr['title'] = $_POST['title'];
@@ -90,6 +91,10 @@ class Agent extends MY_Controller
                 if (!empty($_POST['password'])) {
                     $attr['password'] = $_POST['password'];
                 }
+                if (!empty($_POST['push_active'])) {
+                    $attr['push_active'] = $_POST['push_active'];
+                }
+
                 $user->update_attributes($attr);
                 $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_changes_saved'));
                 redirect('');

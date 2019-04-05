@@ -641,6 +641,7 @@ class Settings extends MY_Controller
     {
         if ($this->user->id != $user) {
             $user = User::find_by_id($user);
+            $user->push_active = 0;
             $user->status = 'deleted';
             $user->save();
             $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_user_success'));
@@ -719,13 +720,11 @@ class Settings extends MY_Controller
             if (!empty($_POST['access'])) {
                 $_POST['access'] = implode(',', $_POST['access']);
             }
-            $_POST = array_map('htmlspecialchars', $_POST);
+
             if (empty($_POST['password'])) {
                 unset($_POST['password']);
             }
-            if ($_POST['admin'] == '0' && $_POST['username'] == 'Admin') {
-                $_POST['admin'] = '1';
-            }
+
             $user->update_attributes($_POST);
             $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_user_success'));
             redirect('settings/users');

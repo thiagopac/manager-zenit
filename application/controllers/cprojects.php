@@ -121,7 +121,10 @@ class cProjects extends MY_Controller {
 
                             $attributes = array('user_id' => $workers->user->id, 'message' => 'Novo comentário no arquivo: '.$this->view_data['media']->name.' ['.$this->view_data['project']->name.']', 'url' => base_url().'projects/view/'.$this->view_data['project']->id);
                             Notification::create($attributes);
-                            array_push($push_receivers, $workers->user->email);
+
+                            if ($workers->user->push_active == 1) {
+                                array_push($push_receivers, $workers->user->email);
+                            }
                         }
 
                         Notification::sendPushNotification($push_receivers, $this->view_data['project']->name.' - Novo comentário em arquivo', base_url().'projects/view/'.$this->view_data['project']->id);
@@ -182,7 +185,10 @@ class cProjects extends MY_Controller {
 
                             $attributes = array('user_id' => $workers->user->id, 'message' => $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>', 'url' => base_url().'projects/view/'.$this->view_data['project']->id);
                             Notification::create($attributes);
-                            array_push($push_receivers, $workers->user->email);
+
+                            if ($workers->user->push_active == 1){
+                                array_push($push_receivers, $workers->user->email);
+                            }
             			}
 
                         Notification::sendPushNotification($push_receivers, $this->view_data['project']->name.' - Novo arquivo no projeto', base_url().'projects/view/'.$this->view_data['project']->id);
@@ -562,7 +568,10 @@ class cProjects extends MY_Controller {
 
                             $attributes = array('user_id' => $workers->user->id, 'message' => "<b>".$_POST['subject']."</b><br>".$_POST['message'].' ['.$project->name.']', 'url' => base_url().'projects/projects/'.$project->id);
                             Notification::create($attributes);
-                            array_push($push_receivers, $workers->user->email);
+
+                            if ($workers->user->push_active == 1) {
+                                array_push($push_receivers, $workers->user->email);
+                            }
             			}
 
                         Notification::sendPushNotification($push_receivers, $project->name.' - Nova atividade no projeto', base_url().'projects/projects/'.$project->id);

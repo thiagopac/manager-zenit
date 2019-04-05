@@ -102,9 +102,11 @@ class messages extends MY_Controller
             if ($receiverart == 'u') {
                 $receiver = User::find($receiverid);
                 $receiveremail = $receiver->email;
+                $receiverPushActive = $receiver->push_active;
             } else {
                 $receiver = Client::find($receiverid);
                 $receiveremail = $receiver->email;
+                $receiverPushActive = $receiver->push_active;
             }
             $attachment = false;
             if (!$this->upload->do_upload()) {
@@ -139,9 +141,11 @@ class messages extends MY_Controller
                     if ($receiverart == 'u') {
                         $receiver = User::find($receiverid);
                         $receiveremail = $receiver->email;
+                        $receiverPushActive = $receiver->push_active;
                     } else {
                         $receiver = Client::find($receiverid);
                         $receiveremail = $receiver->email;
+                        $receiverPushActive = $receiver->push_active;
                     }
                 }
 
@@ -164,8 +168,10 @@ class messages extends MY_Controller
                     send_notification($receiveremail, $message->subject, $this->lang->line('application_notification_new_message').'<br><hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>'.$_POST['message'].'<hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>', $attachment);
                 }
 
-                array_push($push_receivers, $receiveremail);
-                Notification::sendPushNotification($push_receivers, $this->user->firstname.' te enviou uma mensagem', base_url().'messages');
+                if ($receiverPushActive == 1) {
+                    array_push($push_receivers, $receiveremail);
+                    Notification::sendPushNotification($push_receivers, $this->user->firstname . ' te enviou uma mensagem', base_url() . 'messages');
+                }
             }
 
 //            var_dump($_POST);

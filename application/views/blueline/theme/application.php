@@ -31,7 +31,6 @@ $message_icon = false;
 
     <link rel="SHORTCUT ICON" href="<?=base_url()?>assets/blueline/img/favicon.ico"/>
 
-      <link rel="manifest" href="/manifest.json" />
   <?php if ($core_settings->push_active == 1) { ?>
       <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
   <?php } ?>

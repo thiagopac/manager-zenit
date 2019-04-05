@@ -76,9 +76,12 @@ class Notifications extends MY_Controller
                 $module = $class::find_by_id($reminder->source_id);
                 $user = User::find_by_id($reminder->user_id);
 
-                array_push($push_receivers, $user->email);
+                if ($user->push_active == 1){
+                    array_push($push_receivers, $user->email);
 
-                Notification::sendPushNotification($push_receivers, '[Lembrete] - '.$reminder->title, base_url());
+                    Notification::sendPushNotification($push_receivers, '[Lembrete] - '.$reminder->title, base_url());
+                }
+
 
                 $attributes = array('user_id' => $user->id, 'message' => '<b>[Lembrete]</b> - '.$reminder->title, 'url' => base_url());
                 Notification::create($attributes);

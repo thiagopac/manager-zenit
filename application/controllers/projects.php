@@ -463,7 +463,9 @@ class Projects extends MY_Controller
                 $attributes = array('user_id' => $worker->user->id, 'message' => '<p>'.$this->lang->line('application_notification_project_assign').'</p>['.$project->name.']', 'url' => base_url().'projects/view/'.$project->id);
                 Notification::create($attributes);
 
-                array_push($push_receivers, $worker->user->email);
+                if ($worker->user->push_active == 1) {
+                    array_push($push_receivers, $worker->user->email);
+                }
             }
 
             Notification::sendPushNotification($push_receivers, $project->name.' - Novo projeto atribuído', base_url().'projects/view/'.$project->id);
@@ -1052,8 +1054,11 @@ class Projects extends MY_Controller
                     if ($task->user_id != null && $task->due_date != null){
                         $attributes = array('user_id' => $_POST['user_id'], 'message' => '<p><b>'.$this->user->firstname.'</b>'.' efetuou uma alteração em um ticket atribuído a você. </p>['.$project->name.']', 'status' => 'new', 'url' => base_url().'projects/view/'.$id);
                         Notification::create($attributes);
-                        array_push($push_receivers, $user->email);
-                        Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' efetuou uma alteração em um ticket atribuído a você', base_url().'projects/view/'.$id);
+
+                        if ($user->push_active == 1){
+                            array_push($push_receivers, $user->email);
+                            Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' efetuou uma alteração em um ticket atribuído a você', base_url().'projects/view/'.$id);
+                        }
                     }
 
 
@@ -1117,9 +1122,10 @@ class Projects extends MY_Controller
                         $attributes = array('user_id' => $_POST['user_id'], 'message' => '<p><b>'.$this->user->firstname.'</b>'.' atribuiu uma tarefa à você. </p>['.$project->name.']', 'url' => base_url().'projects/view/'.$id);
                         Notification::create($attributes);
 
-                        array_push($push_receivers, $user->email);
-
-                        Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' atribuiu uma tarefa à você', base_url().'projects/view/'.$id);
+                        if ($user->push_active == 1){
+                            array_push($push_receivers, $user->email);
+                            Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' atribuiu uma tarefa à você', base_url().'projects/view/'.$id);
+                        }
                     }
 
                     if (($_POST['status'] == 'done' && $task->status != $_POST['status']) && ($task->sucessors != null && $task->sucessors != '')){
@@ -1137,7 +1143,9 @@ class Projects extends MY_Controller
 
                                 $sucessor_owner = User::find_by_id($sucessor->user_id);
 
-                                array_push($push_receivers, $sucessor_owner->email);
+                                if ($sucessor_owner->push_active == 1){
+                                    array_push($push_receivers, $sucessor_owner->email);
+                                }
 
                                 $sucessor->update_attributes(['start_date' => date('Y-m-d H:i'), 'due_date' => date('Y-m-d H:i', strtotime($sucessor->scheduled_time." weekdays"))]);
 
@@ -1236,7 +1244,9 @@ class Projects extends MY_Controller
 
                             $sucessor_owner = User::find_by_id($sucessor->user_id);
 
-                            array_push($push_receivers, $sucessor_owner->email);
+                            if ($sucessor_owner->push_active == 1) {
+                                array_push($push_receivers, $sucessor_owner->email);
+                            }
 
 //                            $sucessor->update_attributes(['start_date' => date('Y-m-d H:i:s')]);
 
@@ -1349,7 +1359,9 @@ class Projects extends MY_Controller
                             $attributes = array('user_id' => $workers->user->id, 'message' => 'Novo comentário no arquivo: '.$this->view_data['media']->name.' ['.$this->view_data['project']->name.']', 'url' => base_url().'projects/view/'.$this->view_data['project']->id);
                             Notification::create($attributes);
 
-                            array_push($push_receivers, $workers->user->email);
+                            if ($workers->user->push_active == 1) {
+                                array_push($push_receivers, $workers->user->email);
+                            }
                         }
 
                         Notification::sendPushNotification($push_receivers, $this->view_data['project']->name.' - Novo comentário em arquivo', base_url().'projects/view/'.$this->view_data['project']->id);
@@ -1440,7 +1452,9 @@ class Projects extends MY_Controller
                             $attributes = array('user_id' => $workers->user->id, 'message' => $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>', 'url' => base_url().'projects/view/'.$this->view_data['project']->id);
                             Notification::create($attributes);
 
-                            array_push($push_receivers, $workers->user->email);
+                            if ($workers->user->push_active == 1) {
+                                array_push($push_receivers, $workers->user->email);
+                            }
                         }
 
                         Notification::sendPushNotification($push_receivers, $this->view_data['project']->name.' - Novo arquivo no projeto', base_url().'projects/view/'.$this->view_data['project']->id);
@@ -1676,7 +1690,9 @@ class Projects extends MY_Controller
                             $attributes = array('user_id' => $workers->user->id, 'message' => "<b>".$_POST['subject']."</b><br>".$_POST['message'].' ['.$project->name.']', 'url' => base_url().'projects/view/'.$project->id);
                             Notification::create($attributes);
 
-                            array_push($push_receivers, $workers->user->email);
+                            if ($workers->user->push_active == 1) {
+                                array_push($push_receivers, $workers->user->email);
+                            }
                         }
 
                         Notification::sendPushNotification($push_receivers, $project->name.' - Nova atividade no projeto', base_url().'projects/view/'.$project->id);

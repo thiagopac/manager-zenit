@@ -95,6 +95,7 @@ class cMessages extends MY_Controller {
 			if( $receiverart == "u"){
 				$receiver = User::find($receiverid);
 				$receiveremail = $receiver->email;
+                $receiverPushActive = $receiver->push_active;
 			}
 			$_POST = array_map('htmlspecialchars', $_POST);
 			$_POST['message'] = $message;
@@ -130,7 +131,7 @@ class cMessages extends MY_Controller {
 						$receiver = User::find($receiverid);
 						$receiveremail = $receiver->email;
                         $receiverId = $receiver->id;
-
+                        $receiverPushActive = $receiver->push_active;
 					}
 				}
         		$status->status = 'Replied';
@@ -147,9 +148,13 @@ class cMessages extends MY_Controller {
 
                     $attributes = array('user_id' => $receiverId, 'message' => $this->lang->line('application_notification_new_message').' de <b>'.$this->client->firstname.'</b>', 'url' => base_url().'messages');
                     Notification::create($attributes);
-                    array_push($push_receivers, $receiveremail);
 
-                    Notification::sendPushNotification($push_receivers, $this->client->firstname.' te enviou uma mensagem', base_url().'messages');
+                    if ($receiverPushActive == 1) {
+                        array_push($push_receivers, $receiveremail);
+                        Notification::sendPushNotification($push_receivers, $this->client->firstname . ' te enviou uma mensagem', base_url() . 'messages');
+                    }
+
+
             }
 			if($ajax != "reply"){ redirect('cmessages'); }else{
 					$this->theme_view = 'ajax';

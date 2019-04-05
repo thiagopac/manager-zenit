@@ -228,13 +228,16 @@ class Leads extends MY_Controller{
 //                LeadHistory::create($historyAttributes);
             }
 
-            $statusReceivers = LeadStatusHasReceiver::find('all', ['conditions' => ['lead_status_id=?', $_POST['value']]]);
+            $statusReceivers = LeadStatusHasReceiver::find('all', ['conditions' => ['lead_status_id = ?', $_POST['value']]]);
 
             $push_receivers = array();
 
-            foreach ($statusReceivers as $statusReceiver){
+            foreach ($statusReceivers as $statusReceiver) {
                 $user = User::find($statusReceiver->user_id);
-                array_push($push_receivers, $user->email);
+
+                if ($user->push_active == 1) {
+                    array_push($push_receivers, $user->email);
+                }
 
                 $notificationAttributes = array('user_id' => $user->id, 'message' => '<b>'.$this->user->firstname.'</b> moveu <b>'.$currentLead->name.'</b> para <b>'.$destinationLeadStatus->name.'</b>', 'url' => base_url().'leads/');
                 Notification::create($notificationAttributes);
@@ -245,7 +248,10 @@ class Leads extends MY_Controller{
             //push será enviado para todos colaboradores que marcaram aquele lead com interesse em notificação de movimentação
             foreach ($warningUsers as $warningUser){
                 $user = User::find($warningUser->user_id);
-                array_push($push_receivers, $user->email);
+
+                if ($user->push_active == 1) {
+                    array_push($push_receivers, $user->email);
+                }
 
                 $notificationAttributes = array('user_id' => $user->id, 'message' => '<b>'.$this->user->firstname.'</b> moveu <b>'.$currentLead->name.'</b> para <b>'.$destinationLeadStatus->name.'</b>', 'url' => base_url().'leads/');
                 Notification::create($notificationAttributes);
@@ -408,7 +414,10 @@ class Leads extends MY_Controller{
                 //push será enviado para todos colaboradores que estão selecionados na configuração de status
                 foreach ($statusReceivers as $statusReceiver) {
                     $user = User::find($statusReceiver->user_id);
-                    array_push($push_receivers, $user->email);
+
+                    if ($user->push_active == 1) {
+                        array_push($push_receivers, $user->email);
+                    }
 
                     $notificationAttributes = array('user_id' => $user->id, 'message' => '<b>' . $this->user->firstname . '</b> moveu <b>' . $lead->name . '</b> para <b>' . $destinationLeadStatus->name . '</b>', 'url' => base_url() . 'leads/');
                     Notification::create($notificationAttributes);
@@ -419,7 +428,10 @@ class Leads extends MY_Controller{
                 //push será enviado para todos colaboradores que marcaram aquele lead com interesse em notificação de movimentação
                 foreach ($warningUsers as $warningUser) {
                     $user = User::find($warningUser->user_id);
-                    array_push($push_receivers, $user->email);
+
+                    if ($user->push_active == 1) {
+                        array_push($push_receivers, $user->email);
+                    }
 
                     $notificationAttributes = array('user_id' => $user->id, 'message' => '<b>' . $this->user->firstname . '</b> moveu <b>' . $lead->name . '</b> para <b>' . $destinationLeadStatus->name . '</b>', 'url' => base_url() . 'leads/');
                     Notification::create($notificationAttributes);

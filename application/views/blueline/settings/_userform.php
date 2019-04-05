@@ -61,6 +61,22 @@ echo form_open_multipart($form_action, $attributes);
 
 </div>
 
+    <div class="form-group">
+        <label for="push_active"><?=$this->lang->line('application_push_notification_receive'); ?></label>
+        <?php $options = [
+            '1' => $this->lang->line('application_yes'),
+            '0' => $this->lang->line('application_no')
+        ]; ?>
+
+        <?php
+        if (isset($user)) {
+            $push_active = $user->push_active;
+        } else {
+            $push_active = '0';
+        }
+        echo form_dropdown('push_active', $options, $push_active, 'style="width:100%" class="chosen-select"'); ?>
+    </div>
+
 <?php if (!isset($agent)) {
     ?>
 <div class="form-group">
