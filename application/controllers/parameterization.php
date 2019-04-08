@@ -40,9 +40,7 @@ class Parameterization extends MY_Controller
         $this->view_data['breadcrumb'] = $this->lang->line('application_parameterization');
         $this->view_data['breadcrumb_id'] = 'parameterization/departments';
 
-        $options = ['conditions' => ['status != ?', 'deleted']];
-        $departments = Department::all($options);
-        $this->view_data['departments'] = $departments;
+        $this->view_data['departments'] = Department::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
         $this->content_view = 'parameterization/departments';
 
         $this->load->helper('curl');
@@ -54,7 +52,7 @@ class Parameterization extends MY_Controller
         $this->view_data['breadcrumb_id'] = 'parameterization/departments';
 
         $options = ['conditions' => ['status != ?', 'deleted']];
-        $departments = Department::all($options);
+        $departments = Department::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
         $this->view_data['departments'] = $departments;
         $this->content_view = 'parameterization/departments';
     }

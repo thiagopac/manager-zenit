@@ -725,11 +725,45 @@ class Settings extends MY_Controller
                 unset($_POST['password']);
             }
 
+            if (!isset($_POST["department_id"])) {
+                $_POST["department_id"] = array();
+            }
+
+            $query = array();
+
+            $user_is_on_departments = DepartmentHasWorker::find('all', array('conditions' => array("user_id =? ", $user->id)));
+
+            foreach ($user_is_on_departments as $function_of_user) {
+                array_push($query, $function_of_user->department_id);
+            }
+
+            $added = array_diff($_POST["department_id"], $query);
+            $removed = array_diff($query, $_POST["department_id"]);
+
+            foreach ($added as $value) {
+                $atributes = array('department_id' => $value, 'user_id' => $user->id);
+
+                DepartmentHasWorker::create($atributes);
+            }
+
+            foreach ($removed as $value) {
+                $atributes = array('department_id' => $value, 'user_id' => $user->id);
+                $registry = DepartmentHasWorker::find($atributes);
+                $registry->delete();
+            }
+
+            unset($_POST['department_id']);
+
             $user->update_attributes($_POST);
             $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_user_success'));
             redirect('settings/users');
         } else {
             $this->view_data['user'] = $user;
+
+            $this->view_data['departments'] = Department::find('all');
+
+            $this->view_data['worker_departments'] = DepartmentHasWorker::find('all', array('conditions' => array("user_id =? ", $user->id)));
+
             $this->theme_view = 'modal';
             $this->view_data['modules'] = Module::find('all', ['order' => 'sort asc', 'conditions' => ['type != ?', 'client']]);
             $this->view_data['queues'] = Queue::all();

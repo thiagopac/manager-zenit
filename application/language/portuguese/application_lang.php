@@ -941,3 +941,6 @@ $lang['application_edit_tag'] = 'Editar Tag';
 $lang['application_select_tags'] = 'Selecione Tags';
 
 $lang['application_lead_warning_receiver'] = 'Quero receber alertas de movimentação deste lead';
+
+$lang['application_departments_worker_has_functions'] = 'Departamentos que o colaborador tem funções';
+$lang['application_select_departments'] = 'Selecione os departamentos';

@@ -62,7 +62,7 @@
 						</p>
 					</td>
 					<td class="hidden-xs">
-						<span class="label label-<?php if ($user->status == ' active ') {
+						<span class="label label-<?php if ($user->status == 'active') {
     echo 'success ';
 } else {
     echo 'important ';
@@ -71,10 +71,10 @@
 						</span>
 					</td>
 					<td class="hidden-xs">
-						<span class="label label-<?php if ($user->admin == ' 1 ') {
+						<span class="label label-<?php if ($user->admin == '1') {
     echo 'success ';
 } else {
-    echo ' ';
+    echo '';
 } ?>">
 							<?php if ($user->admin) {
     echo $this->lang->line('application_yes');

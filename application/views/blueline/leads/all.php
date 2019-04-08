@@ -208,13 +208,13 @@
 										</span>
 										<span v-for="tag in blockTags(block.tags)" class="label label-success">{{ tag }}</span>
 									</li>
-									<li v-if="block.description != ''">
+									<li v-if="block.description.trim().length > 0">
 										<span>
 											<?=$this->lang->line('application_description');?>
 										</span>
 										<p v-html="block.description"></p>
 									</li>
-                                    <li v-if="block.proposal_value != null">
+                                    <li v-if="block.proposal_value != null && block.proposal_value != ``">
 										<span>
 											<?=$this->lang->line('application_proposal_value');?>
 										</span>

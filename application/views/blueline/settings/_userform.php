@@ -128,7 +128,27 @@ echo form_open_multipart($form_action, $attributes);
             $admin = '0';
         }
     echo form_dropdown('admin', $options, $admin, 'style="width:100%" class="chosen-select"'); ?>
-</div> 
+</div>
+<div class="form-group">
+    <label for="admin"><?=$this->lang->line('application_departments_worker_has_functions'); ?></label>
+    <?php
+    $options = array();
+    $department = array();
+
+    foreach ($departments as $value):
+        $options[$value->id] = $value->name;
+    endforeach;
+
+    if(isset($worker_departments)){}else{$department = "";}
+
+    foreach ($worker_departments as $value):
+        $department[$value->department_id] = $value->department_id;
+    endforeach;
+
+    echo form_dropdown('department_id[]', $options, $department, 'style="width:100%" class="chosen-select" data-placeholder="'.$this->lang->line('application_select_departments').'" multiple tabindex="3"');
+    ?>
+</div>
+
 <?php
 } ?> 
 <?php if (!isset($agent) && $this->user->admin == '1') {
