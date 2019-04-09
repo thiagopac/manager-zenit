@@ -944,3 +944,5 @@ $lang['application_lead_warning_receiver'] = 'Quero receber alertas de movimenta
 
 $lang['application_departments_worker_has_functions'] = 'Departamentos que o colaborador tem funções';
 $lang['application_select_departments'] = 'Selecione os departamentos';
+$lang['application_notify_comercial_team'] = 'Notificar comercial';
+$lang['application_notify_comercial_help'] = 'Chamar a atenção da equipe do comercial para este lead';

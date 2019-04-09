@@ -220,15 +220,18 @@ if (isset($lead)) {
 
         <?php } ?>
 
-
     </ul>
 
     <div class="modal-footer">
-        <?php if (isset($lead)) : ?>
+        <?php if (isset($lead) && $domain == 'ownergy.com.br') : ?>
         <a href="<?=base_url()?>clients/company/createfromlead/<?=$lead->id?>" data-toggle="mainmodal" class="btn btn-success pull-left">
             <?=$this->lang->line('application_convert_to_client');?>
         </a>
         <?php endif; ?>
+        <a href="<?=base_url()?>leads/notifycomercial/<?=$lead->id?>" class="btn btn-danger pull-left tt ajax-silent" title="<?=$this->lang->line('application_notify_comercial_help');?>">
+            <?=$this->lang->line('application_notify_comercial_team');?>
+            <i class="icon dripicons-bell"></i>
+        </a>
         <input type="submit" name="send" class="btn btn-primary silent-submit" data-section="lead" value="<?=$this->lang->line('application_save');?>"
         />
         <a class="btn" data-dismiss="modal">
@@ -248,6 +251,4 @@ if (isset($lead)) {
         $("#zipcode").mask("#####-####", {reverse: false});
 
     });
-
-
 </script>

@@ -857,4 +857,27 @@ class Leads extends MY_Controller{
         }
     }
 
+    public function notifycomercial($lead_id){
+
+        $comercialTeam = DepartmentHasWorker::find('all', array('conditions' => array('department_id = ?', 2)));
+
+        $lead = Lead::find_by_id($lead_id);
+
+        $push_receivers = array();
+
+        //push será enviado para todos colaboradores que tem funções no Departamento Comercial id = 2
+        foreach ($comercialTeam as $worker){
+            $user = User::find($worker->user_id);
+
+            if ($user->push_active == 1) {
+                array_push($push_receivers, $user->email);
+            }
+
+            $notificationAttributes = array('user_id' => $user->id, 'message' => '<b>[Atenção ao Lead]</b> - '.$this->user->firstname.' chamou sua atenção para o Lead '.$lead->name, 'url' => base_url().'leads/');
+            Notification::create($notificationAttributes);
+        }
+
+        Notification::sendPushNotification($push_receivers, '[Atenção ao Lead] - '.$this->user->firstname.' chamou sua atenção para o Lead '.$lead->name, base_url().'leads/');
+    }
+
 }
