@@ -40,11 +40,13 @@ class Leads extends MY_Controller{
 
     public function all(){
 
-        $user_email = $this->user->email;
+//        $user_email = $this->user->email;
 
-        list($user_email, $domain) = explode('@', $user_email);
+//        list($user_email, $domain) = explode('@', $user_email);
 
-        $condition = $domain == 'ownergy.com.br' ? 1 : 0;
+//        $condition = $domain == 'ownergy.com.br' ? 1 : 0;
+
+        $condition = $this->user->department_has_user("Comercial", $this->user);
 
         if ($condition == 0){
             $leads = Lead::find('all', array('conditions' => array("status_id != ? AND user_id =? ORDER BY `order`", 0, $this->user->id), 'include' => array('user')));

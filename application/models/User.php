@@ -37,6 +37,13 @@ class User extends ActiveRecord\Model
         return in_array($module->id, $access);
     }
 
+    public function department_has_user($department_name, $user)
+    {
+        $department = Department::find('first', ['conditions' => ['name = ?', $department_name]]);
+        $department_has_workers = DepartmentHasWorker::find('all', ['conditions' => ['department_id = ? AND user_id = ?', $department->id, $user->id]]);
+        return count($department_has_workers) == 0 ? false : true;
+    }
+
     public function getSalt()
     {
         $charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/\\][{}\'";:?.>,<!@#$%^&*()-_=+|';

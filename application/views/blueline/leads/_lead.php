@@ -189,11 +189,9 @@ if (isset($lead)) {
 
         <?php
 
-        $user_email = $this->user->email;
+        $condition = $this->user->department_has_user("Comercial", $this->user);
 
-        //se for um colaborador com e-mail @ownergy.com.br ele poderá ver essa opção para marcar ou desmarcar
-        list($user_email, $domain) = explode('@', $user_email);
-        if ($domain == 'ownergy.com.br') { ?>
+        if ($condition == 1) { ?>
 
             <!--<li>
                 <input type="checkbox" class="checkbox" id="private" name="private" value="1" data-labelauty="<?/*=$this->lang->line('application_private_lead');*/?>"
@@ -211,7 +209,7 @@ if (isset($lead)) {
     </ul>
 
     <div class="modal-footer">
-        <?php if (isset($lead) && $domain == 'ownergy.com.br') : ?>
+        <?php if (isset($lead) && $condition == 1) : ?>
         <a href="<?=base_url()?>clients/company/createfromlead/<?=$lead->id?>" data-toggle="mainmodal" class="btn btn-success pull-left">
             <?=$this->lang->line('application_convert_to_client');?>
         </a>

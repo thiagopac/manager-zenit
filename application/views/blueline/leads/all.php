@@ -2,24 +2,25 @@
 	<div class="row">
 
         <?php
-        $user_email = $this->user->email;
 
-        list($user_email, $domain) = explode('@', $user_email);
-        $condition = $domain == 'ownergy.com.br' ? 1 : 0;
+        $condition = $this->user->department_has_user("Comercial", $this->user);
+
         ?>
 
 		<div id="kanban-page">
-			<a v-if="stages.length > 1" href="<?=base_url()?>leads/create" class="btn btn-primary" data-toggle="mainmodal" v-cloak>
-			<?=$this->lang->line('application_create_lead');?>
-			</a>
-			<a href="<?=base_url()?>leads/status/create" class="btn btn-primary" data-toggle="mainmodal" v-cloak>
-				<?=$this->lang->line('application_create_status');?>
-			</a>
-			<!--<a v-if="stages.length > 1" href="<?/*=base_url()*/?>leads/import" class="btn btn-success" data-toggle="mainmodal" v-cloak>
-				<?/*=$this->lang->line('application_import_leads');*/?>
-			</a>-->
-			<input class="kanban-search pull-right" :class="(search != '') ? 'active' : ''" type="text" name="search" v-model="search" placeholder="<?=$this->lang->line('application_search');?>"
-			/>
+
+            <?php if($condition == 1) { ?>
+
+                <a v-if="stages.length > 1" href="<?=base_url()?>leads/create" class="btn btn-primary" data-toggle="mainmodal" v-cloak>
+                    <?=$this->lang->line('application_create_lead');?>
+                </a>
+                <a href="<?=base_url()?>leads/status/create" class="btn btn-primary" data-toggle="mainmodal" v-cloak>
+                    <?=$this->lang->line('application_create_status');?>
+                </a>
+
+            <?php } ?>
+
+			<input class="kanban-search pull-right" :class="(search != '') ? 'active' : ''" type="text" name="search" v-model="search" placeholder="<?=$this->lang->line('application_search');?>" />
 
 			<div class="select-wrapper pull-right" v-cloak>
 
@@ -153,11 +154,13 @@
                                 </a>
                             </li>
 
+<!--                            --><?php //if($condition == 1) { ?>
 							<li>
 								<a data-toggle="mainmodal" :href="'<?=base_url()?>leads/edit/'+block.id">
 									<i class="icon dripicons-gear tippy" title="<?=$this->lang->line('application_edit');?>"></i>
 								</a>
 							</li>
+<!--							--><?//}?>
 						</ul>
 
 						<div class="tab-content">
