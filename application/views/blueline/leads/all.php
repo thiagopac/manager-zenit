@@ -1,4 +1,4 @@
-<div class="col-sm-13  col-md-12 main">
+<div class="col-sm-13 col-md-12 main">
 	<div class="row">
 
         <?php
@@ -93,6 +93,9 @@
 <!--						<i class="icon dripicons-lock" style="font-size: 20px; color: orangered;" title="--><?//=htmlspecialchars($this->lang->line('application_private_lead'));?><!--"-->
 <!--						 v-if="block.private != 0"></i>-->
 						<span class="block-title">{{ block.name }}</span>
+                        <div v-if="inDueReminders(block.id)" @click="openThisBlock(block.id); loadReminders(block.id);" class="pull-right switcher-button-container">
+                            <i class="bell-icon icon dripicons-bell bell"></i>
+                        </div>
 						<div class="pull-right switcher-button-container">
 
 							<!--<i class="status-icon switcher-button ionicons" :class="(block.icon != null && block.icon != '') ? block.icon : 'ion-ios-pricetag'"
@@ -112,6 +115,8 @@
 						</div>
 					</div>
 
+
+
 					<div class="block-subtitle">
 						{{ block.company }}
 					</div>
@@ -119,9 +124,7 @@
                     <div class="block-proposal-value">
                         <span v-if="block.proposal_value != `` && block.proposal_value != null" class="label label-info"><?=$core_settings->money_symbol?> {{ block.proposal_value }}</span> <span v-if="(block.city != `` && block.state != ``) && (block.city != null && block.state != null)" class="label label-info">{{ block.city }}/{{ block.state }}</span>
                     </div>
-					<div v-if="inDueReminders(block.id)" @click="openThisBlock(block.id); loadReminders(block.id);" class="pull-right switcher-button-container">
-						<i class="bell-icon icon dripicons-bell bell"></i>
-					</div>
+
 
 					<div class="block-details" v-if="block.id == openBlock" :class="(block.id == openBlock) ? 'block-details-open' : ''">
 						<ul class="nav nav-tabs nav-tabs-lead">

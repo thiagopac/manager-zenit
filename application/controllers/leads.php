@@ -325,7 +325,6 @@ class Leads extends MY_Controller{
             $this->view_data['status'] = LeadStatus::all();
             $this->view_data['users'] = User::find('all', ['conditions' => ['status=?', 'active']]);
 
-            $this->view_data['sources'] = Lead::find_by_sql("select source from leads group by source");
             $this->view_data['form_action'] = 'leads/create';
 
             $tags = array();
@@ -471,12 +470,15 @@ class Leads extends MY_Controller{
             $editing_lead = Lead::find_by_id($id);
             $this->theme_view = 'modal';
             $this->view_data['title'] = $this->lang->line('application_edit_lead');
+            $lead_status = LeadStatus::find_by_id($editing_lead->status_id);
+            $this->view_data['previous_status'] = LeadStatus::find('first', array('conditions' => array('lead_status.order < ? ORDER BY lead_status.order DESC',$lead_status->order)));
+            $this->view_data['next_status'] = LeadStatus::find('first', array('conditions' => array('lead_status.order > ? ORDER BY lead_status.order ASC',$lead_status->order)));
             $this->view_data['status'] = LeadStatus::all();
             $this->view_data['users'] = User::find('all', ['conditions' => ['status=?', 'active']]);
             $this->view_data['lead'] = $editing_lead;
-            $this->view_data['sources'] = Lead::find_by_sql("select source from leads group by source");
             $this->view_data['lead_warning_user'] = LeadHasWarningUser::find('first', array('conditions' => array('lead_id = ? AND user_id = ?',$id, $this->user->id)));
             $this->view_data['form_action'] = 'leads/edit';
+
             $this->content_view = 'leads/_lead';
 
             $tags = array();
@@ -710,7 +712,6 @@ class Leads extends MY_Controller{
             $this->theme_view = 'modal';
             $this->view_data['title'] = $this->lang->line('application_create_lead');
             $this->view_data['status'] = LeadStatus::all();
-            $this->view_data['sources'] = Lead::find_by_sql("select source from leads group by source");
             $this->view_data['form_action'] = 'leads/import';
             $this->content_view = 'leads/_import';
         }

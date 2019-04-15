@@ -6,6 +6,10 @@ if (isset($lead)) {
 <input id="id" type="hidden" name="id" value="<?php echo $lead->id; ?>" />
 <?php
 } ?>
+<div class="visible-xs visible-sm" style="padding-bottom: 40px">
+        <input class="btn btn-primary col-xs-5 silent-submit" type="submit" data-previous-destiny="<?=$previous_status->id?>" data-section="lead" value="◄ <?=$this->lang->line('application_move_previous_status');?>" id="btn-move-lead-previous"/>
+        <input class="btn pull-right btn-primary col-xs-5 silent-submit" type="submit" data-next-destiny="<?=$next_status->id?>" value="<?=$this->lang->line('application_move_next_status');?> ►" data-section="lead" id="btn-move-lead-next"/>
+    </div>
 	<div class="form-group">
 		<label for="status_id">
 			<?=$this->lang->line('application_status');?>
@@ -29,22 +33,6 @@ if (isset($lead)) {
             echo $lead->name;
         } ?>" required/>
 	</div>
-	<!--<div class="form-group">
-		<label for="source">
-			<?/*=$this->lang->line('application_source');*/?>
-		</label>
-		<input id="source" type="text" list="sourcelist" name="source" class="form-control" value="<?php /*if (isset($lead)) {
-            echo $lead->source;
-        } */?>"/>
-		<datalist id="sourcelist">
-			<?php /*foreach ($sources as $value):  */?>
-			<option value="<?/*=$value->source*/?>">
-				<?php /*endforeach; */?>
-				<option value="Facebook">
-                <option value="Google">
-		</datalist>
-
-	</div>-->
 	
 	<div class="form-group">
 		<label for="company">
@@ -249,6 +237,26 @@ if (isset($lead)) {
         $("#mobile").mask("(##)#####-####", {reverse: false});
         $("#phone").mask("(##)####-####", {reverse: false});
         $("#zipcode").mask("#####-####", {reverse: false});
+
+        if ($("#btn-move-lead-previous").data('previous-destiny') == ''){
+            $("#btn-move-lead-previous").hide();
+        }
+
+        if ($("#btn-move-lead-next").data('next-destiny') == ''){
+            $("#btn-move-lead-next").hide();
+        }
+
+        $("#btn-move-lead-previous").on("click", function(t) {
+
+            $("[name='status_id']").val($("#btn-move-lead-previous").data('previous-destiny'));
+
+        });
+
+        $("#btn-move-lead-next").on("click", function(t) {
+
+            $("[name='status_id']").val($("#btn-move-lead-next").data('next-destiny'));
+
+        });
 
     });
 </script>

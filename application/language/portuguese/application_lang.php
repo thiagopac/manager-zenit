@@ -798,7 +798,7 @@ $lang['application_edit_tags'] = 'Editar Tags';
 $lang['application_language'] = 'Idioma';
 $lang['application_lead'] = 'Funil de vendas';
 $lang['application_leads'] = 'Funil de vendas';
-$lang['application_status'] = 'Estado';
+$lang['application_status'] = 'Estágio';
 $lang['application_create_status'] = 'Novo estágio';
 $lang['application_move_left'] = 'Mover Para A Esquerda';
 $lang['application_move_right'] = 'Mover Para A Direita';
@@ -946,3 +946,6 @@ $lang['application_departments_worker_has_functions'] = 'Departamentos que o col
 $lang['application_select_departments'] = 'Selecione os departamentos';
 $lang['application_notify_comercial_team'] = 'Notificar comercial';
 $lang['application_notify_comercial_help'] = 'Chamar a atenção da equipe do comercial para este lead';
+
+$lang['application_move_previous_status'] = 'Voltar lead';
+$lang['application_move_next_status'] = 'Avançar lead';

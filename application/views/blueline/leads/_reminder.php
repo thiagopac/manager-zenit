@@ -10,7 +10,7 @@ if (isset($reminder)) {
 	<div class="form-group">
 		<label for="datetime">
 			<?=$this->lang->line('application_date_time');?> *</label>
-		<input class="form-control datepickr-unix not-required" name="datetime" id="datetime" type="text" value="<?php if (isset($reminder)) {
+		<input class="form-control datepicker-time not-required" data-enable-time=true name="datetime" id="datetime" type="text" value="<?php if (isset($reminder)) {
         echo $reminder->datetime;
     } ?>" required/>
 	</div>
