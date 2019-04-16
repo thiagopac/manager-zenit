@@ -103,17 +103,21 @@ if (isset($lead)) {
 		<label for="province">
 			<?=$this->lang->line('application_province');?>
 		</label>
-		<input id="state" type="text" name="state" class="form-control" value="<?php if (isset($lead)) {
-            echo $lead->state;
-        }?>" />
+        <?php
+        $settings = Setting::first();
+        $statesList = $settings->list_states();
+
+        echo form_dropdown('state', $statesList, $lead->state, 'style="width:100%" class="chosen-select"');?>
 	</div>
 	<div class="form-group">
 		<label for="country">
 			<?=$this->lang->line('application_country');?>
 		</label>
-		<input id="country" type="text" name="country" class="form-control" value="<?php if (isset($lead)) {
-            echo $lead->country;
-        }?>" />
+        <?php
+        $settings = Setting::first();
+        $countriesList = $settings->list_countries();
+
+        echo form_dropdown('country', $countriesList, $lead->country,'style="width:100%" class="chosen-select"');?>
 	</div>
     <div class="form-group">
         <label for="tags">
@@ -194,7 +198,7 @@ if (isset($lead)) {
                     if (isset($lead) && is_object($lead)) {
                         $user_id = $lead->user_id;
                     } else {
-                        $user_id = '';
+                        $user_id = $this->user->id;
                     }
         echo form_dropdown('user_id', $options, $user_id, 'style="width:100%" class="chosen-select"'); ?>
 	</div>
