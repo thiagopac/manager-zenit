@@ -305,7 +305,7 @@ class Leads extends MY_Controller{
             if (!empty($_POST['tags_arr'])) {
                 $_POST['tags'] = implode(',', $_POST['tags_arr']);
             } else {
-                $_POST['tags'] = implode(',', $_POST['tags_arr']);
+                unset($_POST['tags']);
             }
 
             unset($_POST['tags_arr']);
