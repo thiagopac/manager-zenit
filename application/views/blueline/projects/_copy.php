@@ -63,18 +63,17 @@ if(isset($project)){ ?>
 
 <div class="form-group">
                           <label for="start"><?=$this->lang->line('application_start_date');?> *</label>
-                          <input class="form-control datepicker" name="start" id="start" type="text" value="<?php if(isset($project)){echo $project->start;} ?>" required/>
+                          <input class="form-control datepicker-time" data-enable-time=true name="start" id="start" type="text" value="<?php if(isset($project)){echo $project->start;} ?>" required/>
 </div>
 <div class="form-group">
                           <label for="end"><?=$this->lang->line('application_deadline');?> *</label>
-                          <input class="form-control datepicker-linked" name="end" id="end" type="text" value="<?php if(isset($project)){echo $project->end;} ?>" required/>
+                          <input class="form-control datepicker-time datepicker-time-linked" data-enable-time=true name="end" id="end" type="text" value="<?php if(isset($project)){echo $project->end;} ?>" required/>
 </div>
 
-<!-- CRIAR CATEGORIA NO PROJETO AGORA SETA COR PARA Projectcategorylist / ALTERADO ESCONDIDO -->
 <div class="form-group">
     <label for="color"><?=$this->lang->line('application_project_color');?></label>
     <input id="color" name="color" type="text" class="form-control colorpickerinput" value="<?=(isset($project)) ? $project->color : '#5071ab';?>" />
-    <span class="color color-previewer" style="background-color:<?=(isset($value)) ? $value->color : '#5071ab';?>"></span>
+    <span class="color color-previewer" style="background-color:<?=(isset($project)) ? $project->color : '#5071ab';?>"></span>
 </div>
 
 <!--<div class="form-group">
@@ -136,3 +135,5 @@ if(isset($project)){ ?>
 
         });
     });
+
+</script>

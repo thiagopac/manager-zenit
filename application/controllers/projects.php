@@ -409,7 +409,9 @@ class Projects extends MY_Controller
                             'value' => $existingTask->value,
                             'priority' => $existingTask->priority,
                             'milestone_order' => $existingTask->milestone_order,
+                            'sucessors' => $existingTask->sucessors,
                         );
+
                         ProjectHasTask::create($attributes);
                     }
                 }

@@ -424,7 +424,9 @@
 						 :title="(block.address != '' || block.city != '' || block.zipcode != '' || block.country != '') ? block.address+' '+block.city+' '+block.zipcode+' '+block.country : ''">
 							<i class="icon dripicons-direction"></i>
 						</a>
-						<a class="col-xs-2 center tippy" :class="(block.email != '') ? '' : 'grayout'" :href="'mailto:'+block.email" :title="block.email" target="_blank">
+						<a class="col-xs-2 center tippy" :class="(block.email != '') ? '' : 'grayout'" :href="'https://mail.google.com/mail/u/1/?view=cm&fs=1&to='+block.email+'&tf=1'"
+
+                           :title="block.email" target="_blank">
 							<i class="icon dripicons-mail"></i>
 						</a>
 						<a class="col-xs-2 center tippy" :class="(block.phone != '') ? '' : 'grayout'" :href="'tel:'+normalizePhoneNumber(block.phone)"
