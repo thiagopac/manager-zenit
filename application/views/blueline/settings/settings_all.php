@@ -201,6 +201,22 @@ echo form_open_multipart($form_action, $attributes);
 					</div>
 				</div>
 
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>
+                            <?=$this->lang->line('application_rated_power_measurement');?>
+                        </label>
+
+
+                        <div class="input-group">
+
+                            <input type="text" name="rated_power_measurement" value="<?=$settings->rated_power_measurement;?>" class="form-control">
+
+                        </div>
+
+                    </div>
+                </div>
+
                 <!-- PREFIXO DE REFERÊNCIA DE COTAÇÃO / ESCONDIDO -->
 				<!--<div class="col-md-2">
 					<div class="form-group">

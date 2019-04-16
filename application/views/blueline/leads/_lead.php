@@ -27,7 +27,7 @@ if (isset($lead)) {
 	</div>
 	<div class="form-group">
 		<label for="name">
-			<?=$this->lang->line('application_name');?> *
+			<?=$this->lang->line('application_lead_name');?> *
 		</label>
 		<input id="name" type="text" name="name" class="required form-control" value="<?php if (isset($lead)) {
             echo $lead->name;
@@ -149,19 +149,33 @@ if (isset($lead)) {
 		</textarea>
 	</div>
     <div class="form-group">
-        <label for="company">
+        <label for="proposal_value">
             <?=$this->lang->line('application_proposal_value');?>
         </label>
     <?php if(!empty($core_settings->money_symbol)){ ?>
     <div class="input-group">
-        <div class="input-group-addon"><?=$core_settings->money_symbol;?></div> <?php } ?>
+        <div class="input-group-addon"><?=$core_settings->money_symbol;?></div>
         <input id="proposal_value" type="text" name="proposal_value" class="form-control" value="<?php if (isset($lead)) {
             echo $lead->proposal_value;
         } ?>" />
         </div>
+    <?php } ?>
     </div>
     <div class="form-group">
-        <label for="company">
+        <label for="rated_power_mod">
+            <?=$this->lang->line('application_rated_power');?>
+        </label>
+        <?php if(!empty($core_settings->rated_power_measurement)){ ?>
+        <div class="input-group">
+            <div class="input-group-addon"><?=$core_settings->rated_power_measurement;?></div>
+            <input id="rated_power_mod" type="text" name="rated_power_mod" class="form-control" value="<?php if (isset($lead)) {
+                echo $lead->rated_power_mod;
+            } ?>" />
+        </div>
+        <?php } ?>
+    </div>
+    <div class="form-group">
+        <label for="owner">
             <?=$this->lang->line('application_lead_owner');?>
         </label>
         <input id="owner" type="text" name="owner" class="form-control" value="<?php if (isset($lead)) {
@@ -235,6 +249,7 @@ if (isset($lead)) {
         $("#mobile").mask("(##)#####-####", {reverse: false});
         $("#phone").mask("(##)####-####", {reverse: false});
         $("#zipcode").mask("#####-####", {reverse: false});
+        $("#rated_power_mod").mask("##########.##", {reverse: true});
 
         if ($("#btn-move-lead-previous").data('previous-destiny') == ''){
             $("#btn-move-lead-previous").hide();

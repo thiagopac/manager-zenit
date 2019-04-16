@@ -54,45 +54,6 @@ echo form_open_multipart($form_action, $attributes);
                   </div>
 </div>
 
-    <!-- REDES SOCIAIS NO CADASTRO DO CONTATO DO CLIENTE / ESCONDIDO -->
-<!--<div class="row">-->
-<!--    <div class="col-md-6">-->
-<!--        <div class="form-group">-->
-<!--                <label for="twitter">Twitter</label>-->
-<!--                <input id="twitter" type="text" name="twitter" class="form-control" value="--><?php //if(isset($client)){echo $client->twitter;}?><!--" />-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--                <label for="skype">Skype</label>-->
-<!--                <input id="skype" type="text" name="skype" class="form-control" value="--><?php //if(isset($client)){echo $client->skype;}?><!--" />-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--                <label for="linkedin">LinkedIn</label>-->
-<!--                <input id="linkedin" type="text" name="linkedin" class="form-control" value="--><?php //if(isset($client)){echo $client->linkedin;}?><!--" />-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--                <label for="facebook">Facebook</label>-->
-<!--                <input id="facebook" type="text" name="facebook" class="form-control" value="--><?php //if(isset($client)){echo $client->facebook;}?><!--" />-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="col-md-6">-->
-<!--        <div class="form-group">-->
-<!--                <label for="instagram">Instagram</label>-->
-<!--                <input id="instagram" type="text" name="instagram" class="form-control" value="--><?php //if(isset($client)){echo $client->instagram;}?><!--" />-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--                <label for="googleplus">Google Plus</label>-->
-<!--                <input id="googleplus" type="text" name="googleplus" class="form-control" value="--><?php //if(isset($client)){echo $client->googleplus;}?><!--" />-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--                <label for="youtube">Youtube</label>-->
-<!--                <input id="youtube" type="text" name="youtube" class="form-control" value="--><?php //if(isset($client)){echo $client->youtube;}?><!--" />-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--                <label for="pinterest">Pinterest</label>-->
-<!--                <input id="pinterest" type="text" name="pinterest" class="form-control" value="--><?php //if(isset($client)){echo $client->pinterest;}?><!--" />-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 <?php
 $access = array();
 if(isset($client)){ $access = explode(",", $client->access); }

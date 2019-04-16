@@ -101,20 +101,6 @@
 						<?php echo $company->country = empty($company->country) ? '-' : $company->country; ?>
 					</li>
 
-					<!-- REDES SOCIAIS DO CLIENTE / APAGADO -->
-					<!--<li>
-						<span>
-							<?/*=$this->lang->line('application_social_media');*/?>:</span>
-						<?php /*echo (!empty($company->twitter)) ? '<a target="_blank" href="http://twitter.com/' . $company->twitter . '"><i class="ion-social-twitter"></i></a>' : ''; */?>
-						<?php /*echo (!empty($company->skype)) ? '<a target="_blank" href="http://skype.com/' . $company->skype . '"><i class="ion-social-skype"></i></a>' : ''; */?>
-						<?php /*echo (!empty($company->facebook)) ? '<a target="_blank" href="http://facebook.com/' . $company->facebook . '"><i class="ion-social-facebook"></i></a>' : ''; */?>
-						<?php /*echo (!empty($company->linkedin)) ? '<a target="_blank" href="http://linkedin.com/in/' . $company->linkedin . '"><i class="ion-social-linkedin"></i></a>' : ''; */?>
-						<?php /*echo (!empty($company->instagram)) ? '<a target="_blank" href="http://instagram.com/' . $company->instagram . '"><i class="ion-social-instagram"></i></a>' : ''; */?>
-						<?php /*echo (!empty($company->googleplus)) ? '<a target="_blank" href="http://plus.google.com/' . $company->googleplus . '"><i class="ion-social-googleplus"></i></a>' : ''; */?>
-						<?php /*echo (!empty($company->youtube)) ? '<a target="_blank" href="http://youtube.com/' . $company->youtube . '"><i class="ion-social-youtube"></i></a>' : ''; */?>
-						<?php /*echo (!empty($company->pinterest)) ? '<a target="_blank" href="http://pinterest.com/' . $company->pinterest . '"><i class="ion-social-pinterest"></i></a>' : ''; */?>
-					</li>-->
-
 			</ul>
 			<br clear="all">
 		</div>
@@ -209,17 +195,6 @@
 									<?=$value->mobile;?>
 								</td>
 
-                                <!-- REDES SOCIAIS NA GRADE DE CONTATO AO CLIENTE / ESCONDIDO -->
-<!--								<td class="hidden-xs">-->
-<!--									--><?php //echo (!empty($value->twitter)) ? '<a target="_blank" href="http://twitter.com/' . $value->twitter . '"><i class="ion-social-twitter"></i></a>' : ''; ?>
-<!--									--><?php //echo (!empty($value->skype)) ? '<a target="_blank" href="http://skype.com/' . $value->skype . '"><i class="ion-social-skype"></i></a>' : ''; ?>
-<!--									--><?php //echo (!empty($value->facebook)) ? '<a target="_blank" href="http://facebook.com/' . $value->facebook . '"><i class="ion-social-facebook"></i></a>' : ''; ?>
-<!--									--><?php //echo (!empty($value->linkedin)) ? '<a target="_blank" href="http://linkedin.com/in/' . $value->linkedin . '"><i class="ion-social-linkedin"></i></a>' : ''; ?>
-<!--									--><?php //echo (!empty($value->instagram)) ? '<a target="_blank" href="http://instagram.com/' . $value->instagram . '"><i class="ion-social-instagram"></i></a>' : ''; ?>
-<!--									--><?php //echo (!empty($value->googleplus)) ? '<a target="_blank" href="http://plus.google.com/' . $value->googleplus . '"><i class="ion-social-googleplus"></i></a>' : ''; ?>
-<!--									--><?php //echo (!empty($value->youtube)) ? '<a target="_blank" href="http://youtube.com/' . $value->youtube . '"><i class="ion-social-youtube"></i></a>' : ''; ?>
-<!--									--><?php //echo (!empty($value->pinterest)) ? '<a target="_blank" href="http://pinterest.com/' . $value->pinterest . '"><i class="ion-social-pinterest"></i></a>' : ''; ?>
-<!--								</td>-->
 								<td class="hidden-xs">
 									<?php if (!empty($value->last_login)) {
                     echo date($core_settings->date_format . ' ' . $core_settings->date_time_format, $value->last_login);

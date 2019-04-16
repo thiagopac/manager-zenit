@@ -9,11 +9,12 @@
 
 		<div id="kanban-page">
 
-            <?php if($condition == 1) { ?>
-
                 <a v-if="stages.length > 1" href="<?=base_url()?>leads/create" class="btn btn-primary" data-toggle="mainmodal" v-cloak>
                     <?=$this->lang->line('application_create_lead');?>
                 </a>
+
+            <?php if($condition == 1) { ?>
+
                 <a href="<?=base_url()?>leads/status/create" class="btn btn-primary" data-toggle="mainmodal" v-cloak>
                     <?=$this->lang->line('application_create_status');?>
                 </a>
@@ -126,6 +127,14 @@
                         <span v-if="block.proposal_value != `` && block.proposal_value != null" class="label label-info"><?=$core_settings->money_symbol?> {{ block.proposal_value }}</span> <span v-if="(block.city != `` && block.state != ``) && (block.city != null && block.state != null)" class="label label-info">{{ block.city }}/{{ block.state }}</span>
                     </div>
 
+                    <div>
+                        <span v-if="block.owner != ``" class="label label-success">{{ block.owner }}</span>
+                    </div>
+
+                    <div class="block.rated_power_mod != ``">
+                        <span v-if="block.rated_power_mod != ``" class="label label-important">{{ block.rated_power_mod }} <?=$core_settings->rated_power_measurement?></span>
+                    </div>
+
 
 					<div class="block-details" v-if="block.id == openBlock" :class="(block.id == openBlock) ? 'block-details-open' : ''">
 						<ul class="nav nav-tabs nav-tabs-lead">
@@ -224,8 +233,15 @@
 										<span>
 											<?=$this->lang->line('application_proposal_value');?>
 										</span>
-                                        <?=$core_settings->money_symbol." "; ?>{{ block.proposal_value }}
+                                        <?=$core_settings->money_symbol; ?> {{ block.proposal_value }}
                                     </li>
+                                    <li v-if="block.rated_power_mod != null && block.rated_power_mod != ``">
+										<span>
+											<?=$this->lang->line('application_rated_power');?>
+										</span>
+                                        {{ block.rated_power_mod }} <?=$core_settings->rated_power_measurement?>
+                                    </li>
+
                                     <li v-if="block.owner != ''">
 										<span>
 											<?=$this->lang->line('application_lead_owner');?>

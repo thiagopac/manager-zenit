@@ -396,6 +396,18 @@ class Leads extends MY_Controller{
                 $changedDataHistory .= "Responsável pelo lead; ";
             }
 
+            if ($lead->tags != $_POST['tags']){
+                $changedDataHistory .= "Tags; ";
+            }
+
+            if ($lead->proposal_value != $_POST['proposal_value']){
+                $changedDataHistory .= "Valor da proposta; ";
+            }
+
+            if ($lead->rated_power_mod != $_POST['rated_power_mod']){
+                $changedDataHistory .= "Potência nominal; ";
+            }
+
             if ($changedDataHistory != ""){
                 $changedDataHistoryFull = array('lead_id' => $lead->id, 'message' => $this->user->firstname.' alterou os seguintes dados de '.$lead->name.': '.$changedDataHistory);
                 LeadHistory::create($changedDataHistoryFull);

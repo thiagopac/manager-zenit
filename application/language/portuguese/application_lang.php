@@ -949,3 +949,6 @@ $lang['application_notify_comercial_help'] = 'Chamar a atenção da equipe do co
 
 $lang['application_move_previous_status'] = 'Voltar lead';
 $lang['application_move_next_status'] = 'Avançar lead';
+$lang['application_lead_name'] = 'Nome do Lead';
+$lang['application_rated_power'] = 'Potência nominal';
+$lang['application_rated_power_measurement'] = 'Unidade de medida da potência nominal';

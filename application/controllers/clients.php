@@ -230,18 +230,8 @@ class Clients extends MY_Controller
                                         'zipcode' => $_POST['zipcode'],
                                         'city' => $_POST['city'],
                                         'country' => $_POST['country'],
-                                        'province' => $_POST['province'],
-                                        'vat' => $_POST['vat'],
+                                        'state' => $_POST['state'],
                                         'terms' => $terms,
-
-                                        'twitter' => $_POST['twitter'],
-                                        'skype' => $_POST['skype'],
-                                        'linkedin' => $_POST['linkedin'],
-                                        'facebook' => $_POST['facebook'],
-                                        'instagram' => $_POST['instagram'],
-                                        'googleplus' => $_POST['googleplus'],
-                                        'youtube' => $_POST['youtube'],
-                                        'pinterest' => $_POST['pinterest'],
                                      ];
 
                 $company = Company::create($company_data);
@@ -264,14 +254,6 @@ class Clients extends MY_Controller
                                         'city' => $_POST['city'],
                                         'userpic' => 'no-pic.png',
 
-                                        'twitter' => $_POST['twitter'],
-                                        'skype' => $_POST['skype'],
-                                        'linkedin' => $_POST['linkedin'],
-                                        'facebook' => $_POST['facebook'],
-                                        'instagram' => $_POST['instagram'],
-                                        'googleplus' => $_POST['googleplus'],
-                                        'youtube' => $_POST['youtube'],
-                                        'pinterest' => $_POST['pinterest'],
                                      ];
 
                 $client_contact = Client::create($client_data);
