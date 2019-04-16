@@ -416,6 +416,29 @@ class Projects extends MY_Controller
                     }
                 }
 
+                $options = ['conditions' => ['project_id = ? AND sucessors IS NOT NULL', $project->id]];
+                $newTasksHaveSucessors = ProjectHasTask::all($options);
+
+                foreach ($newTasksHaveSucessors as $task){
+
+                    $sucessorsIds = explode(',', $task->sucessors);
+
+                    $new_sucessors = array();
+
+                    foreach ($sucessorsIds as $sucessorId) {
+
+                        if (is_numeric($sucessorId)){
+                            $old_successor = ProjectHasTask::find($sucessorId);
+
+                            $new_sucessor = ProjectHasTask::first(['conditions' => ['project_id = ? AND name = ?', $project->id, $old_successor->name]]);
+                            array_push($new_sucessors, $new_sucessor->id);
+                        }
+                    }
+
+                    $task->sucessors = implode(',', $new_sucessors);
+                    $task->save();
+                }
+
 
             }
 
@@ -423,6 +446,7 @@ class Projects extends MY_Controller
                 $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_create_project_error'));
             } else {
                 $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_create_project_success'));
+
                 $attributes = array('project_id' => $project->id, 'user_id' => $this->user->id);
                 ProjectHasWorker::create($attributes);
             }
