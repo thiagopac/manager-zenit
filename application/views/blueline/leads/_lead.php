@@ -236,7 +236,7 @@ if (isset($lead)) {
             <?=$this->lang->line('application_notify_comercial_team');?>
             <i class="icon dripicons-bell"></i>
         </a>
-        <input type="submit" name="send" class="btn btn-primary silent-submit" data-section="lead" value="<?=$this->lang->line('application_save');?>"
+        <input type="button" name="send" id="send" class="btn btn-primary silent-submit" data-section="lead" value="<?=$this->lang->line('application_save');?>"
         />
         <a class="btn" data-dismiss="modal">
             <?=$this->lang->line('application_close');?>
@@ -254,6 +254,16 @@ if (isset($lead)) {
         $("#phone").mask("(##)####-####", {reverse: false});
         $("#zipcode").mask("#####-####", {reverse: false});
         $("#rated_power_mod").mask("##########.##", {reverse: true});
+
+        $('#send').on('click', function() {
+
+            $(this).val("<?=$this->lang->line('application_wait');?>");
+
+            setTimeout(function(){
+                $('#send').attr('disabled','disabled');
+            }, 10);
+
+        });
 
         if ($("#btn-move-lead-previous").data('previous-destiny') == ''){
             $("#btn-move-lead-previous").hide();
