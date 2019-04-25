@@ -419,31 +419,31 @@
 					</div>
 					<div class="row block-actions" :class="block.completed">
 
-						<a class="col-xs-2 center tippy" :class="(block.address != '' || block.city != '' || block.zipcode != '' || block.country != '') ? '' : 'grayout'"
-						 :href="'https://maps.google.com?q='+block.address+'+'+block.city+'+'+block.zipcode+'+'+block.country" target="_blank"
+						<a class="col-xs-2 center tippy" :class="(block.address != '' || block.city != '' || block.zipcode != '' || block.country != '') ? 'white' : 'transparent'"
+						 :href="(block.address != '' || block.city != '' || block.zipcode != '' || block.country != '') ? 'https://maps.google.com?q='+block.address+'+'+block.city+'+'+block.zipcode+'+'+block.country : ''" target="_blank"
 						 :title="(block.address != '' || block.city != '' || block.zipcode != '' || block.country != '') ? block.address+' '+block.city+' '+block.zipcode+' '+block.country : ''">
 							<i class="icon dripicons-direction"></i>
 						</a>
-						<a class="col-xs-2 center tippy" :class="(block.email != '') ? '' : 'grayout'" :href="'https://mail.google.com/mail/u/1/?view=cm&fs=1&to='+block.email+'&tf=1'"
+						<a class="col-xs-2 center tippy" :class="(block.email != '') ? 'white' : 'transparent'" :href="(block.email != '') ? 'https://mail.google.com/mail/u/1/?view=cm&fs=1&to='+block.email+'&tf=1' : ''"
 
                            :title="block.email" target="_blank">
 							<i class="icon dripicons-mail"></i>
 						</a>
-						<a class="col-xs-2 center tippy" :class="(block.phone != '') ? '' : 'grayout'" :href="'tel:'+normalizePhoneNumber(block.phone)"
+						<a class="col-xs-2 center tippy" :class="(block.phone != '') ? 'white' : 'transparent'" :href="(block.phone != '') ? 'tel:'+normalizePhoneNumber(block.phone) : ''"
 						 :title="block.phone">
 							<i class="icon dripicons-phone"></i>
 						</a>
-						<a class="col-xs-2 center tippy" :class="(block.mobile != '') ? '' : 'grayout'" :href="'tel:'+normalizePhoneNumber(block.mobile)"
+						<a class="col-xs-2 center tippy" :class="(block.mobile != '') ? 'white' : 'transparent'" :href="(block.mobile != '') ? 'tel:'+normalizePhoneNumber(block.mobile) : ''"
 						 :title="block.mobile">
 							<i class="icon dripicons-device-mobile"></i>
 						</a>
                         <a class="col-xs-2 center tippy" :class="(block.private != '1') ? '' : ''" :title="block.private == '1' ? 'Privado' : 'Público'">
-                            <i :class="block.private == 1 ? 'icon dripicons-lock orangered' : 'icon dripicons-lock-open green'"></i>
+                            <i :class="block.private == 1 ? 'icon dripicons-lock white' : 'icon dripicons-lock-open white'"></i>
                         </a>
                         <!--<a class="col-xs-2 center tippy" :class="(block.private != '1') ? '' : ''" title="Histórico do Lead">
                             <i class="icon dripicons-hourglass"></i>
                         </a>-->
-						<a class="col-xs-2 center tippy" href="#" @click="openThisBlock(block.id)" title="<?=$this->lang->line('application_details');?>">
+						<a class="col-xs-2 center tippy white" href="#" @click="openThisBlock(block.id)" title="<?=$this->lang->line('application_details');?>">
 							<i class="icon dripicons-expand-2"></i>
 						</a>
 					</div>

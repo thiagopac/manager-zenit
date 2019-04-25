@@ -3668,6 +3668,7 @@ a.cke_button_off:hover, a.cke_button_off:focus, a.cke_button_off:active, a.cke_b
 		}
 		.login .logo img{
 			max-width: 300px;
+			filter: invert(44%) sepia(3%) saturate(3%) hue-rotate(316deg) brightness(89%) contrast(93%);
 		}
 		.form-signin {
 			max-width: 490px;

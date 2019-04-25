@@ -35,7 +35,7 @@ class Leads extends MY_Controller{
 
     public function search($search){
         $this->view_data['search'] = $search;
-        $this->content_view = 'leads/all';
+        $this->content_view = 'leads/_lead';
     }
 
     public function all(){
@@ -66,7 +66,7 @@ class Leads extends MY_Controller{
 
             $completed = (($current - $start) / ($end - $start)) * 100;
 
-            if (is_infinite($completed) == false) { if ($completed >= 100) { $lead->completed = "danger-lead"; }else if($completed >= 60){ $lead->completed = "warning-lead"; }}else{ $lead->completed = "";}
+            if (is_infinite($completed) == false) { if ($completed >= 100) { $lead->completed = "danger-lead"; }else if($completed >= 60){ $lead->completed = "warning-lead"; }else{ $lead->completed = "normal-lead";} }else{ $lead->completed = "";}
         }
 
         $stages = LeadStatus::find('all', array('order' => "`order` ASC"));

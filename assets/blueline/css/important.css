@@ -166,23 +166,10 @@ ul.todo li .lbl p {
     margin-top: -21px;
 }
 
-.orangered {
-    color: orangered;
-}
 
-.green {
-    color: green;
-}
-
-.warning-lead {
-    background: #fde9a1 !important;
-}
-
-.danger-lead {
-    background: #ffb3b3 !important;
-}
 
 .block-proposal-value {
     font-family: Open Sans, Arial !important;
     font-weight: normal;
 }
+

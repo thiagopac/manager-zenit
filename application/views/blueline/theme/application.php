@@ -55,6 +55,7 @@ $message_icon = false;
 
     <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/app.css"/>
     <link rel="stylesheet" href="https://diagramclub.github.io/styles/user.css"/>
+    <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/user.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/important.css"/>
 
     <?=get_theme_colors($core_settings);?>

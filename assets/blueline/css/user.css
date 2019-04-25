@@ -1,20 +1,55 @@
+.btn-danger {
+    background: #f0284a !important;
+}
 
-				
-.table .progress .bar,
-.login .btn-primary,
-.login .logo,
-.logo,
-.navbar-header,
-.modal-header,
-.ui-slider-range,
-.ui-slider-handle:before,
-.chosen-container .chosen-results li.highlighted,
-.paginate_enabled_next,
-.paginate_enabled_previous,
-.datepicker table tr td.active,
-.datepicker table tr td.active:hover,
-.datepicker table tr td.active.disabled,
-.datepicker table tr td.active.disabled:hover,
-.ui-slider-handle:before,
-.login .forgotpass-info,
-.login .forgotpass-success {}
+.btn-success {
+    background: #27ae60 !important;
+}
+
+.btn-primary {
+    background: #0081ff !important;
+}
+
+.btn-secondary {
+    background: #e67e22 !important;
+}
+
+.btn-warning {
+    background: #ffa61e !important;
+}
+
+.btn-info {
+    background: #f1f1f1 !important;
+    color: #0081ff !important;
+}
+
+.orangered {
+    color: orangered;
+}
+
+.green {
+    color: green;
+}
+
+.white {
+    color: white;
+}
+
+.warning-lead {
+    /*background: #fde9a1 !important;*/
+    background: #ffa61e !important;
+}
+
+.danger-lead {
+    /*background: #ffb3b3 !important;*/
+    background: #ec492c !important;
+}
+
+.normal-lead {
+    background: #bcc2c7 !important;
+}
+
+.transparent {
+    color: transparent !important;
+}
+						

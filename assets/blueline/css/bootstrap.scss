@@ -1,0 +1,35 @@
+/* Bottstrap 3 */
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+/* jquery plugins */
+@import "plugins/jquery-ui-1.10.3.custom.min";
+@import "plugins/colorpicker";
+@import "plugins/jquery-slider";
+@import "plugins/summernote";
+@import "plugins/chosen";
+@import "plugins/datatables.min";
+@import "plugins/nprogress";
+@import "plugins/jquery-labelauty";
+@import "plugins/easy-pie-chart-style";
+@import "plugins/fullcalendar";
+@import "plugins/reflex.min";
+@import "plugins/animate";
+@import "plugins/bootstrap-editable";
+@import "plugins/jquery.ganttView";
+@import "plugins/dropzone.min";
+@import "plugins/lightbox.min";
+@import "plugins/circle";
+@import "plugins/fileicons";
+@import "plugins/loaders";
+
+/* From Node_Modules*/
+@import "~tippy.js/src/scss/tippy";
+@import "~flatpickr/dist/themes/dark";
+/* Icons */
+@import "ionicons.min";
+@import "dripicons";
+
+/* Blueline Theme */
+@import "blueline";
+
+/* Vue Styles */
+@import "vue/kanban";
