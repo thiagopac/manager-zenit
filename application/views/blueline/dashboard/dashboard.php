@@ -39,13 +39,13 @@
     <div class="grid__col-sm-12 grid__col-md-8 grid__col-lg-9 grid__col--bleed">
       <div class="grid grid--align-content-start">
 <?php if($this->user->admin == "1"){ ?>
-        <div class="grid__col-12 update-panel">
+        <!--<div class="grid__col-12 update-panel">
           <div class="tile-base box-shadow">
-              <div class="panel-heading red"><span class="title red"><?=$this->lang->line('application_update_available');?></span><span id="hideUpdate"class="pull-right"><i class="ion-close"></i></span></div>
-              <div class="panel-content"><h2><a href="<?=base_url()?>settings/updates"><?=$this->lang->line('application_new_update_is_ready');?></a></h2></div>
+              <div class="panel-heading red"><span class="title red"><?/*=$this->lang->line('application_update_available');*/?></span><span id="hideUpdate"class="pull-right"><i class="ion-close"></i></span></div>
+              <div class="panel-content"><h2><a href="<?/*=base_url()*/?>settings/updates"><?/*=$this->lang->line('application_new_update_is_ready');*/?></a></h2></div>
               <div class="panel-footer">Version <span id="versionnumber"></span></div>
           </div>
-        </div>
+        </div>-->
 
 <!-- DASHBOARD - QUADRO DE PAGAMENTOS FEITOS DO MODULO FINANCEIRO -->
         <!-- <div class="grid__col-6 grid__col-xs-6 grid__col-sm-6 grid__col-md-6 grid__col-lg-3">
@@ -184,74 +184,140 @@
 
 
 <?php } ?>
-
-        <div class="grid__col-12" id="task-grid">
-                  <?php if(isset($tasks))
-                  { ?>
-                    <div id="task-list" class="stdpad box-shadow">
-                        <div class="table-head"><?=$this->lang->line('application_my_open_tasks');?></div>
-
-                        <div id="main-nano-wrapper" class="nano">
-                            <div class="nano-content">
-                                <ul id="jp-container" class="todo jp-container">
-                                    <?php
-                                    $count = 0;
-                                    $projectname = "";
-                                    foreach ($tasks as $task):
-
-                                        if ($task->start_date == null || $task->due_date == null){ continue; }
-
-                                        $count = $count+1;
-                                        if(is_object($task->project) && $projectname != $task->project->name && in_array($task->project, $this->user->projects))
-                                        {
-                                            $projectname = $task->project->name;
-                                            echo "<h5>".$projectname."</h5>";
-                                        }
-                                    ?>
-
-                                    <?php if (in_array($task->project, $this->user->projects)) { ?>
-                                    <li data-href="<?=base_url()?>projects/view/<?=$task->project->id?>" id="mytask_<?=$task->id;?>" class="<?=$task->status;?> task_<?=$task->id;?> priority<?=$task->priority;?> list-item task-row <?php
-
-                                    $start = strtotime($task->start_date);
-                                    $end = strtotime($task->due_date);
-                                    $current =  strtotime(date('Y-m-d H:i'));
-
-                                    $completed = (($current - $start) / ($end - $start)) * 100;
-
-                                    if (is_infinite($completed) == false) { if ($completed >= 100) { echo "danger-task"; }else if($completed >= 60){ echo "warning-task"; }}else{ echo "";}
-
-                                    ?>">
-                                        <span class="lbl-">
-                                            <p class="truncate">
-                                                <a href="<?=base_url()?>projects/tasks/<?=$project->id;?>/check/<?=$task->id;?>" class="ajax-silent task-check"></a>
-                                                <input name="form-field-checkbox" class="checkbox-nolabel task-check dynamic-reload checkbox-task" id="task_<?=$task->id;?>" data-reload="" data-reload2="" type="checkbox" data-link="<?=base_url()?>projects/tasks/<?=$task->project_id;?>/check/<?=$task->id;?>" <?=$task->status;?>/>
-<!--                                                <input name="form-field-checkbox" type="checkbox" class="checkbox-nolabel task-check" data-link="--><?//=base_url()?><!--projects/tasks/--><?//=$task->project_id;?><!--/check/--><?//=$task->id;?><!--" --><?//=$task->status;?><!--/>-->
-                                                <a href="<?=base_url()?>projects/view/<?=$task->project_id;?>"><?=$task->name;?></a>
-                                            </p>
-                                        </span>
-                                        <span class="pull-right hidden-xs" style="margin-top: -43px;">
-<!--                                            <span class="hidden-sm hidden-xs" style="margin-right: 10px; left: 8px !important; font-size: 11px!important; font-family: Open Sans, Arial; font-weight: 300!important;">[--><?//=$task->project->name?><!--]</span>-->
-                                            <span class="task-cell-start-date-end-date"><?php if ($task->start_date != null){ ?><?=date("d/m/Y H:i", strtotime($task->start_date));?><?php } ?> <?php if ($task->start_date != null || $task->due_date != null){  ?>➔<?php } ?> <?php if ($task->due_date != null){ ?><?=date("d/m/Y H:i", strtotime($task->due_date));?><?php }else{ ?> <span style="visibility: hidden;"> <?=date("d/m/Y H:i", time());?> </span> <?php } ?></span>
-                                              <?php if ($task->public != 0) {  ?><span class="list-button"><i class="icon dripicons-preview tt" title="" data-original-title="<?=$this->lang->line('application_task_public');?>"></i></span><?php } ?>
-                                              <a href="<?=base_url()?>projects/tasks/<?=$task->project_id;?>/update/<?=$task->id;?>" id="a_mytask_<?=$task->id;?>" class="edit-button" data-toggle="mainmodal"><i class="icon dripicons-gear"></i></a>
-                                        </span>
-                                    </li>
-                                        <?php } ?>
-                                    <?php
-                                    endforeach;
-                                    if($count == 0)
-                                    { ?>
-                                        <div class="empty">
-                                          <i class="ion-checkmark-round"></i><br>
-                                          <?=$this->lang->line('application_no_tasks_yet');?>
-                                        </div>
-                              <?php } ?>
-                                </ul>
-                            </div>
-                        </div>
+        <div class="grid__col-12">
+            <div class="">
+                <div class="btn-group pull-right margin-right-3">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <?php if (isset($active_task_filter)) {
+                            echo $this->lang->line('application_due_' . $active_task_filter);
+                        } else {
+                            echo $this->lang->line('application_expiration');
+                        } ?>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right" role="menu">
+                        <li>
+                            <a id="all" href="<?=base_url()?>dashboard/taskfilter/all">
+                                <?=$this->lang->line('application_due_all');?>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="delayed" href="<?=base_url()?>dashboard/taskfilter/delayed">
+                                <?=$this->lang->line('application_due_delayed');?>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="today" href="<?=base_url()?>dashboard/taskfilter/today">
+                                <?=$this->lang->line('application_due_today');?>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="two" href="<?=base_url()?>dashboard/taskfilter/two">
+                                <?=$this->lang->line('application_due_two');?>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="week" href="<?=base_url()?>dashboard/taskfilter/week">
+                                <?=$this->lang->line('application_due_week');?>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="weekahead" href="<?=base_url()?>dashboard/taskfilter/weekahead">
+                                <?=$this->lang->line('application_due_weekahead');?>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <p class="">
+                <div class="box-shadow">
+                    <div class="table-head">
+                        <?=$this->lang->line('application_tasks');?>
                     </div>
-            <?php } ?>
+                    <div class="table-div">
+                        <table class="data table" id="tasks" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
+                            <thead>
+                            <tr>
+                                <th class="hidden-xs">
+                                    <?=$this->lang->line('application_task_name');?>
+                                </th>
+                                <th>
+                                    <?=$this->lang->line('application_start_date');?> ➔ <?=$this->lang->line('application_due_date');?>
+                                </th>
+                                <th class="hidden-xs">
+                                    <?=$this->lang->line('application_project');?>
+                                </th>
+                                <th class="hidden-xs">
+                                    <?=$this->lang->line('application_assigned_to');?>
+                                </th>
+                                <th class="hidden-xs">
+                                    <?=$this->lang->line('application_expiration');?>
+                                </th>
+                                <th>
+                                    <?=$this->lang->line('application_action');?>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $i = 0; foreach ($tasks as $task): $i = $i + 1;?>
+                                <tr id="<?=$task->id;?>">
+                                    <td class="hidden-xs">
+                                        <span class="static-color-preview" style="background-color:<?=$value->color?>"></span>
+                                        <?=$task->name;?>
+                                    </td>
+                                    <td>
+                                        <?=fnDateYMDHItoDMYHI($task->start_date);?> ➔ <?=fnDateYMDHItoDMYHI($task->due_date);?>
+                                    </td>
+                                    <td>
+                                        <?=$task->project->name;?>
+                                    </td>
+                                    <td class="hidden-xs">
+                                        <?=$task->user->firstname;?>
+                                    </td>
+                                    <td class="hidden-xs">
+                                        <?
+                                            $end = strtotime($task->due_date);
+                                        $now = new DateTime();
+                                        $due_date = new DateTime($task->due_date);
+
+                                            $current =  strtotime(date('Y-m-d H:i'));
+                                            $interval = $due_date->diff($now);
+
+                                            if ($due_date > $now) {
+
+                                                if ($interval->d >= 7) {
+                                                    $color = "label-success";
+                                                }else if($interval->d > 2 && $interval->d < 7){
+                                                    $color = "label-info";
+                                                }else if($interval->d > 1 && $interval->d <= 2){
+                                                    $color = "label-attention";
+                                                }else if($interval->d >= 0 && $interval->d <= 1){
+                                                    $color = "label-warning";
+                                                }
+
+                                                echo "<span class='label $color'>" . $interval->format("%a dias e %h horas") . "</span>";
+
+                                            }else {
+                                                echo '<span class="label label-important">' . $this->lang->line('application_delayed_task') . '</span>';
+                                            }
+
+                                        ?>
+                                    </td>
+                                    <td class="option" width="5%">
+                                        <a href="<?=base_url()?>projects/tasks/<?=$task->project_id;?>/update/<?=$task->id;?>" class="btn-option tt" title="
+											<?=$this->lang->line('application_edit_project'); ?>" data-toggle="mainmodal">
+                                            <i class="icon dripicons-gear"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach;?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </p>
         </div>
+
         <div class="grid__col-12">
                   <?php if($tickets_access){ ?>
                     <div class="stdpad stdpad--auto-height box-shadow"><div class="table-head"><?=$this->lang->line('application_new_tickets');?></div>

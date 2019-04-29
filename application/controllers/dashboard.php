@@ -2,6 +2,8 @@
     exit('No direct script access allowed');
 }
 
+include_once(dirname(__FILE__).'/../third_party/functions.php');
+
 class Dashboard extends MY_Controller
 {
     public function __construct()
@@ -43,7 +45,13 @@ class Dashboard extends MY_Controller
         }
         if (in_array('projects', $this->view_data['module_permissions'])) {
             $sql = 'SELECT * FROM project_has_tasks WHERE status != "done" AND user_id = "' . $this->user->id . '" ORDER BY project_id';
-            $taskquery = ProjectHasTask::find('all', ['conditions' => ['status != ? and user_id = ?', 'done', $this->user->id], 'order' => 'project_id desc']);
+
+            if ($this->user->admin == 0) {
+                $taskquery = ProjectHasTask::find('all', ['conditions' => ['status != ? and user_id = ?', 'done', $this->user->id], 'order' => 'project_id desc']);
+            }else{
+                $taskquery = ProjectHasTask::find('all', ['conditions' => ['status != ? and start_date != ? and due_date != ?', 'done', '', ''], 'order' => 'project_id asc']);
+            }
+
             $this->view_data['tasks'] = $taskquery;
         }
     }
@@ -235,4 +243,60 @@ class Dashboard extends MY_Controller
 
         $this->content_view = 'dashboard/dashboard';
     }
+
+    public function taskfilter($filter){
+
+        if ($this->user->admin == 0) {
+
+            switch ($filter) {
+                case 'all':
+                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ?', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
+                    break;
+                case 'delayed':
+                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ? and NOW() > start_date and NOW() > due_date', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
+                    break;
+                case 'today':
+                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ? and NOW() > start_date and due_date BETWEEN NOW() AND NOW() + INTERVAL 1 DAY', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
+                    break;
+                case 'two':
+                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ? and NOW() > start_date and due_date BETWEEN NOW() AND NOW() + INTERVAL 2 DAY', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
+                    break;
+                case 'week':
+                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ? and NOW() > start_date and due_date BETWEEN NOW() AND NOW() + INTERVAL 1 WEEK', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
+                    break;
+                case 'weekahead':
+                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ? and NOW() > start_date and due_date BETWEEN NOW() AND NOW() + INTERVAL 1 YEAR', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
+                    break;
+            }
+
+        } else {
+
+            switch ($filter) {
+                case 'all':
+                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['status != ? and start_date != ? and due_date != ?', 'done', '', ''], 'order' => 'project_id asc']);
+                    break;
+                case 'delayed':
+                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['status != ? and start_date != ? and due_date != ? and NOW() > start_date and NOW() > due_date', 'done', '', ''], 'order' => 'project_id asc']);
+                    break;
+                case 'today':
+                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['status != ? and start_date != ? and due_date != ? and NOW() > start_date and due_date BETWEEN NOW() AND NOW() + INTERVAL 1 DAY', 'done', '', ''], 'order' => 'project_id asc']);
+                    break;
+                case 'two':
+                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['status != ? and start_date != ? and due_date != ? and NOW() > start_date and due_date BETWEEN NOW() AND NOW() + INTERVAL 2 DAY', 'done', '', ''], 'order' => 'project_id asc']);
+                    break;
+                case 'week':
+                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['status != ? and start_date != ? and due_date != ? and NOW() > start_date and due_date BETWEEN NOW() AND NOW() + INTERVAL 1 WEEK', 'done', '', ''], 'order' => 'project_id asc']);
+                    break;
+                case 'weekahead':
+                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['status != ? and start_date != ? and due_date != ? and NOW() > start_date and due_date BETWEEN NOW() AND NOW() + INTERVAL 1 YEAR', 'done', '', ''], 'order' => 'project_id asc']);
+                    break;
+            }
+        }
+
+        $this->view_data['tasks'] = $taskquery;
+        $this->view_data['active_task_filter'] = $filter;
+
+        $this->content_view = 'dashboard/dashboard';
+    }
+
 }
