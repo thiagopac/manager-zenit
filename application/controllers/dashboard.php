@@ -61,66 +61,7 @@ class Dashboard extends MY_Controller
         $this->index($year);
     }
 
-    public function index($year = false)
-    {
-        if (!$year) {
-            $year = date('Y', time());
-        }
-        $currentYearMonth = date('Y-m', time());
-        $thismonth = date('m');
-        $yearMonth = $year . '-' . $thismonth;
-
-        // View Values
-        $this->view_data['month'] = date('M');
-        $this->view_data['year'] = $year;
-        $this->view_data['firstlogin'] = ($this->user->email == 'local@localhost') ? true : false;
-
-        // Projects Stats
-        $this->view_data['projects_open'] = Project::count(['conditions' => ['progress < ?', 100]]);
-        $this->view_data['projects_all'] = Project::count();
-
-        //Format main statistic labels and values
-        $line1 = '';
-        $line2 = '';
-        $labels = '';
-        $untilMonth = $thismonth;
-        if ($year != date('Y', time())) {
-            $untilMonth = 12;
-        }
-        if ($untilMonth <= 2) {
-            $untilMonth = 3;
-        }
-
-        for ($i = 01; $i <= $untilMonth; $i++) {
-            $monthname = date_format(date_create_from_format('Y-m-d', '2016-' . $i . '-01'), 'M');
-            $monthname = $this->lang->line('application_' . $monthname);
-            $num = '0';
-            $num2 = '0';
-            foreach ($this->view_data['stats'] as $value):
-                  $act_month = explode('-', $value->paid_date);
-            if ($act_month[1] == $i) {
-                $num = sprintf('%02.2d', $value->summary);
-            }
-            endforeach;
-            foreach ($this->view_data['stats_expenses'] as $value):
-                  $act_month = explode('-', $value->date_month);
-            if ($act_month[1] == $i) {
-                $num2 = sprintf('%02.2d', $value->summary);
-            }
-            endforeach;
-            $i = sprintf('%02.2d', $i);
-            $labels .= '"' . $monthname . '"';
-            $line1 .= $num;
-            $line2 .= $num2;
-            if ($i != '12') {
-                $line1 .= ',';
-                $line2 .= ',';
-                $labels .= ',';
-            }
-        }
-        $this->view_data['labels'] = $labels;
-        $this->view_data['line1'] = $line1;
-        $this->view_data['line2'] = $line2;
+    public function index($year = false) {
 
         //Calendar
         if ($this->user->admin == 0) {
@@ -265,7 +206,7 @@ class Dashboard extends MY_Controller
                     $taskquery = ProjectHasTask::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ? and NOW() > start_date and due_date BETWEEN NOW() AND NOW() + INTERVAL 1 WEEK', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
                     break;
                 case 'weekahead':
-                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ? and NOW() > start_date and due_date BETWEEN NOW() AND NOW() + INTERVAL 1 YEAR', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
+                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ? and NOW() > start_date and due_date BETWEEN NOW() + INTERVAL 1 WEEK AND NOW() + INTERVAL 1 YEAR', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
                     break;
             }
 
@@ -288,7 +229,7 @@ class Dashboard extends MY_Controller
                     $taskquery = ProjectHasTask::find('all', ['conditions' => ['status != ? and start_date != ? and due_date != ? and NOW() > start_date and due_date BETWEEN NOW() AND NOW() + INTERVAL 1 WEEK', 'done', '', ''], 'order' => 'project_id asc']);
                     break;
                 case 'weekahead':
-                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['status != ? and start_date != ? and due_date != ? and NOW() > start_date and due_date BETWEEN NOW() AND NOW() + INTERVAL 1 YEAR', 'done', '', ''], 'order' => 'project_id asc']);
+                    $taskquery = ProjectHasTask::find('all', ['conditions' => ['status != ? and start_date != ? and due_date != ? and NOW() > start_date and due_date BETWEEN NOW() + INTERVAL 1 WEEK AND NOW() + INTERVAL 1 YEAR', 'done', '', ''], 'order' => 'project_id asc']);
                     break;
             }
         }

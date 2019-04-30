@@ -55,34 +55,71 @@
     color: transparent !important;
 }
 
-.label-important {
-    color: #ec492c !important;
-    border: 1px solid #ec492c !important;
+.dashboard-label.label-important {
+    font-family: Tahoma;
+    font-weight: 100;
+    background: #ec492c !important;
+    border: 0px;
+    padding: 4px;
+    font-size: 10px;
+    color: white !important;
 }
 
-.label-warning {
-    color: #e67e22 !important;
-    border: 1px solid #e67e22 !important;
+.dashboard-label.label-warning {
+    font-family: Tahoma;
+    font-weight: 100;
+    background: #ffbd30 !important;
+    border: 0px;
+    padding: 4px;
+    font-size: 10px;
+    color: white !important;
 }
 
-.label-attention {
-    color: #f39c12 !important;
-    border: 1px solid #f39c12 !important;
+.dashboard-label.label-attention {
+    font-family: Tahoma;
+    font-weight: 100;
+    background: #3498db !important;
+    border: 0px;
+    padding: 4px;
+    font-size: 10px;
+    color: white !important;
 }
 
-.label-info {
-    color: #3498db !important;
-    border: 1px solid #3498db !important;
+.dashboard-label.label-info {
+    font-family: Tahoma;
+    font-weight: 100;
+    background: #27ae60 !important;
+    border: 0px;
+    padding: 4px;
+    font-size: 10px;
+    color: white !important;
 }
 
-.label-success {
-    color: #27ae60 !important;
-    border: 1px solid #27ae60 !important;
+.dashboard-label.label-success {
+    font-family: Tahoma;
+    font-weight: 100;
+    background: #95a5a6 !important;
+    border: 0px;
+    padding: 4px;
+    font-size: 10px;
+    color: white !important;
 }
 
 .lead-screen-tv-size {
     min-width: 150px !important;
     max-width: 200px !important;
+}
+
+.lead-title-tv-size {
+    font-size: 12px !important;
+    white-space: normal !important;
+    width: calc(100%) !important;
+}
+
+.lead-status-tv-title {
+    font-size: 14px !important;
+    white-space: normal !important;
+    height: 60px !important;
 }
 
 .toggle-on {
@@ -97,4 +134,8 @@
     height: 27px !important;
     min-height: 27px !important;
     bottom: 1px !important;
+}
+
+.dashboard-label {
+    width: 60px !important;
 }

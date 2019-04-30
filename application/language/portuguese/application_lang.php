@@ -964,3 +964,7 @@ $lang['application_due_today'] = 'Vencendo hoje';
 $lang['application_due_two'] = 'Vencendo em 2 dias';
 $lang['application_due_week'] = 'Vencendo em 1 semana';
 $lang['application_due_weekahead'] = 'Vencendo acima de uma semana';
+
+$lang['application_task_chart'] = 'Gráfico de tarefas';
+
+$lang['application_task_filter'] = 'Filtro de tarefas';

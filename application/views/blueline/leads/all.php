@@ -113,13 +113,13 @@
 							 @click="openThisSwitch(block.id)"></i>
 							<transition name="fade-slide-down">
 								<div v-if="openSwitch == block.id" class="switcher-group">
-									<i v-if="block.icon != null && block.icon != ''" class="status-icon ionicons ion-ios-pricetag tippy" data-position="left"
+									<i v-if="block.icon != null && block.icon != ''" class="status-icon ionicons ion-ios-pricetag" data-position="left"
 									 title="" @click="setIcon(block.id, '')"></i>
-									<i v-if="block.icon != 'cold'" class="status-icon ionicons cold tippy" data-position="left" title="<?/*=htmlspecialchars(addslashes($this->lang->line('application_cold')));*/?>"
+									<i v-if="block.icon != 'cold'" class="status-icon ionicons cold" data-position="left" title="<?/*=htmlspecialchars(addslashes($this->lang->line('application_cold')));*/?>"
 									 @click="setIcon(block.id, 'cold')"></i>
-									<i v-if="block.icon != 'hot'" class="status-icon ionicons hot tippy" data-position="left" title="<?/*=htmlspecialchars(addslashes($this->lang->line('application_hot')));*/?>"
+									<i v-if="block.icon != 'hot'" class="status-icon ionicons hot" data-position="left" title="<?/*=htmlspecialchars(addslashes($this->lang->line('application_hot')));*/?>"
 									 @click="setIcon(block.id, 'hot')"></i>
-									<i v-if="block.icon != 'won'" class="status-icon ionicons won tippy" data-position="left" title="<?/*=htmlspecialchars(addslashes($this->lang->line('application_won')));*/?>"
+									<i v-if="block.icon != 'won'" class="status-icon ionicons won" data-position="left" title="<?/*=htmlspecialchars(addslashes($this->lang->line('application_won')));*/?>"
 									 @click="setIcon(block.id, 'won')"></i>
 								</div>
 							</transition>-->
@@ -150,32 +150,32 @@
 
 							<li :class="(openDetails == block.id) ? 'active' : '' ">
 								<a @click="loadDetails(block.id)" href="#details">
-									<i class="icon dripicons-information tippy" title="<?=$this->lang->line('application_details');?>"></i>
+									<i class="icon dripicons-information" title="<?=$this->lang->line('application_details');?>"></i>
 								</a>
 							</li>
 
 							<li :class="(openActivities == block.id) ? 'active' : '' ">
 								<a @click="loadActivities(block.id)" href="#activities">
-									<i class="icon dripicons-message tippy" title="<?=$this->lang->line('application_activities');?>"></i>
+									<i class="icon dripicons-message" title="<?=$this->lang->line('application_activities');?>"></i>
 								</a>
 							</li>
 
 							<li :class="(openReminders == block.id) ? 'active' : '' ">
 								<a id="remindertab" @click="loadReminders(block.id)" href="#reminders">
-									<i class="icon dripicons-bell tippy" title="<?=$this->lang->line('application_reminder');?>"></i>
+									<i class="icon dripicons-bell" title="<?=$this->lang->line('application_reminder');?>"></i>
 								</a>
 							</li>
 
                             <li :class="(openHistory == block.id) ? 'active' : '' ">
                                 <a @click="loadHistory(block.id)" href="#history">
-                                    <i class="icon dripicons-hourglass tippy" title="<?=$this->lang->line('application_history');?>"></i>
+                                    <i class="icon dripicons-hourglass" title="<?=$this->lang->line('application_history');?>"></i>
                                 </a>
                             </li>
 
 <!--                            --><?php //if($condition == 1) { ?>
 							<li>
 								<a data-toggle="mainmodal" :href="'<?=base_url()?>leads/edit/'+block.id">
-									<i class="icon dripicons-gear tippy" title="<?=$this->lang->line('application_edit');?>"></i>
+									<i class="icon dripicons-gear" title="<?=$this->lang->line('application_edit');?>"></i>
 								</a>
 							</li>
 <!--							--><?//}?>
@@ -291,9 +291,9 @@
 									<textarea name="message" v-model.trim.lazy="commentForm.message" class="form-control autogrow message" placeholder="<?=$this->lang->line('application_write_message');?>"></textarea>
 									<span class="options">
 
-										<i class="ion-ios-paperplane-outline tippy" v-if="!formLoading" @click="submitComment(block.id)" title="<?=$this->lang->line('application_send');?>"></i>
+										<i class="ion-ios-paperplane-outline" v-if="!formLoading" @click="submitComment(block.id)" title="<?=$this->lang->line('application_send');?>"></i>
 										<img class="loading" src="<?=base_url()?>assets/blueline/images/loading_mini_ripple.gif" v-show="formLoading" />
-										<i class="ion-android-attach tippy chat-attach" v-if="!formLoading" title="<?=$this->lang->line('application_attachment');?>"></i>
+										<i class="ion-android-attach chat-attach" v-if="!formLoading" title="<?=$this->lang->line('application_attachment');?>"></i>
 										<input type="file" name="userfile" @change="uploadAttachment" :data-image-holder="'image_holder_'+block.id" class="chat-attachment lead-attachment hidden">
 
 									</span>
@@ -304,7 +304,7 @@
 												<div class="progress-bar" role="progressbar" :aria-valuenow="uploadProcess" aria-valuemin="0" aria-valuemax="100" :style="'width:'+ uploadProcess+'%'"></div>
 											</div>
 										</div>
-										<span v-if="!uploadProcess" class="progress-bar tippy" @click="removeAttachment" title="<?=$this->lang->line('application_delete');?>">
+										<span v-if="!uploadProcess" class="progress-bar" @click="removeAttachment" title="<?=$this->lang->line('application_delete');?>">
 											<i class="ionicons ion-close-round"></i>
 										</span>
 										<img v-if="attachment.image" :src="attachment.image" />
@@ -387,7 +387,7 @@
 											</div>
 
 											<p>
-												<i @click="toggleReminder(reminder.id)" class="ionicons reminder-check tippy" :class="(reminder.done == 1) ? 'ion-android-checkbox-outline' : 'ion-android-checkbox-outline-blank'"
+												<i @click="toggleReminder(reminder.id)" class="ionicons reminder-check" :class="(reminder.done == 1) ? 'ion-android-checkbox-outline' : 'ion-android-checkbox-outline-blank'"
 												 title="<?=$this->lang->line('application_done');?>"></i> {{ reminder.title }}</p>
 										</div>
 									</li>
@@ -428,31 +428,31 @@
 					</div>
 					<div class="row block-actions" :class="block.completed">
 
-						<a class="col-xs-2 center tippy" :class="(block.address != '' || block.city != '' || block.zipcode != '' || block.country != '') ? 'white' : 'transparent'"
+						<a class="col-xs-2 center" :class="(block.address != '' || block.city != '' || block.zipcode != '' || block.country != '') ? 'white' : 'transparent'"
 						 :href="(block.address != '' || block.city != '' || block.zipcode != '' || block.country != '') ? 'https://maps.google.com?q='+block.address+'+'+block.city+'+'+block.zipcode+'+'+block.country : ''" target="_blank"
 						 :title="(block.address != '' || block.city != '' || block.zipcode != '' || block.country != '') ? block.address+' '+block.city+' '+block.zipcode+' '+block.country : ''">
 							<i class="icon dripicons-direction"></i>
 						</a>
-						<a class="col-xs-2 center tippy" :class="(block.email != '') ? 'white' : 'transparent'" :href="(block.email != '') ? 'https://mail.google.com/mail/u/1/?view=cm&fs=1&to='+block.email+'&tf=1' : ''"
+						<a class="col-xs-2 center" :class="(block.email != '') ? 'white' : 'transparent'" :href="(block.email != '') ? 'https://mail.google.com/mail/u/1/?view=cm&fs=1&to='+block.email+'&tf=1' : ''"
 
                            :title="block.email" target="_blank">
 							<i class="icon dripicons-mail"></i>
 						</a>
-						<a class="col-xs-2 center tippy" :class="(block.phone != '') ? 'white' : 'transparent'" :href="(block.phone != '') ? 'tel:'+normalizePhoneNumber(block.phone) : ''"
+						<a class="col-xs-2 center" :class="(block.phone != '') ? 'white' : 'transparent'" :href="(block.phone != '') ? 'tel:'+normalizePhoneNumber(block.phone) : ''"
 						 :title="block.phone">
 							<i class="icon dripicons-phone"></i>
 						</a>
-						<a class="col-xs-2 center tippy" :class="(block.mobile != '') ? 'white' : 'transparent'" :href="(block.mobile != '') ? 'tel:'+normalizePhoneNumber(block.mobile) : ''"
+						<a class="col-xs-2 center" :class="(block.mobile != '') ? 'white' : 'transparent'" :href="(block.mobile != '') ? 'tel:'+normalizePhoneNumber(block.mobile) : ''"
 						 :title="block.mobile">
 							<i class="icon dripicons-device-mobile"></i>
 						</a>
-                        <a class="col-xs-2 center tippy" :class="(block.private != '1') ? '' : ''" :title="block.private == '1' ? 'Privado' : 'Público'">
+                        <a class="col-xs-2 center" :class="(block.private != '1') ? '' : ''" :title="block.private == '1' ? 'Privado' : 'Público'">
                             <i :class="block.private == 1 ? 'icon dripicons-lock white' : 'icon dripicons-lock-open white'"></i>
                         </a>
-                        <!--<a class="col-xs-2 center tippy" :class="(block.private != '1') ? '' : ''" title="Histórico do Lead">
+                        <!--<a class="col-xs-2 center" :class="(block.private != '1') ? '' : ''" title="Histórico do Lead">
                             <i class="icon dripicons-hourglass"></i>
                         </a>-->
-						<a class="col-xs-2 center tippy white" href="#" @click="openThisBlock(block.id)" title="<?=$this->lang->line('application_details');?>">
+						<a class="col-xs-2 center white" href="#" @click="openThisBlock(block.id)" title="<?=$this->lang->line('application_details');?>">
 							<i class="icon dripicons-expand-2"></i>
 						</a>
 					</div>
@@ -479,6 +479,9 @@ jQuery(document).ready(function($) {
 
     $("#tv-screen").on('change', function () {
         $(".drag-column").toggleClass("lead-screen-tv-size");
+        $(".block-title").toggleClass("lead-title-tv-size");
+        $(".tippy").toggleClass("lead-status-tv-title");
+
     });
 
 });

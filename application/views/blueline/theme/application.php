@@ -239,7 +239,7 @@ $message_icon = false;
 
                                        <div class="two-columns">
                                            <div style=""><?php $data['core_settings'] = Setting::first();echo date($data['core_settings']->date_format . ' ' . $data['core_settings']->date_time_format, strtotime($notification->created_at))?></div>
-                                           <div><?php if ($notification->status == 'new') : ?><span class="ajax-silent mark_read" data-href="<?=base_url()?>notifications/read/<?=$notification->id;?>/read" style="cursor: pointer" id="<?=$notification->id?>">Marcar lido<span><? endif; ?></div>
+                                           <div><?php if ($notification->status == 'new') : ?><span class="ajax-silent mark_read" data-href="<?=base_url()?>notifications/read/<?=$notification->id;?>/read" style="cursor: pointer; color: #2980b9" id="<?=$notification->id?>">Marcar lido<span><? endif; ?></div>
                                        </div>
 
                                    </li>

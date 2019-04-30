@@ -17,20 +17,65 @@
         <small><?=sprintf($this->lang->line('application_welcome_subline'), $messages_new[0]->amount, $event_count_for_today);?></small>
       </div>
       <div class="grid__col-md-5 dashboard-header hidden-xs">
-          <div class="grid grid--bleed grid--justify-end">
+          <!--<div class="grid grid--bleed grid--justify-end">
               <div class="grid__col-4 grid__col-lg-3 grid--align-self-center">
-                <h6><?=$this->lang->line('application_tasks');?></h6>
-                  <h2><?=count($tasks);?></h2>
+                <h6><?/*=$this->lang->line('application_tasks');*/?></h6>
+                  <h2><?/*=count($tasks);*/?></h2>
               </div>
-              <?php if($tickets_access){ ?>
+              <?php /*if($tickets_access){ */?>
               <div class="grid__col-4 grid__col-lg-3 grid--align-self-center">
-                  <h6><?=$this->lang->line('application_tickets');?></h6>
-                  <h2><?=$ticketcounter;?></h2>
+                  <h6><?/*=$this->lang->line('application_tickets');*/?></h6>
+                  <h2><?/*=$ticketcounter;*/?></h2>
               </div>
-              <?php } ?>
+              <?php /*} */?>
               <div class="grid__col-4 grid__col-lg-3 grid--align-self-center">
-                <h6><?=$this->lang->line('application_clients');?></h6>
-                <h2><?=$clientcounter;?></h2>
+                <h6><?/*=$this->lang->line('application_clients');*/?></h6>
+                <h2><?/*=$clientcounter;*/?></h2>
+              </div>
+          </div>-->
+
+          <div class="">
+              <div class="btn-group pull-right margin-right-3">
+                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                      <?php if (isset($active_task_filter)) {
+                          echo $this->lang->line('application_due_' . $active_task_filter);
+                      } else {
+                          echo $this->lang->line('application_task_filter');
+                      } ?>
+                      <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu pull-right" role="menu">
+                      <li>
+                          <a id="all" href="<?=base_url()?>dashboard/taskfilter/all">
+                              <?=$this->lang->line('application_due_all');?>
+                          </a>
+                      </li>
+                      <li>
+                          <a id="delayed" href="<?=base_url()?>dashboard/taskfilter/delayed">
+                              <?=$this->lang->line('application_due_delayed');?>
+                          </a>
+                      </li>
+                      <li>
+                          <a id="today" href="<?=base_url()?>dashboard/taskfilter/today">
+                              <?=$this->lang->line('application_due_today');?>
+                          </a>
+                      </li>
+                      <li>
+                          <a id="two" href="<?=base_url()?>dashboard/taskfilter/two">
+                              <?=$this->lang->line('application_due_two');?>
+                          </a>
+                      </li>
+                      <li>
+                          <a id="week" href="<?=base_url()?>dashboard/taskfilter/week">
+                              <?=$this->lang->line('application_due_week');?>
+                          </a>
+                      </li>
+                      <li>
+                          <a id="weekahead" href="<?=base_url()?>dashboard/taskfilter/weekahead">
+                              <?=$this->lang->line('application_due_weekahead');?>
+                          </a>
+                      </li>
+                  </ul>
               </div>
           </div>
       </div>
@@ -135,101 +180,11 @@
             </a>
         </div> -->
 
-<!-- DASHBOARD - GRÁFICO DE ESTATÍSTICAS: RENDIMENTO - DESPESAS = LUCRO -->
-        <!-- <div class="grid__col-12">
-          <div class="tile-base box-shadow no-padding" >
-                      <div class="tile-extended-header">
-                          <div class="grid tile-extended-header">
-                              <div class="grid__col-4">
-                                  <h5><?=$this->lang->line('application_statistics');?> </h5>
-                                  <div class="btn-group">
-                                <button type="button" class="tile-year-selector dropdown-toggle" data-toggle="dropdown">
-                                  <?=$year;?> <i class="ion-ios-arrow-down"></i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu--small" role="menu">
-                                  <li><a href="<?=base_url()?>dashboard/year/<?=date("Y");?>"><?=date("Y");?></a></li>
-                                  <li><a href="<?=base_url()?>dashboard/year/<?=date("Y")-1;?>"><?=date("Y")-1;?></a></li>
-                                  <li><a href="<?=base_url()?>dashboard/year/<?=date("Y")-2;?>"><?=date("Y")-2;?></a></li>
-                                  <li><a href="<?=base_url()?>dashboard/year/<?=date("Y")-3;?>"><?=date("Y")-3;?></a></li>
-                                  <li><a href="<?=base_url()?>dashboard/year/<?=date("Y")-4;?>"><?=date("Y")-4;?></a></li>
-                                  <li><a href="<?=base_url()?>dashboard/year/<?=date("Y")-5;?>"><?=date("Y")-5;?></a></li>
-                                </ul>
-                          </div>
-                              </div>
-                              <div class="grid__col-8">
-                                    <div class="grid grid--bleed grid--justify-end">
-                                        <div class="grid__col-md-3 tile-text-right">
-                                            <h5><?=$this->lang->line('application_income');?></h5>
-                                            <h1><?=display_money($totalIncomeForYear, false);?></h1>
-                                        </div>
-                                        <div class="grid__col-md-3 tile-text-right tile-negative">
-                                            <h5><?=$this->lang->line('application_expenses');?></h5>
-                                            <h1><?=display_money($totalExpenses, false);?></h1>
-                                        </div>
-                                        <div class="grid__col-md-3 tile-text-right tile-positive">
-                                            <h5><?=$this->lang->line('application_profit');?></h5>
-                                            <h1><?=display_money($totalProfit, false);?></h1>
-                                        </div>
-                                  </div>
-                              </div>
-                              <div class="grid__col-12 grid__col--bleed grid--align-self-end">
-                                  <div class="tile-body">
-                                      <canvas id="tileChart" width="auto" height="70" style="margin-bottom: -5px;"></canvas>
-                                  </div>
-                              </div>
-                            </div>
-                          </div>
-                    </div>
-        </div> -->
-
 
 <?php } ?>
         <div class="grid__col-12">
-            <div class="">
-                <div class="btn-group pull-right margin-right-3">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        <?php if (isset($active_task_filter)) {
-                            echo $this->lang->line('application_due_' . $active_task_filter);
-                        } else {
-                            echo $this->lang->line('application_expiration');
-                        } ?>
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu pull-right" role="menu">
-                        <li>
-                            <a id="all" href="<?=base_url()?>dashboard/taskfilter/all">
-                                <?=$this->lang->line('application_due_all');?>
-                            </a>
-                        </li>
-                        <li>
-                            <a id="delayed" href="<?=base_url()?>dashboard/taskfilter/delayed">
-                                <?=$this->lang->line('application_due_delayed');?>
-                            </a>
-                        </li>
-                        <li>
-                            <a id="today" href="<?=base_url()?>dashboard/taskfilter/today">
-                                <?=$this->lang->line('application_due_today');?>
-                            </a>
-                        </li>
-                        <li>
-                            <a id="two" href="<?=base_url()?>dashboard/taskfilter/two">
-                                <?=$this->lang->line('application_due_two');?>
-                            </a>
-                        </li>
-                        <li>
-                            <a id="week" href="<?=base_url()?>dashboard/taskfilter/week">
-                                <?=$this->lang->line('application_due_week');?>
-                            </a>
-                        </li>
-                        <li>
-                            <a id="weekahead" href="<?=base_url()?>dashboard/taskfilter/weekahead">
-                                <?=$this->lang->line('application_due_weekahead');?>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <p class="">
+
+            <span class="">
                 <div class="box-shadow">
                     <div class="table-head">
                         <?=$this->lang->line('application_tasks');?>
@@ -295,17 +250,16 @@
                                                     $color = "label-warning";
                                                 }
 
-                                                echo "<span class='label $color'>" . $interval->format("%a dias e %h horas") . "</span>";
+                                                echo "<span aria-sort='ascending' id='<?=$interval->d?>' class='label dashboard-label $color'>" . $interval->format("%ad %hh") . "</span>";
 
                                             }else {
-                                                echo '<span class="label label-important">' . $this->lang->line('application_delayed_task') . '</span>';
+                                                echo '<span class="label dashboard-label label-important">' . $this->lang->line('application_delayed_task') . '</span>';
                                             }
 
                                         ?>
                                     </td>
                                     <td class="option" width="5%">
-                                        <a href="<?=base_url()?>projects/tasks/<?=$task->project_id;?>/update/<?=$task->id;?>" class="btn-option tt" title="
-											<?=$this->lang->line('application_edit_project'); ?>" data-toggle="mainmodal">
+                                        <a href="<?=base_url()?>projects/tasks/<?=$task->project_id;?>/update/<?=$task->id;?>" class="btn-option tt" title="<?=$this->lang->line('application_edit_project'); ?>" data-toggle="mainmodal">
                                             <i class="icon dripicons-gear"></i>
                                         </a>
                                     </td>
@@ -315,7 +269,7 @@
                         </table>
                     </div>
                 </div>
-            </p>
+            </span>
         </div>
 
         <div class="grid__col-12">
@@ -366,38 +320,9 @@
            <div class="grid grid--align-content-start">
 
            <div class="grid__col-12 ">
-                      <div class="stdpad box-shadow"><div class="table-head"><?=$this->lang->line('application_project_activities');?></div>
-                        <div id="main-nano-wrapper" class="nano">
-                          <div class="nano-content">
-                            <ul class="activity__list">
-                                <?php foreach ($recent_activities as $value) { ?>
-                                    <li>
-                                        <h3 class="activity__list--header">
-                                            <?php echo time_ago($value->datetime); ?>
-                                        </h3>
-                                        <p class="activity__list--sub truncate">
-                                            <?php if(is_object($value->user))
-                                                  {
-                                                        echo $value->user->firstname." ".$value->user->lastname;
-                                                       echo (is_object($value->project)) ? ' <a href="'.base_url().'projects/view/'.$value->project->id.'">'.$value->project->name."</a>" : "";
-
-                                                  } ?>
-                                        </p>
-                                        <div class="activity__list--body">
-                                            <?=character_limiter(str_replace(array("\r\n", "\r", "\n",), "",strip_tags($value->message)), 260); ?>
-                                        </div>
-                                    </li>
-                                <?php } ?>
-                                <?php if(empty($recent_activities)) { ?>
-                                          <div class="empty">
-                                              <i class="ion-ios-people"></i><br>
-                                              <?=$this->lang->line('application_no_recent_activities');?>
-                                          </div>
-                                <?php } ?>
-                            </ul>
-                          </div>
-                        </div>
-                  </div>
+                      <div class="stdpad box-shadow"><div class="table-head"><?=$this->lang->line('application_task_chart');?></div>
+                          <canvas id="task-chart" width="200" height="auto" style="margin-bottom: -5px;"></canvas>
+                      </div>
                 </div>
 
                 <div class="grid__col-12">
@@ -651,19 +576,50 @@ $(document).ready(function(){
 });
 </script>
 
-<?php if($this->user->admin == "1"){ ?>
   <script type="text/javascript">
     $(document).ready(function(){
 
-        // $(".task-row").dblclick(function() {
-        //     $('#a_'+this.id).click();
-        // });
-
-        $(".task-row").dblclick(function() {
-            location.href = $(this).data("href");
+        var ctx = document.getElementById('task-chart').getContext('2d');
+        var taskChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Atrasada', 'Vencendo hoje', 'Vencendo em 2 dias', 'Vencendo em 1 semana', 'Vencendo acima de 1 semana'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2],
+                    backgroundColor: [
+                        '#ec492c',
+                        '#ffbd30',
+                        '#3498db',
+                        '#27ae60',
+                        '#95a5a6'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        display: false,
+                        ticks: {
+                            beginAtZero: true,
+                            drawBorder: false
+                        },gridLines: {
+                            display:false,
+                            drawBorder: false
+                        }
+                    }]
+                },
+                legend: {
+                    display: true,
+                    fullWidth: true,
+                    position: 'top',
+                    labels: {
+                        usePointStyle: true,
+                    }
+                }
+            }
         });
-
 
     });
   </script>
-  <?php } ?>
