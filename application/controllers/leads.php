@@ -354,7 +354,7 @@ class Leads extends MY_Controller{
             $description = $_POST['description'];
             $_POST['description'] = $description;
             $_POST['modified'] = date("Y-m-d H:i");
-            $_POST['last_landing'] = date("Y-m-d H:i");
+
             $lead = Lead::find_by_id($_POST['id']);
             $destinationLeadStatus = LeadStatus::find($_POST['status_id']);
 
@@ -415,6 +415,8 @@ class Leads extends MY_Controller{
 
 
             if ($lead->status_id != $_POST['status_id']){
+
+                $_POST['last_landing'] = date("Y-m-d H:i");
 
                 $historyAttributes = array('lead_id' => $lead->id, 'message' => $this->user->firstname.' moveu '.$lead->name.' para '.$destinationLeadStatus->name);
                 LeadHistory::create($historyAttributes);

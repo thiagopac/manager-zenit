@@ -80,4 +80,21 @@
     border: 1px solid #27ae60 !important;
 }
 
-															
+.lead-screen-tv-size {
+    min-width: 150px !important;
+    max-width: 200px !important;
+}
+
+.toggle-on {
+    top:1.5px !important;
+}
+
+.toggle-off {
+    top:1.5px !important;
+}
+
+.toggle.btn-sm {
+    height: 27px !important;
+    min-height: 27px !important;
+    bottom: 1px !important;
+}

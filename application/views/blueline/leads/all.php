@@ -21,11 +21,20 @@
 
             <?php } ?>
 
-			<input class="kanban-search pull-right" :class="(search != '') ? 'active' : ''" type="text" name="search" v-model="search" placeholder="<?=$this->lang->line('application_search');?>" />
+            <div class="pull-right">
+                <input class="kanban-search" :class="(search != '') ? 'active' : ''" type="text" name="search" v-model="search" placeholder="<?=$this->lang->line('application_search');?>" />
+
+                <?php if($condition == 1) { ?>
+                    <input class="tv-screen" id="tv-screen" type="checkbox" data-size="small" checked data-toggle="toggle" data-on="Modo WEB" data-off="Modo TV" data-onstyle="primary" data-offstyle="warning" />
+                <?php } ?>
+            </div>
+
+
 
 			<div class="select-wrapper pull-right" v-cloak>
 
                 <?php if($condition == 1) { ?>
+
 
                 <a href="<?=base_url()?>leads/tags" class="btn btn-success">
                     <?=$this->lang->line('application_edit_tags');?>
@@ -123,16 +132,16 @@
 						{{ block.company }}
 					</div>
 
-                    <div class="block-proposal-value">
-                        <span v-if="block.proposal_value != `` && block.proposal_value != null" class="label label-info"><?=$core_settings->money_symbol?> {{ block.proposal_value }}</span> <span v-if="(block.city != `` && block.state != ``) && (block.city != null && block.state != null)" class="label label-info">{{ block.city }}/{{ block.state }}</span>
+                    <div class="block-proposal-value || block.rated_power_mod != ``">
+                        <span v-if="block.rated_power_mod != ``" class="label label-info">{{ block.rated_power_mod }} <?=$core_settings->rated_power_measurement?></span> <span v-if="block.proposal_value != `` && block.proposal_value != null" class="label label-info"><?=$core_settings->money_symbol?> {{ block.proposal_value }}</span>
+                    </div>
+
+                    <div class="">
+                        <span v-if="(block.city != `` && block.state != ``) && (block.city != null && block.state != null)" class="label label-important">{{ block.city }}/{{ block.state }}</span>
                     </div>
 
                     <div>
                         <span v-if="block.owner != ``" class="label label-success">{{ block.owner }}</span>
-                    </div>
-
-                    <div class="block.rated_power_mod != ``">
-                        <span v-if="block.rated_power_mod != ``" class="label label-important">{{ block.rated_power_mod }} <?=$core_settings->rated_power_measurement?></span>
                     </div>
 
 
@@ -465,9 +474,19 @@
 		</div>
 	</div>
 </div>
+<script>
+jQuery(document).ready(function($) {
 
+    $("#tv-screen").on('change', function () {
+        $(".drag-column").toggleClass("lead-screen-tv-size");
+    });
+
+});
+
+</script>
 <?php if (isset($search)) :?>
 	<script>
         sessionStorage . setItem('lead', '<?=$search?>');
+
 	</script>
 <?php endif; ?>

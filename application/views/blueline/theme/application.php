@@ -58,6 +58,8 @@ $message_icon = false;
     <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/user.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/important.css"/>
 
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
     <?=get_theme_colors($core_settings);?>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -310,7 +312,7 @@ $message_icon = false;
     <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/utils.js"></script>
     <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/jquery.mask.js"></script>
 
-
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
         <script>
             flatdatepicker(false, langshort);
