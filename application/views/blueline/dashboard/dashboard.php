@@ -184,7 +184,7 @@
 <?php } ?>
         <div class="grid__col-12">
 
-            <span class="">
+            <span id="task-list" class="">
                 <div class="box-shadow">
                     <div class="table-head">
                         <?=$this->lang->line('application_tasks');?>
@@ -253,19 +253,30 @@
 
                                                 if ($interval->d >= 7) {
                                                     $color = "label-gray";
+                                                    $remainingTime = $interval->format("%ad %hh");
                                                     $count7ahead++;
                                                 }else if($interval->d > 2 && $interval->d < 7){
                                                     $color = "label-green";
+                                                    $remainingTime = $interval->format("%ad %hh");
                                                     $count7++;
-                                                }else if($interval->d > 1 && $interval->d <= 2){
+                                                }else if($interval->d >= 1 && $interval->d <= 2){
                                                     $color = "label-blue";
+                                                    $remainingTime = $interval->format("%ad %hh");
                                                     $count2++;
-                                                }else if($interval->d >= 0 && $interval->d <= 1){
+                                                }else if($interval->d >= 0 && $interval->d < 1){
                                                     $color = "label-yellow";
+                                                    $remainingTime = $interval->format("%ad %hh");
+
+                                                    if ($interval->d == 0 && $interval->h != 0){
+                                                        $remainingTime = $interval->format("%hh %im");
+                                                    }else if ($interval->d == 0 && $interval->h == 0){
+                                                        $remainingTime = $interval->format("%im");
+                                                    }
+
                                                     $count1++;
                                                 }
 
-                                                echo "<span aria-sort='ascending' id='<?=$interval->d?>' class='label dashboard-label $color'>" . $interval->format("%ad %hh") . "</span>";
+                                                echo "<span aria-sort='ascending' id='<?=$interval->d?>' class='label dashboard-label $color'>" . $remainingTime . "</span>";
 
                                             }else {
                                                 echo '<span class="label dashboard-label label-red">' . $this->lang->line('application_delayed_task') . '</span>';

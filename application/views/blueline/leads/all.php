@@ -446,8 +446,8 @@
 						 :title="block.mobile">
 							<i class="icon dripicons-device-mobile"></i>
 						</a>
-                        <a class="col-xs-2 center" :class="(block.private != '1') ? '' : ''" :title="block.private == '1' ? 'Privado' : 'Público'">
-                            <i :class="block.private == 1 ? 'icon dripicons-lock white' : 'icon dripicons-lock-open white'"></i>
+                        <a class="col-xs-2 center" :class="(block.payment != 'bank financing') ? '' : ''" :title="block.payment == 'bank financing' ? 'Financiamento bancário' : 'Recursos próprios'">
+                            <i :class="block.payment == 'bank financing' ? 'icon dripicons-jewel white' : ''"></i>
                         </a>
                         <!--<a class="col-xs-2 center" :class="(block.private != '1') ? '' : ''" title="Histórico do Lead">
                             <i class="icon dripicons-hourglass"></i>

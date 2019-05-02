@@ -968,3 +968,5 @@ $lang['application_due_weekahead'] = 'Vencendo acima de uma semana';
 $lang['application_task_chart'] = 'Gráfico de tarefas';
 
 $lang['application_task_filter'] = 'Filtro de tarefas';
+
+$lang['application_payment_method'] = 'Método de pagamento';

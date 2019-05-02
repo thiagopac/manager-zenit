@@ -109,16 +109,16 @@ if (isset($lead)) {
 
         echo form_dropdown('state', $statesList, $lead->state, 'style="width:100%" class="chosen-select"');?>
 	</div>
-	<div class="form-group">
-		<label for="country">
-			<?=$this->lang->line('application_country');?>
-		</label>
+    <div class="form-group">
+        <label for="country">
+            <?=$this->lang->line('application_payment_method');?>
+        </label>
         <?php
         $settings = Setting::first();
         $countriesList = $settings->list_countries();
 
         echo form_dropdown('country', $countriesList, $lead->country,'style="width:100%" class="chosen-select"');?>
-	</div>
+    </div>
     <div class="form-group">
         <label for="tags">
             <?=$this->lang->line('application_tags');?>
@@ -165,6 +165,17 @@ if (isset($lead)) {
         </div>
     <?php } ?>
     </div>
+    <div class="form-group">
+        <label for="payment">
+            <?=$this->lang->line('application_payment_method');?>
+        </label>
+        <?php
+        $settings = Setting::first();
+        $paymentMethodsList = $settings->list_payment_methods();
+
+        echo form_dropdown('payment', $paymentMethodsList, $lead->payment,'style="width:100%" class="chosen-select"');?>
+    </div>
+
     <div class="form-group">
         <label for="rated_power_mod">
             <?=$this->lang->line('application_rated_power');?>

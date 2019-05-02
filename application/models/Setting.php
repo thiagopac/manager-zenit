@@ -48,4 +48,15 @@ class Setting extends ActiveRecord\Model {
 
         return $pt_BR;
     }
+
+    public function list_payment_methods(){
+
+        $pt_BR = array(
+            ''=>'Selecione o tipo de pagamento',
+            'bank financing'=>'Financiamento bancário',
+            'own resources'=>'Recursos próprios',
+        );
+
+        return $pt_BR;
+    }
 }
