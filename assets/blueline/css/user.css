@@ -55,7 +55,7 @@
     color: transparent !important;
 }
 
-.dashboard-label.label-important {
+.dashboard-label.label-red {
     font-family: Tahoma;
     font-weight: 100;
     background: #ec492c !important;
@@ -65,7 +65,7 @@
     color: white !important;
 }
 
-.dashboard-label.label-warning {
+.dashboard-label.label-yellow {
     font-family: Tahoma;
     font-weight: 100;
     background: #ffbd30 !important;
@@ -75,7 +75,7 @@
     color: white !important;
 }
 
-.dashboard-label.label-attention {
+.dashboard-label.label-blue {
     font-family: Tahoma;
     font-weight: 100;
     background: #3498db !important;
@@ -85,7 +85,7 @@
     color: white !important;
 }
 
-.dashboard-label.label-info {
+.dashboard-label.label-green {
     font-family: Tahoma;
     font-weight: 100;
     background: #27ae60 !important;
@@ -95,7 +95,7 @@
     color: white !important;
 }
 
-.dashboard-label.label-success {
+.dashboard-label.label-gray {
     font-family: Tahoma;
     font-weight: 100;
     background: #95a5a6 !important;

@@ -214,7 +214,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php $i = 0; foreach ($tasks as $task): $i = $i + 1;?>
+                            <?php
+
+                            $i = 0;
+
+                            $count7ahead = 0;
+                            $count7 = 0;
+                            $count2 = 0;
+                            $count1 = 0;
+                            $countDelayed = 0;
+
+                            foreach ($tasks as $task): $i = $i + 1;?>
                                 <tr id="<?=$task->id;?>">
                                     <td class="hidden-xs">
                                         <span class="static-color-preview" style="background-color:<?=$value->color?>"></span>
@@ -231,9 +241,10 @@
                                     </td>
                                     <td class="hidden-xs">
                                         <?
-                                            $end = strtotime($task->due_date);
                                         $now = new DateTime();
                                         $due_date = new DateTime($task->due_date);
+
+
 
                                             $current =  strtotime(date('Y-m-d H:i'));
                                             $interval = $due_date->diff($now);
@@ -241,19 +252,24 @@
                                             if ($due_date > $now) {
 
                                                 if ($interval->d >= 7) {
-                                                    $color = "label-success";
+                                                    $color = "label-gray";
+                                                    $count7ahead++;
                                                 }else if($interval->d > 2 && $interval->d < 7){
-                                                    $color = "label-info";
+                                                    $color = "label-green";
+                                                    $count7++;
                                                 }else if($interval->d > 1 && $interval->d <= 2){
-                                                    $color = "label-attention";
+                                                    $color = "label-blue";
+                                                    $count2++;
                                                 }else if($interval->d >= 0 && $interval->d <= 1){
-                                                    $color = "label-warning";
+                                                    $color = "label-yellow";
+                                                    $count1++;
                                                 }
 
                                                 echo "<span aria-sort='ascending' id='<?=$interval->d?>' class='label dashboard-label $color'>" . $interval->format("%ad %hh") . "</span>";
 
                                             }else {
-                                                echo '<span class="label dashboard-label label-important">' . $this->lang->line('application_delayed_task') . '</span>';
+                                                echo '<span class="label dashboard-label label-red">' . $this->lang->line('application_delayed_task') . '</span>';
+                                                $countDelayed++;
                                             }
 
                                         ?>
@@ -586,7 +602,7 @@ $(document).ready(function(){
                 labels: ['Atrasada', 'Vencendo hoje', 'Vencendo em 2 dias', 'Vencendo em 1 semana', 'Vencendo acima de 1 semana'],
                 datasets: [{
                     label: '# of Votes',
-                    data: [12, 19, 3, 5, 2],
+                    data: [<?=$countDelayed?>, <?=$count1?>, <?=$count2?>, <?=$count7?>, <?=$count7ahead?>],
                     backgroundColor: [
                         '#ec492c',
                         '#ffbd30',

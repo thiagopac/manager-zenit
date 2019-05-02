@@ -233,6 +233,7 @@ class Dashboard extends MY_Controller
                     break;
             }
         }
+        
 
         $this->view_data['tasks'] = $taskquery;
         $this->view_data['active_task_filter'] = $filter;
