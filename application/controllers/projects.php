@@ -410,6 +410,8 @@ class Projects extends MY_Controller
                             'priority' => $existingTask->priority,
                             'milestone_order' => $existingTask->milestone_order,
                             'sucessors' => $existingTask->sucessors,
+                            'scheduled_time' => $existingTask->scheduled_time,
+                            'reference' => $existingTask->reference,
                         );
 
                         ProjectHasTask::create($attributes);
@@ -430,7 +432,7 @@ class Projects extends MY_Controller
                         if (is_numeric($sucessorId)){
                             $old_successor = ProjectHasTask::find($sucessorId);
 
-                            $new_sucessor = ProjectHasTask::first(['conditions' => ['project_id = ? AND name = ?', $project->id, $old_successor->name]]);
+                            $new_sucessor = ProjectHasTask::first(['conditions' => ['project_id = ? AND reference = ?', $project->id, $old_successor->reference]]);
                             array_push($new_sucessors, $new_sucessor->id);
                         }
                     }
@@ -1070,6 +1072,7 @@ class Projects extends MY_Controller
                     $_POST = array_map('htmlspecialchars', $_POST);
                     $_POST['description'] = $description;
                     $_POST['project_id'] = $id;
+                    $_POST['reference'] = ProjectHasTask::createTaskReference();
                     $task = ProjectHasTask::create($_POST);
 
                     $project = Project::find_by_id($id);
@@ -1078,12 +1081,12 @@ class Projects extends MY_Controller
                     $user = User::find_by_id($_POST['user_id']);
 
                     if ($task->user_id != null && $task->due_date != null){
-                        $attributes = array('user_id' => $_POST['user_id'], 'message' => '<p><b>'.$this->user->firstname.'</b>'.' efetuou uma alteração em um ticket atribuído a você. </p>['.$project->name.']', 'status' => 'new', 'url' => base_url().'projects/view/'.$id);
+                        $attributes = array('user_id' => $_POST['user_id'], 'message' => '<p><b>'.$this->user->firstname.'</b>'.' atribuiu uma tarefa a você. </p>['.$project->name.']', 'status' => 'new', 'url' => base_url().'projects/view/'.$id);
                         Notification::create($attributes);
 
                         if ($user->push_active == 1){
                             array_push($push_receivers, $user->email);
-                            Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' efetuou uma alteração em um ticket atribuído a você', base_url().'projects/view/'.$id);
+                            Notification::sendPushNotification($push_receivers, $project->name.' - '.$this->user->firstname.' atribuiu uma tarefa a você', base_url().'projects/view/'.$id);
                         }
                     }
 
@@ -1164,16 +1167,20 @@ class Projects extends MY_Controller
 
                                 $sucessor = ProjectHasTask::find($sucessorId);
 
-                                $attributes = array('user_id' => $sucessor->user_id, 'message' => '<p><b>'.$this->user->firstname.'</b>'.' concluiu a tarefa  <b>'.$task->name.'</b> e você já pode iniciar a tarefa <b>'.$sucessor->name.'</b> </p>['.$project->name.']', 'url' => base_url().'projects/view/'.$id);
-                                Notification::create($attributes);
+                                if ($sucessor->status != 'done'){
 
-                                $sucessor_owner = User::find_by_id($sucessor->user_id);
+                                    $attributes = array('user_id' => $sucessor->user_id, 'message' => '<p><b>'.$this->user->firstname.'</b>'.' concluiu a tarefa  <b>'.$task->name.'</b> e você já pode iniciar a tarefa <b>'.$sucessor->name.'</b> </p>['.$project->name.']', 'url' => base_url().'projects/view/'.$id);
+                                    Notification::create($attributes);
 
-                                if ($sucessor_owner->push_active == 1){
-                                    array_push($push_receivers, $sucessor_owner->email);
+                                    $sucessor_owner = User::find_by_id($sucessor->user_id);
+
+                                    if ($sucessor_owner->push_active == 1){
+                                        array_push($push_receivers, $sucessor_owner->email);
+                                    }
+
+                                    $sucessor->update_attributes(['start_date' => date('Y-m-d H:i'), 'due_date' => date('Y-m-d H:i', strtotime($sucessor->scheduled_time." weekdays"))]);
+
                                 }
-
-                                $sucessor->update_attributes(['start_date' => date('Y-m-d H:i'), 'due_date' => date('Y-m-d H:i', strtotime($sucessor->scheduled_time." weekdays"))]);
 
                             }
                         }

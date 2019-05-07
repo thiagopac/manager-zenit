@@ -88,4 +88,15 @@ class ProjectHasTask extends ActiveRecord\Model
 
         return $clientTasks;
     }
+
+    public static function createTaskReference($len=10, $abc="aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789") {
+
+        $letters = str_split($abc);
+        $str = "";
+        for ($i=0; $i<$len; $i++) {
+            $str .= $letters[rand(0, count($letters)-1)];
+        };
+
+        return strtoupper($str);
+    }
 }
