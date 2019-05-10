@@ -244,8 +244,6 @@
                                         $now = new DateTime();
                                         $due_date = new DateTime($task->due_date);
 
-
-
                                             $current =  strtotime(date('Y-m-d H:i'));
                                             $interval = $due_date->diff($now);
 
@@ -338,10 +336,8 @@
           <?php } ?>
         </div>
 
-
       </div>
     </div>
-
 
         <div class="grid__col-sm-12 grid__col-md-4 grid__col-lg-3 grid__col--bleed">
            <div class="grid grid--align-content-start">
@@ -350,53 +346,6 @@
                       <div class="stdpad box-shadow"><div class="table-head"><?=$this->lang->line('application_task_chart');?></div>
                           <canvas id="task-chart" width="200" height="auto" style="margin-bottom: -5px;"></canvas>
                       </div>
-                </div>
-
-                <div class="grid__col-12">
-                  <?php if(isset($message)){ ?>
-                      <div class="stdpad box-shadow">
-                          <div class="table-head"><?=$this->lang->line('application_recent_messages');?></div>
-
-                              <ul class="dash-messages">
-                                  <?php foreach ($message as $value):?>
-                                      <li>
-                                          <a href="<?=base_url()?>messages">
-                                            <img class="userpic img-circle" src="
-                                              <?php
-                                                if($value->userpic_u){
-                                                  echo get_user_pic($value->userpic_u, $value->email_u);
-                                                }else{
-                                                  echo get_user_pic($value->userpic_c, $value->email_c);
-                                                }
-                                                ?>
-                                              "/>
-                                              <div class="pull-left" style="width: 78%;">
-                                                  <p class="dash-messages__header truncate">
-                                                      <?php if($value->status == "New"){ echo '<span class="new"><i class="icon dripicons-mail"></i></span>';}?>
-                                                      <?=$value->subject;?>
-                                                  </p>
-                                                  <p class="dash-messages__name">
-                                                  <?php if($value->sender_u){echo $value->sender_u;}else{ echo $value->sender_c; } ?>
-                                                  </p>
-                                              </div>
-                                              <br clear="all">
-                                              <!-- <small><?php echo time_ago($value->time); ?></small> -->
-                                              <p class="dash-messages__body">
-                                                  <?=character_limiter(str_replace(array("\r\n", "\r", "\n",), "",strip_tags($value->message)), 70); ?>
-                                              </p>
-                                          </a>
-                                      </li>
-                                  <?php endforeach;?>
-                                  <?php if(empty($message)) { ?>
-                                      <div class="empty">
-                                          <i class="ion-ios-chatbubble"></i><br>
-                                          <?=$this->lang->line('application_no_messages');?>
-                                      </div>
-                                  <?php } ?>
-                              </ul><br/>
-                             </div>
-                  <?php } ?>
-
                 </div>
 
                 <div class="grid__col-12">
@@ -412,10 +361,6 @@
                 <?php } ?>
                 </div>
 
-
-
-
-
         </div>
     </div>
 </div>
@@ -423,11 +368,6 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-
-    $('#task-grid').on("click", '.checkbox-task', function(){
-
-        $('.' + this.id).toggleClass('done');
-    });
 
   $(document).on("click", '.calendar-style-toggle', function (e) {
       $(".calendar-style-toggle").toggleClass("hidden");
@@ -487,117 +427,9 @@ $(document).ready(function(){
 
                   element.css('background-color', event.bgColor);
 
-              },
-              eventClick: function(event) {
-                if (event.url && event.modal == 'true') {
-                  NProgress.start();
-                  var url = event.url;
-
-                  if (url.indexOf('#') === 0) {
-                    $('#mainModal').modal('open');
-                  } else {
-                    $.get(url, function(data) {
-                        $('#mainModal').modal();
-                        $('#mainModal').html(data);
-                      }).done(function() { NProgress.done();  });
-                  }
-                  return false;
-                }
               }
 
   });
-
-
-    <!-- DASHBOARD - GRÁFICO DE ESTATÍSTICAS: RENDIMENTO - DESPESAS = LUCRO -->
-  //  COMENTARIOS DOS JS
-
-  //chartjs
-  <?php //if($this->user->admin == "1"){ ?>
-  // var ctx = document.getElementById("tileChart");
-  //var myChart = new Chart(ctx, {
-  //  type: 'line',
-  //  data: {
-  //    labels: [<?//=$labels?>//],
-  //    datasets: [{
-  //      label: "<?//=$this->lang->line("application_owed");?>//",
-  //      backgroundColor: "rgba(215,112,173,0.3)",
-  //      borderColor: "rgba(215,112,173,1)",
-  //      pointBorderColor: "rgba(0,0,0,0)",
-  //      pointBackgroundColor: "#ffffff",
-  //      pointHoverBackgroundColor: "rgba(237, 85, 101, 0.5)",
-  //      pointHitRadius: 25,
-  //      pointRadius: 1,
-  //      data: [<?//=$line2?>//], /!* Demo Data => [387, 1108, 987, 2100, 2900, 1023, 1897, 1438, 4100,2861,1000,3872], *!/
-  //    },{
-  //      label: "<?//=$this->lang->line("application_received");?>//",
-  //      backgroundColor: "rgba(79,193,233,0.6)",
-  //      borderColor: "rgba(79, 193, 233, 1)",
-  //      pointBorderColor: "rgba(0,0,0,0)",
-  //      pointBackgroundColor: "#ffffff",
-  //      pointHoverBackgroundColor: "rgba(79, 193, 233, 1)",
-  //      pointHitRadius: 25,
-  //      pointRadius: 1,
-  //      data: [<?//=$line1?>//], /!* Demo Data => [1702, 2310, 1900, 3800, 4123, 3000, 3210, 5439, 3000,4000,3234,5539], *!/
-  //    },
-  //    ]
-  //  },
-  //  options: {
-  //    tooltips:{
-  //      xPadding: 10,
-  //      yPadding: 10,
-  //      cornerRadius:2,
-  //      mode: 'label',
-  //      multiKeyBackground: 'rgba(0,0,0,0.2)'
-  //    },
-  //    legend:{
-  //      display: false
-  //    },
-  //    scales: {
-  //      yAxes: [{
-  //        display: false,
-  //        ticks: {
-  //                    beginAtZero:true
-  //                }
-  //      }],
-  //      xAxes: [{
-  //        display: false
-  //      }]
-  //    }
-  //  }
-  //});
-
-  //Count up settings
-  //var options = {
-  //  useEasing : true,
-  //  useGrouping : true,
-  ////  <?////=get_money_format();?>
-  //  
-  //};
-  //var number1 = new CountUp("number1", 0, <?php //if(empty($payments)){echo 0;}else{echo $payments; }?>//, 2, 1.5, options);
-  // number1.start();
-
-  //var number2 = new CountUp("number2", 0, <?php //if(empty($paymentsoutstanding)){echo 0;}else{echo $paymentsoutstanding; }?>//, 2, 1.5, options);
-  // number2.start();
-<?php //} ?>
-
-
-
-  function tick(){
-    $('ul.dash-messages li:first').slideUp('slow', function () { $(this).appendTo($('ul.dash-messages')).fadeIn('slow'); });
-  }
-  function tick2(){
-   // $('ul.activity__list li:first').slideUp('slow', function () { $(this).appendTo($('ul.activity__list')).fadeIn('slow'); });
-  }
-  <?php if(count($message) > 4){ ?>
-  setInterval(function(){ tick() }, 5000);
-  <?php } ?>
-   <?php if(count($recent_activities) > 4){ ?>
-  setInterval(function(){ tick2() }, 8000);
-  <?php } ?>
-  $('ul.notificationlist li').click(function(){
-    $('ul.notificationlist li:first').slideUp('slow', function () { $(this).appendTo($('ul.notificationlist')).fadeIn('slow'); });
-  });
-
 
 
 });

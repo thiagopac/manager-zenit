@@ -959,7 +959,7 @@ $lang['application_responsible'] = 'Responsável';
 
 $lang['application_delayed_task'] = 'Atrasada';
 $lang['application_due_delayed'] = 'Atrasadas';
-$lang['application_due_all'] = 'Todas';
+$lang['application_due_all'] = 'Todas as tarefas';
 $lang['application_due_today'] = 'Vencendo hoje';
 $lang['application_due_two'] = 'Vencendo em 2 dias';
 $lang['application_due_week'] = 'Vencendo em 1 semana';
@@ -967,6 +967,6 @@ $lang['application_due_weekahead'] = 'Vencendo acima de uma semana';
 
 $lang['application_task_chart'] = 'Gráfico de tarefas';
 
-$lang['application_task_filter'] = 'Filtro de tarefas';
+$lang['application_task_filter'] = 'Todas as tarefas';
 
 $lang['application_payment_method'] = 'Método de pagamento';

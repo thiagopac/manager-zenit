@@ -28,21 +28,6 @@ class Dashboard extends MY_Controller
             redirect('login');
         }
 
-        //Events
-        $events = [];
-        $date = date('Y-m-d', time());
-        $eventcount = 0;
-
-        if (in_array('messages', $this->view_data['module_permissions'])) {
-            $sql = 'SELECT pm.id, pm.`status`, pm.subject, pm.message, pm.`time`, pm.`recipient`, cl.`userpic` as userpic_c, us.`userpic` as userpic_u, us.`email` as email_u , cl.`email` as email_c , CONCAT(us.firstname," ", us.lastname) as sender_u, CONCAT(cl.firstname," ", cl.lastname) as sender_c
-							FROM privatemessages pm
-							LEFT JOIN clients cl ON CONCAT("c",cl.id) = pm.sender
-							LEFT JOIN users us ON CONCAT("u",us.id) = pm.sender
-							WHERE pm.recipient = "u' . $this->user->id . '"AND pm.status != "deleted"
-							ORDER BY pm.`time` DESC LIMIT 6';
-            $query = Privatemessage::find_by_sql($sql);
-            $this->view_data['message'] = array_filter($query);
-        }
         if (in_array('projects', $this->view_data['module_permissions'])) {
             $sql = 'SELECT * FROM project_has_tasks WHERE status != "done" AND user_id = "' . $this->user->id . '" ORDER BY project_id';
 

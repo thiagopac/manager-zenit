@@ -111,7 +111,7 @@ if (isset($lead)) {
 	</div>
     <div class="form-group">
         <label for="country">
-            <?=$this->lang->line('application_payment_method');?>
+            <?=$this->lang->line('application_country');?>
         </label>
         <?php
         $settings = Setting::first();
