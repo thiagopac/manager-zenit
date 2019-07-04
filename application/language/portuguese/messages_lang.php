@@ -198,3 +198,6 @@ $lang['messages_create_tag_success'] = "Tag criada";
 $lang['messages_create_tag_error'] = "Erro ao salvar tag";
 $lang['messages_edit_tag_success'] = "Tag salva";
 $lang['messages_edit_tag_error'] = "Erro ao salvar tag";
+
+$lang['messages_duplicate_milestone_error'] = "Erro ao duplicar Pacote de Trabalho";
+$lang['messages_duplicate_milestone_success'] = "Pacote de Trabalho duplicado com sucesso";

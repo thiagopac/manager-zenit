@@ -13,7 +13,7 @@
 				</span>
 		</div>
 		<div class="table-div responsive">
-			<table id="users" class="data-no-search table" cellspacing="0" cellpadding="0">
+			<table id="users" class="data-no-search table" data-page-length='100' cellspacing="0" cellpadding="0">
 				<thead>
 					<th style="width:10px"></th>
 					<th class="hidden-xs">
@@ -110,3 +110,4 @@
 	</div>
 	</div>
 </div>
+

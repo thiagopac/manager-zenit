@@ -1048,6 +1048,60 @@ class Projects extends MY_Controller
                        }
                     redirect('projects/view/'.$id);
                 break;
+            case 'copy':
+
+                    $project = Project::find($id);
+                    $this->theme_view = 'ajax';
+                    $current_milestone = ProjectHasMilestone::find($milestone_id);
+
+                    $attributes = array(
+                        'project_id' => $project->id,
+                        'name' => $current_milestone->name." ".$this->lang->line('application_copy_sub')." ".random_string('alpha', 3),
+                        'description' => $current_milestone->description,
+                        'orderindex' => $current_milestone->orderindex,
+                        'area_id' => $current_milestone->area_id,
+                        'public' => $current_milestone->public,
+                    );
+
+
+                    $new_milestone = ProjectHasMilestone::create($attributes);
+
+                    $options = ['conditions' => ['milestone_id = ?', $current_milestone->id]];
+                    $tasksOfMilestone = ProjectHasTask::all($options);
+
+                    foreach ($tasksOfMilestone as $existingTask) {
+
+                        $new_task_reference = ProjectHasTask::createTaskReference();
+
+                        $attributes = array(
+                            'project_id' => $project->id,
+                            'milestone_id' => $new_milestone->id,
+                            'name' => $existingTask->name,
+                            'user_id' => $existingTask->user_id,
+                            'status' => 'open',
+                            'public' => $existingTask->public,
+                            'description' => $existingTask->description,
+                            'value' => $existingTask->value,
+                            'priority' => $existingTask->priority,
+                            'milestone_order' => $existingTask->milestone_order,
+                            'sucessors' => $existingTask->sucessors,
+                            'scheduled_time' => $existingTask->scheduled_time,
+                            'reference' => $new_task_reference,
+                        );
+
+                        ProjectHasTask::create($attributes);
+                    }
+
+
+                    if (!$new_milestone) {
+                        $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_duplicate_milestone_error'));
+                    } else {
+                        $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_duplicate_milestone_success'));
+                    }
+
+                    redirect('projects/view/'.$id);
+
+                break;
             default:
                 $this->view_data['project'] = Project::find($id);
                 $this->content_view = 'projects/milestones';

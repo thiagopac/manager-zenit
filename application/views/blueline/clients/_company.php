@@ -97,17 +97,26 @@ echo form_open_multipart($form_action, $attributes);
         echo $company->city;
     }?>" />
 </div>
+
 <div class="form-group">
-    <label for="province"><?=$this->lang->line('application_province');?></label>
-    <input id="province" type="text" maxlength="2" name="province" class="form-control" value="<?php if (isset($company)) {
-        echo $company->province;
-    }?>" />
+    <label for="province">
+        <?=$this->lang->line('application_province');?>
+    </label>
+    <?php
+    $settings = Setting::first();
+    $statesList = $settings->list_states();
+
+    echo form_dropdown('province', $statesList, $company->province, 'style="width:100%" class="chosen-select"');?>
 </div>
 <div class="form-group">
-        <label for="country"><?=$this->lang->line('application_country');?></label>
-        <input id="country" type="text" name="country" class="form-control" value="<?php if (isset($company)) {
-        echo $company->country;
-    }?>" />
+    <label for="country">
+        <?=$this->lang->line('application_country');?>
+    </label>
+    <?php
+    $settings = Setting::first();
+    $countriesList = $settings->list_countries();
+
+    echo form_dropdown('country', $countriesList, $company->country,'style="width:100%" class="chosen-select"');?>
 </div>
 
 <!-- IMPOSTO SOBRE O VALOR AGREGADO - IVA / ESCONDIDO -->
@@ -124,62 +133,6 @@ echo form_open_multipart($form_action, $attributes);
         echo $company->terms;
     }?></textarea>
  </div>
-
-<!-- REDES SOCIAIS DO CLIENTE / ESCONDIDO -->
-<!-- <div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-                <label for="twitter">Twitter</label>
-                <input id="twitter" type="text" name="twitter" class="form-control" value="<?php if (isset($company)) {
-        echo $company->twitter;
-    }?>" />
-        </div>
-        <div class="form-group">
-                <label for="skype">Skype</label>
-                <input id="skype" type="text" name="skype" class="form-control" value="<?php if (isset($company)) {
-        echo $company->skype;
-    }?>" />
-        </div>
-        <div class="form-group">
-                <label for="linkedin">LinkedIn</label>
-                <input id="linkedin" type="text" name="linkedin" class="form-control" value="<?php if (isset($company)) {
-        echo $company->linkedin;
-    }?>" />
-        </div>
-        <div class="form-group">
-                <label for="facebook">Facebook</label>
-                <input id="facebook" type="text" name="facebook" class="form-control" value="<?php if (isset($company)) {
-        echo $company->facebook;
-    }?>" />
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="form-group">
-                <label for="instagram">Instagram</label>
-                <input id="instagram" type="text" name="instagram" class="form-control" value="<?php if (isset($company)) {
-        echo $company->instagram;
-    }?>" />
-        </div>
-        <div class="form-group">
-                <label for="googleplus">Google Plus</label>
-                <input id="googleplus" type="text" name="googleplus" class="form-control" value="<?php if (isset($company)) {
-        echo $company->googleplus;
-    }?>" />
-        </div>
-        <div class="form-group">
-                <label for="youtube">Youtube</label>
-                <input id="youtube" type="text" name="youtube" class="form-control" value="<?php if (isset($company)) {
-        echo $company->youtube;
-    }?>" />
-        </div>
-        <div class="form-group">
-                <label for="pinterest">Pinterest</label>
-                <input id="pinterest" type="text" name="pinterest" class="form-control" value="<?php if (isset($company)) {
-        echo $company->pinterest;
-    }?>" />
-        </div>
-    </div>
-</div> -->
 
         <div class="modal-footer">
         <input type="submit" name="send" class="btn btn-primary" value="<?=$this->lang->line('application_save');?>"/>

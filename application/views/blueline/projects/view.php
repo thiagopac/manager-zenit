@@ -452,6 +452,7 @@
             <h1 class="milestones__header ui-state-disabled">
                <i class="ion-android-list milestone__header__icon"></i>
                 <?=$milestone->name?>
+                <a href="<?=base_url()?>projects/milestones/<?=$project->id;?>/copy/<?=$milestone->id;?>"><i style="vertical-align: middle; color: white" class="icon dripicons-copy milestone__header__icon" title="<?=$this->lang->line('application_copy_milestone')?>"></i></a>
                 <span class="pull-right">
                     <span id="milestone_completion_<?=$milestone->id;?>" style="margin-top: -2px; float: left!important;">
                         <a class="milestone-new-task-btn" href="<?=base_url()?>projects/tasks/<?=$project->id;?>/add/milestone_id/<?=$milestone->id?>" data-toggle="mainmodal"><?=$this->lang->line('application_more_task')?></a>

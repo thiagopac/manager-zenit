@@ -692,6 +692,7 @@ class Settings extends MY_Controller
             $this->view_data['modules'] = Module::find('all', ['order' => 'sort asc', 'conditions' => ['type != ?', 'client']]);
             $this->view_data['queues'] = Queue::find('all', ['conditions' => ['inactive=?', '0']]);
             $this->view_data['form_action'] = 'settings/user_create/';
+            $this->view_data['departments'] = Department::find('all');
             $this->content_view = 'settings/_userform';
         }
     }
