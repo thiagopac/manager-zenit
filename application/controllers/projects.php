@@ -1066,6 +1066,8 @@ class Projects extends MY_Controller
 
                     $new_milestone = ProjectHasMilestone::create($attributes);
 
+                    $last_created_milestone = ProjectHasMilestone::find('last', ['conditions' => ['project_id = ?', $project->id]]);
+
                     $options = ['conditions' => ['milestone_id = ?', $current_milestone->id]];
                     $tasksOfMilestone = ProjectHasTask::all($options);
 
@@ -1075,7 +1077,7 @@ class Projects extends MY_Controller
 
                         $attributes = array(
                             'project_id' => $project->id,
-                            'milestone_id' => $new_milestone->id,
+                            'milestone_id' => $last_created_milestone->id,
                             'name' => $existingTask->name,
                             'user_id' => $existingTask->user_id,
                             'status' => 'open',
