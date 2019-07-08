@@ -67,7 +67,7 @@ $public = "0";
     $sucessor = array();
 
     foreach ($tasks as $value):
-        $options[$value->id] = $value->name." [".ProjectHasMilestone::find($task->milestone_id)->name."]";
+        $options[$value->id] = $value->name." [".ProjectHasMilestone::find($value->milestone_id)->name."]";
     endforeach;
 
     if(isset($task)){}else{$sucessor = "";}

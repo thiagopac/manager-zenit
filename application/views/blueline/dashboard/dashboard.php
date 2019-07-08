@@ -274,10 +274,11 @@
                                                     $count1++;
                                                 }
 
-                                                echo "<span aria-sort='ascending' id='<?=$interval->d?>' class='label dashboard-label $color'>" . $remainingTime . "</span>";
+                                                echo "<span id='<?=$interval->d?>' class='label dashboard-label $color'>" . $remainingTime . "</span>";
 
                                             }else {
-                                                echo '<span class="label dashboard-label label-red">' . $this->lang->line('application_delayed_task') . '</span>';
+
+                                                echo '<span class="label dashboard-label label-red">' .  $interval->format('-%ad %hh %im') . '</span>';
                                                 $countDelayed++;
                                             }
 
@@ -344,7 +345,7 @@
 
            <div class="grid__col-12 ">
                       <div class="stdpad box-shadow"><div class="table-head"><?=$this->lang->line('application_task_chart');?></div>
-                          <canvas id="task-chart" width="200" height="auto" style="margin-bottom: -5px;"></canvas>
+                          <canvas id="task-chart" width="200" height="130" style="margin-top:10px; margin-bottom: 5px;"></canvas>
                       </div>
                 </div>
 
@@ -442,7 +443,7 @@ $(document).ready(function(){
         var taskChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ['Atrasada', 'Vencendo hoje', 'Vencendo em 2 dias', 'Vencendo em 1 semana', 'Vencendo acima de 1 semana'],
+                labels: ['Atrasada', 'Hoje', '2 dias', '< 1 sem', '> 1 sem.'],
                 datasets: [{
                     label: '# of Votes',
                     data: [<?=$countDelayed?>, <?=$count1?>, <?=$count2?>, <?=$count7?>, <?=$count7ahead?>],
@@ -471,10 +472,11 @@ $(document).ready(function(){
                 },
                 legend: {
                     display: true,
-                    fullWidth: true,
+                    fullWidth: false,
                     position: 'top',
                     labels: {
                         usePointStyle: true,
+                        boxWidth: 12
                     }
                 }
             }
