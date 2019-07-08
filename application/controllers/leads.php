@@ -302,6 +302,27 @@ class Leads extends MY_Controller{
             $_POST['modified'] = date("Y-m-d H:i");
             $_POST['order'] = -50+rand(1, 5);
 
+            $post_lead_has_warning_user = (isset($_POST['lead_warning_user'])) ? 1 : 0;
+            unset($_POST['lead_warning_user']);
+
+            $lead_has_warning_user = LeadHasWarningUser::find('first', array('conditions' => array('lead_id = ? AND user_id = ?',$_POST['id'], $this->user->id)));
+
+            if ($post_lead_has_warning_user == 0){
+                if ($lead_has_warning_user != null){
+                    $atributes = array('user_id' => $this->user->id, 'lead_id' => $_POST['id']);
+                    $deleted = LeadHasWarningUser::find($atributes);
+                    $deleted->delete();
+                }
+            }else{
+                if ($lead_has_warning_user != null){
+                    $atributes = array('user_id' => $this->user->id, 'lead_id' => $_POST['id']);
+                    LeadHasWarningUser::save($atributes);
+                }else{
+                    $atributes = array('user_id' => $this->user->id, 'lead_id' => $_POST['id']);
+                    LeadHasWarningUser::create($atributes);
+                }
+            }
+
             if (!empty($_POST['tags_arr'])) {
                 $_POST['tags'] = implode(',', $_POST['tags_arr']);
             } else {

@@ -190,7 +190,7 @@
                         <?=$this->lang->line('application_tasks');?>
                     </div>
                     <div class="table-div">
-                        <table class="data table" id="tasks" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
+                        <table class="data table noclick" id="tasks" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
                             <thead>
                             <tr>
                                 <th class="hidden-xs">
@@ -208,7 +208,7 @@
                                 <th class="hidden-xs">
                                     <?=$this->lang->line('application_expiration');?>
                                 </th>
-                                <th>
+                                <th style="text-align: center" width="8%">
                                     <?=$this->lang->line('application_action');?>
                                 </th>
                             </tr>
@@ -284,7 +284,10 @@
 
                                         ?>
                                     </td>
-                                    <td class="option" width="5%">
+                                    <td style="text-align: left" class="option">
+                                        <a href="<?=base_url()?>projects/view/<?=$task->project_id;?>" class="btn-option tt" title="<?=$this->lang->line('application_go_to_project'); ?>">
+                                            <i class="icon dripicons-suitcase"></i>
+                                        </a>
                                         <a href="<?=base_url()?>projects/tasks/<?=$task->project_id;?>/update/<?=$task->id;?>" class="btn-option tt" title="<?=$this->lang->line('application_edit_project'); ?>" data-toggle="mainmodal">
                                             <i class="icon dripicons-gear"></i>
                                         </a>
