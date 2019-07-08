@@ -1036,10 +1036,13 @@ class Projects extends MY_Controller
             case 'delete':
                     $milestone = ProjectHasMilestone::find($milestone_id);
 
+                    $toDelete = array();
                     foreach ($milestone->project_has_tasks as $value) {
-                        $value->milestone_id = "";
-                        $value->save();
+                        array_push($toDelete, $value->id);
                     }
+
+                    ProjectHasTask::table()->delete(array('id' => $toDelete));
+
                     $milestone->delete();
                        if (!$milestone) {
                            $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_delete_milestone_error'));
