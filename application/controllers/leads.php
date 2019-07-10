@@ -489,7 +489,7 @@ class Leads extends MY_Controller{
             }else{
                 if ($lead_has_warning_user != null){
                     $atributes = array('user_id' => $this->user->id, 'lead_id' => $_POST['id']);
-                    LeadHasWarningUser::save($atributes);
+                    $lead_has_warning_user->save($atributes);
                 }else{
                     $atributes = array('user_id' => $this->user->id, 'lead_id' => $_POST['id']);
                     LeadHasWarningUser::create($atributes);
