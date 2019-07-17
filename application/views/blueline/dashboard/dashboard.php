@@ -190,7 +190,7 @@
                         <?=$this->lang->line('application_tasks');?>
                     </div>
                     <div class="table-div">
-                        <table class="data table noclick" id="tasks" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
+                        <table class="data-natural table noclick" id="tasks" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
                             <thead>
                             <tr>
                                 <th class="hidden-xs">
@@ -274,11 +274,14 @@
                                                     $count1++;
                                                 }
 
-                                                echo "<span id='<?=$interval->d?>' class='label dashboard-label $color'>" . $remainingTime . "</span>";
+                                                echo "<span id='$interval->d' class='label dashboard-label $color'>" . $remainingTime . "</span>";
+//                                                echo $remainingTime;
 
                                             }else {
 
                                                 echo '<span class="label dashboard-label label-red">' .  $interval->format('-%ad %hh %im') . '</span>';
+//                                                echo $interval->format('-%ad %hh %im');
+//                                                echo 'atrasada';
                                                 $countDelayed++;
                                             }
 
@@ -441,6 +444,8 @@ $(document).ready(function(){
 
   <script type="text/javascript">
     $(document).ready(function(){
+
+
 
         var ctx = document.getElementById('task-chart').getContext('2d');
         var taskChart = new Chart(ctx, {

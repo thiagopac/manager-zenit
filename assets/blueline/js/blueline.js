@@ -1023,6 +1023,26 @@ $(".summernote-big").summernote({
                 sPrevious: showingPreviousArrow
             }
         }
+    }), $("table.data-natural").dataTable({
+        iDisplayLength: 25,
+        bLengthChange: !1,
+        aaSorting: [
+            [1, "desc"]
+        ],
+        columnDefs: [{
+            targets: 0,
+            type: 'natural'
+        }],
+        oLanguage: {
+            sSearch: "",
+            sInfo: showingFromToLang,
+            sInfoEmpty: showingFromToEmptyLang,
+            sEmptyTable: noDataYetLang,
+            oPaginate: {
+                sNext: showingNextArrow,
+                sPrevious: showingPreviousArrow
+            }
+        }
     })
 }), $(".set-lead-id").on("click", function(t, e) {
     var a = $(this).data("lead-id");
