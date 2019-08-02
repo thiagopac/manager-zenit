@@ -137,5 +137,9 @@
 }
 
 .dashboard-label {
-    width: 80px !important;
+    font: initial !important;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    margin-right: 10px;
 }

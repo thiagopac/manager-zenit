@@ -973,3 +973,5 @@ $lang['application_task_chart'] = 'Vencimento de tarefas';
 $lang['application_task_filter'] = 'Todas as tarefas';
 
 $lang['application_payment_method'] = 'Método de pagamento';
+
+$lang['application_sla'] = 'SLA';

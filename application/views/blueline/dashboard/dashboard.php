@@ -193,6 +193,9 @@
                         <table class="data-natural table noclick" id="tasks" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
                             <thead>
                             <tr>
+                                <th class="hidden-xs" style="width: 2px;">
+                                    <?=$this->lang->line('application_sla');?>
+                                </th>
                                 <th class="hidden-xs">
                                     <?=$this->lang->line('application_task_name');?>
                                 </th>
@@ -205,11 +208,11 @@
                                 <th class="hidden-xs">
                                     <?=$this->lang->line('application_assigned_to');?>
                                 </th>
-                                <th class="hidden-xs">
+                                <th class="hidden-xs no-sort">
                                     <?=$this->lang->line('application_expiration');?>
                                 </th>
-                                <th style="text-align: center" width="8%">
-                                    <?=$this->lang->line('application_action');?>
+                                <th class="hidden-xs">
+                                    <?=$this->lang->line('test');?>
                                 </th>
                             </tr>
                             </thead>
@@ -226,6 +229,59 @@
 
                             foreach ($tasks as $task): $i = $i + 1;?>
                                 <tr id="<?=$task->id;?>">
+                                    <td class="hidden-xs" style="padding-left: 15px; padding-right: 15px">
+                                        <?
+                                        $now = new DateTime();
+                                        $due_date = new DateTime($task->due_date);
+
+                                        $current =  strtotime(date('Y-m-d H:i'));
+                                        $interval = $due_date->diff($now);
+
+                                        if ($due_date > $now) {
+
+                                            if ($interval->d >= 7) {
+                                                $color = "label-gray";
+                                                $remainingTime = "z";
+                                                $count7ahead++;
+                                            }else if($interval->d > 2 && $interval->d < 7){
+                                                $color = "label-green";
+                                                $remainingTime = "y";
+                                                $count7++;
+                                            }else if($interval->d >= 1 && $interval->d <= 2){
+                                                $color = "label-blue";
+                                                $remainingTime = "x";
+                                                $count2++;
+                                            }else if($interval->d >= 0 && $interval->d < 1){
+                                                $color = "label-yellow";
+                                                $remainingTime = "u";
+
+//                                                    if ($interval->d == 0 && $interval->h != 0){
+//                                                        $remainingTime = $interval->format("%h horas");
+//                                                    }else if ($interval->d == 0 && $interval->h == 0){
+//                                                        $remainingTime = $interval->format("%i minutos");
+//                                                    }
+
+                                                $count1++;
+                                            }
+
+                                            echo "<span id='$interval->d' class='label dashboard-label $color'>" . $remainingTime . "</span>";
+//                                                echo $remainingTime;
+
+                                        }else {
+
+//                                                $remainingTime = $interval->format('-%a dias');
+
+                                            $horas = ($interval->d * 24) + $interval->h;
+                                            $remainingTime = "r";
+
+                                            echo '<span class="label dashboard-label label-red">' .  $remainingTime . '</span>';
+//                                                echo $interval->format('-%ad %hh %im');
+//                                                echo 'atrasada';
+                                            $countDelayed++;
+                                        }
+
+                                        ?>
+                                    </td>
                                     <td class="hidden-xs">
                                         <span class="static-color-preview" style="background-color:<?=$value->color?>"></span>
                                         <?=$task->name;?>
@@ -244,46 +300,38 @@
                                         $now = new DateTime();
                                         $due_date = new DateTime($task->due_date);
 
-                                            $current =  strtotime(date('Y-m-d H:i'));
-                                            $interval = $due_date->diff($now);
+                                        $current =  strtotime(date('Y-m-d H:i'));
+                                        $interval = $due_date->diff($now);
 
-                                            if ($due_date > $now) {
+                                        if ($due_date > $now) {
 
-                                                if ($interval->d >= 7) {
-                                                    $color = "label-gray";
-                                                    $remainingTime = $interval->format("%ad %hh");
-                                                    $count7ahead++;
-                                                }else if($interval->d > 2 && $interval->d < 7){
-                                                    $color = "label-green";
-                                                    $remainingTime = $interval->format("%ad %hh");
-                                                    $count7++;
-                                                }else if($interval->d >= 1 && $interval->d <= 2){
-                                                    $color = "label-blue";
-                                                    $remainingTime = $interval->format("%ad %hh");
-                                                    $count2++;
-                                                }else if($interval->d >= 0 && $interval->d < 1){
-                                                    $color = "label-yellow";
-                                                    $remainingTime = $interval->format("%ad %hh");
+                                            if ($interval->d >= 7) {
+                                                $remainingTime = $interval->format("%ad %hh");
+                                                $count7ahead++;
+                                            }else if($interval->d > 2 && $interval->d < 7){
+                                                $remainingTime = $interval->format("%ad %hh");
+                                                $count7++;
+                                            }else if($interval->d >= 1 && $interval->d <= 2){
+                                                $remainingTime = $interval->format("%ad %hh");
+                                                $count2++;
+                                            }else if($interval->d >= 0 && $interval->d < 1){
+                                                $remainingTime = $interval->format("%ad %hh");
 
-                                                    if ($interval->d == 0 && $interval->h != 0){
-                                                        $remainingTime = $interval->format("%hh %im");
-                                                    }else if ($interval->d == 0 && $interval->h == 0){
-                                                        $remainingTime = $interval->format("%im");
-                                                    }
-
-                                                    $count1++;
+                                                if ($interval->d == 0 && $interval->h != 0){
+                                                    $remainingTime = $interval->format("%hh %im");
+                                                }else if ($interval->d == 0 && $interval->h == 0){
+                                                    $remainingTime = $interval->format("%im");
                                                 }
-
-                                                echo "<span id='$interval->d' class='label dashboard-label $color'>" . $remainingTime . "</span>";
-//                                                echo $remainingTime;
-
-                                            }else {
-
-                                                echo '<span class="label dashboard-label label-red">' .  $interval->format('-%ad %hh %im') . '</span>';
-//                                                echo $interval->format('-%ad %hh %im');
-//                                                echo 'atrasada';
-                                                $countDelayed++;
+                                                $count1++;
                                             }
+
+                                            echo $remainingTime;
+
+                                        }else {
+
+                                            echo $interval->format('-%ad %hh %im');
+                                            $countDelayed++;
+                                        }
 
                                         ?>
                                     </td>

@@ -675,11 +675,24 @@ class Settings extends MY_Controller
             }
             $_POST = array_map('htmlspecialchars', $_POST);
             $user_exists = User::find_by_username($_POST['username']);
+
+            $departments = $_POST['department_id'];
+            unset($_POST['department_id']);
+
             if (empty($user_exists)) {
                 $user = User::create($_POST);
+
                 if (!$user) {
                     $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_user_error'));
                 } else {
+
+                    //criar os registros de departamentos que o usuário tem funções
+                    foreach ($departments as $value) {
+                        $atributes = array('department_id' => $value, 'user_id' => $user->id);
+
+                        DepartmentHasWorker::create($atributes);
+                    }
+
                     $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_create_user_success'));
                 }
             } else {

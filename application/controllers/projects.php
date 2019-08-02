@@ -1309,6 +1309,7 @@ class Projects extends MY_Controller
                 $this->theme_view = 'blank';
                 $task = ProjectHasTask::find_by_id($task_id);
                 $project = Project::find_by_id($task->project_id);
+
                 if ($task->status == 'done') {
                     $task->status = 'open';
                     $task->completion_date = null;
@@ -1326,10 +1327,17 @@ class Projects extends MY_Controller
 
                     $sucessors = explode(',', $task->sucessors);
 
+                    //
+                    $options = ['conditions' => ['project_id = ? AND id in (?)', $id, explode(',', $task->sucessors)]];
+                    $sucessors_parents = ProjectHasTask::find($options);
+                    //
+
                     foreach ($sucessors as $sucessorId){
 
                         if (is_numeric($sucessorId)){
                             $sucessor = ProjectHasTask::find($sucessorId);
+
+                            //achar um meio de não precisar percorrer todas as tarefas para achar se ela é pai da tarefa que está instanciada nessa repetição
 
                             $attributes = array('user_id' => $sucessor->user_id, 'message' => '<p><b>'.$this->user->firstname.'</b>'.' concluiu a tarefa  <b>'.$task->name.'</b> e você já pode iniciar a tarefa <b>'.$sucessor->name.'</b> </p>['.$project->name.']', 'url' => base_url().'projects/view/'.$id);
                             Notification::create($attributes);
@@ -1340,7 +1348,6 @@ class Projects extends MY_Controller
                                 array_push($push_receivers, $sucessor_owner->email);
                             }
 
-//                            $sucessor->update_attributes(['start_date' => date('Y-m-d H:i:s')]);
 
                             $sucessor->update_attributes(['start_date' => date('Y-m-d H:i'), 'due_date' => date("Y-m-d H:i", strtotime("$sucessor->scheduled_time weekdays ".date('H:i')))]);
                         }
