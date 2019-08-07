@@ -92,7 +92,7 @@ if (isset($status)) {
 					maxTop: 200
 				}
 			};
-			$('.colorpickerinput').colorpicker({
+			/*$('.colorpickerinput').colorpicker({
 				customClass: 'colorpicker-2x',
 				colorSelectors: colors,
 				align: 'left',
@@ -101,6 +101,6 @@ if (isset($status)) {
 				$('.color-previewer')
 					.css('background', e.color);
 
-			});
+			});*/
 		});
 	</script>
