@@ -29,7 +29,7 @@
               </div>
               <?php /*} */?>
               <div class="grid__col-4 grid__col-lg-3 grid--align-self-center">
-                <h6><?/*=$this->lang->line('application_clients');*/?></h6>
+                <h6><?/*=$this->lang->line('application_client');*/?></h6>
                 <h2><?/*=$clientcounter;*/?></h2>
               </div>
           </div>-->

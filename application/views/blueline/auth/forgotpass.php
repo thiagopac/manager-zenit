@@ -1,7 +1,7 @@
 <?php $attributes = ['class' => 'form-signin box-shadow', 'role' => 'form', 'id' => 'forgotpass']; ?>
 <?=form_open('forgotpass', $attributes)?>
         <div class="logo"><img src="<?=base_url()?><?php if ($core_settings->login_logo == '') {
-    echo $core_settings->invoice_logo;
+    echo $core_settings->company_logo;
 } else {
     echo $core_settings->login_logo;
 }?>" alt="<?=$core_settings->company;?>"></div>

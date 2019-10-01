@@ -438,7 +438,7 @@ $.ajaxSetup({
     0 == e.indexOf("#") ? $(e).modal("open") : $.get(e, function(t) {
         $('<div class="modal fade" >' + t + "</div>").modal()
     })
-}), $(document).on("click", "table#projects td, table#clients td, table#invoices td, table#cprojects td, table#cinvoices td, table#estimates td, table#cestimates td, table#quotations td, table#messages td, table#cmessages td, table#subscriptions td, table#csubscriptions td, table#tickets td, table#ctickets td", function(t) {
+}), $(document).on("click", "table#projects td, table#client td, table#invoices td, table#cprojects td, table#cinvoices td, table#estimates td, table#cestimates td, table#quotations td, table#messages td, table#cmessages td, table#subscriptions td, table#csubscriptions td, table#tickets td, table#ctickets td", function(t) {
     var e = $(this).parent().attr("id");
     if (e && !$(this).hasClass("noclick")) {
         var a = $(this).closest("table").attr("rel") + $(this).closest("table").attr("id");

@@ -37,8 +37,8 @@
 
 				<tr>
 					<td>
-						<?php echo str_replace('.zip', '', $filename[1]); ?>
-						<?php echo str_replace('.zip', '', $filename[2]); ?>
+						<?php $file_date = str_replace('Zenit-manual-backup-', '', $filename[0]); ?>
+                        <?php echo str_replace('.zip', '', $file_date);  ?>
 					</td>
 					<td>
 						<?php echo str_replace('-', ' ', $filename[0]); ?>

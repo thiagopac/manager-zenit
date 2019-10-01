@@ -132,7 +132,7 @@ class Postmaster extends MY_Controller
                         }
                         $ticket->updated = '1';
                         $ticket->save();
-                        $article = TicketHasArticle::create($article_attributes);
+                        $article = TicketArticle::create($article_attributes);
 
                         //Attachments
                         $parts = $email->get_parts_array();
@@ -150,7 +150,7 @@ class Postmaster extends MY_Controller
                                 $orgname = str_replace('%20', '_', $orgname);
                                 $part->filename = $savename;
                                 $attributes = ['article_id' => $article->id, 'filename' => $orgname, 'savename' => $savename];
-                                $attachment = ArticleHasAttachment::create($attributes);
+                                $attachment = ArticleAttachment::create($attributes);
                                 $email_attachment[] = 'files/media/' . $savename;
                             }
                             $email->save_all_attachments('files/media/');
@@ -203,7 +203,7 @@ class Postmaster extends MY_Controller
                                 $orgname = str_replace('%20', '_', $orgname);
                                 $part->filename = $savename;
                                 $attributes = ['ticket_id' => $ticket->id, 'filename' => $orgname, 'savename' => $savename];
-                                $attachment = TicketHasAttachment::create($attributes);
+                                $attachment = TicketAttachment::create($attributes);
                                 $email_attachment[] = 'files/media/' . $savename;
                             }
                             $email->save_all_attachments('files/media/');

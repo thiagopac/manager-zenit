@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class reports extends MY_Controller
+class Reports extends MY_Controller
 {
 	function __construct()
 	{
@@ -34,8 +34,8 @@ class reports extends MY_Controller
  				
 				
 				if(in_array("projects", $this->view_data['module_permissions'])){
-					$sql = 'SELECT * FROM project_has_tasks WHERE status != "done" AND user_id = "'.$this->user->id.'" ORDER BY project_id';
-					$taskquery = ProjectHasTask::find('all', array('conditions' => array('status != ? and user_id = ?', 'done', $this->user->id), 'order' => 'project_id desc'));
+					$sql = 'SELECT * FROM project_task WHERE status != "done" AND user_id = "'.$this->user->id.'" ORDER BY project_id';
+					$taskquery = ProjectTask::find('all', array('conditions' => array('status != ? and user_id = ?', 'done', $this->user->id), 'order' => 'project_id desc'));
 					$this->view_data["tasks"] = $taskquery;
 				} 
 
@@ -51,8 +51,8 @@ class reports extends MY_Controller
 			$end = $_POST['end'];
 		}
 		
-		if($report == "clients"){
-			$this->income_by_clients($start, $end); 
+		if($report == "client"){
+			$this->income_by_client($start, $end);
 			$this->view_data["report_selected"] = $report;
 		}else{
 		$this->index($start, $end);
@@ -210,7 +210,7 @@ class reports extends MY_Controller
 		
 	}
 
-	function income_by_clients($start = FALSE, $end = FALSE)
+	function income_by_client($start = FALSE, $end = FALSE)
 	{
 		$core_settings = Setting::first();
 		$year = date('Y', time()); 

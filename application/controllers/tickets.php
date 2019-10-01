@@ -48,8 +48,7 @@ class Tickets extends MY_Controller
         $now = time();
         $beginning_of_week = strtotime('last Monday', $now); // BEGINNING of the week
         $end_of_week = strtotime('next Sunday', $now) + 86400; // END of the last day of the week
-        $this->view_data['tickets_opened_this_week'] = Ticket::find_by_sql('select count(id) AS "amount", DATE_FORMAT(FROM_UNIXTIME(`created`), "%w") AS "date_day", DATE_FORMAT(FROM_UNIXTIME(`created`), "%Y-%m-%d") AS "date_formatted" from tickets where created >= "' . $beginning_of_week . '" AND created <= "' . $end_of_week . '" Group By date_day, created');
-        //$this->view_data['tickets_closed_this_week'] = Ticket::find_by_sql('select count(id) AS "amount", DATE_FORMAT(FROM_UNIXTIME(`created`), "%w") AS "date_day", DATE_FORMAT(FROM_UNIXTIME(`created`), "%Y-%m-%d") AS "date_formatted" from tickets where created >= "'.$beginning_of_week.'" AND created <= "'.$end_of_week.'" ');
+        $this->view_data['tickets_opened_this_week'] = Ticket::find_by_sql('select count(id) AS "amount", DATE_FORMAT(FROM_UNIXTIME(`created`), "%w") AS "date_day", DATE_FORMAT(FROM_UNIXTIME(`created`), "%Y-%m-%d") AS "date_formatted" from ticket where created >= "' . $beginning_of_week . '" AND created <= "' . $end_of_week . '" Group By date_day, created');
     }
 
     public function index()
@@ -61,15 +60,16 @@ class Tickets extends MY_Controller
                 foreach ($this->user->companies as $value) {
                     array_push($comp_array, $value->id);
                 }
-                $options = ['conditions' => ['status != ? AND company_id in (?)', 'closed', $comp_array], 'order' => 'id DESC', 'include' => ['company', 'client', 'user', 'ticket_has_articles']];
+                $options = ['conditions' => ['status != ? AND company_id in (?)', 'closed', $comp_array], 'order' => 'id DESC', 'include' => ['company', 'client', 'user', 'ticket_article']];
                 $this->view_data['ticket'] = Ticket::find('all', $options);
                 $this->view_data['ticketFilter'] = $this->lang->line('application_all');
             } else {
                 $this->view_data['ticket'] = $this->user->tickets;
                 $this->view_data['ticketFilter'] = $this->lang->line('application_my_tickets');
             }
+
         } else {
-            $options = ['conditions' => ['status != ?', 'closed'], 'order' => 'id DESC', 'include' => ['company', 'client', 'user', 'ticket_has_articles']];
+            $options = ['conditions' => ['status != ?', 'closed'], 'order' => 'id DESC', 'include' => ['company', 'client', 'user', 'ticket_article']];
             $this->view_data['ticket'] = Ticket::find('all', $options);
             $this->view_data['ticketFilter'] = $this->lang->line('application_all');
         }
@@ -200,7 +200,7 @@ class Tickets extends MY_Controller
                 $data = ['upload_data' => $this->upload->data()];
 
                 $attributes = ['ticket_id' => $ticket->id, 'filename' => $data['upload_data']['orig_name'], 'savename' => $data['upload_data']['file_name']];
-                $attachment = TicketHasAttachment::create($attributes);
+                $attachment = TicketAttachment::create($attributes);
                 $email_attachment = $data['upload_data']['file_name'];
             }
 
@@ -226,12 +226,12 @@ class Tickets extends MY_Controller
                     foreach ($this->user->companies as $value) {
                         array_push($comp_array, $value->id);
                     }
-                    $this->view_data['clients'] = Client::find('all', ['conditions' => ['inactive=? AND company_id in (?)', '0', $comp_array]]);
+                    $this->view_data['client'] = Client::find('all', ['conditions' => ['inactive=? AND company_id in (?)', '0', $comp_array]]);
                 } else {
-                    $this->view_data['clients'] = (object) [];
+                    $this->view_data['client'] = (object) [];
                 }
             } else {
-                $this->view_data['clients'] = Client::find('all', ['conditions' => ['inactive=?', '0']]);
+                $this->view_data['client'] = Client::find('all', ['conditions' => ['inactive=?', '0']]);
             }
             $this->view_data['users'] = User::find('all', ['conditions' => ['status=?', 'active']]);
             $this->view_data['queues'] = Queue::find('all', ['conditions' => ['inactive=?', '0']]);
@@ -280,7 +280,7 @@ class Tickets extends MY_Controller
             $_POST['ticket_id'] = $id;
             $_POST['to'] = $_POST['user_id'];
             unset($_POST['user_id']);
-            $article = TicketHasArticle::create($_POST);
+            $article = TicketArticle::create($_POST);
             if (!$assign) {
                 $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_save_ticket_error'));
             } else {
@@ -322,7 +322,7 @@ class Tickets extends MY_Controller
             $_POST['ticket_id'] = $id;
             $_POST['to'] = $_POST['client_id'];
             unset($_POST['client_id']);
-            $article = TicketHasArticle::create($_POST);
+            $article = TicketArticle::create($_POST);
             if (!$assign) {
                 $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_save_ticket_error'));
             } else {
@@ -335,9 +335,9 @@ class Tickets extends MY_Controller
                 foreach ($this->user->companies as $value) {
                     array_push($comp_array, $value->id);
                 }
-                $this->view_data['clients'] = Client::find('all', ['conditions' => ['inactive=? AND company_id in (?)', '0', $comp_array]]);
+                $this->view_data['client'] = Client::find('all', ['conditions' => ['inactive=? AND company_id in (?)', '0', $comp_array]]);
             } else {
-                $this->view_data['clients'] = Client::find('all', ['conditions' => ['inactive=?', '0']]);
+                $this->view_data['client'] = Client::find('all', ['conditions' => ['inactive=?', '0']]);
             }
             $this->view_data['ticket'] = Ticket::find($id);
             $this->theme_view = 'modal';
@@ -460,7 +460,7 @@ class Tickets extends MY_Controller
             $_POST['ticket_id'] = $id;
             $_POST['to'] = $email;
             unset($_POST['client_id']);
-            $article = TicketHasArticle::create($_POST);
+            $article = TicketArticle::create($_POST);
             if (!$ticket) {
                 $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_save_ticket_error'));
             } else {
@@ -480,7 +480,7 @@ class Tickets extends MY_Controller
     {
         $this->load->helper('notification');
         if ($id) {
-            $ticket = ($type == 'article') ? TicketHasArticle::find_by_id($id) : Ticket::find_by_id($id);
+            $ticket = ($type == 'article') ? TicketArticle::find_by_id($id) : Ticket::find_by_id($id);
             $raw = $ticket->raw;
 
             $this->view_data['raw'] = htmlspecialchars($raw);
@@ -499,7 +499,7 @@ class Tickets extends MY_Controller
         $this->view_data['submenu'] = [];
         $this->content_view = 'tickets/view';
         $this->view_data['ticket'] = Ticket::find_by_id($id);
-        $this->view_data['articles'] = TicketHasArticle::find('all', ['conditions' => ['ticket_id=?', $id], 'order' => 'id DESC']);
+        $this->view_data['articles'] = TicketArticle::find('all', ['conditions' => ['ticket_id=?', $id], 'order' => 'id DESC']);
 
         if ($this->user->admin == 0) {
             $comp_array = [];
@@ -565,7 +565,7 @@ class Tickets extends MY_Controller
                     $_POST['user_id'] = $this->user->id;
 
                     $_POST['reply_to'] = $this->user->email;
-                    $article = TicketHasArticle::create($_POST);
+                    $article = TicketArticle::create($_POST);
                     $email_attachment = '';
                     if (!$this->upload->do_upload()) {
                         $error = $this->upload->display_errors('', ' ');
@@ -574,7 +574,7 @@ class Tickets extends MY_Controller
                         $data = ['upload_data' => $this->upload->data()];
 
                         $attributes = ['article_id' => $article->id, 'filename' => $data['upload_data']['orig_name'], 'savename' => $data['upload_data']['file_name']];
-                        $attachment = ArticleHasAttachment::create($attributes);
+                        $attachment = ArticleAttachment::create($attributes);
                         $email_attachment = 'files/media/' . $data['upload_data']['file_name'];
                     }
                     if (isset($notify)) {
@@ -641,27 +641,6 @@ class Tickets extends MY_Controller
             }
             redirect('tickets');
 
-            /*
-            if(isset($ticket->client->email)){ $email = $ticket->client->email; } else {$emailex = explode(' - ', $ticket->from); $email = $emailex[1]; }
-            if(isset($_POST['notify'])){
-
-            send_ticket_notification($email, '[Ticket#'.$ticket->reference.'] - '.$ticket->subject, $_POST['message'], $ticket->id);
-            }
-            send_ticket_notification($ticket->user->email, '[Ticket#'.$ticket->reference.'] - '.$ticket->subject, $_POST['message'], $ticket->id);
-            $_POST['internal'] = "0";
-            unset($_POST['notify']);
-            $_POST['subject'] = htmlspecialchars($_POST['subject']);
-            $_POST['datetime'] = time();
-            $_POST['from'] = $this->user->firstname." ".$this->user->lastname.' - '.$this->user->email;
-            $_POST['reply_to'] = $this->user->email;
-            $_POST['ticket_id'] = $id;
-            $_POST['to'] = $email;
-            unset($_POST['client_id']);
-            $article = TicketHasArticle::create($_POST);
-               if(!$ticket){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_ticket_error'));}
-               else{$this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_ticket_close_success'));}
-            redirect('tickets');
-            */
         } else {
             $this->view_data['ticket'] = Ticket::find($id);
             $this->theme_view = 'modal';
@@ -675,7 +654,7 @@ class Tickets extends MY_Controller
     {
         $this->load->helper('file');
         $this->load->helper('download');
-        $attachment = TicketHasAttachment::find_by_savename($id);
+        $attachment = TicketAttachment::find_by_savename($id);
 
         $file = './files/media/' . $attachment->savename;
         $mime = get_mime_by_extension($file);
@@ -700,7 +679,7 @@ class Tickets extends MY_Controller
         $this->load->helper('download');
         $this->load->helper('file');
 
-        $attachment = ArticleHasAttachment::find_by_savename($id);
+        $attachment = ArticleAttachment::find_by_savename($id);
         $file = './files/media/' . $attachment->savename;
         $mime = get_mime_by_extension($file);
         if (file_exists($file)) {

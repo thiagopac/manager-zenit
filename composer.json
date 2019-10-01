@@ -1,0 +1,7 @@
+{
+    "require": {
+        "ezyang/htmlpurifier": "4.8",
+        "stripe/stripe-php": "4.*",
+        "paquettg/php-html-parser": "^1.7"
+    }
+}

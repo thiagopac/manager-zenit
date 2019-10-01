@@ -29,7 +29,7 @@ if(isset($ticket)){ ?>
         <label for="client"><?=$this->lang->line('application_client');?></label>
         <?php $options = array();
                 $options['0'] = '-';
-                foreach ($clients as $value):  
+                foreach ($client as $value):  
                 $options[$value->id] = $value->firstname.' '.$value->lastname.' ['.$value->company->name.']';
                 endforeach;
         if(isset($ticket) && is_object($ticket->company)){$client = $ticket->company->id;}else{$client = "";}

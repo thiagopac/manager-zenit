@@ -122,14 +122,14 @@ class Parameterization extends MY_Controller
         $this->view_data['breadcrumb_id'] = 'parameterization/areas';
 
         $options = array('conditions' => 'status != \'deleted\'', 'include' => array('department'));
-        $areas = DepartmentHasArea::all($options);
+        $areas = DepartmentArea::all($options);
         $this->view_data['areas'] = $areas;
         $this->content_view = 'parameterization/areas';
     }
 
     public function area_update($area = false)
     {
-        $area = DepartmentHasArea::find($area);
+        $area = DepartmentArea::find($area);
 
         if ($_POST) {
 
@@ -155,7 +155,7 @@ class Parameterization extends MY_Controller
     {
         if ($_POST) {
 
-            $area = DepartmentHasArea::create($_POST);
+            $area = DepartmentArea::create($_POST);
             if (!$area) {
                 $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_area_error'));
             } else {
@@ -180,7 +180,7 @@ class Parameterization extends MY_Controller
 
         if ($this->area->id != $area) {
             $options = ['conditions' => ['id = ?', $area]];
-            $area = DepartmentHasArea::find($options);
+            $area = DepartmentArea::find($options);
             $area->status = 'deleted';
             $area->save();
             $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_area_success'));

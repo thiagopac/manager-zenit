@@ -12,7 +12,7 @@ if(isset($company)){ ?>
                 foreach ($users as $value):
                 $options[$value->id] = $value->firstname.' '.$value->lastname;
                 endforeach;
-        foreach ($company->company_has_admins as $workers):
+        foreach ($company->company_admin as $workers):
             $user[$workers->user_id] = $workers->user_id;
         endforeach;
         echo form_dropdown('user_id[]', $options, $user, 'style="width:100%" class="chosen-select" data-placeholder="'.$this->lang->line('application_select_agents').'" multiple tabindex="3"');?>

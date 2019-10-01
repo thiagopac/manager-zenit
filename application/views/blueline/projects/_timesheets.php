@@ -146,7 +146,7 @@ table thead tr th {
                             } else {
                                 $users = array();
                                 $users['0'] = '-';
-                                foreach ($task->project->project_has_workers as $workers):
+                                foreach ($task->project->project_worker as $workers):
                                                              $users[$workers->user_id] = $workers->user->firstname.' '.$workers->user->lastname;
                                 endforeach;
                                 if (isset($task)) {

@@ -96,7 +96,7 @@ if(isset($project)){ ?>
                         <?php } ?>
                         <li>
                           <!-- CLIENTE CRIAR TAREFAS NO PROJETO / ESCONDIDO -->
-                        <!-- <input name="enable_client_tasks" class="checkbox" data-labelauty="<?=$this->lang->line('application_clients_can_create_tasks');?>" value="1" type="checkbox" <?php if(isset($project)){ if($project->enable_client_tasks == "1"){ ?> checked="checked" <?php } } ?> /> -->
+                        <!-- <input name="enable_client_tasks" class="checkbox" data-labelauty="<?=$this->lang->line('application_client_can_create_tasks');?>" value="1" type="checkbox" <?php if(isset($project)){ if($project->enable_client_tasks == "1"){ ?> checked="checked" <?php } } ?> /> -->
                         </li>
 </ul>
 </div>

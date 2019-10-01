@@ -1,7 +1,9 @@
 <?php
 
-class Ticket extends ActiveRecord\Model
-{
+class Ticket extends ActiveRecord\Model {
+
+    static $table_name = 'ticket';
+
     public static $belongs_to = [
      ['company'],
      ['client'],
@@ -12,8 +14,8 @@ class Ticket extends ActiveRecord\Model
   ];
 
     public static $has_many = [
-    ['ticket_has_articles'],
-    ['ticket_has_attachments'],
+    ['ticket_article'],
+    ['ticket_attachment'],
     ];
 
     public static function newTicketCount($userId, $comp_array)
@@ -35,23 +37,7 @@ class Ticket extends ActiveRecord\Model
 
     public function getLastArticle()
     {
-        $article = end($this->ticket_has_articles);
+        $article = end($this->ticket_article);
         return $article;
     }
-}
-
-class TicketHasArticle extends ActiveRecord\Model
-{
-    public static $belongs_to = [
-     ['ticket'],
-     ['user'],
-     [
-               'client',
-            'foreign_key' => 'email',
-            'primary_key' => 'from',
-        ],
-  ];
-    public static $has_many = [
-      ['article_has_attachments', 'foreign_key' => 'article_id']
-    ];
 }

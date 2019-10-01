@@ -104,7 +104,7 @@ echo form_open($form_action, $attributes);
   <ul class="accesslist checkboxlist">
     
     <?php 
-      $tasks = $project->project_has_tasks;
+      $tasks = $project->project_task;
       function cmp($a, $b)
       {
           return strcmp($a->invoice_id, $b->invoice_id);

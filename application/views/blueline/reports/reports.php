@@ -29,7 +29,7 @@
                               <label for="reports"><?=$this->lang->line('application_reports'); ?> </label>
                               <select id="report" name="report" class="formcontrol chosen-select ">
                                     <option value="income"><?=$this->lang->line('application_income_and_expenses'); ?></option>
-                                    <option value="clients" <?php if (isset($report_selected)) {
+                                    <option value="client" <?php if (isset($report_selected)) {
         echo 'selected';
     } ?>><?=$this->lang->line('application_income_by_client'); ?></option>          
 
@@ -237,7 +237,7 @@
                   </tbody>
                 </table>     
             </div>
-                  <?php if ($current_language == 'german' && $report_selected != 'clients') {
+                  <?php if ($current_language == 'german' && $report_selected != 'client') {
         $fields = [
                             'bmf_form_ekst:ekst_bj' => urlencode($report_year),
                             'bmf_form_ekst:ekst_zve' => urlencode($totalProfit),

@@ -21,7 +21,7 @@ $public = "0";
             <label for="milestone_id"><?=$this->lang->line('application_milestone');?></label>
             <?php   $milestones = array();
             //    $milestones['0'] = '-';
-            foreach ($project->project_has_milestones as $milestone):
+            foreach ($project->project_milestone as $milestone):
                 $milestones[$milestone->id] = $milestone->name;
             endforeach;
             if(isset($task)){$milestone_selected = $task->milestone_id;}else{$milestone_selected = "";}
@@ -67,7 +67,7 @@ $public = "0";
     $sucessor = array();
 
     foreach ($tasks as $value):
-        $options[$value->id] = $value->name." [".ProjectHasMilestone::find($value->milestone_id)->name."]";
+        $options[$value->id] = $value->name." [".ProjectMilestone::find($value->milestone_id)->name."]";
     endforeach;
 
     if(isset($task)){}else{$sucessor = "";}

@@ -129,39 +129,13 @@ class My_Controller extends CI_Controller
                 $this->view_data['user_online']    = User::all(array('conditions' => array('last_active+(30 * 60) > ? AND status = ?', time(), "active")));
                 $this->view_data['client_online']    = Client::all(array('conditions' => array('last_active+(30 * 60) > ? AND inactive = ?', time(), "0")));
 
-                $this->view_data['sticky']            = Project::find_by_sql("select distinct(projects.name), projects.id, projects.tracking, projects.progress from projects, project_has_workers where projects.sticky = 1 AND projects.id = project_has_workers.project_id AND project_has_workers.user_id=".$this->user->id);
+                $this->view_data['sticky']            = Project::find_by_sql("select distinct(project.name), project.id, project.tracking, project.progress from project, project_worker where project.sticky = 1 AND project.id = project_worker.project_id AND project_worker.user_id=".$this->user->id);
 
                 $this->view_data['tickets_access'] = false;
                 if (in_array("tickets", $this->view_data['module_permissions'])) {
                     $this->view_data['tickets_access'] = true;
                     $this->view_data['tickets_new'] = Ticket::newTicketCount($this->user->id, $comp_array);
                 }
-
-
-               /* if (in_array("projects", $this->view_data['module_permissions'])) {
-                    $overdueProjects = Project::overdueByDate($this->user->id, $comp_array, $date);
-                    //task notification
-                    $this->view_data['projects_icon'] = true;
-                    $this->view_data['task_notifications'] = ProjectHasTask::find('all', array('conditions' => array('user_id = ? AND tracking != ?', $this->user->id, 0)));
-                    foreach ($overdueProjects as $key2 => $value2) {
-                        if ($this->user->admin == 0) {
-                            $sql = "SELECT id FROM `project_has_workers` WHERE project_id = ".$value->id." AND user_id = ".$this->user->id;
-                            $res = Project::find_by_sql($sql);
-                            //$res = $query;
-                            if ($res) {
-                                $eventline = str_replace("{project_number}", '<a href="'.base_url().'projects/view/'.$value2->id.'">#'.$this->view_data['core_settings']->project_prefix.$value2->reference.'</a>', $this->lang->line('event_project_overdue'));
-                                $notification_list[$value2->end.".".$value2->id] = $eventline;
-                            }
-                        } else {
-                            $eventline = str_replace("{project_number}", '<a href="'.base_url().'projects/view/'.$value2->id.'">#'.$this->view_data['core_settings']->project_prefix.$value2->reference.'</a>', $this->lang->line('event_project_overdue'));
-                            $notification_list[$value2->end.".".$value2->id] = $eventline;
-                        }
-                    }
-                }*/
-
-//               for ($i = 0; $i < 20; $i++){
-//                   $notification_list[$i] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bonum incolumis acies: misera caecitas. Ab hoc autem quaedam non melius quam veteres, quaedam omnino relicta.";
-//                }
 
                 $notification_list = Notification::get_notifications($this->user);
 
@@ -191,7 +165,7 @@ class My_Controller extends CI_Controller
             $update->last_active = time();
             $update->save();
 
-            $this->view_data['messages_new'] = Privatemessage::find_by_sql("select count(id) as amount from privatemessages where `status`='New' AND recipient = '".$email."'");
+            $this->view_data['messages_new'] = PrivateMessage::find_by_sql("select count(id) as amount from private_message where `status`='New' AND recipient = '".$email."'");
         }
 
         /*$this->load->database();

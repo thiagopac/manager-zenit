@@ -95,7 +95,7 @@ class cTickets extends MY_Controller {
 							$data = array('upload_data' => $this->upload->data());
 
 							$attributes = array('ticket_id' => $ticket->id, 'filename' => $data['upload_data']['orig_name'], 'savename' => $data['upload_data']['file_name']);
-							$attachment = TicketHasAttachment::create($attributes);
+							$attachment = TicketAttachment::create($attributes);
 							$email_attachment = $data['upload_data']['file_name'];
 						}
 
@@ -131,7 +131,7 @@ class cTickets extends MY_Controller {
 		$this->view_data['submenu'] = array();
 		$this->content_view = 'tickets/client_views/view';
 		$this->view_data['ticket'] = Ticket::find_by_id($id);
-		$this->view_data['articles'] = TicketHasArticle::find('all', ['conditions' => ['ticket_id=? AND internal = ?', $id, 0], 'order' => 'id DESC']);
+		$this->view_data['articles'] = TicketArticle::find('all', ['conditions' => ['ticket_id=? AND internal = ?', $id, 0], 'order' => 'id DESC']);
 
 		if(!$this->view_data['ticket']){redirect('ctickets');}
 		if($this->view_data['ticket']->company_id != $this->client->company->id || $this->view_data['ticket']->client_id != $this->client->id){ redirect('ctickets');}
@@ -177,7 +177,7 @@ class cTickets extends MY_Controller {
 					$_POST['ticket_id'] = $id;
 					$_POST['from'] = $this->client->firstname." ".$this->client->lastname.' - '.$this->client->email;
 					$_POST['reply_to'] = $this->client->email;
-					$article = TicketHasArticle::create($_POST);
+					$article = TicketArticle::create($_POST);
 
 					if ( ! $this->upload->do_upload())
 						{
@@ -190,7 +190,7 @@ class cTickets extends MY_Controller {
 							$data = array('upload_data' => $this->upload->data());
 
 							$attributes = array('article_id' => $article->id, 'filename' => $data['upload_data']['orig_name'], 'savename' => $data['upload_data']['file_name']);
-							$attachment = ArticleHasAttachment::create($attributes);
+							$attachment = ArticleAttachment::create($attributes);
 						}
 
 		       		if(!$article){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_article_error'));}
@@ -216,7 +216,7 @@ class cTickets extends MY_Controller {
 		$this->load->helper('download');
 		$this->load->helper('file');
 
-		$attachment = TicketHasAttachment::find_by_savename($id);
+		$attachment = TicketAttachment::find_by_savename($id);
 
 		$file = './files/media/'.$attachment->savename;
 		$mime = get_mime_by_extension($file);
@@ -240,7 +240,7 @@ class cTickets extends MY_Controller {
 		$this->load->helper('download');
 		$this->load->helper('file');
 
-		$attachment = ArticleHasAttachment::find_by_savename($id);
+		$attachment = ArticleAttachment::find_by_savename($id);
 		$file = './files/media/'.$attachment->savename;
 		$mime = get_mime_by_extension($file);
 		if(file_exists($file)) {

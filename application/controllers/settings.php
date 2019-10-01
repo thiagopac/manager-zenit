@@ -31,10 +31,7 @@ class Settings extends MY_Controller
             $this->lang->line('application_settings') => 'settings',
             $this->lang->line('application_agents') => 'settings/users',
 
-            // opções de configuração do zenit suprimidas / ESCONDIDO
-            // $this->lang->line('application_registration') => 'settings/registration',
-
-            $this->lang->line('application_calendar') => 'settings/calendar',
+//            $this->lang->line('application_calendar') => 'settings/calendar',
 
             'devider1' => 'devider',
 
@@ -62,7 +59,7 @@ class Settings extends MY_Controller
         $this->view_data['iconlist'] = [
             'settings' => 'dripicons-toggles',
             'settings/templates' => 'dripicons-duplicate',
-            'settings/calendar' => 'dripicons-calendar',
+//            'settings/calendar' => 'dripicons-calendar',
             'settings/users' => 'dripicons-user-group',
             'settings/registration' => 'dripicons-document-edit',
             'settings/backup' => 'dripicons-stack',
@@ -118,7 +115,7 @@ class Settings extends MY_Controller
                 }
             } else {
                 $data = ['upload_data' => $this->upload->data()];
-                $_POST['invoice_logo'] = 'files/media/' . $data['upload_data']['file_name'];
+                $_POST['company_logo'] = 'files/media/' . $data['upload_data']['file_name'];
             }
 
             if ($_POST['push_active'] != '1') {
@@ -150,7 +147,7 @@ class Settings extends MY_Controller
         }
     }
 
-    public function templates($template = 'invoice')
+    public function templates($template = '')
     {
         $this->load->helper('file');
         $settings = Setting::first();
@@ -193,85 +190,6 @@ class Settings extends MY_Controller
         }
     }
 
-    public function invoice_templates($dest = false, $template = false)
-    {
-        $this->load->helper('file');
-        $settings = Setting::first();
-        $filename = './application/views/' . $settings->template . '/templates/invoice/default.php';
-        $this->view_data['folder_path'] = '/application/views/' . $settings->template . '/templates/';
-
-        $this->view_data['breadcrumb'] = $this->lang->line('application_pdf_templates');
-        $this->view_data['breadcrumb_id'] = 'invoice_templates';
-        if ($_POST) {
-            unset($_POST['send']);
-            if (!isset($_POST['pdf_path'])) {
-                $_POST['pdf_path'] = 0;
-            }
-            $settings->update_attributes($_POST);
-            if ($settings) {
-                $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_template_success'));
-                redirect('settings/invoice_templates/');
-            } else {
-                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_save_template_error'));
-                redirect('settings/invoice_templates/');
-            }
-        } else {
-            if ($dest && $template) {
-                $DBdest = $dest . '_pdf_template';
-                $attr = [];
-                $attr[$DBdest] = 'templates/' . $dest . '/' . $template;
-                $settings->update_attributes($attr);
-                redirect('settings/invoice_templates');
-            } else {
-                $this->view_data['invoice_template_files'] = get_filenames('./application/views/' . $settings->template . '/templates/invoice/');
-                $this->view_data['invoice_template_files'] = str_replace('.php', '', $this->view_data['invoice_template_files']);
-                $this->view_data['estimate_template_files'] = get_filenames('./application/views/' . $settings->template . '/templates/estimate/');
-                $this->view_data['estimate_template_files'] = str_replace('.php', '', $this->view_data['estimate_template_files']);
-
-                $this->view_data['settings'] = Setting::first();
-                $active_template = end(explode('/', $this->view_data['settings']->invoice_pdf_template));
-                $this->view_data['active_template'] = str_replace('.php', '', $active_template);
-
-                $active_estimate_template = explode('/', $this->view_data['settings']->estimate_pdf_template);
-                $active_estimate_template = end();
-                $this->view_data['active_estimate_template'] = str_replace('.php', '', $active_estimate_template);
-
-                $this->view_data['form_action'] = 'settings/invoice_templates/' . $template;
-                $this->content_view = 'settings/invoice_templates';
-            }
-        }
-    }
-
-    public function paypal()
-    {
-        $this->view_data['breadcrumb'] = $this->lang->line('application_paypal');
-        $this->view_data['breadcrumb_id'] = 'paypal';
-
-        if ($_POST) {
-            unset($_POST['send']);
-            if (isset($_POST['paypal'])) {
-                if ($_POST['paypal'] != '1') {
-                    $_POST['paypal'] = '0';
-                }
-            } else {
-                $_POST['paypal'] = '0';
-            }
-            $settings = Setting::first();
-            $settings->update_attributes($_POST);
-            if ($settings) {
-                $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_settings_success'));
-                redirect('settings/paypal');
-            } else {
-                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_save_settings_error'));
-                redirect('settings/paypal');
-            }
-        } else {
-            $this->view_data['settings'] = Setting::first();
-            $this->view_data['form_action'] = 'settings/paypal';
-            $this->content_view = 'settings/paypal';
-        }
-    }
-
     public function calendar()
     {
         $this->view_data['breadcrumb'] = $this->lang->line('application_calendar');
@@ -293,87 +211,6 @@ class Settings extends MY_Controller
             $this->view_data['settings'] = Setting::first();
             $this->view_data['form_action'] = 'settings/calendar';
             $this->content_view = 'settings/calendar';
-        }
-    }
-
-    public function payment_gateways()
-    {
-        $this->view_data['breadcrumb'] = $this->lang->line('application_payment_gateways');
-        $this->view_data['breadcrumb_id'] = 'payment_gateways';
-
-        if ($_POST) {
-            unset($_POST['send']);
-            if (isset($_POST['stripe'])) {
-                if ($_POST['stripe'] != '1') {
-                    $_POST['stripe'] = '0';
-                }
-                if ($_POST['stripe_ideal'] != '1') {
-                    $_POST['stripe_ideal'] = '0';
-                }
-            } else {
-                $_POST['stripe'] = '0';
-            }
-
-            if (isset($_POST['authorize_net'])) {
-                if ($_POST['authorize_net'] != '1') {
-                    $_POST['authorize_net'] = '0';
-                }
-            } else {
-                $_POST['authorize_net'] = '0';
-            }
-
-            if (isset($_POST['twocheckout'])) {
-                if ($_POST['twocheckout'] != '1') {
-                    $_POST['twocheckout'] = '0';
-                }
-            } else {
-                $_POST['twocheckout'] = '0';
-            }
-
-            $settings = Setting::first();
-            $settings->update_attributes($_POST);
-            if ($settings) {
-                $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_settings_success'));
-                redirect('settings/payment_gateways');
-            } else {
-                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_save_settings_error'));
-                redirect('settings/payment_gateways');
-            }
-        } else {
-            $this->view_data['settings'] = Setting::first();
-            $this->view_data['form_action'] = 'settings/payment_gateways';
-            $this->content_view = 'settings/stripe';
-        }
-    }
-
-    public function bank_transfer()
-    {
-        $this->view_data['breadcrumb'] = $this->lang->line('application_bank_transfer');
-        $this->view_data['breadcrumb_id'] = 'bank_transfer';
-
-        if ($_POST) {
-            unset($_POST['send'], $_POST['note-codable'], $_POST['files']);
-
-            if (isset($_POST['bank_transfer'])) {
-                if ($_POST['bank_transfer'] != '1') {
-                    $_POST['bank_transfer'] = '0';
-                }
-            } else {
-                $_POST['bank_transfer'] = '0';
-            }
-            $settings = Setting::first();
-            $settings->update_attributes($_POST);
-            if ($settings) {
-                $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_settings_success'));
-                redirect('settings/bank_transfer');
-            } else {
-                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_save_settings_error'));
-                redirect('settings/bank_transfer');
-            }
-        } else {
-            $this->view_data['settings'] = Setting::first();
-            $this->view_data['form_action'] = 'settings/bank_transfer';
-            $this->content_view = 'settings/bank_transfer';
         }
     }
 
@@ -690,7 +527,7 @@ class Settings extends MY_Controller
                     foreach ($departments as $value) {
                         $atributes = array('department_id' => $value, 'user_id' => $user->id);
 
-                        DepartmentHasWorker::create($atributes);
+                        DepartmentWorker::create($atributes);
                     }
 
                     $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_create_user_success'));
@@ -745,9 +582,9 @@ class Settings extends MY_Controller
 
             $query = array();
 
-            $user_is_on_departments = DepartmentHasWorker::find('all', array('conditions' => array("user_id =? ", $user->id)));
+            $user_is_in_departments = DepartmentWorker::find('all', array('conditions' => array("user_id =? ", $user->id)));
 
-            foreach ($user_is_on_departments as $function_of_user) {
+            foreach ($user_is_in_departments as $function_of_user) {
                 array_push($query, $function_of_user->department_id);
             }
 
@@ -757,12 +594,12 @@ class Settings extends MY_Controller
             foreach ($added as $value) {
                 $atributes = array('department_id' => $value, 'user_id' => $user->id);
 
-                DepartmentHasWorker::create($atributes);
+                DepartmentWorker::create($atributes);
             }
 
             foreach ($removed as $value) {
                 $atributes = array('department_id' => $value, 'user_id' => $user->id);
-                $registry = DepartmentHasWorker::find($atributes);
+                $registry = DepartmentWorker::find($atributes);
                 $registry->delete();
             }
 
@@ -776,7 +613,7 @@ class Settings extends MY_Controller
 
             $this->view_data['departments'] = Department::find('all');
 
-            $this->view_data['worker_departments'] = DepartmentHasWorker::find('all', array('conditions' => array("user_id =? ", $user->id)));
+            $this->view_data['worker_departments'] = DepartmentWorker::find('all', array('conditions' => array("user_id =? ", $user->id)));
 
             $this->theme_view = 'modal';
             $this->view_data['modules'] = Module::find('all', ['order' => 'sort asc', 'conditions' => ['type != ?', 'client']]);
@@ -992,11 +829,11 @@ class Settings extends MY_Controller
         $this->load->dbutil();
         $settings = Setting::first();
         $version = str_replace('.', '-', $settings->version);
-        $prefs = ['format' => 'zip', 'filename' => 'Zenit-manual-backup_'. date('d-m-Y_H:i')];
+        $prefs = ['format' => 'zip', 'filename' => 'Zenit-manual-backup_'. date('d-m-Y-H-i')];
 
         $backup = &$this->dbutil->backup($prefs);
 
-        if (!write_file('./files/backup/Zenit-manual-backup_' . date('d-m-Y_H:i') . '.zip', $backup)) {
+        if (!write_file('./files/backup/Zenit-manual-backup-' . date('d-m-Y-H-i') . '.zip', $backup)) {
             $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_backup_error'));
         } else {
             $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_create_backup_success'));

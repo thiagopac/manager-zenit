@@ -81,7 +81,7 @@
     } else {
         ?><a class="label label-success" href="#"><?php echo $project->company->name;
     } ?></a></li>
-                    <li><span><?=$this->lang->line('application_assigned_to');?>:</span> <?php foreach ($project->project_has_workers as $workers):?> <a class="label label-info" style="padding: 2px 5px 3px;"><?php echo $workers->user->firstname." ".$workers->user->lastname;?></a><?php endforeach;?> </li>
+                    <li><span><?=$this->lang->line('application_assigned_to');?>:</span> <?php foreach ($project->project_worker as $workers):?> <a class="label label-info" style="padding: 2px 5px 3px;"><?php echo $workers->user->firstname." ".$workers->user->lastname;?></a><?php endforeach;?> </li>
 
                   </ul>
                   <ul class="details col-xs-12 col-sm-12 col-md-6"><span class="visible-xs divider"></span>
@@ -105,7 +105,7 @@
             <div id="main-nano-wrapper" class="nano">
               <div class="nano-content">
                 <ul class="activity__list">
-                                <?php foreach ($project->project_has_activities as $value) {
+                                <?php foreach ($project->project_activity as $value) {
         ?>
                                     <li>
                                         <h3 class="activity__list--header">
@@ -336,7 +336,7 @@
                                   <span><?=$this->lang->line('application_milestone');?></span>
                                  <!-- <a href="#" data-name="milestone_id" class="editable-select" data-type="select" data-pk="<?=$value->id;?>" data-url="<?=base_url()?>cprojects/task_change_attribute"> -->
                                   <?php if ($value->milestone_id != 0 && $value->milestone_id != "") {
-                  echo $value->project_has_milestone->name;
+                  echo $value->project_milestone->name;
               } else {
                   echo $this->lang->line('application_no_milestone_assigned');
               }?> <!--</a> -->
@@ -372,8 +372,8 @@
                                 </div>
                                 <ul class="task-comments">
                                     <?php
-                                    usort($value->task_has_comments, "cmpDatetime");
-                                    foreach ($value->task_has_comments as $comments) {
+                                    usort($value->task_comment, "cmpDatetime");
+                                    foreach ($value->task_comment as $comments) {
                                         if (!empty($comments->attachment)) {
                                             $mime = explode("/", get_mime_by_extension($comments->attachment));
                                         } ?>
@@ -448,17 +448,17 @@
 <div class="subcont no-padding min-height-410">
 <ul id="milestones-list" class="todo">
     <?php  $count = 0;
-    foreach ($project->project_has_milestones as $milestone):
+    foreach ($project->project_milestone as $milestone):
             $count2 = 0; $count = $count+1; ?>
 
             <?php
 
-              $tasksInMilestone = count($milestone->project_has_tasks);
+              $tasksInMilestone = count($milestone->project_task);
               $taskSize = 100/$tasksInMilestone;
               $completion = 0;
               $multiplier = 0;
 
-              foreach ($milestone->project_has_tasks as $value){
+              foreach ($milestone->project_task as $value){
 
                 if ($value->status == "done") {
                   $multiplier ++;
@@ -520,7 +520,7 @@
     <div class=" min-height-410 media-view-container">
     <div class="mediaPreviews dropzone"></div>
     <?php
-          foreach ($project->project_has_files as $value):
+          foreach ($project->project_file as $value):
           $type = explode("/", $value->type);
           $thumb = "./files/media/thumb_".$value->savename;
 
@@ -581,7 +581,7 @@
           </tr></thead>
 
         <tbody>
-        <?php foreach ($project->project_has_files as $value):?>
+        <?php foreach ($project->project_file as $value):?>
 
         <tr id="<?=$value->id;?>">
           <td class="hidden"><?=human_to_unix($value->date);?></td>
@@ -601,7 +601,7 @@
 
 
         </tbody></table>
-        <?php if (!$project->project_has_files) {
+        <?php if (!$project->project_file) {
                        ?>
         <div class="no-files">
             <i class="icon dripicons-cloud-upload"></i><br>
@@ -721,7 +721,7 @@
                       </div>
                        </form>
                       </li>
-<?php foreach ($project->project_has_activities as $value):?>
+<?php foreach ($project->project_activity as $value):?>
                       <?php
                       $writer = false;
                       if ($value->user_id != 0) {

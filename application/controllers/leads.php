@@ -83,7 +83,7 @@ class Leads extends MY_Controller{
 
     public function comments($id = false)
     {
-        $comments = LeadHasComment::find('all', array('conditions' => array("lead_id = ? ORDER BY `datetime` DESC", $id), 'include' => array('user')));
+        $comments = LeadComment::find('all', array('conditions' => array("lead_id = ? ORDER BY `datetime` DESC", $id), 'include' => array('user')));
         $data = array('comments' => object_to_array($comments, true));
         json_response("success", "", $data);
     }
@@ -196,7 +196,7 @@ class Leads extends MY_Controller{
                 }
             }
 
-            $comment = LeadHasComment::create($data);
+            $comment = LeadComment::create($data);
             $responsedata = array('comment' => array( "datetime" => $comment->datetime,
                                                       "id" => $comment->id,
                                                       "user_id" => $comment->user_id,
@@ -232,7 +232,7 @@ class Leads extends MY_Controller{
 //                LeadHistory::create($historyAttributes);
             }
 
-            $statusReceivers = LeadStatusHasReceiver::find('all', ['conditions' => ['lead_status_id = ?', $_POST['value']]]);
+            $statusReceivers = LeadStatusReceiver::find('all', ['conditions' => ['lead_status_id = ?', $_POST['value']]]);
 
             $push_receivers = array();
 
@@ -247,7 +247,7 @@ class Leads extends MY_Controller{
                 Notification::create($notificationAttributes);
             }
 
-            $warningUsers = LeadHasWarningUser::find('all', array('conditions' => array('lead_id = ?',$_POST['id'])));
+            $warningUsers = LeadWarningUser::find('all', array('conditions' => array('lead_id = ?',$_POST['id'])));
 
             //push será enviado para todos colaboradores que marcaram aquele lead com interesse em notificação de movimentação
             foreach ($warningUsers as $warningUser){
@@ -305,21 +305,21 @@ class Leads extends MY_Controller{
             $post_lead_has_warning_user = (isset($_POST['lead_warning_user'])) ? 1 : 0;
             unset($_POST['lead_warning_user']);
 
-            $lead_has_warning_user = LeadHasWarningUser::find('first', array('conditions' => array('lead_id = ? AND user_id = ?',$_POST['id'], $this->user->id)));
+            $lead_warning_user = LeadWarningUser::find('first', array('conditions' => array('lead_id = ? AND user_id = ?',$_POST['id'], $this->user->id)));
 
             if ($post_lead_has_warning_user == 0){
-                if ($lead_has_warning_user != null){
+                if ($lead_warning_user != null){
                     $atributes = array('user_id' => $this->user->id, 'lead_id' => $_POST['id']);
-                    $deleted = LeadHasWarningUser::find($atributes);
+                    $deleted = LeadWarningUser::find($atributes);
                     $deleted->delete();
                 }
             }else{
-                if ($lead_has_warning_user != null){
+                if ($lead_warning_user != null){
                     $atributes = array('user_id' => $this->user->id, 'lead_id' => $_POST['id']);
-                    LeadHasWarningUser::save($atributes);
+                    LeadWarningUser::save($atributes);
                 }else{
                     $atributes = array('user_id' => $this->user->id, 'lead_id' => $_POST['id']);
-                    LeadHasWarningUser::create($atributes);
+                    LeadWarningUser::create($atributes);
                 }
             }
 
@@ -443,7 +443,7 @@ class Leads extends MY_Controller{
                 LeadHistory::create($historyAttributes);
             }
 
-            $statusReceivers = LeadStatusHasReceiver::find('all', ['conditions' => ['lead_status_id=?', $_POST['status_id']]]);
+            $statusReceivers = LeadStatusReceiver::find('all', ['conditions' => ['lead_status_id=?', $_POST['status_id']]]);
 
             if ($lead->status_id != $_POST['status_id']) {
 
@@ -461,7 +461,7 @@ class Leads extends MY_Controller{
                     Notification::create($notificationAttributes);
                 }
 
-                $warningUsers = LeadHasWarningUser::find('all', array('conditions' => array('lead_id = ?', $_POST['id'])));
+                $warningUsers = LeadWarningUser::find('all', array('conditions' => array('lead_id = ?', $_POST['id'])));
 
                 //push será enviado para todos colaboradores que marcaram aquele lead com interesse em notificação de movimentação
                 foreach ($warningUsers as $warningUser) {
@@ -478,21 +478,21 @@ class Leads extends MY_Controller{
                 Notification::sendPushNotification($push_receivers, $this->user->firstname . ' moveu ' . $lead->name . ' para ' . $destinationLeadStatus->name, base_url() . 'leads/');
             }
 
-            $lead_has_warning_user = LeadHasWarningUser::find('first', array('conditions' => array('lead_id = ? AND user_id = ?',$_POST['id'], $this->user->id)));
+            $lead_warning_user = LeadWarningUser::find('first', array('conditions' => array('lead_id = ? AND user_id = ?',$_POST['id'], $this->user->id)));
 
             if ($post_lead_has_warning_user == 0){
-                if ($lead_has_warning_user != null){
+                if ($lead_warning_user != null){
                     $atributes = array('user_id' => $this->user->id, 'lead_id' => $_POST['id']);
-                    $deleted = LeadHasWarningUser::find($atributes);
+                    $deleted = LeadWarningUser::find($atributes);
                     $deleted->delete();
                 }
             }else{
-                if ($lead_has_warning_user != null){
+                if ($lead_warning_user != null){
                     $atributes = array('user_id' => $this->user->id, 'lead_id' => $_POST['id']);
-                    $lead_has_warning_user->save($atributes);
+                    $lead_warning_user->save($atributes);
                 }else{
                     $atributes = array('user_id' => $this->user->id, 'lead_id' => $_POST['id']);
-                    LeadHasWarningUser::create($atributes);
+                    LeadWarningUser::create($atributes);
                 }
             }
 
@@ -513,7 +513,7 @@ class Leads extends MY_Controller{
             $this->view_data['status'] = LeadStatus::all();
             $this->view_data['users'] = User::find('all', ['conditions' => ['status=?', 'active']]);
             $this->view_data['lead'] = $editing_lead;
-            $this->view_data['lead_warning_user'] = LeadHasWarningUser::find('first', array('conditions' => array('lead_id = ? AND user_id = ?',$id, $this->user->id)));
+            $this->view_data['lead_warning_user'] = LeadWarningUser::find('first', array('conditions' => array('lead_id = ? AND user_id = ?',$id, $this->user->id)));
             $this->view_data['form_action'] = 'leads/edit';
 
             $this->content_view = 'leads/_lead';
@@ -560,7 +560,7 @@ class Leads extends MY_Controller{
                     foreach ($_POST["user_id"] as $value) {
                         $atributes = array('lead_status_id' => $status->id, 'user_id' => $value);
 
-                        LeadStatusHasReceiver::create($atributes);
+                        LeadStatusReceiver::create($atributes);
                     }
 
                     if (!$status) {
@@ -597,7 +597,7 @@ class Leads extends MY_Controller{
 
                     $query = array();
 
-                    foreach ($status->lead_status_has_receivers as $receiver) {
+                    foreach ($status->lead_status_receiver as $receiver) {
                         array_push($query, $receiver->user_id);
                     }
 
@@ -607,12 +607,12 @@ class Leads extends MY_Controller{
                     foreach ($added as $value) {
                         $atributes = array('lead_status_id' => $status_id, 'user_id' => $value);
 
-                        LeadStatusHasReceiver::create($atributes);
+                        LeadStatusReceiver::create($atributes);
                     }
 
                     foreach ($removed as $value) {
                         $atributes = array('lead_status_id' => $status_id, 'user_id' => $value);
-                        $worker = LeadStatusHasReceiver::find($atributes);
+                        $worker = LeadStatusReceiver::find($atributes);
                         $worker->delete();
                     }
 
@@ -655,7 +655,7 @@ class Leads extends MY_Controller{
                     }
 //                    $leads_delete = Lead::table()->delete(array('status_id' => array($status->id)));
                     $reminders = Reminder::table()->delete(['source_id' => $leads_ids, 'module' => 'lead']);
-                    $receivers_delete = LeadStatusHasReceiver::table()->delete(array('lead_status_id' => array($status->id)));
+                    $receivers_delete = LeadStatusReceiver::table()->delete(array('lead_status_id' => array($status->id)));
 
                     $status->delete();
                     json_response("success", "Status has been deleted!", '');
@@ -671,7 +671,7 @@ class Leads extends MY_Controller{
         $this->load->helper('download');
         $this->load->helper('file');
 
-        $comment = LeadHasComment::find_by_id($lead);
+        $comment = LeadComment::find_by_id($lead);
         if ($comment && $comment->attachment != "") {
             $file = './files/media/'.$comment->attachment_link;
         } else {
@@ -897,7 +897,7 @@ class Leads extends MY_Controller{
 
     public function notifycomercial($lead_id){
 
-        $comercialTeam = DepartmentHasWorker::find('all', array('conditions' => array('department_id = ?', 2)));
+        $comercialTeam = DepartmentWorker::find('all', array('conditions' => array('department_id = ?', 2)));
 
         $lead = Lead::find_by_id($lead_id);
 

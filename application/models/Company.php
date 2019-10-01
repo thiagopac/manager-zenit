@@ -1,11 +1,14 @@
 <?php
 
 class Company extends ActiveRecord\Model {
+
+    static $table_name = 'company';
+
 	static $has_many = array(
-	array('clients', 'conditions' => 'inactive != 1'),
-    array('projects'),
-    array("company_has_admins"),
-    array('users', 'through' => 'company_has_admins')
+	array('client', 'conditions' => 'inactive != 1'),
+    array('project'),
+    array("company_admin"),
+    array('users', 'through' => 'company_admin')
     );
 
     static $belongs_to = array(

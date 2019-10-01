@@ -54,8 +54,8 @@ class cProjects extends MY_Controller {
 						 		);
 		$this->view_data['project'] = Project::find($id);
 		$this->view_data['project_has_invoices'] = Invoice::find('all',array('conditions' => array('project_id = ? AND company_id=? AND estimate != ? AND issue_date<=?',$id,$this->client->company->id,1,date('Y-m-d', time()))));
-		$tasks = ProjectHasTask::count(array('conditions' => array('project_id = ? AND public = ?',$id, 1)));
-		$tasks_done = ProjectHasTask::count(array('conditions' => array('status = ? AND project_id = ? AND public = ?', 'done', $id, 1)));
+		$tasks = ProjectTask::count(array('conditions' => array('project_id = ? AND public = ?',$id, 1)));
+		$tasks_done = ProjectTask::count(array('conditions' => array('status = ? AND project_id = ? AND public = ?', 'done', $id, 1)));
 		@$this->view_data['opentaskspercent'] = $tasks_done/$tasks*100;
 
 		$this->view_data['time_days'] = round((human_to_unix($this->view_data['project']->end) - human_to_unix($this->view_data['project']->start.' 00:00')) / 3600 / 24);
@@ -79,7 +79,7 @@ class cProjects extends MY_Controller {
 		$tracking_hours = floor($tracking/60);
 		$tracking_minutes = $tracking-($tracking_hours*60);
 
-		$this->view_data['task_list'] = ProjectHasTask::find('all', array('conditions' => array('project_id = ? AND public = ?',$id, 1)));
+		$this->view_data['task_list'] = ProjectTask::find('all', array('conditions' => array('project_id = ? AND public = ?',$id, 1)));
 
 		$this->view_data['time_spent'] = $tracking_hours." ".$this->lang->line('application_hours')." ".$tracking_minutes." ".$this->lang->line('application_minutes');
 		$this->view_data['time_spent_counter'] = sprintf("%02s", $tracking_hours).":".sprintf("%02s", $tracking_minutes);
@@ -111,12 +111,12 @@ class cProjects extends MY_Controller {
 					$_POST['media_id'] = $media_id;
 					$_POST['from'] = $this->client->firstname.' '.$this->client->lastname;
 					$this->view_data['project'] = Project::find_by_id($id);
-					$this->view_data['media'] = ProjectHasFile::find($media_id);
-					$message = Message::create($_POST);
+					$this->view_data['media'] = ProjectFile::find($media_id);
+					$message = ProjectMessage::create($_POST);
 					$push_receivers = array();
        				if(!$message){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_message_error'));}
        				else{$this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_message_success'));
-       					foreach ($this->view_data['project']->project_has_workers as $workers){
+       					foreach ($this->view_data['project']->project_worker as $workers){
 //            			    send_notification($workers->user->email, "[".$this->view_data['project']->name."] Novo comentário", 'Novo comentário no arquivo: '.$this->view_data['media']->name.'<br><strong>'.$this->view_data['project']->name.'</strong>');
 
                             $attributes = array('user_id' => $workers->user->id, 'message' => 'Novo comentário no arquivo: '.$this->view_data['media']->name.' ['.$this->view_data['project']->name.']', 'url' => base_url().'projects/view/'.$this->view_data['project']->id);
@@ -133,7 +133,7 @@ class cProjects extends MY_Controller {
        				redirect('cprojects/media/'.$id.'/view/'.$media_id);
 				}
 				$this->content_view = 'projects/client_views/view_media';
-				$this->view_data['media'] = ProjectHasFile::find($media_id);
+				$this->view_data['media'] = ProjectFile::find($media_id);
 				$project = Project::find_by_id($id);
 				if($project->company_id != $this->client->company->id){ redirect('cprojects');}
 				$this->view_data['form_action'] = 'cprojects/media/'.$id.'/view/'.$media_id;
@@ -172,15 +172,15 @@ class cProjects extends MY_Controller {
 					$_POST = array_map('htmlspecialchars', $_POST);
 					$_POST['project_id'] = $id;
 					$_POST['client_id'] = $this->client->id;
-					$media = ProjectHasFile::create($_POST);
+					$media = ProjectFile::create($_POST);
 		       		if(!$media){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_media_error'));}
 		       		else{$this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_media_success'));
 		       			$attributes = array('subject' => $this->lang->line('application_new_media_subject'), 'message' => '<b>'.$this->client->firstname.' '.$this->client->lastname.'</b> '.$this->lang->line('application_uploaded'). ' '.$_POST['name'], 'datetime' => time(), 'project_id' => $id, 'type' => 'media', 'client_id' => $this->client->id);
 
 							// CLIENTES AO FAZER UPLOAD DE MÍDIAS NO PROJETO GERAM REGISTROS EM ATIVIDADES / ESCONDIDO
-							// $activity = ProjectHasActivity::create($attributes);
+							// $activity = ProjectActivity::create($attributes);
                         $push_receivers = array();
-    		       		foreach ($this->view_data['project']->project_has_workers as $workers){
+    		       		foreach ($this->view_data['project']->project_worker as $workers){
 //            				send_notification($workers->user->email, "[".$this->view_data['project']->name."] ".$this->lang->line('application_new_media_subject'), $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>');
 
                             $attributes = array('user_id' => $workers->user->id, 'message' => $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>', 'url' => base_url().'projects/view/'.$this->view_data['project']->id);
@@ -208,7 +208,7 @@ class cProjects extends MY_Controller {
 				break;
 			case 'update':
 				$this->content_view = 'projects/_media';
-				$this->view_data['media'] = ProjectHasFile::find($media_id);
+				$this->view_data['media'] = ProjectFile::find($media_id);
 				$this->view_data['project'] = Project::find($id);
 				if($_POST){
 					unset($_POST['send']);
@@ -216,7 +216,7 @@ class cProjects extends MY_Controller {
 					unset($_POST['files']);
 					$_POST = array_map('htmlspecialchars', $_POST);
 					$media_id = $_POST['id'];
-					$media = ProjectHasFile::find($media_id);
+					$media = ProjectFile::find($media_id);
 					if ($this->view_data['media']->client_id != "0") {
 						$media->update_attributes($_POST);
 					}
@@ -232,10 +232,10 @@ class cProjects extends MY_Controller {
 				}
 				break;
 			case 'delete':
-					$media = ProjectHasFile::find($media_id);
+					$media = ProjectFile::find($media_id);
 					if ($media->client_id != "0") {
 						$media->delete();
-						ProjectHasFile::find_by_sql("DELETE FROM messages WHERE media_id = $media_id");
+						ProjectFile::find_by_sql("DELETE FROM project_message WHERE media_id = $media_id");
 					}
 		       		if(!$media){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_delete_media_error'));}
 		       		else{	unlink('./files/media/'.$media->savename);
@@ -273,7 +273,7 @@ class cProjects extends MY_Controller {
 
 							$attr['project_id'] = $id;
 							$attr['client_id'] = $this->client->id;
-							$media = ProjectHasFile::create($attr);
+							$media = ProjectFile::create($attr);
 							echo $media->id;
 
 							//check image processor extension
@@ -319,7 +319,7 @@ class cProjects extends MY_Controller {
 				$name = $_POST["name"];
 				$taskId = $_POST["pk"];
 				$value = $_POST["value"];
-				$task = ProjectHasTask::find_by_id($taskId);
+				$task = ProjectTask::find_by_id($taskId);
 				$task->{$name} = $value;
 				$task->save();
 		}
@@ -327,7 +327,7 @@ class cProjects extends MY_Controller {
 	}
 	function task_start_stop_timer($taskId)
 	{
-				$task = ProjectHasTask::find_by_id($taskId);
+				$task = ProjectTask::find_by_id($taskId);
 				if($task->tracking != 0){
 					$diff = time() - $task->tracking;
 					$task->time_spent = $task->time_spent+$diff;
@@ -354,7 +354,7 @@ class cProjects extends MY_Controller {
 					$_POST = array_map('htmlspecialchars', $_POST);
 					$_POST['description'] = $description;
 					$_POST['project_id'] = $id;
-					$task = ProjectHasTask::create($_POST);
+					$task = ProjectTask::create($_POST);
 		       		if(!$task){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_task_error'));}
 		       		else{$this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_task_success'));}
 					redirect('cprojects/view/'.$id);
@@ -369,7 +369,7 @@ class cProjects extends MY_Controller {
 				break;
 			case 'update':
 				$this->content_view = 'projects/client_views/_tasks';
-				$this->view_data['task'] = ProjectHasTask::find_by_id($task_id);
+				$this->view_data['task'] = ProjectTask::find_by_id($task_id);
 				if($_POST){
 					unset($_POST['send']);
 					unset($_POST['files']);
@@ -377,7 +377,7 @@ class cProjects extends MY_Controller {
 					$_POST = array_map('htmlspecialchars', $_POST);
 					$_POST['description'] = $description;
 					$task_id = $_POST['id'];
-					$task = ProjectHasTask::find($task_id);
+					$task = ProjectTask::find($task_id);
 					$task->update_attributes($_POST);
 		       		if(!$task){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_task_error'));}
 		       		else{$this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_task_success'));}
@@ -392,12 +392,12 @@ class cProjects extends MY_Controller {
 				}
 				break;
 			case 'check':
-					$task = ProjectHasTask::find($task_id);
+					$task = ProjectTask::find($task_id);
 					if ($task->status == 'done'){$task->status = 'open';}else{$task->status = 'done';}
 					$task->save();
 					$project = Project::find($id);
-					$tasks = ProjectHasTask::count(array('conditions' => 'project_id = '.$id));
-					$tasks_done = ProjectHasTask::count(array('conditions' => array('status = ? AND project_id = ?', 'done', $id)));
+					$tasks = ProjectTask::count(array('conditions' => 'project_id = '.$id));
+					$tasks_done = ProjectTask::count(array('conditions' => array('status = ? AND project_id = ?', 'done', $id)));
 					if($project->progress_calc == 1){
 						if ($tasks) {$progress = round($tasks_done/$tasks*100);}
 						$attr = array('progress' => $progress);
@@ -408,7 +408,7 @@ class cProjects extends MY_Controller {
 		       		$this->content_view = 'projects/client_views/tasks';
 				break;
 			case 'delete':
-					$task = ProjectHasTask::find($task_id);
+					$task = ProjectTask::find($task_id);
 					$task->delete();
 		       		if(!$task){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_delete_task_error'));}
 		       		else{$this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_delete_task_success'));}
@@ -434,7 +434,7 @@ class cProjects extends MY_Controller {
 	}
 	function deletemessage($project_id, $media_id, $id){
 					$from = $this->client->firstname.' '.$this->client->lastname;
-					$message = Message::find($id);
+					$message = ProjectMessage::find($id);
 					if($message->from == $this->client->firstname." ".$this->client->lastname){
 					$message->delete();
 					}
@@ -452,7 +452,7 @@ class cProjects extends MY_Controller {
         $this->load->helper('download');
         $this->load->helper('file');
         if($media_id && $media_id != "false"){
-			$media = ProjectHasFile::find($media_id);
+			$media = ProjectFile::find($media_id);
 			$media->download_counter = $media->download_counter+1;
 			$media->save();
 			$file = './files/media/'.$media->savename;
@@ -480,7 +480,7 @@ class cProjects extends MY_Controller {
 
 	function task_comment($id, $condition){
 		$this->load->helper('notification');
-		$task = ProjectHasTask::find_by_id($id);
+		$task = ProjectTask::find_by_id($id);
 		$project = Project::find_by_id($task->project_id);
 
 		// var_dump($project);
@@ -515,12 +515,12 @@ class cProjects extends MY_Controller {
 		            }
 		            unset($_POST['userfile']);
 
-					$comment = TaskHasComment::create($_POST);
+					$comment = TaskComment::create($_POST);
 		       		if(!$comment){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_error'));}
 		       		else{
 		       		    $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_success'));
 
-		       		    foreach ($project->project_has_workers as $workers){
+		       		    foreach ($project->project_worker as $workers){
             			    send_notification($workers->user->email, "[".$project->name."] ".$this->lang->line('application_new_comment_in_task')." ".$_POST['subject'], "<b>".$this->lang->line('application_task_name').":</b> ".$task->name." <br><b>".$this->lang->line('application_comment').":</b> ".$_POST['message'].'<br><b>'.$project->name.'</b>');
             			}
 
@@ -558,12 +558,12 @@ class cProjects extends MY_Controller {
 					$_POST['type'] = "comment";
 					unset($_POST['files']);
 					$_POST['datetime'] = time();
-					$activity = ProjectHasActivity::create($_POST);
+					$activity = ProjectActivity::create($_POST);
 		       		if(!$activity){$this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_error'));}
 		       		else{
 		       		    $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_success'));
                         $push_receivers = array();
-		       		    foreach ($project->project_has_workers as $workers){
+		       		    foreach ($project->project_worker as $workers){
 //            			    send_notification($workers->user->email, "[".$project->name."] ".$_POST['subject'], "<b>".$_POST['subject']."</b><br>".$_POST['message'].'<br><strong>'.$project->name.'</strong>');
 
                             $attributes = array('user_id' => $workers->user->id, 'message' => "<b>".$_POST['subject']."</b><br>".$_POST['message'].' ['.$project->name.']', 'url' => base_url().'projects/projects/'.$project->id);

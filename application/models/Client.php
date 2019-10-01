@@ -1,7 +1,9 @@
 <?php
 
-class Client extends ActiveRecord\Model
-{
+class Client extends ActiveRecord\Model{
+
+    static $table_name = 'client';
+
     public $password = false;
 
     public function before_save()
@@ -60,7 +62,7 @@ class Client extends ActiveRecord\Model
     }
 
     public static $has_many = [
-    ['projects']
+    ['project']
     ];
 
     public static $belongs_to = [

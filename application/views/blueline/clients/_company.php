@@ -37,7 +37,7 @@ echo form_open_multipart($form_action, $attributes);
         <label for="contact"><?=$this->lang->line('application_primary_contact'); ?></label>
         <?php $options = [];
         $options['0'] = '-';
-        foreach ($company->clients as $value):
+        foreach ($company->client as $value):
                 $options[$value->id] = $value->firstname . ' ' . $value->lastname;
         endforeach;
         if (is_object($company->client)) {

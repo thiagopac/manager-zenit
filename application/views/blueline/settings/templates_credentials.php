@@ -31,11 +31,10 @@ echo form_open_multipart($form_action, $attributes);
 				<small style="font-weight: bold;"> 
 					<?=$this->lang->line('application_short_tags');?>:<br/>
 					{logo}<br/> 
-					{invoice_logo}<br/> 
+					{company_logo}<br/>
 					{client_link}<br/> 
 					{client_contact}<br/> 
-					{due_date}<br/> 
-					{invoice_id}<br/> 
+					{due_date}<br/>
 					{company}<br/>
 				</small>
 			</div>

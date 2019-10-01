@@ -53,7 +53,7 @@
   <body>
   <div class="container small-container">
 
-  		<img class="fullpage-logo" src="<?=base_url()?><?=$core_settings->invoice_logo;?>" alt="<?=$core_settings->company;?>" />
+  		<img class="fullpage-logo" src="<?=base_url()?><?=$core_settings->company_logo;?>" alt="<?=$core_settings->company;?>" />
 
 
     <div>

@@ -28,7 +28,7 @@ function send_notification($email, $subject, $text, $attachment = false, $link =
                     'company' => $data['core_settings']->company,
                     'link' => base_url(),
                     'logo' => '<img src="' . base_url() . '' . $data['core_settings']->logo . '" alt="' . $data['core_settings']->company . '"/>',
-                    'invoice_logo' => '<img src="' . base_url() . '' . $data['core_settings']->invoice_logo . '" alt="' . $data['core_settings']->company . '"/>',
+                    'company_logo' => '<img src="' . base_url() . '' . $data['core_settings']->company_logo . '" alt="' . $data['core_settings']->company . '"/>',
                     'message' => $text,
                     'link' => ($link) ? $link : base_url(),
                     ];
@@ -57,7 +57,7 @@ function send_ticket_notification($email, $subject, $text, $ticket_id, $attachme
     $data['core_settings'] = Setting::first();
 
     $ticket = Ticket::find_by_id($ticket_id);
-    $ticket_articles = TicketHasArticle::find('all', ['conditions' => ['ticket_id=?', $ticket_id], 'order' => 'id DESC', 'limit' => '3']);
+    $ticket_article = TicketArticle::find('all', ['conditions' => ['ticket_id=?', $ticket_id], 'order' => 'id DESC', 'limit' => '3']);
 
     $ticket_link = base_url() . 'tickets/view/' . $ticket->id;
 
@@ -82,16 +82,16 @@ function send_ticket_notification($email, $subject, $text, $ticket_id, $attachme
     $close_div = '</div>';
     $open_div_light = '<div style="cursor:auto;color:#888;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Helvetica,sans-serif;font-size:13px;line-height:22px;text-align:left;">';
     $hr = '<p style="font-size:1px;margin:0px auto;border-top:1px solid #F4F7FA;width:100%;"></p>';
-    $ticket_body .= ($ticket_articles) ? '' : $open_div_light . get_email_name($ticket->from) . $close_div . $hr . $open_div . $ticket->text . $close_div;
-    foreach ($ticket_articles as $article) {
-        $ticket_body .= ($article === reset($ticket_articles)) ? $open_div_title : $open_div_light;
+    $ticket_body .= ($ticket_article) ? '' : $open_div_light . get_email_name($ticket->from) . $close_div . $hr . $open_div . $ticket->text . $close_div;
+    foreach ($ticket_article as $article) {
+        $ticket_body .= ($article === reset($ticket_article)) ? $open_div_title : $open_div_light;
         $ticket_body .= get_email_name($article->from) . ' - ' . date($data['core_settings']->date_format . '  ' . $data['core_settings']->date_time_format, $article->datetime) . $close_div;
         $ticket_body .= $hr;
-        $ticket_body .= ($article === reset($ticket_articles)) ? $open_div_title : $open_div_light;
+        $ticket_body .= ($article === reset($ticket_article)) ? $open_div_title : $open_div_light;
         $ticket_body .= $article->message . $close_div;
         $ticket_body .= '<br/><br/>';
     }
-    $ticket_body .= ($ticket_articles) ? '' : '';
+    $ticket_body .= ($ticket_article) ? '' : '';
 
     //Set parse values
     $parse_data = [
@@ -102,7 +102,7 @@ function send_ticket_notification($email, $subject, $text, $ticket_id, $attachme
                       'ticket_created_date' => date($data['core_settings']->date_format . '  ' . $data['core_settings']->date_time_format, $ticket->created),
                       'ticket_status' => $instance->lang->line('applicatio  n_ticket_status_' . $ticket->status),
                       'logo' => '<img src="' . base_url() . '' . $data['core_settings']->logo . '" alt="' . $data['core_settings']->company . '"/>',
-                      'invoice_logo' => '<img src="' . base_url() . '' . $data['core_settings']->invoice_logo . '" alt="' . $data['core_settings']->company . '"/>',
+                      'company_logo' => '<img src="' . base_url() . '' . $data['core_settings']->company_logo . '" alt="' . $data['core_settings']->company . '"/>',
                       'message' => $text,
                       'ticket_body' => $ticket_body,
                       'ticket_subject' => $ticket->subject
@@ -135,7 +135,7 @@ function receipt_notification($clientId, $subject = false, $paymentId = false)
                       'company' => $settings->company,
                       'link' => base_url(),
                       'logo' => '<img src="' . base_url() . '' . $settings->logo . '" alt="' . $settings->company . '"/>',
-                      'invoice_logo' => '<img src="' . base_url() . '' . $settings->invoice_logo . '" alt="' . $settings->company . '"/>',
+                      'company_logo' => '<img src="' . base_url() . '' . $settings->company_logo . '" alt="' . $settings->company . '"/>',
                       'client_firstname' => $client->firstname,
                       'client_lastname' => $client->lastname,
                       'client_company' => $client->company->name,
@@ -182,7 +182,7 @@ function reminder_notification($class, $user = false, $module = false, $reminder
                                     'message' => $body,
                                     'datetime' => $reminder->datetime,
                                     'logo' => '<img src="' . base_url() . '' . $settings->logo . '" alt="' . $settings->company . '"/>',
-                                    'invoice_logo' => '<img src="' . base_url() . '' . $settings->invoice_logo . '" alt="' . $settings->company . '"/>',
+                                    'company_logo' => '<img src="' . base_url() . '' . $settings->company_logo . '" alt="' . $settings->company . '"/>',
                                     'company' => $settings->company,
 
                                     'icon' => '<img alt="Lembrete" height="auto" src="' . base_url() . 'assets/blueline/images/bell-circle-red.png" width="70">',

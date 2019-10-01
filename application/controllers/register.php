@@ -83,7 +83,7 @@ class Register extends MY_Controller
                                     'last_name' => $client->lastname,
                                     'company_reference' => $company->reference,
                                     'logo' => '<img src="' . base_url() . '' . $core_settings->logo . '" alt="' . $core_settings->company . '"/>',
-                                    'invoice_logo' => '<img src="' . base_url() . '' . $core_settings->invoice_logo . '" alt="' . $core_settings->company . '"/>'
+                                    'company_logo' => '<img src="' . base_url() . '' . $core_settings->company_logo . '" alt="' . $core_settings->company . '"/>'
                                     ];
                     $email = read_file('./application/views/' . $core_settings->template . '/templates/email_create_account.html');
                     $message = $this->parser->parse_string($email, $parse_data);

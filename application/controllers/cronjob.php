@@ -146,7 +146,7 @@ class Cronjob extends MY_Controller
                                 'invoice_link' => base_url() . 'cinvoices/view/' . $data['invoice']->id,
                                 'company' => $core_settings->company,
                                 'logo' => '<img src="' . base_url() . '' . $core_settings->logo . '" alt="' . $core_settings->company . '"/>',
-                                'invoice_logo' => '<img src="' . base_url() . '' . $core_settings->invoice_logo . '" alt="' . $core_settings->company . '"/>'
+                                'company_logo' => '<img src="' . base_url() . '' . $core_settings->company_logo . '" alt="' . $core_settings->company . '"/>'
             ];
             $mail_subject = $this->parser->parse_string($core_settings->invoice_mail_subject, $parse_data);
 

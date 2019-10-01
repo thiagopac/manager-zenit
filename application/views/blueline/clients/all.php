@@ -37,7 +37,6 @@
 } else {
     echo $this->lang->line('application_no_contact_assigned');
 }?></td>
-			<!-- <td class="hidden-xs"><?php echo $value->website = empty($value->website) ? '-' : '<a target="_blank" href="http://' . $value->website . '">' . $value->website . '</a>' ?></td> -->
 			<td class="hidden-xs"><?php echo $value->city ?>/<?php echo $value->province ?></td>
 			<td class="option" width="8%">
 				        <button type="button" title="<?=$this->lang->line('application_delete'); ?>" class="btn-option delete po tt" data-toggle="popover" data-placement="left" data-content="<a class='btn btn-danger po-delete ajax-silent' href='<?=base_url()?>clients/company/delete/<?=$value->id;?>'><?=$this->lang->line('application_yes_im_sure');?></a> <button class='btn po-close'><?=$this->lang->line('application_no');?></button> <input type='hidden' name='td-id' class='id' value='<?=$value->id;?>'>" data-original-title="<b><?=$this->lang->line('application_really_delete');?></b>"><i class="icon dripicons-cross"></i></button>

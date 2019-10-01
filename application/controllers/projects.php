@@ -39,7 +39,7 @@ class Projects extends MY_Controller
 
     public function index()
     {
-        $options = array('conditions' => 'progress < 100', 'order' => 'id DESC', 'include' => array('company', 'project_has_workers'));
+        $options = array('conditions' => 'progress < 100', 'order' => 'id DESC', 'include' => array('company', 'project_worker'));
         if ($this->user->admin == 0) {
             $comp_array = array();
 //            $thisUserHasNoCompanies = (array) $this->user->companies;
@@ -47,7 +47,7 @@ class Projects extends MY_Controller
                 foreach ($this->user->companies as $value) {
                     array_push($comp_array, $value->id);
                 }
-                $projects_by_client_admin = Project::find('all', array('conditions' => array('progress < ? AND company_id in (?)', '100', $comp_array), 'order' => 'id DESC', 'include' => array('company', 'project_has_workers')));
+                $projects_by_client_admin = Project::find('all', array('conditions' => array('progress < ? AND company_id in (?)', '100', $comp_array), 'order' => 'id DESC', 'include' => array('company', 'project_worker')));
 
                 //merge projects by client admin and assigned to projects
                 $result = array_merge($projects_by_client_admin, array_diff($projects_by_client_admin, $this->user->projects));
@@ -65,13 +65,8 @@ class Projects extends MY_Controller
             $this->view_data['project'] = Project::all($options);
         }
         $this->content_view = 'projects/all';
-        $this->view_data['projects_assigned_to_me'] = ProjectHasWorker::find_by_sql('select count(distinct(projects.id)) AS "amount" FROM projects, project_has_workers WHERE projects.progress != "100" AND (projects.id = project_has_workers.project_id AND project_has_workers.user_id = "'.$this->user->id.'") ');
-        $this->view_data['tasks_assigned_to_me'] = count(ProjectHasTask::find_by_sql('SELECT * FROM `project_has_tasks` AS task INNER JOIN project_has_workers AS worker ON worker.project_id = task.project_id WHERE task.user_id = "'.$this->user->id.'" AND worker.user_id = "'.$this->user->id.'"'));
-
-//        $now = time();
-//        $beginning_of_week = strtotime('last Monday', $now); // BEGINNING of the week
-//        $end_of_week = strtotime('next Sunday', $now) + 86400; // END of the last day of the week
-//        $this->view_data['projects_opened_this_week'] = Project::find_by_sql('select count(id) AS "amount", DATE_FORMAT(FROM_UNIXTIME(`datetime`), "%w") AS "date_day", DATE_FORMAT(FROM_UNIXTIME(`datetime`), "%Y-%m-%d") AS "date_formatted" from projects where datetime >= "'.$beginning_of_week.'" AND datetime <= "'.$end_of_week.'" Group By date_formatted, `date_day`');
+        $this->view_data['projects_assigned_to_me'] = ProjectWorker::find_by_sql('select count(distinct(project.id)) AS "amount" FROM project, project_worker WHERE project.progress != "100" AND (project.id = project_worker.project_id AND project_worker.user_id = "'.$this->user->id.'") ');
+        $this->view_data['tasks_assigned_to_me'] = count(ProjectTask::find_by_sql('SELECT * FROM `project_task` AS task INNER JOIN project_worker AS worker ON worker.project_id = task.project_id WHERE task.user_id = "'.$this->user->id.'" AND worker.user_id = "'.$this->user->id.'"'));
     }
 
     public function filter($condition)
@@ -105,13 +100,6 @@ class Projects extends MY_Controller
                     array_push($comp_array, $value->id);
                 }
 
-
-//                $projects_by_client_admin = Project::find('all', array('conditions' => array($options.' AND company_id in (?)', $comp_array), 'include' => array('company', 'project_has_workers')));
-
-
-
-                //merge projects by client admin and assigned to projects
-//                $result = array_merge($projects_by_client_admin, $this->user->projects);
                 $result = array_merge($this->user->projects);
                 //duplicate objects will be removed
                 $result = array_map("unserialize", array_unique(array_map("serialize", $result)));
@@ -120,7 +108,7 @@ class Projects extends MY_Controller
 
 //                $this->view_data['project'] = $result;
             } else {
-                $this->view_data['project'] = Project::find('all', array('conditions' => array($options.' AND id in (?)', $project_array), 'include' => array('company', 'project_has_workers')));
+                $this->view_data['project'] = Project::find('all', array('conditions' => array($options.' AND id in (?)', $project_array), 'include' => array('company', 'project_worker')));
             }
         } else {
             switch ($condition) {
@@ -140,8 +128,8 @@ class Projects extends MY_Controller
 
         $this->content_view = 'projects/all';
 
-        $this->view_data['projects_assigned_to_me'] = ProjectHasWorker::find_by_sql('select count(distinct(projects.id)) AS "amount" FROM projects, project_has_workers WHERE projects.progress != "100" AND (projects.id = project_has_workers.project_id AND project_has_workers.user_id = "'.$this->user->id.'") ');
-        $this->view_data['tasks_assigned_to_me'] = ProjectHasTask::count(array('conditions' => 'user_id = '.$this->user->id.' and status = "open"'));
+        $this->view_data['projects_assigned_to_me'] = ProjectWorker::find_by_sql('select count(distinct(projects.id)) AS "amount" FROM projects, project_worker WHERE projects.progress != "100" AND (projects.id = project_worker.project_id AND project_worker.user_id = "'.$this->user->id.'") ');
+        $this->view_data['tasks_assigned_to_me'] = ProjectTask::count(array('conditions' => 'user_id = '.$this->user->id.' and status = "open"'));
 
         $now = time();
         $beginning_of_week = strtotime('last Monday', $now); // BEGINNING of the week
@@ -166,7 +154,7 @@ class Projects extends MY_Controller
             } else {
                 $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_create_project_success'));
                 $attributes = array('project_id' => $project->id, 'user_id' => $this->user->id);
-                ProjectHasWorker::create($attributes);
+                ProjectWorker::create($attributes);
             }
             redirect('projects');
         } else {
@@ -231,7 +219,7 @@ class Projects extends MY_Controller
             $sort = explode("-", $sort);
             $sortnumber = 1;
             foreach ($sort as $value) {
-                $task = ProjectHasTask::find_by_id($value);
+                $task = ProjectTask::find_by_id($value);
                 if ($list != "task-list") {
                     $task->milestone_order = $sortnumber;
                 } else {
@@ -250,7 +238,7 @@ class Projects extends MY_Controller
             $sort = explode("-", $sort);
             $sortnumber = 1;
             foreach ($sort as $value) {
-                $task = ProjectHasMilestone::find_by_id($value);
+                $task = ProjectMilestone::find_by_id($value);
                 $task->orderindex = $sortnumber;
                 $task->save();
                 $sortnumber = $sortnumber+1;
@@ -265,7 +253,7 @@ class Projects extends MY_Controller
             $sort = explode("-", $sort);
             $sortnumber = 1;
             foreach ($sort as $value) {
-                $milestone = DepartmentHasArea::find_by_id($value);
+                $milestone = DepartmentArea::find_by_id($value);
                 $milestone->orderindex = $sortnumber;
                 $milestone->save();
                 $sortnumber = $sortnumber+1;
@@ -277,7 +265,7 @@ class Projects extends MY_Controller
     public function move_milestone_to_area($milestoneId = false, $listId = false)
     {
         if ($listId && $milestoneId) {
-            $milestone = ProjectHasMilestone::find_by_id($milestoneId);
+            $milestone = ProjectMilestone::find_by_id($milestoneId);
             $milestone->area_id = $listId;
             $milestone->save();
         }
@@ -287,7 +275,7 @@ class Projects extends MY_Controller
     public function move_task_to_milestone($taskId = false, $listId = false)
     {
         if ($listId && $taskId) {
-            $task = ProjectHasTask::find_by_id($taskId);
+            $task = ProjectTask::find_by_id($taskId);
             $task->milestone_id = $listId;
             $task->save();
         }
@@ -300,7 +288,7 @@ class Projects extends MY_Controller
             $name = $_POST["name"];
             $taskId = $_POST["pk"];
             $value = $_POST["value"];
-            $task = ProjectHasTask::find_by_id($taskId);
+            $task = ProjectTask::find_by_id($taskId);
             $task->{$name} = $value;
             $task->save();
         }
@@ -309,7 +297,7 @@ class Projects extends MY_Controller
 
     public function task_start_stop_timer($taskId)
     {
-        $task = ProjectHasTask::find_by_id($taskId);
+        $task = ProjectTask::find_by_id($taskId);
         if ($task->tracking != 0) {
             $now = time();
             $diff = $now - $task->tracking;
@@ -326,7 +314,7 @@ class Projects extends MY_Controller
                             'start' => $timer_start,
                             'end' => $now
                             );
-            $timesheet = ProjectHasTimesheet::create($attributes);
+            $timesheet = ProjectTimesheet::create($attributes);
         } else {
             $task->tracking = time();
         }
@@ -338,7 +326,7 @@ class Projects extends MY_Controller
     {
         $area_list = "";
         $department = Department::find_by_id($departmentId);
-        foreach ($department->department_has_areas as $value) {
+        foreach ($department->department_area as $value) {
             $area_list .= '{value:'.$value->id.', text: "'.$value->name.'"},';
         }
         echo $area_list;
@@ -349,7 +337,7 @@ class Projects extends MY_Controller
     {
         $milestone_list = "";
         $project = Project::find_by_id($projectId);
-        foreach ($project->project_has_milestones as $value) {
+        foreach ($project->project_milestone as $value) {
             $milestone_list .= '{value:'.$value->id.', text: "'.$value->name.'"},';
         }
         echo $milestone_list;
@@ -376,14 +364,14 @@ class Projects extends MY_Controller
             $project_reference->update_attributes(array('project_reference' => $new_project_reference));
 
 //            $options = ['conditions' => ['project_id = ?', $project->id]];
-//            $workersOfProject = ProjectHasWorker::all($options);
+//            $workersOfProject = ProjectWorker::all($options);
 
             if ($tasks) {
                 unset($_POST['tasks']);
                 $source_project = Project::find_by_id($id);
 
 
-                foreach ($source_project->project_has_milestones as $existingMilestone) {
+                foreach ($source_project->project_milestone as $existingMilestone) {
                     $attributes = array(
                         'project_id' => $project->id,
                         'name' => $existingMilestone->name,
@@ -392,10 +380,10 @@ class Projects extends MY_Controller
                         'area_id' => $existingMilestone->area_id,
                         'public' => $existingMilestone->public,
                         );
-                    $milestone = ProjectHasMilestone::create($attributes);
+                    $milestone = ProjectMilestone::create($attributes);
 
                     $options = ['conditions' => ['milestone_id = ?', $existingMilestone->id]];
-                    $tasksOfMilestone = ProjectHasTask::all($options);
+                    $tasksOfMilestone = ProjectTask::all($options);
 
                     foreach ($tasksOfMilestone as $existingTask) {
                         $attributes = array(
@@ -414,12 +402,12 @@ class Projects extends MY_Controller
                             'reference' => $existingTask->reference,
                         );
 
-                        ProjectHasTask::create($attributes);
+                        ProjectTask::create($attributes);
                     }
                 }
 
                 $options = ['conditions' => ['project_id = ? AND sucessors IS NOT NULL', $project->id]];
-                $newTasksHaveSucessors = ProjectHasTask::all($options);
+                $newTasksHaveSucessors = ProjectTask::all($options);
 
                 foreach ($newTasksHaveSucessors as $task){
 
@@ -430,9 +418,9 @@ class Projects extends MY_Controller
                     foreach ($sucessorsIds as $sucessorId) {
 
                         if (is_numeric($sucessorId)){
-                            $old_successor = ProjectHasTask::find($sucessorId);
+                            $old_successor = ProjectTask::find($sucessorId);
 
-                            $new_sucessor = ProjectHasTask::first(['conditions' => ['project_id = ? AND reference = ?', $project->id, $old_successor->reference]]);
+                            $new_sucessor = ProjectTask::first(['conditions' => ['project_id = ? AND reference = ?', $project->id, $old_successor->reference]]);
                             array_push($new_sucessors, $new_sucessor->id);
                         }
                     }
@@ -450,7 +438,7 @@ class Projects extends MY_Controller
                 $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_create_project_success'));
 
                 $attributes = array('project_id' => $project->id, 'user_id' => $this->user->id);
-                ProjectHasWorker::create($attributes);
+                ProjectWorker::create($attributes);
             }
             redirect('projects/view/'.$id);
         } else {
@@ -474,7 +462,7 @@ class Projects extends MY_Controller
                 $_POST["user_id"] = array();
             }
             $query = array();
-            foreach ($project->project_has_workers as $key => $value) {
+            foreach ($project->project_worker as $key => $value) {
                 array_push($query, $value->user_id);
             }
 
@@ -485,7 +473,7 @@ class Projects extends MY_Controller
             foreach ($added as $value) {
                 $atributes = array('project_id' => $id, 'user_id' => $value);
 
-                $worker = ProjectHasWorker::create($atributes);
+                $worker = ProjectWorker::create($atributes);
 //                send_notification($worker->user->email, $this->lang->line('application_notification_project_assign_subject'), $this->lang->line('application_notification_project_assign').'<br><strong>'.$project->name.'</strong>');
 
                 $attributes = array('user_id' => $worker->user->id, 'message' => '<p>'.$this->lang->line('application_notification_project_assign').'</p>['.$project->name.']', 'url' => base_url().'projects/view/'.$project->id);
@@ -500,7 +488,7 @@ class Projects extends MY_Controller
 
             foreach ($removed as $value) {
                 $atributes = array('project_id' => $id, 'user_id' => $value);
-                $worker = ProjectHasWorker::find($atributes);
+                $worker = ProjectWorker::find($atributes);
                 $worker->delete();
             }
 
@@ -524,19 +512,19 @@ class Projects extends MY_Controller
         }
         $project = Project::find($id);
         $project->delete();
-        $tasks = ProjectHasTask::find('all', array('conditions' => array('project_id=?',$id)));
+        $tasks = ProjectTask::find('all', array('conditions' => array('project_id=?',$id)));
         $toDelete = array();
         foreach ($tasks as $value) {
             array_push($toDelete, $value->id);
         }
-        ProjectHasTask::table()->delete(array('id' => $toDelete));
+        ProjectTask::table()->delete(array('id' => $toDelete));
 
-        $milestones = ProjectHasMilestone::find('all', array('conditions' => array('project_id=?',$id)));
+        $milestones = ProjectMilestone::find('all', array('conditions' => array('project_id=?',$id)));
         $toDelete = array();
         foreach ($milestones as $value) {
             array_push($toDelete, $value->id);
         }
-        ProjectHasMilestone::table()->delete(array('id' => $toDelete));
+        ProjectMilestone::table()->delete(array('id' => $toDelete));
 
         $this->content_view = 'projects/all';
         if (!$project) {
@@ -593,11 +581,11 @@ class Projects extends MY_Controller
         $this->view_data['first_project'] = Project::first();
         $this->view_data['last_project'] = Project::last();
 
-        $tasks = ProjectHasTask::count(array('conditions' => 'project_id = '.$id));
+        $tasks = ProjectTask::count(array('conditions' => 'project_id = '.$id));
         $this->view_data['alltasks'] = $tasks;
-        $this->view_data['opentasks'] = ProjectHasTask::count(array('conditions' => array('status != ? AND project_id = ?', 'done', $id)));
+        $this->view_data['opentasks'] = ProjectTask::count(array('conditions' => array('status != ? AND project_id = ?', 'done', $id)));
         $this->view_data['usercountall'] = User::count(array('conditions' => array('status = ?', 'active')));
-        $this->view_data['usersassigned'] = ProjectHasWorker::count(array('conditions' => array('project_id = ?', $id)));
+        $this->view_data['usersassigned'] = ProjectWorker::count(array('conditions' => array('project_id = ?', $id)));
 
         $this->view_data['assigneduserspercent'] = round($this->view_data['usersassigned']/$this->view_data['usercountall']*100);
 
@@ -608,8 +596,8 @@ class Projects extends MY_Controller
         $this->view_data["line2"] = "";
 
         $daysOfWeek = getDatesOfWeek();
-        $this->view_data['dueTasksStats'] = ProjectHasTask::getDueTaskStats($id, $daysOfWeek[0], $daysOfWeek[6]);
-        $this->view_data['startTasksStats'] = ProjectHasTask::getStartTaskStats($id, $daysOfWeek[0], $daysOfWeek[6]);
+        $this->view_data['dueTasksStats'] = ProjectTask::getDueTaskStats($id, $daysOfWeek[0], $daysOfWeek[6]);
+        $this->view_data['startTasksStats'] = ProjectTask::getStartTaskStats($id, $daysOfWeek[0], $daysOfWeek[6]);
 
 
         foreach ($daysOfWeek as $day) {
@@ -646,11 +634,11 @@ class Projects extends MY_Controller
             $this->view_data['time_left'] = 0;
             $this->view_data['timeleftpercent'] = 0;
         }
-        $this->view_data['allmytasks'] = ProjectHasTask::all(array('conditions' => array('project_id = ? AND user_id = ?', $id, $this->user->id)));
-        $this->view_data['mytasks'] = ProjectHasTask::count(array('conditions' => array('status != ? AND project_id = ? AND user_id = ?', 'done', $id, $this->user->id)));
-        $this->view_data['tasksWithoutMilestone'] = ProjectHasTask::find('all', array('conditions' => array('milestone_id = ? AND project_id = ? ', '0', $id)));
+        $this->view_data['allmytasks'] = ProjectTask::all(array('conditions' => array('project_id = ? AND user_id = ?', $id, $this->user->id)));
+        $this->view_data['mytasks'] = ProjectTask::count(array('conditions' => array('status != ? AND project_id = ? AND user_id = ?', 'done', $id, $this->user->id)));
+        $this->view_data['tasksWithoutMilestone'] = ProjectTask::find('all', array('conditions' => array('milestone_id = ? AND project_id = ? ', '0', $id)));
 
-        $tasks_done = ProjectHasTask::count(array('conditions' => array('status = ? AND project_id = ?', 'done', $id)));
+        $tasks_done = ProjectTask::count(array('conditions' => array('status = ? AND project_id = ?', 'done', $id)));
         $this->view_data['progress'] = $this->view_data['project']->progress;
         if ($this->view_data['project']->progress_calc == 1) {
             if ($tasks) {
@@ -660,8 +648,8 @@ class Projects extends MY_Controller
             $this->view_data['project']->update_attributes($attr);
         }
         @$this->view_data['opentaskspercent'] = ($tasks == 0 ? 0 : $tasks_done/$tasks*100);
-        $projecthasworker = ProjectHasWorker::all(array('conditions' => array('user_id = ? AND project_id = ?', $this->user->id, $id)));
-        @$this->view_data['worker_is_client_admin'] = CompanyHasAdmin::all(array('conditions' => array('user_id = ? AND
+        $projecthasworker = ProjectWorker::all(array('conditions' => array('user_id = ? AND project_id = ?', $this->user->id, $id)));
+        @$this->view_data['worker_is_client_admin'] = CompanyAdmin::all(array('conditions' => array('user_id = ? AND
 		 company_id = ?',
          $this->user->id,
          $this->view_data['project']->company_id)));
@@ -691,10 +679,10 @@ class Projects extends MY_Controller
     {
         $gantt_data = "[";
         $project = Project::find_by_id($id);
-        foreach ($project->project_has_milestones as $milestone):
+        foreach ($project->project_milestone as $milestone):
 
               $counter = 0;
-        foreach ($milestone->project_has_tasks as $value):
+        foreach ($milestone->project_task as $value):
              $milestone_Name = ($counter == 0) ? $milestone->name : "";
         $counter++;
         $start = ($value->start_date) ? $value->start_date : $milestone->start_date;
@@ -720,7 +708,7 @@ class Projects extends MY_Controller
             $_POST = array_map('htmlspecialchars', $_POST);
             unset($_POST['send']);
             unset($_POST['files']);
-            $task = ProjectHasTask::create($_POST);
+            $task = ProjectTask::create($_POST);
             echo $task->id;
         }
 
@@ -730,7 +718,7 @@ class Projects extends MY_Controller
     public function generate_thumbs($id = false)
     {
         if ($id) {
-            $medias = Project::find_by_id($id)->project_has_files;
+            $medias = Project::find_by_id($id)->project_file;
             //check image processor extension
             if (extension_loaded('gd2')) {
                 $lib = 'gd2';
@@ -781,7 +769,7 @@ class Projects extends MY_Controller
 
             $attr['project_id'] = $id;
             $attr['user_id'] = $this->user->id;
-            $media = ProjectHasFile::create($attr);
+            $media = ProjectFile::create($attr);
             echo $media->id;
 
             //check image processor extension
@@ -824,8 +812,8 @@ class Projects extends MY_Controller
 
     public function timesheets($taskid)
     {
-        $this->view_data['timesheets'] = ProjectHasTimesheet::find("all", array("conditions" => array("task_id = ?", $taskid)));
-        $this->view_data['task'] = ProjectHasTask::find_by_id($taskid);
+        $this->view_data['timesheets'] = ProjectTimesheet::find("all", array("conditions" => array("task_id = ?", $taskid)));
+        $this->view_data['task'] = ProjectTask::find_by_id($taskid);
 
         $this->theme_view = 'modal';
         $this->view_data['title'] = $this->lang->line('application_timesheet');
@@ -847,8 +835,8 @@ class Projects extends MY_Controller
                         "end" => $_POST["end"],
                         "description" => "",
                     );
-            $timesheet = ProjectHasTimesheet::create($attr);
-            $task = ProjectHasTask::find_by_id($timesheet->task_id);
+            $timesheet = ProjectTimesheet::create($attr);
+            $task = ProjectTask::find_by_id($timesheet->task_id);
             $task->time_spent =    $task->time_spent+$time;
             $task->save();
             echo $timesheet->id;
@@ -858,8 +846,8 @@ class Projects extends MY_Controller
 
     public function timesheet_delete($timesheet_id)
     {
-        $timesheet = ProjectHasTimesheet::find_by_id($timesheet_id);
-        $task = ProjectHasTask::find_by_id($timesheet->task_id);
+        $timesheet = ProjectTimesheet::find_by_id($timesheet_id);
+        $task = ProjectTask::find_by_id($timesheet->task_id);
         $task->time_spent = $task->time_spent-$timesheet->time;
         $task->save();
         $timesheet->delete();
@@ -883,7 +871,7 @@ class Projects extends MY_Controller
                     $_POST = array_map('htmlspecialchars', $_POST);
                     $_POST['description'] = $description;
                     $_POST['project_id'] = $id;
-                    $area = DepartmentHasArea::create($_POST);
+                    $area = DepartmentArea::create($_POST);
                     if (!$area) {
                         $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_area_error'));
                     } else {
@@ -903,7 +891,7 @@ class Projects extends MY_Controller
                 break;
             case 'update':
                 $this->content_view = 'projects/areas';
-                $this->view_data['area'] = DepartmentHasArea::find($area_id);
+                $this->view_data['area'] = DepartmentArea::find($area_id);
                 if ($_POST) {
                     unset($_POST['send']);
                     unset($_POST['files']);
@@ -911,7 +899,7 @@ class Projects extends MY_Controller
                     $_POST = array_map('htmlspecialchars', $_POST);
                     $_POST['description'] = $description;
                     $area_id = $_POST['id'];
-                    $area = DepartmentHasArea::find($area_id);
+                    $area = DepartmentArea::find($area_id);
                     $area->update_attributes($_POST);
                     if (!$area) {
                         $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_area_error'));
@@ -928,9 +916,9 @@ class Projects extends MY_Controller
                 }
                 break;
             case 'delete':
-                $area = DepartmentHasArea::find($area_id);
+                $area = DepartmentArea::find($area_id);
 
-                foreach ($area->project_has_milestones as $value) {
+                foreach ($area->project_milestone as $value) {
                     $value->area_id = "";
                     $value->save();
                 }
@@ -966,7 +954,7 @@ class Projects extends MY_Controller
                     $_POST = array_map('htmlspecialchars', $_POST);
                     $_POST['description'] = $description;
                     $_POST['project_id'] = $id;
-                    $milestone = ProjectHasMilestone::create($_POST);
+                    $milestone = ProjectMilestone::create($_POST);
                     if (!$milestone) {
                         $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_milestone_error'));
                     } else {
@@ -979,10 +967,10 @@ class Projects extends MY_Controller
                     $this->view_data['title'] = $this->lang->line('application_add_milestone');
                     $this->view_data['area_id'] = $area_id;
 
-                    $chosenArea = DepartmentHasArea::find($area_id);
+                    $chosenArea = DepartmentArea::find($area_id);
                     $this->view_data['department_id'] = $chosenArea->department_id;
                     $options = ['conditions' => ["department_id = $chosenArea->department_id"]];
-                    $areas = DepartmentHasArea::find('all',$options);
+                    $areas = DepartmentArea::find('all',$options);
                     $this->view_data['bd_areas'] = $areas;
 
                     $this->view_data['form_action'] = 'projects/milestones/'.$id.'/add';
@@ -991,7 +979,7 @@ class Projects extends MY_Controller
                 break;
             case 'update':
                 $this->content_view = 'projects/_milestones';
-                $this->view_data['milestone'] = ProjectHasMilestone::find($milestone_id);
+                $this->view_data['milestone'] = ProjectMilestone::find($milestone_id);
 
                 if ($_POST) {
 
@@ -1004,9 +992,9 @@ class Projects extends MY_Controller
                     $_POST = array_map('htmlspecialchars', $_POST);
                     $_POST['description'] = $description;
                     $milestone_id = $_POST['id'];
-                    $milestone = ProjectHasMilestone::find($milestone_id);
+                    $milestone = ProjectMilestone::find($milestone_id);
 
-                    $areas = DepartmentHasArea::all();
+                    $areas = DepartmentArea::all();
                     $this->view_data['bd_areas'] = $areas;
 
                     $milestone->update_attributes($_POST);
@@ -1023,25 +1011,25 @@ class Projects extends MY_Controller
                     $this->view_data['title'] = $this->lang->line('application_edit_milestone');
                     $this->view_data['area_id'] = area_id;
 
-                    $milestone = ProjectHasMilestone::find($milestone_id);
+                    $milestone = ProjectMilestone::find($milestone_id);
 
-                    $selectedArea = DepartmentHasArea::find($milestone->area_id);
+                    $selectedArea = DepartmentArea::find($milestone->area_id);
 
-                    $areas = DepartmentHasArea::all(array('conditions' => "department_id = $selectedArea->department_id"));
+                    $areas = DepartmentArea::all(array('conditions' => "department_id = $selectedArea->department_id"));
                     $this->view_data['bd_areas'] = $areas;
                     $this->view_data['form_action'] = 'projects/milestones/'.$id.'/update/'.$milestone_id;
                     $this->content_view = 'projects/_milestones';
                 }
                 break;
             case 'delete':
-                    $milestone = ProjectHasMilestone::find($milestone_id);
+                    $milestone = ProjectMilestone::find($milestone_id);
 
                     $toDelete = array();
-                    foreach ($milestone->project_has_tasks as $value) {
+                    foreach ($milestone->project_task as $value) {
                         array_push($toDelete, $value->id);
                     }
 
-                    ProjectHasTask::table()->delete(array('id' => $toDelete));
+                    ProjectTask::table()->delete(array('id' => $toDelete));
 
                     $milestone->delete();
                        if (!$milestone) {
@@ -1055,7 +1043,7 @@ class Projects extends MY_Controller
 
                     $project = Project::find($id);
                     $this->theme_view = 'ajax';
-                    $current_milestone = ProjectHasMilestone::find($milestone_id);
+                    $current_milestone = ProjectMilestone::find($milestone_id);
 
                     $attributes = array(
                         'project_id' => $project->id,
@@ -1067,16 +1055,16 @@ class Projects extends MY_Controller
                     );
 
 
-                    $new_milestone = ProjectHasMilestone::create($attributes);
+                    $new_milestone = ProjectMilestone::create($attributes);
 
-                    $last_created_milestone = ProjectHasMilestone::find('last', ['conditions' => ['project_id = ?', $project->id]]);
+                    $last_created_milestone = ProjectMilestone::find('last', ['conditions' => ['project_id = ?', $project->id]]);
 
                     $options = ['conditions' => ['milestone_id = ?', $current_milestone->id]];
-                    $tasksOfMilestone = ProjectHasTask::all($options);
+                    $tasksOfMilestone = ProjectTask::all($options);
 
                     foreach ($tasksOfMilestone as $existingTask) {
 
-                        $new_task_reference = ProjectHasTask::createTaskReference();
+                        $new_task_reference = ProjectTask::createTaskReference();
 
                         $attributes = array(
                             'project_id' => $project->id,
@@ -1094,7 +1082,7 @@ class Projects extends MY_Controller
                             'reference' => $new_task_reference,
                         );
 
-                        ProjectHasTask::create($attributes);
+                        ProjectTask::create($attributes);
                     }
 
 
@@ -1131,8 +1119,8 @@ class Projects extends MY_Controller
                     $_POST = array_map('htmlspecialchars', $_POST);
                     $_POST['description'] = $description;
                     $_POST['project_id'] = $id;
-                    $_POST['reference'] = ProjectHasTask::createTaskReference();
-                    $task = ProjectHasTask::create($_POST);
+                    $_POST['reference'] = ProjectTask::createTaskReference();
+                    $task = ProjectTask::create($_POST);
 
                     $project = Project::find_by_id($id);
                     $push_receivers = array();
@@ -1170,7 +1158,7 @@ class Projects extends MY_Controller
             case 'update':
                 $this->content_view = 'projects/_tasks';
 
-                $editingTask = ProjectHasTask::find($task_id);
+                $editingTask = ProjectTask::find($task_id);
 
                 $this->view_data['task'] = $editingTask;
                 if ($_POST) {
@@ -1184,7 +1172,7 @@ class Projects extends MY_Controller
 
                     $_POST['description'] = $description;
 
-                    $task = ProjectHasTask::find($task_id);
+                    $task = ProjectTask::find($task_id);
 
                     $project = Project::find_by_id($task->project_id);
 
@@ -1224,7 +1212,7 @@ class Projects extends MY_Controller
 
                             if (is_numeric($sucessorId)){
 
-                                $sucessor = ProjectHasTask::find($sucessorId);
+                                $sucessor = ProjectTask::find($sucessorId);
 
                                 if ($sucessor->status != 'done'){
 
@@ -1264,7 +1252,7 @@ class Projects extends MY_Controller
                                 'start' => $timer_start,
                                 'end' => $now
                             );
-                            $timesheet = ProjectHasTimesheet::create($attributes);
+                            $timesheet = ProjectTimesheet::create($attributes);
                         }
                     }*/
 
@@ -1280,7 +1268,7 @@ class Projects extends MY_Controller
                     $project = Project::find($id);
                     $this->theme_view = 'modal';
                     $this->view_data['project'] = $project;
-                    $this->view_data['tasks'] = ProjectHasTask::find('all', ['order' => 'id asc', 'conditions' => ['project_id = ? AND id != ?', $project->id, $task_id]]);
+                    $this->view_data['tasks'] = ProjectTask::find('all', ['order' => 'id asc', 'conditions' => ['project_id = ? AND id != ?', $project->id, $task_id]]);
                     $this->view_data['title'] = $this->lang->line('application_edit_task');
                     $this->view_data['milestone_id'] = $milestone_id;
                     $this->view_data['form_action'] = 'projects/tasks/'.$id.'/update/'.$task_id;
@@ -1293,7 +1281,7 @@ class Projects extends MY_Controller
                     foreach ($sucessorsIds as $sucessorId) {
 
                         if (is_numeric($sucessorId)){
-                            $value = ProjectHasTask::find($sucessorId);
+                            $value = ProjectTask::find($sucessorId);
                             $sucessors[$value->id] = $value->id;
                         }
                     }
@@ -1307,7 +1295,7 @@ class Projects extends MY_Controller
             case 'check':
 
                 $this->theme_view = 'blank';
-                $task = ProjectHasTask::find_by_id($task_id);
+                $task = ProjectTask::find_by_id($task_id);
                 $project = Project::find_by_id($task->project_id);
 
                 if ($task->status == 'done') {
@@ -1329,13 +1317,13 @@ class Projects extends MY_Controller
 
                     //
                     $options = ['conditions' => ['project_id = ? AND id in (?)', $id, explode(',', $task->sucessors)]];
-                    $sucessors_parents = ProjectHasTask::find($options);
+                    $sucessors_parents = ProjectTask::find($options);
                     //
 
                     foreach ($sucessors as $sucessorId){
 
                         if (is_numeric($sucessorId)){
-                            $sucessor = ProjectHasTask::find($sucessorId);
+                            $sucessor = ProjectTask::find($sucessorId);
 
                             //achar um meio de não precisar percorrer todas as tarefas para achar se ela é pai da tarefa que está instanciada nessa repetição
 
@@ -1359,8 +1347,8 @@ class Projects extends MY_Controller
 
                 $task->save();
                 $project = Project::find($id);
-                $tasks = ProjectHasTask::count(array('conditions' => 'project_id = '.$id));
-                $tasks_done = ProjectHasTask::count(array('conditions' => array('status = ? AND project_id = ?', 'done', $id)));
+                $tasks = ProjectTask::count(array('conditions' => 'project_id = '.$id));
+                $tasks_done = ProjectTask::count(array('conditions' => array('status = ? AND project_id = ?', 'done', $id)));
                 if ($project->progress_calc == 1) {
                     if ($tasks) {
                         $progress = round($tasks_done/$tasks*100);
@@ -1376,7 +1364,7 @@ class Projects extends MY_Controller
                 break;
             case 'unlock':
                 $this->theme_view = 'blank';
-                $task = ProjectHasTask::find($task_id);
+                $task = ProjectTask::find($task_id);
                 $task->save();
                 if ($task) {
                     json_response("success", htmlspecialchars($this->lang->line('application_task_has_been_unlocked')));
@@ -1385,7 +1373,7 @@ class Projects extends MY_Controller
                 }
                 break;
             case 'delete':
-                $task = ProjectHasTask::find($task_id);
+                $task = ProjectTask::find($task_id);
                 $task->delete();
                 if (!$task) {
                     $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_delete_task_error'));
@@ -1415,7 +1403,7 @@ class Projects extends MY_Controller
 
     public function media($id = false, $condition = false, $media_id = false)
     {
-        $projecthasworker = ProjectHasWorker::all(array('conditions' => array('user_id = ? AND project_id = ?', $this->user->id, $id)));
+        $projecthasworker = ProjectWorker::all(array('conditions' => array('user_id = ? AND project_id = ?', $this->user->id, $id)));
 
         if (!$projecthasworker && $this->user->admin != 1 && !$this->view_data['worker_is_client_admin']) {
             $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_no_access_error'));
@@ -1443,8 +1431,8 @@ class Projects extends MY_Controller
                     $_POST['media_id'] = $media_id;
                     $_POST['from'] = $this->user->firstname.' '.$this->user->lastname;
                     $this->view_data['project'] = Project::find_by_id($id);
-                    $this->view_data['media'] = ProjectHasFile::find($media_id);
-                    $message = Message::create($_POST);
+                    $this->view_data['media'] = ProjectFile::find($media_id);
+                    $message = ProjectMessage::create($_POST);
                     if (!$message) {
                         $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_message_error'));
                     } else {
@@ -1452,7 +1440,7 @@ class Projects extends MY_Controller
 
                         $push_receivers = array();
 
-                        foreach ($this->view_data['project']->project_has_workers as $workers) {
+                        foreach ($this->view_data['project']->project_worker as $workers) {
 //                            send_notification($workers->user->email, "[".$this->view_data['project']->name."] Novo comentário", 'Novo comentário no arquivo: '.$this->view_data['media']->name.'<br><strong>'.$this->view_data['project']->name.'</strong>');
 
                             $attributes = array('user_id' => $workers->user->id, 'message' => 'Novo comentário no arquivo: '.$this->view_data['media']->name.' ['.$this->view_data['project']->name.']', 'url' => base_url().'projects/view/'.$this->view_data['project']->id);
@@ -1475,7 +1463,7 @@ class Projects extends MY_Controller
                     redirect('projects/media/'.$id.'/view/'.$media_id);
                 }
                 $this->content_view = 'projects/view_media';
-                $this->view_data['media'] = ProjectHasFile::find($media_id);
+                $this->view_data['media'] = ProjectFile::find($media_id);
                 $this->view_data['form_action'] = 'projects/media/'.$id.'/view/'.$media_id;
                 $this->view_data['filetype'] = explode('.', $this->view_data['media']->filename);
                 $this->view_data['filetype'] = $this->view_data['filetype'][1];
@@ -1532,7 +1520,7 @@ class Projects extends MY_Controller
                     $_POST = array_map('htmlspecialchars', $_POST);
                     $_POST['project_id'] = $id;
                     $_POST['user_id'] = $this->user->id;
-                    $media = ProjectHasFile::create($_POST);
+                    $media = ProjectFile::create($_POST);
                     if (!$media) {
                         $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_media_error'));
                     } else {
@@ -1541,11 +1529,11 @@ class Projects extends MY_Controller
                         $attributes = array('subject' => $this->lang->line('application_new_media_subject'), 'message' => '<b>'.$this->user->firstname.' '.$this->user->lastname.'</b> '.$this->lang->line('application_uploaded'). ' '.$_POST['name'], 'datetime' => time(), 'project_id' => $id, 'type' => 'media', 'user_id' => $this->user->id);
 
                         // COLABORADORES AO FAZER UPLOAD DE MÍDIAS NO PROJETO GERAM REGISTROS EM ATIVIDADES / ESCONDIDO
-                        // $activity = ProjectHasActivity::create($attributes);
+                        // $activity = ProjectActivity::create($attributes);
 
                         $push_receivers = array();
 
-                        foreach ($this->view_data['project']->project_has_workers as $workers) {
+                        foreach ($this->view_data['project']->project_worker as $workers) {
 //                            send_notification($workers->user->email, "[".$this->view_data['project']->name."] ".$this->lang->line('application_new_media_subject'), $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>');
 
                             $attributes = array('user_id' => $workers->user->id, 'message' => $this->lang->line('application_new_media_file_was_added').' <strong>'.$this->view_data['project']->name.'</strong>', 'url' => base_url().'projects/view/'.$this->view_data['project']->id);
@@ -1575,7 +1563,7 @@ class Projects extends MY_Controller
                 break;
             case 'update':
                 $this->content_view = 'projects/_media';
-                $this->view_data['media'] = ProjectHasFile::find($media_id);
+                $this->view_data['media'] = ProjectFile::find($media_id);
                 $this->view_data['project'] = Project::find($id);
                 if ($_POST) {
                     unset($_POST['send']);
@@ -1583,7 +1571,7 @@ class Projects extends MY_Controller
                     unset($_POST['files']);
                     $_POST = array_map('htmlspecialchars', $_POST);
                     $media_id = $_POST['id'];
-                    $media = ProjectHasFile::find($media_id);
+                    $media = ProjectFile::find($media_id);
                     $media->update_attributes($_POST);
                     if (!$media) {
                         $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_media_error'));
@@ -1599,9 +1587,9 @@ class Projects extends MY_Controller
                 }
                 break;
             case 'delete':
-                    $media = ProjectHasFile::find($media_id);
+                    $media = ProjectFile::find($media_id);
                     $media->delete();
-                    ProjectHasFile::find_by_sql("DELETE FROM messages WHERE media_id = $media_id");
+                    ProjectFile::find_by_sql("DELETE FROM project_message WHERE media_id = $media_id");
 
                        if (!$media) {
                            $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_delete_media_error'));
@@ -1620,7 +1608,7 @@ class Projects extends MY_Controller
 
     public function deletemessage($project_id, $media_id, $id)
     {
-        $message = Message::find($id);
+        $message = ProjectMessage::find($id);
         if ($message->from == $this->user->firstname." ".$this->user->lastname || $this->user->admin == "1") {
             $message->delete();
         }
@@ -1662,7 +1650,7 @@ class Projects extends MY_Controller
         $this->load->helper('download');
         $this->load->helper('file');
         if ($media_id && $media_id != "false") {
-            $media = ProjectHasFile::find($media_id);
+            $media = ProjectFile::find($media_id);
             $media->download_counter = $media->download_counter+1;
             $media->save();
             $file = './files/media/'.$media->savename;
@@ -1696,7 +1684,7 @@ class Projects extends MY_Controller
     {
         $this->load->helper('notification');
 
-        $task = ProjectHasTask::find_by_id($id);
+        $task = ProjectTask::find_by_id($id);
     		$project = Project::find_by_id($task->project_id);
 
         switch ($condition) {
@@ -1727,14 +1715,14 @@ class Projects extends MY_Controller
                     }
                     unset($_POST['userfile']);
 
-                    $comment = TaskHasComment::create($_POST);
+                    $comment = TaskComment::create($_POST);
                     if (!$comment) {
                         $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_error'));
                     } else {
                         $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_save_success'));
 
                         //quando um colaborador responder ou enviar um comentário, não enviar e-mails para todos os outros colaboradores, apenas para o cliente / ESCONDIDO
-                        // foreach ($project->project_has_workers as $workers){
+                        // foreach ($project->project_worker as $workers){
                         //     // send_notification($workers->user->email, "[".$project->name."] ".$_POST['subject'], $_POST['message'].'<br><strong>'.$project->name.'</strong>');
                         //     send_notification($workers->user->email, "[".$project->name."] ".$this->lang->line('application_new_comment_in_task')." ".$_POST['subject'], "<b>".$this->lang->line('application_task_name').":</b> ".$task->name." <br><b>".$this->lang->line('application_comment').":</b> ".$_POST['message'].'<br><br><strong>'.$project->name.'</strong>');
                         // }
@@ -1775,7 +1763,7 @@ class Projects extends MY_Controller
                     $_POST['type'] = "comment";
                     unset($_POST['files']);
                     $_POST['datetime'] = time();
-                    $activity = ProjectHasActivity::create($_POST);
+                    $activity = ProjectActivity::create($_POST);
                     if (!$activity) {
                         $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_save_error'));
                     } else {
@@ -1783,7 +1771,7 @@ class Projects extends MY_Controller
 
                         $push_receivers = array();
 
-                        foreach ($project->project_has_workers as $workers) {
+                        foreach ($project->project_worker as $workers) {
 //                            send_notification($workers->user->email, "[".$project->name."] ".$_POST['subject'], "<b>".$_POST['subject']."</b><br>".$_POST['message'].'<br><strong>'.$project->name.'</strong>');
 
                             $attributes = array('user_id' => $workers->user->id, 'message' => "<b>".$_POST['subject']."</b><br>".$_POST['message'].' ['.$project->name.']', 'url' => base_url().'projects/view/'.$project->id);
@@ -1810,7 +1798,7 @@ class Projects extends MY_Controller
 
                 break;
             case 'delete':
-                    $activity = ProjectHasActivity::find_by_id($activityID);
+                    $activity = ProjectActivity::find_by_id($activityID);
                     if ($activity->user_id == $this->user->id) {
                         $activity->delete();
                     }

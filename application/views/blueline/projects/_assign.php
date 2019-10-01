@@ -13,7 +13,7 @@ if(isset($project)){ ?>
                 $options[$value->id] = $value->firstname.' '.$value->lastname;
                 endforeach;
         if(isset($project)){}else{$user = "";}
-        foreach ($project->project_has_workers as $workers):
+        foreach ($project->project_worker as $workers):
             $user[$workers->user_id] = $workers->user_id;
         endforeach;
         echo form_dropdown('user_id[]', $options, $user, 'style="width:100%" class="chosen-select" data-placeholder="'.$this->lang->line('application_select_agents').'" multiple tabindex="3"');?>

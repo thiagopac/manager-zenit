@@ -51,7 +51,7 @@ if (isset($status)) {
 
         if(isset($status)){}else{$user = "";}
 
-        foreach ($status->lead_status_has_receivers as $workers):
+        foreach ($status->lead_status_receiver as $workers):
             $user[$workers->user_id] = $workers->user_id;
         endforeach;
 

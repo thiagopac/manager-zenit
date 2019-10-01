@@ -145,7 +145,7 @@
 								</span>
                             </td>
                             <td class="hidden-xs">
-                                <?php foreach ($value->project_has_workers as $workers): ?>
+                                <?php foreach ($value->project_worker as $workers): ?>
                                     <img class="img-circle tt" src="
 									<?=$workers->user->userpic;?>" title="
 									<?php echo $workers->user->firstname . ' ' . $workers->user->lastname;?>" height="19px">

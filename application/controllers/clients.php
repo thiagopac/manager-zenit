@@ -2,8 +2,7 @@
     exit('No direct script access allowed');
 }
 
-class Clients extends MY_Controller
-{
+class Clients extends MY_Controller {
     public function __construct()
     {
         parent::__construct();
@@ -97,13 +96,13 @@ class Clients extends MY_Controller
             }
             redirect('clients/view/' . $company_id);
         } else {
-            $this->view_data['clients'] = Client::find('all', ['conditions' => ['inactive=?', '0']]);
+            $this->view_data['client'] = Client::find('all', ['conditions' => ['inactive=?', '0']]);
             $this->view_data['modules'] = Module::find('all', ['order' => 'sort asc', 'conditions' => ['type = ?', 'client']]);
             $this->view_data['next_reference'] = Client::last();
             $this->theme_view = 'modal';
             $this->view_data['title'] = $this->lang->line('application_add_new_contact');
             $this->view_data['form_action'] = 'clients/create/' . $company_id;
-            $this->content_view = 'clients/_clients';
+            $this->content_view = 'clients/_client';
         }
     }
 
@@ -165,7 +164,7 @@ class Clients extends MY_Controller
             $this->theme_view = 'modal';
             $this->view_data['title'] = $this->lang->line('application_edit_client');
             $this->view_data['form_action'] = 'clients/update';
-            $this->content_view = 'clients/_clients';
+            $this->content_view = 'clients/_client';
         }
     }
 
@@ -192,9 +191,9 @@ class Clients extends MY_Controller
                 $company = Company::create($_POST);
                 $companyid = Company::last();
                 $attributes = ['company_id' => $companyid->id, 'user_id' => $this->user->id];
-                $adminExists = CompanyHasAdmin::exists($attributes);
+                $adminExists = CompanyAdmin::exists($attributes);
                 if (!$adminExists) {
-                    $addUserAsClientAdmin = CompanyHasAdmin::create($attributes);
+                    $addUserAsClientAdmin = CompanyAdmin::create($attributes);
                 }
                 $new_company_reference = $_POST['reference'] + 1;
                 $company_reference = Setting::first();
@@ -206,7 +205,7 @@ class Clients extends MY_Controller
                 }
                 redirect('clients/view/' . $companyid->id);
             } else {
-                $this->view_data['clients'] = Company::find('all', ['conditions' => ['inactive=?', '0']]);
+                $this->view_data['client'] = Company::find('all', ['conditions' => ['inactive=?', '0']]);
                 $this->view_data['next_reference'] = Company::last();
                 $this->theme_view = 'modal';
                 $this->view_data['title'] = $this->lang->line('application_add_new_company');
@@ -237,9 +236,9 @@ class Clients extends MY_Controller
                 $company = Company::create($company_data);
                 $companyid = Company::last();
                 $attributes = ['company_id' => $companyid->id, 'user_id' => $this->user->id];
-                $adminExists = CompanyHasAdmin::exists($attributes);
+                $adminExists = CompanyAdmin::exists($attributes);
                 if (!$adminExists) {
-                    $addUserAsClientAdmin = CompanyHasAdmin::create($attributes);
+                    $addUserAsClientAdmin = CompanyAdmin::create($attributes);
                 }
                 $client_data = [
                                         'company_id' => $companyid->id,
@@ -307,7 +306,7 @@ class Clients extends MY_Controller
                 $company = Company::find_by_id($id);
                 $company->inactive = '1';
                 $company->save();
-                foreach ($company->clients as $value) {
+                foreach ($company->client as $value) {
                     $client = Client::find_by_id($value->id);
                     $client->inactive = '1';
                     $client->save();
@@ -331,12 +330,12 @@ class Clients extends MY_Controller
             $id = addslashes($_POST['id']);
             $company = Company::find_by_id($id);
 
-            $users_query = $company->company_has_admins;
+            $users_query = $company->company_admin;
             $still_assigned_users = [];
             //remove unselected users
             foreach ($users_query as $value) {
                 if (!in_array($value->user_id, $_POST['user_id'])) {
-                    $delete = CompanyHasAdmin::find_by_id($value->id);
+                    $delete = CompanyAdmin::find_by_id($value->id);
                     $delete->delete();
                 } else {
                     array_push($still_assigned_users, $value->user_id);
@@ -346,7 +345,7 @@ class Clients extends MY_Controller
             foreach ($_POST['user_id'] as $value) {
                 if (!in_array($value, $still_assigned_users)) {
                     $attributes = ['company_id' => $id, 'user_id' => $value];
-                    $create = CompanyHasAdmin::create($attributes);
+                    $create = CompanyAdmin::create($attributes);
                 }
             }
 
@@ -368,7 +367,7 @@ class Clients extends MY_Controller
 
     public function removeassigned($id = false, $companyid = false)
     {
-        $delete = CompanyHasAdmin::find(['conditions' => ['user_id = ? AND company_id = ?', $id, $companyid]]);
+        $delete = CompanyAdmin::find(['conditions' => ['user_id = ? AND company_id = ?', $id, $companyid]]);
         $delete->delete();
         $this->theme_view = 'ajax';
     }
@@ -431,7 +430,7 @@ class Clients extends MY_Controller
                                 'password' => $newPass,
                                 'link' => base_url() . 'forgotpass/token/' . $token,
                                 'logo' => '<img src="' . base_url() . '' . $setting->logo . '" alt="' . $setting->company . '"/>',
-                                'invoice_logo' => '<img src="' . base_url() . '' . $setting->invoice_logo . '" alt="' . $setting->company . '"/>'
+                                'company_logo' => '<img src="' . base_url() . '' . $setting->company_logo . '" alt="' . $setting->company . '"/>'
                                 ];
 
             $message = read_file('./application/views/' . $setting->template . '/templates/email_credentials.html');
@@ -463,8 +462,8 @@ class Clients extends MY_Controller
 
     public function hash_passwords()
     {
-        $clients = Client::all();
-        foreach ($clients as $client) {
+        $client = Client::all();
+        foreach ($client as $client) {
             $pass = $client->password_old;
             $client->password = $client->set_password($pass);
             $client->save();

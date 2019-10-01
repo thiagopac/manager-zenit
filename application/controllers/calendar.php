@@ -95,7 +95,7 @@ class Calendar extends MY_Controller
         $task_list = '';
         foreach ($projects as $project) {
 
-            foreach ($project->project_has_tasks as $pht) {
+            foreach ($project->project_task as $pht) {
 
                 if ($pht->start_date == null || $pht->user_id != $this->user->id){
                     continue;

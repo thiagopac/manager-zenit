@@ -9,8 +9,8 @@ echo form_open_multipart($form_action, $attributes);
                 $options[$this->lang->line('application_agents')]["u".$value->id] = $value->firstname.' '.$value->lastname;
                 }
                 endforeach;
-                foreach ($clients as $value):
-                $options[$this->lang->line('application_clients')]["c".$value->id] = $value->firstname.' '.$value->lastname.' ['.$value->company->name.']';
+                foreach ($client as $value):
+                $options[$this->lang->line('application_client')]["c".$value->id] = $value->firstname.' '.$value->lastname.' ['.$value->company->name.']';
                 endforeach;
         echo form_dropdown('recipient', $options, '', 'style="width:100%" class="chosen-select"');?>
 </div>

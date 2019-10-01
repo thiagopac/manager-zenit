@@ -37,7 +37,7 @@ echo form_open($form_action, $attributes);
         <label for="user"><?=$this->lang->line('application_assign_to');?></label>
         <?php $users = array();
                 $users['0'] = '-';
-                 foreach ($project->project_has_workers as $workers):
+                 foreach ($project->project_worker as $workers):
                     $users[$workers->user_id] = $workers->user->firstname.' '.$workers->user->lastname;
                 endforeach;
         if(isset($task)){$user = $task->user_id;}else{$user = $this->user->id;}
@@ -48,7 +48,7 @@ echo form_open($form_action, $attributes);
         <label for="contacts"><?=$this->lang->line('application_assign_to');?></label>
         <?php $contact = array();
                 $contacts['0'] = '-';
-                 foreach ($project->company->clients as $workers):
+                 foreach ($project->company->client as $workers):
                     $contacts[$workers->id] = $workers->firstname.' '.$workers->lastname;
                 endforeach;
         if(isset($task)){$contact = $task->client_id;}else{$contact = $this->client->id;}

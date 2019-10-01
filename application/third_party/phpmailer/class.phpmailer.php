@@ -110,7 +110,7 @@ class PHPMailer
 
     /**
      * The plain-text message body.
-     * This body can be read by mail clients that do not have HTML email
+     * This body can be read by mail client that do not have HTML email
      * capability such as mutt & Eudora.
      * Clients that can read HTML will view the normal Body.
      * @var string

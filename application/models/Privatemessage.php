@@ -1,41 +1,34 @@
 <?php
 
-class Privatemessage extends ActiveRecord\Model
-{
+class PrivateMessage extends ActiveRecord\Model{
+    static $table_name = 'private_message';
+
     public static function getMessages($limit, $max_value, $qdeleted, $user_id, $client = false)
     {
         $prefix = ($client) ? 'c' : 'u';
 
-        $messages = Privatemessage::find_by_sql('SELECT * FROM
-                (SELECT privatemessages.id, privatemessages.`status`,
-                privatemessages.`deleted`,
-                privatemessages.attachment,
-                privatemessages.attachment_link,
-                privatemessages.subject,
-                privatemessages.conversation,
-                privatemessages.sender,
-                privatemessages.recipient,
-                privatemessages.message,
-                privatemessages.`time`,
-                clients.`userpic` as userpic_c,
+        $messages = PrivateMessage::find_by_sql('SELECT * FROM
+                (SELECT private_message.id, private_message.`status`,
+                private_message.`deleted`,
+                private_message.attachment,
+                private_message.attachment_link,
+                private_message.subject,
+                private_message.conversation,
+                private_message.sender,
+                private_message.recipient,
+                private_message.message,
+                private_message.`time`,
+                client.`userpic` as userpic_c,
                 users.`userpic` as userpic_u ,
                 users.`email` as email_u ,
-                clients.`email` as email_c ,
-                CONCAT(users.firstname," ", users.lastname) as sender_u, CONCAT(clients.firstname," ", clients.lastname) as sender_c
-				FROM privatemessages
-				LEFT JOIN clients ON CONCAT("c",clients.id) = privatemessages.sender
-				LEFT JOIN users ON CONCAT("u",users.id) = privatemessages.sender
-				WHERE privatemessages.recipient = "' . $prefix . $user_id . '" ' . $qdeleted . ' ORDER BY privatemessages.`time`
+                client.`email` as email_c ,
+                CONCAT(users.firstname," ", users.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c
+				FROM private_message
+				LEFT JOIN client ON CONCAT("c",client.id) = private_message.sender
+				LEFT JOIN users ON CONCAT("u",users.id) = private_message.sender
+				WHERE private_message.recipient = "' . $prefix . $user_id . '" ' . $qdeleted . ' ORDER BY private_message.`time`
                 DESC LIMIT ' . $limit . $max_value . ') as messages
                 GROUP BY conversation, messages.subject, messages.conversation
-
-                -- GROUP BY conversation, messages.id, messages.status,
-                -- messages.deleted, messages.attachment, messages.attachment_link,
-                -- messages.subject, messages.conversation, messages.sender,
-                -- messages.recipient, messages.message, messages.`time`,
-                -- messages.userpic_c, messages.userpic_u, messages.email_u,
-                -- messages.email_c, messages.sender_u, messages.sender_c
-
                 ORDER BY `time` DESC');
 
                 // var_dump($messages);
@@ -48,33 +41,33 @@ class Privatemessage extends ActiveRecord\Model
         $prefix = ($client) ? 'c' : 'u';
         switch ($filter) {
             case 'read':
-                $rule = 'LEFT JOIN clients ON CONCAT("c",clients.id) = privatemessages.sender
-				LEFT JOIN users ON CONCAT("u",users.id) = privatemessages.sender
-				GROUP by privatemessages.conversation HAVING privatemessages.recipient = "' . $prefix . $user_id . '" AND (privatemessages.`status`="Replied" OR privatemessages.`status`="Read") ORDER BY privatemessages.`time` DESC LIMIT ' . $limit . $max_value;
+                $rule = 'LEFT JOIN client ON CONCAT("c",client.id) = private_message.sender
+				LEFT JOIN users ON CONCAT("u",users.id) = private_message.sender
+				GROUP by private_message.conversation HAVING private_message.recipient = "' . $prefix . $user_id . '" AND (private_message.`status`="Replied" OR private_message.`status`="Read") ORDER BY private_message.`time` DESC LIMIT ' . $limit . $max_value;
             break;
             case 'sent':
-                $rule = 'LEFT JOIN clients ON CONCAT("c",clients.id) = privatemessages.recipient
-				LEFT JOIN users ON CONCAT("u",users.id) = privatemessages.recipient
-				WHERE privatemessages.sender = "' . $prefix . $user_id . '" ORDER BY privatemessages.`time` DESC LIMIT ' . $limit . $max_value;
+                $rule = 'LEFT JOIN client ON CONCAT("c",client.id) = private_message.recipient
+				LEFT JOIN users ON CONCAT("u",users.id) = private_message.recipient
+				WHERE private_message.sender = "' . $prefix . $user_id . '" ORDER BY private_message.`time` DESC LIMIT ' . $limit . $max_value;
             break;
             case 'marked':
-                $rule = 'LEFT JOIN clients ON CONCAT("c",clients.id) = privatemessages.sender
-				LEFT JOIN users ON CONCAT("u",users.id) = privatemessages.sender
-				WHERE privatemessages.recipient = "' . $prefix . $user_id . '" AND privatemessages.`status`="Marked" ORDER BY privatemessages.`time` DESC LIMIT ' . $limit . $max_value;
+                $rule = 'LEFT JOIN client ON CONCAT("c",client.id) = private_message.sender
+				LEFT JOIN users ON CONCAT("u",users.id) = private_message.sender
+				WHERE private_message.recipient = "' . $prefix . $user_id . '" AND private_message.`status`="Marked" ORDER BY private_message.`time` DESC LIMIT ' . $limit . $max_value;
             break;
             case 'deleted':
-                $rule = 'LEFT JOIN clients ON CONCAT("c",clients.id) = privatemessages.sender
-				LEFT JOIN users ON CONCAT("u",users.id) = privatemessages.sender
-				WHERE privatemessages.recipient = "' . $prefix . $user_id . '" AND (privatemessages.status = "deleted" OR privatemessages.deleted = 1) ORDER BY privatemessages.`time` DESC LIMIT ' . $limit . $max_value;
+                $rule = 'LEFT JOIN client ON CONCAT("c",client.id) = private_message.sender
+				LEFT JOIN users ON CONCAT("u",users.id) = private_message.sender
+				WHERE private_message.recipient = "' . $prefix . $user_id . '" AND (private_message.status = "deleted" OR private_message.deleted = 1) ORDER BY private_message.`time` DESC LIMIT ' . $limit . $max_value;
             break;
             default:
-                $rule = 'LEFT JOIN clients ON CONCAT("c",clients.id) = privatemessages.sender
-				LEFT JOIN users ON CONCAT("u",users.id) = privatemessages.sender
-				GROUP by privatemessages.conversation HAVING privatemessages.recipient = "' . $prefix . $user_id . '" ORDER BY privatemessages.`time` DESC LIMIT ' . $limit . $max_value;
+                $rule = 'LEFT JOIN client ON CONCAT("c",client.id) = private_message.sender
+				LEFT JOIN users ON CONCAT("u",users.id) = private_message.sender
+				GROUP by private_message.conversation HAVING private_message.recipient = "' . $prefix . $user_id . '" ORDER BY private_message.`time` DESC LIMIT ' . $limit . $max_value;
             break;
         }
-        $messages = Privatemessage::find_by_sql('SELECT privatemessages.id, privatemessages.`status`, privatemessages.subject, privatemessages.attachment, privatemessages.attachment_link, privatemessages.message, privatemessages.sender, privatemessages.recipient, privatemessages.`time`, clients.`userpic` as userpic_c, users.`userpic` as userpic_u , users.`email` as email_u , clients.`email` as email_c , CONCAT(users.firstname," ", users.lastname) as sender_u, CONCAT(clients.firstname," ", clients.lastname) as sender_c
-				FROM privatemessages
+        $messages = PrivateMessage::find_by_sql('SELECT private_message.id, private_message.`status`, private_message.subject, private_message.attachment, private_message.attachment_link, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, client.`userpic` as userpic_c, users.`userpic` as userpic_u , users.`email` as email_u , client.`email` as email_c , CONCAT(users.firstname," ", users.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c
+				FROM private_message
 				' . $rule);
 
         return $messages;

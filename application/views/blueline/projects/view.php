@@ -307,7 +307,7 @@
             <div id="main-nano-wrapper" class="nano">
               <div class="nano-content">
                 <ul class="activity__list">
-                                <?php foreach ($project->project_has_activities as $activity) {
+                                <?php foreach ($project->project_activity as $activity) {
         ?>
                                     <li>
                                         <h3 class="activity__list--header">
@@ -353,7 +353,7 @@
             <div id="main-nano-wrapper" class="nano">
               <div class="nano-content">
                           <ul class="user-list">
-                              <?php foreach ($project->project_has_workers as $workers): ?>
+                              <?php foreach ($project->project_worker as $workers): ?>
                                   <li>
                                     <img src="<?=$workers->user->userpic?>" class="img-circle list-profile-img " height="21px">
                                     <span class="user-list-name"><?=$workers->user->firstname;?> <?=$workers->user->lastname;?></span>
@@ -403,7 +403,7 @@
 
     <?php foreach ($departments as $department) {?>
 
-    <?php foreach ($department->department_has_areas as $area) {?>
+    <?php foreach ($department->department_area as $area) {?>
      <div class="col-xs-12 col-sm-12 col-lg-6 department_<?=$department->id?>">
          <div id="areas-list" class="box-shadow">
             <div class="table-head"><?=$area->name;?>
@@ -420,7 +420,7 @@
 <ul id="milestones-list" class="todo sortlist sortable-list2">
 
     <?php  $count = 0;
-    foreach ($area->project_has_milestones as $milestone):
+    foreach ($area->project_milestone as $milestone):
 
         if ($milestone->project_id != $project->id){
             continue;
@@ -428,12 +428,12 @@
 
             $count2 = 0; $count = $count+1;
 
-              $tasksInMilestone = count($milestone->project_has_tasks);
+              $tasksInMilestone = count($milestone->project_task);
               $taskSize = 100/$tasksInMilestone;
               $completion = 0;
               $multiplier = 0;
 
-              foreach ($milestone->project_has_tasks as $task){
+              foreach ($milestone->project_task as $task){
 
                 if ($task->status == "done") {
                   $multiplier ++;
@@ -463,7 +463,7 @@
             </h1>
 
             <ul id="milestonelist_<?=$milestone->id;?>" class="sortable-list">
-                <?php  foreach ($milestone->project_has_tasks as $task):   $count2 =  $count2+1;  ?>
+                <?php  foreach ($milestone->project_task as $task):   $count2 =  $count2+1;  ?>
                 <li id="milestonetask_<?=$task->id;?>" class="<?=$task->status;?> priority<?=$task->priority;?> task-row list-item <?php
 
                 $start = strtotime($task->start_date);
@@ -555,9 +555,9 @@
                                   name: "'.htmlspecialchars($project->name).'", desc: "", values: [{
                                 label: "", from: "'.$project->start.'", to: "'.$project->end.'", customClass: "gantt-headerline"
                                 }]},  ';
-            foreach ($project->project_has_milestones as $milestone):
+            foreach ($project->project_milestone as $milestone):
               $counter = 0;
-                   foreach ($milestone->project_has_tasks as $task):
+                   foreach ($milestone->project_task as $task):
                          $milestone_Name = "";
                           if ($counter == 0) {
                               $milestone_Name = $milestone->name;
@@ -593,7 +593,7 @@
                                 { name: "'.htmlspecialchars($project->name).'", desc: "", values: [{
                                 label: "", from: "'.$project->start.'", to: "'.$project->end.'", customClass: "gantt-headerline"
                                 }]}, ';
-            foreach ($project->project_has_workers as $worker):
+            foreach ($project->project_worker as $worker):
               $counter = 0;
                    foreach ($worker->getAllTasksInProject($project->id, $worker->user->id) as $task):
                          $user_name = "";
@@ -668,7 +668,7 @@
     <div class=" min-height-410 media-view-container">
     <div class="mediaPreviews dropzone"></div>
     <?php
-          foreach ($project->project_has_files as $file):
+          foreach ($project->project_file as $file):
           $type = explode("/", $file->type);
           $thumb = "./files/media/thumb_".$file->savename;
 
@@ -729,7 +729,7 @@
           </tr></thead>
 
         <tbody>
-        <?php foreach ($project->project_has_files as $file):?>
+        <?php foreach ($project->project_file as $file):?>
 
         <tr id="<?=$file->id;?>">
           <td class="hidden"><?=human_to_unix($file->date);?></td>
@@ -752,7 +752,7 @@
 
 
         </tbody></table>
-        <?php if (!$project->project_has_files) {
+        <?php if (!$project->project_file) {
                        ?>
         <div class="no-files">
             <i class="icon dripicons-cloud-upload"></i><br>
@@ -807,7 +807,7 @@
                       </div>
                        </form>
                       </li>
-<?php foreach ($project->project_has_activities as $activity):?>
+<?php foreach ($project->project_activity as $activity):?>
                       <?php
                       $writer = false;
 

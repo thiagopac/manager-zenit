@@ -13,7 +13,7 @@
 			<th><?=$this->lang->line('application_phase');?></th>
 			<th><?=$this->lang->line('application_action');?></th>
 		</thead>
-		<?php foreach ($project->project_has_files as $value):?>
+		<?php foreach ($project->project_file as $value):?>
 
 		<tr id="<?=$value->id;?>">
 			<td id="icon" class="<?php $type = explode('.', $value->filename); echo $type[1]; ?>"></td>

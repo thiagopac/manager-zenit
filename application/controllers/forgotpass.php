@@ -54,7 +54,7 @@ class Forgotpass extends MY_Controller
                                 'last_name' => $user->lastname,
                                 'username' => $username,
                                 'logo' => '<img src="' . base_url() . '' . $data['core_settings']->logo . '" alt="' . $data['core_settings']->company . '"/>',
-                                'invoice_logo' => '<img src="' . base_url() . '' . $data['core_settings']->invoice_logo . '" alt="' . $data['core_settings']->company . '"/>'
+                                'company_logo' => '<img src="' . base_url() . '' . $data['core_settings']->company_logo . '" alt="' . $data['core_settings']->company . '"/>'
                                 ];
                 $email = read_file('./application/views/' . $data['core_settings']->template . '/templates/email_pw_reset_link.html');
                 $message = $this->parser->parse_string($email, $parse_data);
@@ -106,7 +106,7 @@ class Forgotpass extends MY_Controller
                                     'first_name' => $first_name,
                                     'last_name' => $last_name,
                                     'logo' => '<img src="' . base_url() . '' . $data['core_settings']->logo . '" alt="' . $data['core_settings']->company . '"/>',
-                                    'invoice_logo' => '<img src="' . base_url() . '' . $data['core_settings']->invoice_logo . '" alt="' . $data['core_settings']->company . '"/>'
+                                    'company_logo' => '<img src="' . base_url() . '' . $data['core_settings']->company_logo . '" alt="' . $data['core_settings']->company . '"/>'
                                   ];
                     $email = read_file('./application/views/' . $data['core_settings']->template . '/templates/email_pw_reset.html');
                     $message = $this->parser->parse_string($email, $parse_data);

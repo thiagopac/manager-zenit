@@ -1189,11 +1189,11 @@ class MY_Email extends CI_Email {
         h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {color: blue !important;}
 
         h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:active {
-        color: red !important; /* Preferably not the same color as the normal header link color.  There is limited support for psuedo classes in email clients, this was added just for good measure. */
+        color: red !important; /* Preferably not the same color as the normal header link color.  There is limited support for psuedo classes in email client, this was added just for good measure. */
         }
 
         h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited {
-        color: purple !important; /* Preferably not the same color as the normal header link color. There is limited support for psuedo classes in email clients, this was added just for good measure. */
+        color: purple !important; /* Preferably not the same color as the normal header link color. There is limited support for psuedo classes in email client, this was added just for good measure. */
         }
 
         /* Outlook 07, 10 Padding issue fix
@@ -1204,7 +1204,7 @@ class MY_Email extends CI_Email {
         Bring inline: Yes */
         table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
 
-        /* Styling your links has become much simpler with the new Yahoo.  In fact, it falls in line with the main credo of styling in email and make sure to bring your styles inline.  Your link colors will be uniform across clients when brought inline.
+        /* Styling your links has become much simpler with the new Yahoo.  In fact, it falls in line with the main credo of styling in email and make sure to bring your styles inline.  Your link colors will be uniform across client when brought inline.
         Bring inline: Yes. */
         a {color: blue;}
 

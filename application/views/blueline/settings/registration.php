@@ -16,9 +16,9 @@
 			<br>
 			<div class="form-group">
 				<label>
-					<?=$this->lang->line('application_clients_can_register');?>
+					<?=$this->lang->line('application_client_can_register');?>
 				</label>
-				<input name="registration" type="checkbox" class="checkbox" style="width:100%;" data-labelauty="<?=$this->lang->line('application_clients_can_register');?>"
+				<input name="registration" type="checkbox" class="checkbox" style="width:100%;" data-labelauty="<?=$this->lang->line('application_client_can_register');?>"
 				 value="1" <?php if ($settings->registration == '1') {
             ?> checked="checked"
 				<?php

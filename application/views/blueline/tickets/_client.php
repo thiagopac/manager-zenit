@@ -7,7 +7,7 @@ if(isset($ticket)){ ?>
 <div class="form-group">
         <label for="client_id"><?=$this->lang->line('application_client');?></label>
         <?php $workers = array();
-                 foreach ($clients as $worker):
+                 foreach ($client as $worker):
                     $workers[$worker->id] = $worker->firstname.' '.$worker->lastname.' - ['.$worker->company->name.']';
                 endforeach;
         echo form_dropdown('client_id', $workers, $ticket->client_id, 'style="width:100%" class="chosen-select"');?>

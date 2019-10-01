@@ -40,7 +40,7 @@
 			<th>Name</th>
 			<th>Action</th>
 		</thead>
-		<?php foreach ($project->project_has_tasks as $value):?>
+		<?php foreach ($project->project_task as $value):?>
 
 		<tr id="<?=$value->id;?>" class="done">
 			<td><?=$value->status;?></td>
@@ -52,7 +52,7 @@
 		</tr>
 
 		<?php endforeach;?>
-		<?php if($project->project_has_tasks == NULL){ echo '<tr class="noborder"><td width="120px"> No Tasks yet</td><td></td><td ></td><td ></td><td ></td></tr>';}?>
+		<?php if($project->project_task == NULL){ echo '<tr class="noborder"><td width="120px"> No Tasks yet</td><td></td><td ></td><td ></td><td ></td></tr>';}?>
 	 	</table>
 	 	<br clear="all">
 
