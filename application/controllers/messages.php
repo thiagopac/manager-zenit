@@ -301,12 +301,12 @@ class messages extends MY_Controller
         				WHERE private_message.recipient = "u'.$this->user->id.'" AND private_message.`id`="'.$id.'"';
             $row = PrivateMessage::find_by_sql($stringQuery);
 
-            $stringQuery = 'SELECT private_message.id, private_message.`status`, private_message.`deleted`, private_message.`receiver_delete`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, users.`userpic` as userpic_u , users.`email` as email_u , client.`email` as email_c , CONCAT(users.firstname," ", users.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(rec_u.firstname," ", rec_u.lastname) as recipient_u, CONCAT(rec_c.firstname," ", rec_c.lastname) as recipient_c
+            $stringQuery = 'SELECT private_message.id, private_message.`status`, private_message.`deleted`, private_message.`receiver_delete`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, user.`userpic` as userpic_u , user.`email` as email_u , client.`email` as email_c , CONCAT(user.firstname," ", user.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(rec_u.firstname," ", rec_u.lastname) as recipient_u, CONCAT(rec_c.firstname," ", rec_c.lastname) as recipient_c
         				FROM private_message
         				LEFT JOIN client ON CONCAT("c",client.id) = private_message.sender
-        				LEFT JOIN users ON CONCAT("u",users.id) = private_message.sender
+        				LEFT JOIN user ON CONCAT("u",user.id) = private_message.sender
         				LEFT JOIN client AS rec_c ON CONCAT("c",rec_c.id) = private_message.recipient
-        				LEFT JOIN users AS rec_u ON CONCAT("u",rec_u.id) = private_message.recipient
+        				LEFT JOIN user AS rec_u ON CONCAT("u",rec_u.id) = private_message.recipient
 
         				WHERE private_message.conversation = "'.$row[0]->conversation.'" ORDER BY private_message.`id` DESC LIMIT 100';
             $query2 = PrivateMessage::find_by_sql($stringQuery);
@@ -316,24 +316,21 @@ class messages extends MY_Controller
             $this->view_data['count'] = count($this->view_data['conversation']);
         } else {
             if ($message->status == 'deleted') {
-                $stringQuery = 'SELECT private_message.id, private_message.`status`, private_message.`deleted`, private_message.`receiver_delete`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, users.`userpic` as userpic_u , users.`email` as email_u , client.`email` as email_c , CONCAT(users.firstname," ", users.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(rec_u.firstname," ", rec_u.lastname) as recipient_u, CONCAT(rec_c.firstname," ", rec_c.lastname) as recipient_c
+                $stringQuery = 'SELECT private_message.id, private_message.`status`, private_message.`deleted`, private_message.`receiver_delete`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, user.`userpic` as userpic_u , user.`email` as email_u , client.`email` as email_c , CONCAT(user.firstname," ", user.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(rec_u.firstname," ", rec_u.lastname) as recipient_u, CONCAT(rec_c.firstname," ", rec_c.lastname) as recipient_c
         				FROM private_message
         				LEFT JOIN client ON CONCAT("c",client.id) = private_message.sender
-        				LEFT JOIN users ON CONCAT("u",users.id) = private_message.sender
+        				LEFT JOIN user ON CONCAT("u",user.id) = private_message.sender
         				LEFT JOIN client AS rec_c ON CONCAT("c",rec_c.id) = private_message.recipient
-        				LEFT JOIN users AS rec_u ON CONCAT("u",rec_u.id) = private_message.recipient
+        				LEFT JOIN user AS rec_u ON CONCAT("u",rec_u.id) = private_message.recipient
         				WHERE private_message.conversation = "'.$message->conversation.'" ORDER BY private_message.`id` DESC LIMIT 100';
-//                WHERE private_message.id = "'.$id.'" AND private_message.recipient = "u'.$this->user->id.'" ORDER BY private_message.`id` DESC LIMIT 100';
-//                LEFT JOIN users ON (CONCAT("u",users.id) = private_message.sender) OR (CONCAT("u",users.id) = private_message.recipient)
                 $sql = PrivateMessage::find_by_sql($stringQuery);
             } else {
                 if ($filter == 'Sent') {
-                    $stringQuery = 'SELECT private_message.id, private_message.`status`, private_message.`deleted`, private_message.`receiver_delete`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, users.`userpic` as userpic_u , users.`email` as email_u , client.`email` as email_c , CONCAT(users.firstname," ", users.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(users.firstname," ", users.lastname) as recipient_u, CONCAT(client.firstname," ", client.lastname) as recipient_c
+                    $stringQuery = 'SELECT private_message.id, private_message.`status`, private_message.`deleted`, private_message.`receiver_delete`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, user.`userpic` as userpic_u , user.`email` as email_u , client.`email` as email_c , CONCAT(user.firstname," ", user.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(user.firstname," ", user.lastname) as recipient_u, CONCAT(client.firstname," ", client.lastname) as recipient_c
         				FROM private_message
         				LEFT JOIN client ON CONCAT("c",client.id) = private_message.recipient OR CONCAT("c",client.id) = private_message.sender
-        				LEFT JOIN users ON CONCAT("u",users.id) = private_message.sender
+        				LEFT JOIN user ON CONCAT("u",user.id) = private_message.sender
         				WHERE private_message.id = "'.$id.'" AND private_message.sender = "u'.$this->user->id.'" ORDER BY private_message.`id` DESC LIMIT 100';
-//                    LEFT JOIN users ON  CONCAT("u",users.id) = private_message.recipient OR CONCAT("u",users.id) = private_message.senders
                     $sql = PrivateMessage::find_by_sql($stringQuery);
 
                     $receiverart = substr($additional, 0, 1);
@@ -347,10 +344,10 @@ class messages extends MY_Controller
                         $this->view_data['recipient'] = $receiver->firstname.' '.$receiver->lastname;
                     }
                 } else {
-                    $stringQuery = 'SELECT private_message.id, private_message.`status`, private_message.`deleted`, private_message.`receiver_delete`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, users.`userpic` as userpic_u , users.`email` as email_u , client.`email` as email_c , CONCAT(users.firstname," ", users.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(users.firstname," ", users.lastname) as recipient_u, CONCAT(client.firstname," ", client.lastname) as recipient_c
+                    $stringQuery = 'SELECT private_message.id, private_message.`status`, private_message.`deleted`, private_message.`receiver_delete`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, user.`userpic` as userpic_u , user.`email` as email_u , client.`email` as email_c , CONCAT(user.firstname," ", user.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(user.firstname," ", user.lastname) as recipient_u, CONCAT(client.firstname," ", client.lastname) as recipient_c
         				FROM private_message
         				LEFT JOIN client ON (CONCAT("c",client.id) = private_message.sender) OR (CONCAT("c",client.id) = private_message.recipient)
-        				LEFT JOIN users ON (CONCAT("u",users.id) = private_message.sender) OR (CONCAT("u",users.id) = private_message.recipient)
+        				LEFT JOIN user ON (CONCAT("u",user.id) = private_message.sender) OR (CONCAT("u",user.id) = private_message.recipient)
         				WHERE private_message.id = "'.$id.'" AND (private_message.sender = "u'.$this->user->id.'" OR private_message.recipient = "u'.$this->user->id.'") ORDER BY private_message.`id` DESC LIMIT 100';
                     $sql = PrivateMessage::find_by_sql($stringQuery);
                 }

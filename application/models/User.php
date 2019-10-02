@@ -1,7 +1,9 @@
 <?php
 
-class User extends ActiveRecord\Model
-{
+class User extends ActiveRecord\Model {
+
+    static $table_name = 'user';
+
     public static $has_many = [
          ['company_admin'],
          ['tickets'],

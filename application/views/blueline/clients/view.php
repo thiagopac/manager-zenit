@@ -227,7 +227,7 @@
 	</div>
 
 	<div class="col-md-9">
-		<?php if (!array_key_exists(0, $company->users)) {
+		<?php if (!array_key_exists(0, $company->user)) {
                     ?>
 		<div class="alert alert-warning">
 			<?=$this->lang->line('application_client_has_no_admins'); ?>
@@ -276,7 +276,7 @@
 								<?php
                 } ?>
 							</thead>
-							<?php foreach ($company->users as $value):?>
+							<?php foreach ($company->user as $value):?>
 
 							<tr id="<?=$value->id;?>">
 								<td style="width:10px" class="sorting_disabled">

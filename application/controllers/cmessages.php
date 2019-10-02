@@ -161,7 +161,7 @@ class cMessages extends MY_Controller {
 				}
 		}else
 		{
-			$this->view_data['users'] = $this->client->company->users; // User::find('all',array('conditions' => array('status=?','active')));
+			$this->view_data['users'] = $this->client->company->user; // User::find('all',array('conditions' => array('status=?','active')));
 			$this->theme_view = 'modal';
 			$this->view_data['title'] = $this->lang->line('application_write_message');
 			$this->view_data['form_action'] = 'cmessages/write';
@@ -242,12 +242,12 @@ class cMessages extends MY_Controller {
         				WHERE private_message.recipient = "c'.$this->client->id.'" AND private_message.`id`="'.$id.'"');
 
         		$row = $query[0];
-        		$query2 = PrivateMessage::find_by_sql('SELECT private_message.id, private_message.`status`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, users.`userpic` as userpic_u , users.`email` as email_u , client.`email` as email_c , CONCAT(users.firstname," ", users.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(rec_u.firstname," ", rec_u.lastname) as recipient_u, CONCAT(rec_c.firstname," ", rec_c.lastname) as recipient_c
+        		$query2 = PrivateMessage::find_by_sql('SELECT private_message.id, private_message.`status`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, user.`userpic` as userpic_u , user.`email` as email_u , client.`email` as email_c , CONCAT(user.firstname," ", user.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(rec_u.firstname," ", rec_u.lastname) as recipient_u, CONCAT(rec_c.firstname," ", rec_c.lastname) as recipient_c
         				FROM private_message
         				LEFT JOIN client ON CONCAT("c",client.id) = private_message.sender
-        				LEFT JOIN users ON CONCAT("u",users.id) = private_message.sender
+        				LEFT JOIN user ON CONCAT("u",user.id) = private_message.sender
         				LEFT JOIN client AS rec_c ON CONCAT("c",rec_c.id) = private_message.recipient
-        				LEFT JOIN users AS rec_u ON CONCAT("u",rec_u.id) = private_message.recipient
+        				LEFT JOIN user AS rec_u ON CONCAT("u",rec_u.id) = private_message.recipient
 
         				GROUP by private_message.id HAVING private_message.conversation = "'.$row->conversation.'" ORDER BY private_message.`id` DESC LIMIT 100');
 
@@ -256,18 +256,18 @@ class cMessages extends MY_Controller {
         		$this->view_data["count"] = count($this->view_data["conversation"]);
 		    }else{
 		        if($message->status == 'deleted'){
-		        $sql = PrivateMessage::find_by_sql('SELECT private_message.id, private_message.`status`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, users.`userpic` as userpic_u , users.`email` as email_u , client.`email` as email_c , CONCAT(users.firstname," ", users.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(users.firstname," ", users.lastname) as recipient_u, CONCAT(client.firstname," ", client.lastname) as recipient_c
+		        $sql = PrivateMessage::find_by_sql('SELECT private_message.id, private_message.`status`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, user.`userpic` as userpic_u , user.`email` as email_u , client.`email` as email_c , CONCAT(user.firstname," ", user.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(user.firstname," ", user.lastname) as recipient_u, CONCAT(client.firstname," ", client.lastname) as recipient_c
         				FROM private_message
         				LEFT JOIN client ON (CONCAT("c",client.id) = private_message.sender) OR (CONCAT("c",client.id) = private_message.recipient)
-        				LEFT JOIN users ON (CONCAT("u",users.id) = private_message.sender) OR (CONCAT("u",users.id) = private_message.recipient)
+        				LEFT JOIN user ON (CONCAT("u",user.id) = private_message.sender) OR (CONCAT("u",user.id) = private_message.recipient)
         				GROUP by private_message.id HAVING private_message.id = "'.$id.'" AND private_message.recipient = "c'.$this->client->id.'" ORDER BY private_message.`id` DESC LIMIT 100');
 
 		        }else{
 		        	if($filter == "Sent"){
-		        		 $sql = PrivateMessage::find_by_sql('SELECT private_message.id, private_message.`status`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, users.`userpic` as userpic_u , users.`email` as email_u , client.`email` as email_c , CONCAT(users.firstname," ", users.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(users.firstname," ", users.lastname) as recipient_u, CONCAT(client.firstname," ", client.lastname) as recipient_c
+		        		 $sql = PrivateMessage::find_by_sql('SELECT private_message.id, private_message.`status`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, user.`userpic` as userpic_u , user.`email` as email_u , client.`email` as email_c , CONCAT(user.firstname," ", user.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(user.firstname," ", user.lastname) as recipient_u, CONCAT(client.firstname," ", client.lastname) as recipient_c
         				FROM private_message
         				LEFT JOIN client ON CONCAT("c",client.id) = private_message.recipient OR CONCAT("c",client.id) = private_message.sender
-        				LEFT JOIN users ON  CONCAT("u",users.id) = private_message.recipient OR CONCAT("u",users.id) = private_message.sender
+        				LEFT JOIN user ON  CONCAT("u",user.id) = private_message.recipient OR CONCAT("u",user.id) = private_message.sender
         				GROUP by private_message.id HAVING private_message.id = "'.$id.'" AND private_message.sender = "c'.$this->client->id.'" ORDER BY private_message.`id` DESC LIMIT 100');
 
 							$receiverart = substr($additional, 0, 1);
@@ -283,10 +283,10 @@ class cMessages extends MY_Controller {
 							}
 
 		        	}else{
-					        $sql = PrivateMessage::find_by_sql('SELECT private_message.id, private_message.`status`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, users.`userpic` as userpic_u , users.`email` as email_u , client.`email` as email_c , CONCAT(users.firstname," ", users.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(users.firstname," ", users.lastname) as recipient_u, CONCAT(client.firstname," ", client.lastname) as recipient_c
+					        $sql = PrivateMessage::find_by_sql('SELECT private_message.id, private_message.`status`, private_message.conversation, private_message.attachment, private_message.attachment_link, private_message.subject, private_message.message, private_message.sender, private_message.recipient, private_message.`time`, private_message.`sender` , client.`userpic` as userpic_c, user.`userpic` as userpic_u , user.`email` as email_u , client.`email` as email_c , CONCAT(user.firstname," ", user.lastname) as sender_u, CONCAT(client.firstname," ", client.lastname) as sender_c, CONCAT(user.firstname," ", user.lastname) as recipient_u, CONCAT(client.firstname," ", client.lastname) as recipient_c
 			        				FROM private_message
 			        				LEFT JOIN client ON (CONCAT("c",client.id) = private_message.sender) OR (CONCAT("c",client.id) = private_message.recipient)
-			        				LEFT JOIN users ON (CONCAT("u",users.id) = private_message.sender) OR (CONCAT("u",users.id) = private_message.recipient)
+			        				LEFT JOIN user ON (CONCAT("u",user.id) = private_message.sender) OR (CONCAT("u",user.id) = private_message.recipient)
 			        				GROUP by private_message.id HAVING private_message.id = "'.$id.'" AND private_message.sender = "c'.$this->client->id.'" ORDER BY private_message.`id` DESC LIMIT 100');
 					      }
 		        }
