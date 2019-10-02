@@ -42,15 +42,14 @@ class Projects extends MY_Controller
         $options = array('conditions' => 'progress < 100', 'order' => 'id DESC', 'include' => array('company', 'project_worker'));
         if ($this->user->admin == 0) {
             $comp_array = array();
-//            $thisUserHasNoCompanies = (array) $this->user->companies;
             if (!empty($thisUserHasNoCompanies)) {
-                foreach ($this->user->companies as $value) {
+                foreach ($this->user->company as $value) {
                     array_push($comp_array, $value->id);
                 }
                 $projects_by_client_admin = Project::find('all', array('conditions' => array('progress < ? AND company_id in (?)', '100', $comp_array), 'order' => 'id DESC', 'include' => array('company', 'project_worker')));
 
                 //merge projects by client admin and assigned to projects
-                $result = array_merge($projects_by_client_admin, array_diff($projects_by_client_admin, $this->user->projects));
+                $result = array_merge($projects_by_client_admin, array_diff($projects_by_client_admin, $this->user->project));
                 //duplicate objects will be removed
                 $result = array_map("unserialize", array_unique(array_map("serialize", $result), SORT_STRING));
                 //array is sorted on the bases of id
@@ -58,7 +57,7 @@ class Projects extends MY_Controller
 
                 $this->view_data['project'] = $result;
             } else {
-                $this->view_data['project'] = $this->user->projects; //só projetos que o colaborador está atribuído
+                $this->view_data['project'] = $this->user->project; //só projetos que o colaborador está atribuído
 //                $this->view_data['project'] = Project::all($options); //todos os projetos
             }
         } else {
@@ -87,20 +86,20 @@ class Projects extends MY_Controller
             $this->view_data['project'] = Project::all($options);
 
             $project_array = array();
-            if ($this->user->projects) {
-                foreach ($this->user->projects as $value) {
+            if ($this->user->project) {
+                foreach ($this->user->project as $value) {
                     array_push($project_array, $value->id);
                 }
             }
 
-            $thisUserHasNoCompanies = (array) $this->user->companies;
+            $thisUserHasNoCompanies = (array) $this->user->company;
             if (!empty($thisUserHasNoCompanies)) {
                 $comp_array = array();
-                foreach ($this->user->companies as $value) {
+                foreach ($this->user->company as $value) {
                     array_push($comp_array, $value->id);
                 }
 
-                $result = array_merge($this->user->projects);
+                $result = array_merge($this->user->project);
                 //duplicate objects will be removed
                 $result = array_map("unserialize", array_unique(array_map("serialize", $result)));
                 //array is sorted on the bases of id
@@ -159,7 +158,7 @@ class Projects extends MY_Controller
             redirect('projects');
         } else {
             if ($this->user->admin == 0) {
-                $this->view_data['companies'] = $this->user->companies;
+                $this->view_data['companies'] = $this->user->company;
             } else {
                 $this->view_data['companies'] = Company::find('all', array('conditions' => array('inactive=?','0')));
             }
@@ -201,7 +200,7 @@ class Projects extends MY_Controller
             redirect('projects/view/'.$id);
         } else {
             if ($this->user->admin == 0) {
-                $this->view_data['companies'] = $this->user->companies;
+                $this->view_data['companies'] = $this->user->company;
             } else {
                 $this->view_data['companies'] = Company::find('all', array('conditions' => array('inactive=?','0')));
             }

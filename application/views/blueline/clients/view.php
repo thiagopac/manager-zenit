@@ -336,7 +336,7 @@
 								<?=$this->lang->line('application_progress'); ?>
 							</th>
 						</thead>
-						<?php foreach ($company->projects as $value):?>
+						<?php foreach ($company->project as $value):?>
 
 						<tr id="<?=$value->id; ?>">
 							<td class="hidden-xs" style="width:70px">
@@ -357,7 +357,7 @@
 
 						<?php endforeach; ?>
 					</table>
-					<?php if (!$company->projects) {
+					<?php if (!$company->project) {
                         ?>
 					<div class="no-files">
 						<i class="icon dripicons-lightbulb"></i>

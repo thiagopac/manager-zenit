@@ -54,10 +54,10 @@ class Tickets extends MY_Controller
     public function index()
     {
         if ($this->user->admin == 0) {
-            $thisUserHasNoCompanies = (array) $this->user->companies;
+            $thisUserHasNoCompanies = (array) $this->user->company;
             if (!empty($thisUserHasNoCompanies)) {
                 $comp_array = [];
-                foreach ($this->user->companies as $value) {
+                foreach ($this->user->company as $value) {
                     array_push($comp_array, $value->id);
                 }
                 $options = ['conditions' => ['status != ? AND company_id in (?)', 'closed', $comp_array], 'order' => 'id DESC', 'include' => ['company', 'client', 'user', 'ticket_article']];
@@ -82,9 +82,9 @@ class Tickets extends MY_Controller
     {
         if ($this->user->admin == 0) {
             $comp_array = [];
-            $thisUserHasNoCompanies = (array) $this->user->companies;
+            $thisUserHasNoCompanies = (array) $this->user->company;
             if (!empty($thisUserHasNoCompanies)) {
-                foreach ($this->user->companies as $value) {
+                foreach ($this->user->company as $value) {
                     array_push($comp_array, $value->id);
                 }
                 if ($this->user->queue == $id) {
@@ -135,9 +135,9 @@ class Tickets extends MY_Controller
         }
         if ($this->user->admin == 0) {
             $comp_array = [];
-            $thisUserHasNoCompanies = (array) $this->user->companies;
+            $thisUserHasNoCompanies = (array) $this->user->company;
             if (!empty($thisUserHasNoCompanies)) {
-                foreach ($this->user->companies as $value) {
+                foreach ($this->user->company as $value) {
                     array_push($comp_array, $value->id);
                 }
                 $options = ['conditions' => [$option . ' AND company_id in (?)', $comp_array]];
@@ -221,9 +221,9 @@ class Tickets extends MY_Controller
         } else {
             if ($this->user->admin != 1) {
                 $comp_array = [];
-                $thisUserHasNoCompanies = (array) $this->user->companies;
+                $thisUserHasNoCompanies = (array) $this->user->company;
                 if (!empty($thisUserHasNoCompanies)) {
-                    foreach ($this->user->companies as $value) {
+                    foreach ($this->user->company as $value) {
                         array_push($comp_array, $value->id);
                     }
                     $this->view_data['client'] = Client::find('all', ['conditions' => ['inactive=? AND company_id in (?)', '0', $comp_array]]);
@@ -235,15 +235,15 @@ class Tickets extends MY_Controller
             }
             $this->view_data['users'] = User::find('all', ['conditions' => ['status=?', 'active']]);
             $this->view_data['queues'] = Queue::find('all', ['conditions' => ['inactive=?', '0']]);
-                $this->view_data['types'] = Type::find('all', ['conditions' => ['inactive=?', '0']]);
+                $this->view_data['types'] = TicketType::find('all', ['conditions' => ['inactive=?', '0']]);
             $this->view_data['settings'] = Setting::first();
 
             if ($this->user->admin != 1) {
                 $comp_array = [];
-                foreach ($this->user->companies as $value) {
+                foreach ($this->user->company as $value) {
                     array_push($comp_array, $value->id);
                 }
-                $this->view_data['companies'] = $this->user->companies;
+                $this->view_data['companies'] = $this->user->company;
             } else {
                 $this->view_data['companies'] = Company::find('all', ['conditions' => ['inactive=?', '0']]);
             }
@@ -332,7 +332,7 @@ class Tickets extends MY_Controller
         } else {
             if ($this->user->admin != 1) {
                 $comp_array = [];
-                foreach ($this->user->companies as $value) {
+                foreach ($this->user->company as $value) {
                     array_push($comp_array, $value->id);
                 }
                 $this->view_data['client'] = Client::find('all', ['conditions' => ['inactive=? AND company_id in (?)', '0', $comp_array]]);
@@ -394,7 +394,7 @@ class Tickets extends MY_Controller
             }
             redirect('tickets/view/' . $id);
         } else {
-            $this->view_data['types'] = Type::find('all', ['conditions' => ['inactive=?', '0']]);
+            $this->view_data['types'] = TicketType::find('all', ['conditions' => ['inactive=?', '0']]);
             $this->view_data['ticket'] = Ticket::find_by_id($id);
             $this->theme_view = 'modal';
             $this->view_data['title'] = $this->lang->line('application_type');
@@ -503,7 +503,7 @@ class Tickets extends MY_Controller
 
         if ($this->user->admin == 0) {
             $comp_array = [];
-            foreach ($this->user->companies as $value) {
+            foreach ($this->user->company as $value) {
                 array_push($comp_array, $value->id);
             }
             if (!in_array($this->view_data['ticket']->company_id, $comp_array) && $this->user->queue != $this->view_data['ticket']->queue_id) {

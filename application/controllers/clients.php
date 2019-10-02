@@ -30,10 +30,10 @@ class Clients extends MY_Controller {
     public function index()
     {
         if ($this->user->admin == 0) {
-            $thisUserHasNoCompanies = (array) $this->user->companies;
+            $thisUserHasNoCompanies = (array) $this->user->company;
             if (!empty($thisUserHasNoCompanies)) {
                 $comp_array = [];
-                foreach ($this->user->companies as $value) {
+                foreach ($this->user->company as $value) {
                     array_push($comp_array, $value->id);
                 }
                 $options = ['conditions' => ['inactive = ? AND id in (?)', 0, $comp_array]];
@@ -394,7 +394,7 @@ class Clients extends MY_Controller {
         $this->view_data['company'] = Company::find($id);
         if ($this->user->admin != 1) {
             $comp_array = [];
-            foreach ($this->user->companies as $value) {
+            foreach ($this->user->company as $value) {
                 array_push($comp_array, $value->id);
             }
             if (!in_array($this->view_data['company']->id, $comp_array)) {

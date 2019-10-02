@@ -16,8 +16,8 @@
 	
 				<li><span><?=$this->lang->line('application_ticket_number');?></span> #<?=$ticket->reference;?></li>
 				<li><span><?=$this->lang->line('application_status');?></span> <span class="label <?php echo $lable; ?>"><?=$this->lang->line('application_ticket_status_' . $ticket->status);?></span></li>
-				<li><span><?=$this->lang->line('application_type');?></span> <?php if (is_object($ticket->type)) {
-    ?><?=$ticket->type->name; ?> <?php
+				<li><span><?=$this->lang->line('application_type');?></span> <?php if (is_object($ticket->ticket_type)) {
+    ?><?=$ticket->ticket_type->name; ?> <?php
 } ?></li>
 				<li><span><?=$this->lang->line('application_from');?></span> <?php if (is_object($ticket->client)) {
         echo '<a class="tt" title="' . $ticket->client->email . '">' . $ticket->client->firstname . ' ' . $ticket->client->lastname . '</a>';

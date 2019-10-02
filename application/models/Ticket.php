@@ -9,7 +9,7 @@ class Ticket extends ActiveRecord\Model {
      ['client'],
      ['user'],
      ['queue'],
-     ['type'],
+     ['ticket_type', "foreign_key" => 'id'],
      ['project'],
   ];
 

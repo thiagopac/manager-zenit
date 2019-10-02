@@ -39,15 +39,15 @@ class Calendar extends MY_Controller
     {
         if ($this->user->admin == 0) {
             $comp_array = [];
-            $thisUserHasNoCompanies = (array) $this->user->companies;
+            $thisUserHasNoCompanies = (array) $this->user->company;
             if (!empty($thisUserHasNoCompanies)) {
-                foreach ($this->user->companies as $value) {
+                foreach ($this->user->company as $value) {
                     array_push($comp_array, $value->id);
                 }
                 $projects_by_client_admin = Project::find('all', ['conditions' => ['company_id in (?)', $comp_array]]);
 
                 //merge projects by client admin and assigned to projects
-                $result = array_merge($projects_by_client_admin, $this->user->projects);
+                $result = array_merge($projects_by_client_admin, $this->user->project);
                 //duplicate objects will be removed
                 $result = array_map('unserialize', array_unique(array_map('serialize', $result)));
                 //array is sorted on the bases of id
@@ -55,7 +55,7 @@ class Calendar extends MY_Controller
 
                 $projects = $result;
             } else {
-                $projects = $this->user->projects;
+                $projects = $this->user->project;
             }
         } else {
             $projects = Project::all();

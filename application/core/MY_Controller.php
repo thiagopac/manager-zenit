@@ -106,9 +106,9 @@ class My_Controller extends CI_Controller
                 //Create client access list if active user is not super admin
                 if (!$userIsSuperAdmin) {
                     $comp_array = array();
-                    $thisUserHasCompanies = (array) $this->user->companies;
+                    $thisUserHasCompanies = (array) $this->user->company;
                     if (!empty($thisUserHasCompanies)) {
-                        foreach ($this->user->companies as $value) {
+                        foreach ($this->user->company as $value) {
                             array_push($comp_array, $value->id);
                         }
                         $comp_array = "'".implode(',', $comp_array)."'";

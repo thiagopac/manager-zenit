@@ -2,155 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="498798ec-50f4-449c-872c-6dbc26a6cb09" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/zenit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/zenit.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/models/TicketType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/calendar.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/calendar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/clients.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/clients.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/cmessages.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/cmessages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/cprojects.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/cprojects.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/cronjob.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/cronjob.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/ctickets.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/ctickets.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/forgotpass.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/forgotpass.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/leads.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/leads.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/messages.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/messages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/migrate.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/parameterization.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/parameterization.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/postmaster.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/postmaster.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/projects.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/projects.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/reports.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/reports.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/settings.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/tickets.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/tickets.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/core/MY_Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/core/MY_Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/helpers/notification_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/helpers/notification_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/language/english/application_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/language/english/application_lang.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/language/portuguese/application_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/language/portuguese/application_lang.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/libraries/MY_Email_3_0_x.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/libraries/MY_Email_3_0_x.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/libraries/MY_Email_3_1_x.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/libraries/MY_Email_3_1_x.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/ArticleHasAttachment.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Client.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Company.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/CompanyHasAdmin.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Department.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Department.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/DepartmentHasArea.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/DepartmentHasWorker.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Event.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Lead.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Lead.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/LeadHasComment.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/LeadHasWarningUser.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/LeadStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/LeadStatus.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/LeadStatusHasReceiver.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Message.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Module.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Module.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Notification.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Notification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Privatemessage.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Privatemessage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Project.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Project.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/ProjectHasActivity.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/ProjectHasFile.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/ProjectHasMilestone.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/ProjectHasTask.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/ProjectHasTimesheet.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/ProjectHasWorker.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Queue.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Queue.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Reminder.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Reminder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/Tag.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Tag.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/TaskHasComment.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/application/models/Ticket.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Ticket.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/TicketHasArticle.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/TicketHasAttachment.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/third_party/phpmailer/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/application/third_party/phpmailer/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/third_party/phpmailer/class.phpmailer.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/third_party/phpmailer/class.phpmailer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/auth/forgotpass.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/auth/forgotpass.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/auth/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/auth/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/auth/reset_password.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/auth/reset_password.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/clients/_assign.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/clients/_assign.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/clients/_clients.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/clients/_company.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/clients/_company.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/clients/all.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/clients/all.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Type.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/blueline/clients/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/clients/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/dashboard/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/dashboard/dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/leads/_status.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/leads/_status.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/blueline/leads/all.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/leads/all.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/messages/_messages.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/messages/_messages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/_assign.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/_assign.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/_invoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/_invoice.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/_project.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/_project.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/_tasks.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/_tasks.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/_timesheets.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/_timesheets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/all.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/all.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/client_views/_tasks.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/client_views/_tasks.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/client_views/all.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/client_views/all.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/client_views/media.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/client_views/media.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/client_views/tasks.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/client_views/tasks.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/client_views/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/client_views/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/media.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/media.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/messages.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/messages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/tasks.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/tasks.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/reports/reports.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/reports/reports.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/settings/backup.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/settings/backup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/settings/bank_transfer.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/settings/invoice_templates.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/settings/paypal.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/settings/registration.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/settings/registration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/settings/settings_all.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/settings/settings_all.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/settings/settings_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/settings/settings_menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/settings/stripe.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/settings/templates.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/settings/templates.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/settings/templates_credentials.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/settings/templates_credentials.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/settings/updatenews.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/settings/updates.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/templates/default/email_create_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/templates/default/email_create_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/templates/default/email_credentials.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/templates/default/email_credentials.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/templates/default/email_notification.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/templates/default/email_notification.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/templates/default/email_pw_reset.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/templates/default/email_pw_reset.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/templates/default/email_pw_reset_link.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/templates/default/email_pw_reset_link.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/templates/default/email_reminder.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/templates/default/email_reminder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/templates/default/email_ticket_notification.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/templates/default/email_ticket_notification.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/templates/email_create_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/templates/email_create_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/templates/email_credentials.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/templates/email_credentials.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/templates/email_notification.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/templates/email_notification.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/templates/email_pw_reset.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/templates/email_pw_reset.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/templates/email_pw_reset_link.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/templates/email_pw_reset_link.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/templates/email_reminder.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/templates/email_reminder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/templates/email_ticket_notification.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/templates/email_ticket_notification.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/theme/application.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/theme/application.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/theme/fullpage.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/theme/fullpage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/tickets/_client.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/tickets/_client.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/blueline/tickets/_ticket.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/tickets/_ticket.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/blueline/tickets/client_views/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/tickets/client_views/view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/blueline/tickets/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/tickets/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/OpenSans-Bold.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/fonts/OpenSans-Bold.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/OpenSans-ExtraBold.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/fonts/OpenSans-ExtraBold.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/OpenSans-Light.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/fonts/OpenSans-Light.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/OpenSans-Regular.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/fonts/OpenSans-Regular.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/OpenSans-Semibold.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/fonts/OpenSans-Semibold.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/dripicons-v2.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/fonts/dripicons-v2.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/dripicons-v2.woff" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/fonts/dripicons-v2.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/ionicons.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/fonts/ionicons.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/summernote.eot" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/fonts/summernote.eot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/summernote.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/fonts/summernote.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/summernote.woff" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/fonts/summernote.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/fonts/vendor/bootstrap-sass/bootstrap/glyphicons-halflings-regular.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/images/alpha-horizontal.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/images/alpha-horizontal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/images/hue-horizontal.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/images/hue-horizontal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/images/hue.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/images/hue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/images/loading.gif" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/images/loading.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/images/saturation.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/images/saturation.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/js/blueline.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/js/blueline.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/js/plugins/chart.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/js/plugins/chart.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/js/plugins/countUp.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/js/plugins/countUp.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/js/vue_app_packed.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/js/vue_app_packed.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/mix-manifest.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/vendor/composer/" />
@@ -164,11 +33,49 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>stripe</find>
+      <find>Todas as tags</find>
+      <find>'companies'</find>
+      <find>-&gt;companies</find>
+      <find>-&gt;projects</find>
+      <find />
+      <find>Type::</find>
+      <find>ticket-&gt;type</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+      <replace>-&gt;project</replace>
+      <replace>TicketType::</replace>
+      <replace>ticket-&gt;ticket_type</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/application/controllers/messages.php" />
+        <option value="$PROJECT_DIR$/application/controllers/dashboard.php" />
+        <option value="$PROJECT_DIR$/application/controllers/api.php" />
+        <option value="$PROJECT_DIR$/application/controllers/clients.php" />
+        <option value="$PROJECT_DIR$/application/controllers/projects.php" />
+        <option value="$PROJECT_DIR$/application/controllers/calendar.php" />
+        <option value="$PROJECT_DIR$/application/models/Type.php" />
+        <option value="$PROJECT_DIR$/application/models/Ticket.php" />
+        <option value="$PROJECT_DIR$/application/views/blueline/tickets/view.php" />
+        <option value="$PROJECT_DIR$/application/views/blueline/tickets/client_views/view.php" />
+        <option value="$PROJECT_DIR$/application/views/blueline/tickets/_ticket.php" />
+      </list>
+    </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -183,6 +90,65 @@
     <option name="y" value="23" />
     <option name="width" value="1920" />
     <option name="height" value="1057" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="zenit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zenit" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zenit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zenit" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zenit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zenit" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zenit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zenit" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zenit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zenit" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="blueline" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zenit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zenit" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="blueline" type="462c0819:PsiDirectoryNode" />
+              <item name="leads" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zenit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zenit" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="blueline" type="462c0819:PsiDirectoryNode" />
+              <item name="theme" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
@@ -202,13 +168,9 @@
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2550586" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.24973376" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -216,14 +178,63 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Remote Host" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Database Changes" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32982087" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="File Transfer" order="11" visible="true" weight="0.32982087" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Remote Host" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$USER_HOME$/Downloads/owner398_zenit.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="397" column="41" lean-forward="true" selection-start-line="397" selection-start-column="41" selection-end-line="397" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/blueline/theme/application.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="304" column="18" lean-forward="true" selection-start-line="304" selection-start-column="18" selection-end-line="304" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/calendar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/blueline/leads/all.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="48" column="43" selection-start-line="48" selection-start-column="43" selection-end-line="48" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Ticket.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/TicketType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

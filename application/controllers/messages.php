@@ -186,9 +186,9 @@ class messages extends MY_Controller
         } else {
             if ($this->user->admin != 1) {
                 $comp_array = array();
-                $thisUserHasNoCompanies = (array) $this->user->companies;
+                $thisUserHasNoCompanies = (array) $this->user->company;
                 if (!empty($thisUserHasNoCompanies)) {
-                    foreach ($this->user->companies as $value) {
+                    foreach ($this->user->company as $value) {
                         array_push($comp_array, $value->id);
                     }
                     $this->view_data['client'] = Client::find('all', array('conditions' => array('inactive=? AND company_id in (?)', '0', $comp_array)));

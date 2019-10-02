@@ -51,17 +51,17 @@ class Dashboard extends MY_Controller
         //Calendar
         if ($this->user->admin == 0) {
             $comp_array = [];
-            $thisUserHasNoCompanies = (is_object($this->user->companies)) ? (array) $this->user->companies : [];
+            $thisUserHasNoCompanies = (is_object($this->user->company)) ? (array) $this->user->company : [];
             if (!empty($thisUserHasNoCompanies)) {
                 $this->view_data['clientcounter'] = 0;
-                foreach ($this->user->companies as $value) {
+                foreach ($this->user->company as $value) {
                     array_push($comp_array, $value->id);
                     $this->view_data['clientcounter']++;
                 }
                 $projects_by_client_admin = Project::find('all', ['conditions' => ['company_id in (?)', $comp_array]]);
 
                 //merge projects by client admin and assigned to projects
-                $result = array_merge($projects_by_client_admin, $this->user->projects);
+                $result = array_merge($projects_by_client_admin, $this->user->project);
                 //duplicate objects will be removed
                 $result = array_map('unserialize', array_unique(array_map('serialize', $result)));
                 //array is sorted on the bases of id
@@ -83,7 +83,7 @@ class Dashboard extends MY_Controller
 
                 $this->view_data['recent_activities'] = (empty($projectIds)) ? [] : ProjectActivity::find('all', ['conditions' => ['project_id in (?)', $projectIds], 'order' => 'datetime desc', 'limit' => 10]);
             } else {
-                $projects = $this->user->projects;
+                $projects = $this->user->project;
                 $options = ['conditions' => ['status != ? AND user_id in (?)', 'closed', $this->user->id], 'limit' => 5];
                 $options2 = ['conditions' => ['status != ? AND user_id in (?)', 'closed', $this->user->id]];
 

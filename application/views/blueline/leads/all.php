@@ -31,7 +31,7 @@
 
 
 
-			<div class="select-wrapper pull-right" v-cloak>
+			<div class="col-md-4 select-wrapper pull-right" v-cloak>
 
                 <?php if($condition == 1) { ?>
 

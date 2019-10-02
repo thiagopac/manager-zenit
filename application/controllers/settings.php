@@ -285,7 +285,7 @@ class Settings extends MY_Controller
             }
         } else {
             $this->view_data['settings'] = Setting::first();
-            $this->view_data['types'] = Type::find('all', ['conditions' => ['inactive = ?', '0']]);
+            $this->view_data['types'] = TicketType::find('all', ['conditions' => ['inactive = ?', '0']]);
             $this->view_data['queues'] = Queue::find('all', ['conditions' => ['inactive = ?', '0']]);
             $this->view_data['owners'] = User::find('all', ['conditions' => ['status = ?', 'active']]);
             $this->view_data['form_action'] = 'settings/ticket';
@@ -297,17 +297,17 @@ class Settings extends MY_Controller
     {
         if ($condition == 'delete') {
             $_POST['inactive'] = '1';
-            $type = Type::find_by_id($id);
+            $type = TicketType::find_by_id($id);
             $type->update_attributes($_POST);
         } else {
             if ($_POST) {
                 unset($_POST['send']);
 
                 if ($id) {
-                    $type = Type::find_by_id($id);
+                    $type = TicketType::find_by_id($id);
                     $type->update_attributes($_POST);
                 } else {
-                    $type = Type::create($_POST);
+                    $type = TicketType::create($_POST);
                 }
                 if ($type) {
                     $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_settings_success'));
@@ -318,7 +318,7 @@ class Settings extends MY_Controller
                 }
             } else {
                 if ($id) {
-                    $this->view_data['type'] = Type::find_by_id($id);
+                    $this->view_data['type'] = TicketType::find_by_id($id);
                 }
 
                 $this->view_data['title'] = $this->lang->line('application_type');

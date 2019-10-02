@@ -11,7 +11,7 @@ if(isset($ticket)){ ?>
                 foreach ($types as $value):  
                 $options[$value->id] = $value->name;
                 endforeach;
-        if(isset($ticket) && is_object($ticket->type)){$type = $ticket->type->id;}else{$type = $settings->ticket_default_type;}
+        if(isset($ticket) && is_object($ticket->ticket_type)){$type = $ticket->ticket_type->id;}else{$type = $settings->ticket_default_type;}
         echo form_dropdown('type_id', $options, $type, 'style="width:100%" class="chosen-select"');?>
 </div> 
 
@@ -53,7 +53,7 @@ if(isset($ticket)){ ?>
             <option value="0">-</option>
             <?php foreach ($companies as $comp): ?>
                 <optgroup label="<?=$comp->name?>" id="optID_<?=$comp->id?>"    >
-                  <?php foreach ($comp->projects as $pro): ?>
+                  <?php foreach ($comp->project as $pro): ?>
                     <option value="<?=$pro->id?>" <?php if($project == $pro->id){ ?>selected="selected"<?php } ?>><?=$pro->name?></option>
                     <?php endforeach; ?>
                 </optgroup>
