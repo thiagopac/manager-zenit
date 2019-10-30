@@ -976,3 +976,15 @@ $lang['application_task_filter'] = 'Todas as tarefas';
 $lang['application_payment_method'] = 'Método de pagamento';
 
 $lang['application_sla'] = 'SLA';
+
+$lang['application_terrains'] = 'Captação de Terrenos';
+$lang['application_create_terrain'] = 'Novo Terreno';
+$lang['application_edit_terrain'] = 'Editar Terreno';
+$lang['application_show_lost_terrains'] = "";
+$lang['application_terrain_owner'] = "";
+$lang['application_lost_terrains'] = "";
+$lang['application_terrain_name'] = "";
+$lang['application_private_terrain'] = "";
+$lang['application_terrain_warning_receiver'] = '';
+$lang['application_terrain_status_user_notification'] = '';
+

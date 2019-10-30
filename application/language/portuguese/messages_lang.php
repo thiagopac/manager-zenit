@@ -201,3 +201,10 @@ $lang['messages_edit_tag_error'] = "Erro ao salvar tag";
 
 $lang['messages_duplicate_milestone_error'] = "Erro ao duplicar Pacote de Trabalho";
 $lang['messages_duplicate_milestone_success'] = "Pacote de Trabalho duplicado com sucesso";
+
+
+$lang['messages_create_terrain_error'] = "Erro ao criar Terreno";
+$lang['messages_create_terrain_success'] = "Terreno criado com sucesso";
+
+$lang['messages_edit_terrain_error'] = "Erro ao editar Terreno";
+$lang['messages_edit_terrain_success'] = "Terreno alterado com sucesso";
