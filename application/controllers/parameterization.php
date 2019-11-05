@@ -27,7 +27,8 @@ class Parameterization extends MY_Controller
             $this->lang->line('application_areas') => 'parameterization/areas',
             $this->lang->line('application_deposits') => 'parameterization/deposits',
             $this->lang->line('application_stock_areas') => 'parameterization/stock_areas',
-            $this->lang->line('application_materials') => 'parameterization/materials'
+            $this->lang->line('application_materials') => 'parameterization/materials',
+            $this->lang->line('application_deposit_stock_areas') => 'parameterization/deposit_stock_areas'
         ];
 
         $this->view_data['iconlist'] = [
@@ -35,7 +36,8 @@ class Parameterization extends MY_Controller
             'parameterization/areas' => 'dripicons-network-3',
             'parameterization/deposits' => 'dripicons-store',
             'parameterization/stock_areas' => 'dripicons-view-thumb',
-            'parameterization/materials' => 'dripicons-suitcase'
+            'parameterization/materials' => 'dripicons-suitcase',
+            'parameterization/deposit_stock_areas' => 'dripicons-view-list-large'
         ];
 
         $this->config->load('defaults');
@@ -358,7 +360,7 @@ class Parameterization extends MY_Controller
         } else {
             $this->view_data['material'] = $material;
             $this->theme_view = 'modal';
-            $this->view_data['stock_areas'] = StockArea::all();
+            $this->view_data['stock_areas'] = StockArea::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
             $this->view_data['title'] = $this->lang->line('application_edit_material');
             $this->view_data['form_action'] = 'parameterization/material_update/' . $material->id;
             $this->content_view = 'parameterization/_materialform';
@@ -385,7 +387,7 @@ class Parameterization extends MY_Controller
         } else {
             $this->theme_view = 'modal';
             $this->view_data['title'] = $this->lang->line('application_add_material');
-            $this->view_data['stock_areas'] = StockArea::all();
+            $this->view_data['stock_areas'] = StockArea::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
             $this->view_data['form_action'] = 'parameterization/material_create/';
             $this->content_view = 'parameterization/_materialform';
         }
@@ -404,5 +406,68 @@ class Parameterization extends MY_Controller
             $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_material_error'));
         }
         redirect('parameterization/materials');
+    }
+
+    public function deposit_stock_areas()
+    {
+        $this->view_data['breadcrumb'] = $this->lang->line('application_deposit_stock_areas');
+        $this->view_data['breadcrumb_id'] = 'parameterization/deposit_stock_areas';
+        
+        // $deposit_stock_areas = DepositStockArea::find('all');
+        $deposit_stock_areas = DepositStockArea::find('all', ['include' => ['deposit', 'stock_area']]);
+        $deposits = Deposit::find('all');
+
+        $this->view_data['deposit_stock_areas'] = $deposit_stock_areas;
+        $this->content_view = 'parameterization/deposit_stock_areas';
+    }
+
+    public function deposit_stock_area_update($deposit_id = false, $stock_area_id = false)
+    {
+        
+        if ($_POST) {
+            
+            $options = ['conditions' => ['deposit_id = ? AND stock_area_id = ?', $_POST['deposit_id'], $_POST['stock_area_id']]];
+            $deposit_stock_area = DepositStockArea::first($options);
+            $deposit_stock_area->update_attributes($_POST);
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_deposit_stock_area_success'));
+            redirect('parameterization/deposit_stock_areas');
+        } else {
+            $options = ['conditions' => ['deposit_id = ? AND stock_area_id = ?', $deposit_id, $stock_area_id]];
+            $deposit_stock_area = DepositStockArea::first($options);
+            $this->theme_view = 'modal';
+            $this->view_data['title'] = $this->lang->line('application_edit_deposit_stock_area');
+            $this->view_data['deposit_stock_area'] = $deposit_stock_area;
+            $this->view_data['deposits'] = Deposit::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['stock_areas'] = StockArea::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['form_action'] = 'parameterization/deposit_stock_area_update/' . $deposit_stock_area->deposit_id;
+            $this->content_view = 'parameterization/_depositstockareaform';
+        }
+    }
+    
+    public function deposit_stock_area_create()
+    {
+        if ($_POST) {
+
+            $options = ['conditions' => ['deposit_id = ? AND stock_area_id = ?', $_POST['deposit_id'], $_POST['stock_area_id']]];
+            $deposit_stock_area_exists = DepositStockArea::find($options);
+            if (empty($deposit_stock_area_exists)) {
+                $deposit_stock_area = DepositStockArea::create($_POST);
+                if (!$deposit_stock_area) {
+                    $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_deposit_stock_area_error'));
+                } else {
+                    $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_create_deposit_stock_area_success'));
+                }
+            } else {
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_deposit_stock_area_exists'));
+            }
+            redirect('parameterization/deposit_stock_areas');
+        } else {
+            $this->theme_view = 'modal';
+            $this->view_data['title'] = $this->lang->line('application_add_deposit_stock_area');
+            $this->view_data['deposits'] = Deposit::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['stock_areas'] = StockArea::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['form_action'] = 'parameterization/deposit_stock_area_create/';
+            $this->content_view = 'parameterization/_depositstockareaform';
+        }
     }
 }

@@ -210,18 +210,29 @@ $lang['messages_edit_terrain_error'] = "Erro ao editar Terreno";
 $lang['messages_edit_terrain_success'] = "Terreno alterado com sucesso";
 
 $lang['messages_save_deposit_success'] = "Depósito salvo com sucesso";
-$lang['messages_create_deposit_error'] = "";
-$lang['messages_create_deposit_success'] = "";
-$lang['messages_create_deposit_exists'] = "";
+$lang['messages_create_deposit_error'] = "Erro ao criar depósito";
+$lang['messages_create_deposit_success'] = "Depósito criado com sucesso";
+$lang['messages_create_deposit_exists'] = "Depósito já existente";
 
-$lang['messages_delete_deposit_success'] = "Depósito excluído";
+$lang['messages_delete_deposit_success'] = "Depósito excluído com sucesso";
 $lang['messages_delete_deposit_error'] = "Erro ao excluir depósito";
 
 $lang['messages_save_stock_area_success'] = "Área de depósito salva com sucesso";
+$lang['messages_save_stock_area_error'] = "Erro ao salvar área de depósito";
 $lang['messages_save_material'] = "Material salvo com sucesso";
 
-$lang['messages_create_stock_area_success'] = "";
-$lang['messages_create_stock_area_error'] = "";
+$lang['messages_create_stock_area_success'] = "Área de depósito criada com sucesso";
+$lang['messages_create_stock_area_error'] = "Erro ao criar área de depósito";
+$lang['messages_delete_stock_area_success'] = "Área de depósito excluída com sucesso";
+$lang['messages_delete_stock_area_error'] = "Erro ao excluir área de depósito";
 
-$lang['messages_create_material_success'] = "";
-$lang['messages_create_material_error'] = "";
+$lang['messages_create_material_success'] = "Material criado com sucesso";
+$lang['messages_create_material_error'] = "Erro ao criar material";
+$lang['messages_create_material_exists'] = "Material já existente";
+$lang['messages_delete_material_success'] = "Material excluído com sucesso";
+$lang['messages_delete_material_error'] = "Erro ao excluir material";
+
+$lang['messages_save_deposit_stock_area_success'] = "Relação depósito x área salva com sucesso";
+$lang['messages_create_deposit_stock_area_success'] = "Relação depósito x área criada com sucesso";
+$lang['messages_create_deposit_stock_area_error'] = "Erro ao criar relação depósito x área";
+$lang['messages_create_deposit_stock_area_exists'] = "Relação depósito x área já existente";

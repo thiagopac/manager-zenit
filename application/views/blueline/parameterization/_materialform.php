@@ -23,7 +23,7 @@ echo form_open_multipart($form_action, $attributes);
                         'meter' => $this->lang->line('application_meter'),
                         'kilo' => $this->lang->line('application_kilo')];
 
-            echo form_dropdown('unity', $unities, $deposit->unity, 'style="width:100%" class="chosen-select"');?>
+            echo form_dropdown('unity', $unities, $material->unity, 'style="width:100%" class="chosen-select"');?>
     </div>
 
     <div class="form-group">

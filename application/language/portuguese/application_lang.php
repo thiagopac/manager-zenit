@@ -1011,3 +1011,9 @@ $lang['application_coil'] = "Rolo";
 $lang['application_box'] = "Caixa";
 $lang['application_meter'] = "Metro";
 $lang['application_kilo'] = "Quilo";
+
+$lang['application_deposit_stock_areas'] = "Depósito x Área";
+$lang['application_add_deposit_stock_area'] = "Relacionar depósito x área";
+$lang['application_capacity'] = "Capacidade";
+
+$lang['application_edit_deposit_stock_area'] = "Editar relação depósito x área";
