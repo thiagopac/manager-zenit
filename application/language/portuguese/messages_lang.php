@@ -208,3 +208,20 @@ $lang['messages_create_terrain_success'] = "Terreno criado com sucesso";
 
 $lang['messages_edit_terrain_error'] = "Erro ao editar Terreno";
 $lang['messages_edit_terrain_success'] = "Terreno alterado com sucesso";
+
+$lang['messages_save_deposit_success'] = "Depósito salvo com sucesso";
+$lang['messages_create_deposit_error'] = "";
+$lang['messages_create_deposit_success'] = "";
+$lang['messages_create_deposit_exists'] = "";
+
+$lang['messages_delete_deposit_success'] = "Depósito excluído";
+$lang['messages_delete_deposit_error'] = "Erro ao excluir depósito";
+
+$lang['messages_save_stock_area_success'] = "Área de depósito salva com sucesso";
+$lang['messages_save_material'] = "Material salvo com sucesso";
+
+$lang['messages_create_stock_area_success'] = "";
+$lang['messages_create_stock_area_error'] = "";
+
+$lang['messages_create_material_success'] = "";
+$lang['messages_create_material_error'] = "";

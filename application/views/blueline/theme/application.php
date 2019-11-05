@@ -310,7 +310,8 @@ $message_icon = false;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 
     <script type="text/javascript" src="https://diagramclub.github.io/js/app.js"></script>
-<!--    <script type="text/javascript" src="--><?//=base_url()?><!--assets/blueline/js/app.js"></script>-->
+    <!-- <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/app.js"></script> -->
+    <!-- <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/vue_app_packed.js"></script> -->
     <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/important.js"></script>
     <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/utils.js"></script>
     <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/jquery.mask.js"></script>

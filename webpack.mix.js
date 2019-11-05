@@ -57,10 +57,10 @@ mix
       "./node_modules/flatpickr/dist/l10n/*.js",
 
       //"./node_modules/turbolinks/dist/turbolinks.js",
-      "./assets/blueline/js/vue_app_packed.js",
+      // "./assets/blueline/js/vue_app_packed.js",
 
       "./assets/blueline/js/blueline.js"
     ],
     "./assets/blueline/js/app.js"
-  );
-  // .sass("./assets/blueline/css/bootstrap.scss", "./assets/blueline/css/app.css");
+  )
+  .sass("./assets/blueline/css/bootstrap.scss", "./assets/blueline/css/app.css");

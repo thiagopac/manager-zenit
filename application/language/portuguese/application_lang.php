@@ -977,14 +977,37 @@ $lang['application_payment_method'] = 'Método de pagamento';
 
 $lang['application_sla'] = 'SLA';
 
+$lang['application_number'] = 'Número';
+$lang['application_unity'] = "Unidade";
+
 $lang['application_terrains'] = 'Captação de Terrenos';
 $lang['application_create_terrain'] = 'Novo Terreno';
 $lang['application_edit_terrain'] = 'Editar Terreno';
-$lang['application_show_lost_terrains'] = "";
-$lang['application_terrain_owner'] = "";
-$lang['application_lost_terrains'] = "";
-$lang['application_terrain_name'] = "";
-$lang['application_private_terrain'] = "";
-$lang['application_terrain_warning_receiver'] = '';
-$lang['application_terrain_status_user_notification'] = '';
+$lang['application_show_lost_terrains'] = "Mostrar terrenos perdidos";
+$lang['application_terrain_owner'] = "Dono do registro";
+$lang['application_lost_terrains'] = "Terrenos perdidos";
+$lang['application_terrain_name'] = "Nome do terreno";
+$lang['application_private_terrain'] = "Registro privado";
+$lang['application_terrain_warning_receiver'] = "Quero receber alertas de movimentação deste terreno";
+$lang['application_terrain_status_user_notification'] = 'Notificar colaboradores ao Terreno atingir estágio';
 
+$lang['application_deposits'] = "Depósitos";
+$lang['application_stock_areas'] = "Áreas de Depósito";
+$lang['application_materials'] = "Materiais";
+$lang['application_add_deposit'] = "Adicionar depósito";
+
+$lang['application_edit_deposit'] = "Editar Depósito";
+
+$lang['application_add_stock_area'] = "Adicionar área";
+$lang['application_edit_stock_area'] = "Editar área de depósito";
+
+$lang['application_add_material'] = "Adicionar material";
+$lang['application_edit_material'] = "Editar material";
+
+$lang['application_unity'] = "Unidade";
+$lang['application_piece'] = "Peça";
+$lang['application_package'] = "Pacote";
+$lang['application_coil'] = "Rolo";
+$lang['application_box'] = "Caixa";
+$lang['application_meter'] = "Metro";
+$lang['application_kilo'] = "Quilo";

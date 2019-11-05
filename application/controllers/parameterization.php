@@ -25,16 +25,22 @@ class Parameterization extends MY_Controller
         $this->view_data['submenu'] = [
             $this->lang->line('application_departments') => 'parameterization/departments',
             $this->lang->line('application_areas') => 'parameterization/areas',
+            $this->lang->line('application_deposits') => 'parameterization/deposits',
+            $this->lang->line('application_stock_areas') => 'parameterization/stock_areas',
+            $this->lang->line('application_materials') => 'parameterization/materials'
         ];
 
         $this->view_data['iconlist'] = [
             'parameterization/departments' => 'dripicons-network-1',
-            'parameterization/areas' => 'dripicons-network-3'
+            'parameterization/areas' => 'dripicons-network-3',
+            'parameterization/deposits' => 'dripicons-store',
+            'parameterization/stock_areas' => 'dripicons-view-thumb',
+            'parameterization/materials' => 'dripicons-suitcase'
         ];
 
         $this->config->load('defaults');
     }
-
+    
     public function index()
     {
         $this->view_data['breadcrumb'] = $this->lang->line('application_parameterization');
@@ -50,32 +56,32 @@ class Parameterization extends MY_Controller
     {
         $this->view_data['breadcrumb'] = $this->lang->line('application_departments');
         $this->view_data['breadcrumb_id'] = 'parameterization/departments';
-
+        
         $options = ['conditions' => ['status != ?', 'deleted']];
         $departments = Department::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
         $this->view_data['departments'] = $departments;
         $this->content_view = 'parameterization/departments';
     }
-
+    
     public function department_update($department = false)
     {
         $department = Department::find($department);
-
+        
         if ($_POST) {
-
+            
             $department->update_attributes($_POST);
             $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_department_success'));
             redirect('parameterization/departments');
         } else {
             $this->view_data['department'] = $department;
             $this->theme_view = 'modal';
-
+            
             $this->view_data['title'] = $this->lang->line('application_edit_department');
             $this->view_data['form_action'] = 'parameterization/department_update/' . $department->id;
             $this->content_view = 'parameterization/_departmentform';
         }
     }
-
+    
     public function department_create()
     {
         if ($_POST) {
@@ -100,7 +106,7 @@ class Parameterization extends MY_Controller
             $this->content_view = 'parameterization/_departmentform';
         }
     }
-
+    
     public function department_delete($department = false)
     {
 
@@ -190,5 +196,213 @@ class Parameterization extends MY_Controller
         redirect('parameterization/areas');
     }
 
+    public function deposits()
+    {
+        $this->view_data['breadcrumb'] = $this->lang->line('application_deposits');
+        $this->view_data['breadcrumb_id'] = 'parameterization/deposits';
 
+        $deposits = Deposit::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+        $this->view_data['deposits'] = $deposits;
+        $this->content_view = 'parameterization/deposits';
+    }
+
+    public function deposit_update($deposit = false)
+    {
+        $deposit = Deposit::find($deposit);
+
+        if ($_POST) {
+
+            $deposit->update_attributes($_POST);
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_deposit_success'));
+            redirect('parameterization/deposits');
+        } else {
+            $this->view_data['deposit'] = $deposit;
+            $this->theme_view = 'modal';
+
+            $this->view_data['title'] = $this->lang->line('application_edit_deposit');
+            $this->view_data['form_action'] = 'parameterization/deposit_update/' . $deposit->id;
+            $this->content_view = 'parameterization/_depositform';
+        }
+    }
+
+    public function deposit_create()
+    {
+        if ($_POST) {
+
+            $options = ['conditions' => ['name = ?', $_POST['name']]];
+            $deposit_exists = Deposit::find($options);
+            if (empty($deposit_exists)) {
+                $deposit = Deposit::create($_POST);
+                if (!$deposit) {
+                    $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_deposit_error'));
+                } else {
+                    $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_create_deposit_success'));
+                }
+            } else {
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_deposit_exists'));
+            }
+            redirect('parameterization/deposits');
+        } else {
+            $this->theme_view = 'modal';
+            $this->view_data['title'] = $this->lang->line('application_add_deposit');
+            $this->view_data['form_action'] = 'parameterization/deposit_create/';
+            $this->content_view = 'parameterization/_depositform';
+        }
+    }
+
+
+    public function deposit_delete($deposit = false)
+    {
+
+        if ($this->deposit->id != $deposit) {
+            $options = ['conditions' => ['id = ?', $deposit]];
+            $deposit = Deposit::find($options);
+            $deposit->status = 'deleted';
+            $deposit->save();
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_deposit_success'));
+        } else {
+            $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_deposit_error'));
+        }
+        redirect('parameterization/deposits');
+    }
+
+    public function stock_areas()
+    {
+        $this->view_data['breadcrumb'] = $this->lang->line('application_stock_areas');
+        $this->view_data['breadcrumb_id'] = 'parameterization/stock_areas';
+
+        $stock_areas = StockArea::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+        $this->view_data['stock_areas'] = $stock_areas;
+        $this->content_view = 'parameterization/stock_areas';
+    }
+
+    public function stock_area_update($stock_area = false)
+    {
+        $stock_area = StockArea::find($stock_area);
+
+        if ($_POST) {
+
+            $stock_area->update_attributes($_POST);
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_stock_area_success'));
+            redirect('parameterization/stock_areas');
+        } else {
+            $this->view_data['stock_area'] = $stock_area;
+            $this->theme_view = 'modal';
+
+            $stock_areas = StockArea::all();
+            $this->view_data['bd_stock_areas'] = $stock_areas;
+
+
+            $this->view_data['title'] = $this->lang->line('application_edit_stock_area');
+            $this->view_data['form_action'] = 'parameterization/stock_area_update/' . $stock_area->id;
+            $this->content_view = 'parameterization/_stockareaform';
+        }
+    }
+
+    public function stock_area_create()
+    {
+        if ($_POST) {
+
+            $stock_area = StockArea::create($_POST);
+            if (!$stock_area) {
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_stock_area_error'));
+            } else {
+                $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_create_stock_area_success'));
+            }
+            redirect('parameterization/stock_areas');
+        } else {
+            $this->theme_view = 'modal';
+
+            $stock_areas = StockArea::all();
+            $this->view_data['bd_stock_areas'] = $stock_areas;
+
+            $this->view_data['title'] = $this->lang->line('application_add_stock_area');
+            $this->view_data['form_action'] = 'parameterization/stock_area_create/';
+            $this->content_view = 'parameterization/_stockareaform';
+        }
+    }
+
+    public function stock_area_delete($stock_area = false)
+    {
+        if ($this->stock_area->id != $stock_area) {
+            $options = ['conditions' => ['id = ?', $stock_area]];
+            $stock_area = StockArea::find($options);
+            $stock_area->status = 'deleted';
+            $stock_area->save();
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_stock_area_success'));
+        } else {
+            $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_stock_area_error'));
+        }
+        redirect('parameterization/stock_areas');
+    }
+
+    public function materials()
+    {
+        $this->view_data['breadcrumb'] = $this->lang->line('application_materials');
+        $this->view_data['breadcrumb_id'] = 'parameterization/materials';
+        
+        $materials = Material::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+        $this->view_data['materials'] = $materials;
+        $this->content_view = 'parameterization/materials';
+    }
+    
+    public function material_update($material = false)
+    {
+        $material = Material::find($material);
+        
+        if ($_POST) {
+            
+            $material->update_attributes($_POST);
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_material_success'));
+            redirect('parameterization/materials');
+        } else {
+            $this->view_data['material'] = $material;
+            $this->theme_view = 'modal';
+            $this->view_data['stock_areas'] = StockArea::all();
+            $this->view_data['title'] = $this->lang->line('application_edit_material');
+            $this->view_data['form_action'] = 'parameterization/material_update/' . $material->id;
+            $this->content_view = 'parameterization/_materialform';
+        }
+    }
+    
+    public function material_create()
+    {
+        if ($_POST) {
+
+            $options = ['conditions' => ['description = ?', $_POST['description']]];
+            $material_exists = Material::find($options);
+            if (empty($material_exists)) {
+                $material = Material::create($_POST);
+                if (!$material) {
+                    $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_material_error'));
+                } else {
+                    $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_create_material_success'));
+                }
+            } else {
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_material_exists'));
+            }
+            redirect('parameterization/materials');
+        } else {
+            $this->theme_view = 'modal';
+            $this->view_data['title'] = $this->lang->line('application_add_material');
+            $this->view_data['stock_areas'] = StockArea::all();
+            $this->view_data['form_action'] = 'parameterization/material_create/';
+            $this->content_view = 'parameterization/_materialform';
+        }
+    }
+    
+    public function material_delete($material = false)
+    {
+
+        if ($this->material->id != $material) {
+            $options = ['conditions' => ['id = ?', $material]];
+            $material = Material::find($options);
+            $material->status = 'deleted';
+            $material->save();
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_material_success'));
+        } else {
+            $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_material_error'));
+        }
+        redirect('parameterization/materials');
+    }
 }

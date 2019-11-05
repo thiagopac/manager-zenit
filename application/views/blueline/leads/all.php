@@ -53,7 +53,7 @@
 				</select>
 			</div>
 
-            <di  id="block-all-leads" style="background: #f1f4fa">
+            <div  id="block-all-leads" style="background: #f1f4fa">
 
                 <kanban-board :stages="stages" :blocks="getLeads" @update-block="updateBlock" @delete-block="deleteBlock">
                     <div v-for="(stage, index) in stages" :slot="stage.name" v-cloak>
