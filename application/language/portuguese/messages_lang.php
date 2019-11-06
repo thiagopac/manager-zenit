@@ -236,3 +236,6 @@ $lang['messages_save_deposit_stock_area_success'] = "Relação depósito x área
 $lang['messages_create_deposit_stock_area_success'] = "Relação depósito x área criada com sucesso";
 $lang['messages_create_deposit_stock_area_error'] = "Erro ao criar relação depósito x área";
 $lang['messages_create_deposit_stock_area_exists'] = "Relação depósito x área já existente";
+
+$lang['messages_delete_deposit_stock_area_success'] = "Relação depósito x área excluida com sucesso";
+$lang['messages_delete_deposit_stock_area_error'] = "Erro ao excluir relação depósito x área";

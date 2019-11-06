@@ -1,6 +1,4 @@
-<?php if (!defined('BASEPATH')) {
-    exit('No direct script access allowed');
-}
+<?php if (!defined('BASEPATH')) {exit('No direct script access allowed');}
 
 class Parameterization extends MY_Controller
 {
@@ -259,9 +257,16 @@ class Parameterization extends MY_Controller
         if ($this->deposit->id != $deposit) {
             $options = ['conditions' => ['id = ?', $deposit]];
             $deposit = Deposit::find($options);
-            $deposit->status = 'deleted';
-            $deposit->save();
-            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_deposit_success'));
+            $stock_areas = DepositStockArea::find('all', ['conditions' => ['deposit_id = ?', $deposit->id]]);
+            if(!$stock_areas){
+
+                $deposit->status = 'deleted';
+                $deposit->save();
+                $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_deposit_success'));
+            }
+            else{
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_deposit_error'));
+            }
         } else {
             $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_deposit_error'));
         }
@@ -326,15 +331,23 @@ class Parameterization extends MY_Controller
 
     public function stock_area_delete($stock_area = false)
     {
-        if ($this->stock_area->id != $stock_area) {
-            $options = ['conditions' => ['id = ?', $stock_area]];
-            $stock_area = StockArea::find($options);
+
+        $options = ['conditions' => ['id = ?', $stock_area]];
+        $stock_area = StockArea::find($options);
+        
+        $materials = Material::find('all', ['conditions' => ['stock_area_id = ?', $stock_area->id]]);
+        $deposits = DepositStockArea::find('all', ['conditions' => ['stock_area_id = ?', $stock_area->id]]);
+        
+        if(!$materials && !$deposits){
             $stock_area->status = 'deleted';
             $stock_area->save();
             $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_stock_area_success'));
-        } else {
+        }
+        else{
             $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_stock_area_error'));
         }
+
+        $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_stock_area_error'));
         redirect('parameterization/stock_areas');
     }
 
@@ -413,8 +426,7 @@ class Parameterization extends MY_Controller
         $this->view_data['breadcrumb'] = $this->lang->line('application_deposit_stock_areas');
         $this->view_data['breadcrumb_id'] = 'parameterization/deposit_stock_areas';
         
-        // $deposit_stock_areas = DepositStockArea::find('all');
-        $deposit_stock_areas = DepositStockArea::find('all', ['include' => ['deposit', 'stock_area']]);
+        $deposit_stock_areas = DepositStockArea::find('all', ['conditions' => ['status != ?', "deleted"], 'include' => ['deposit', 'stock_area']]);
         $deposits = Deposit::find('all');
 
         $this->view_data['deposit_stock_areas'] = $deposit_stock_areas;
@@ -469,5 +481,21 @@ class Parameterization extends MY_Controller
             $this->view_data['form_action'] = 'parameterization/deposit_stock_area_create/';
             $this->content_view = 'parameterization/_depositstockareaform';
         }
+    }
+
+    public function deposit_stock_area_delete($deposit_stock_area = false){
+
+        if ($this->deposit_stock_area->id != $deposit_stock_area) {
+            $options = ['conditions' => ['id = ?', $deposit_stock_area]];
+            $deposit_stock_area = DepositStockArea::find($options);
+
+            $deposit_stock_area->status = 'deleted';
+            $deposit_stock_area->save();
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_deposit_stock_area_success'));
+
+        } else {
+            $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_deposit_stock_area_error'));
+        }
+        redirect('parameterization/deposit_stock_areas');
     }
 }

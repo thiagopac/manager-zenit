@@ -59,3 +59,20 @@ typings/
 
 # next.js build output
 .next
+
+# vscode files
+.vscode/
+Backups/
+CachedData/
+CachedExtensions/
+Cookies
+Cookies-journal
+Network Persistent State
+User/
+languagepacks.json
+machineid
+rapid_render.json
+storage.json
+blob_storage
+GPUCache
+Cache
