@@ -662,6 +662,7 @@ $lang['application_pop3'] = 'POP3';
 $lang['application_theme_options'] = 'Opções De Tema';
 $lang['application_login_page'] = 'Página De Início De Sessão';
 $lang['application_login_background'] = 'Login Fundo';
+$lang['application_lead_background'] = 'Funil de Vendas Fundo';
 $lang['application_upload_background'] = 'Upload De Fundo';
 $lang['application_color_customization'] = 'Personalizações De Cor';
 $lang['application_background_color'] = 'Cor De Fundo';

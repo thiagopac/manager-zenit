@@ -148,6 +148,25 @@
         } ?>
 				</select>
 			</div>
+
+			<div class="form-group">
+				<label>
+					<?=$this->lang->line('application_lead_background');?>
+				</label>
+				<select name="lead_background" id="lead_background" class="formcontrol chosen-select ">
+					<?php foreach ($backgrounds as $value) {
+            ?>
+					<option value="<?=$value; ?>" <?php if ($settings->lead_background == $value) {
+                ?>selected=""
+						<?php
+            } ?> >
+							<?=$value; ?>
+					</option>
+					<?php
+        } ?>
+				</select>
+			</div>
+
 			<div class="form-group">
 				<label>
 					<?=$this->lang->line('application_upload_background');?>
@@ -311,7 +330,6 @@
 			$('#login_style').on('change', function(evt, params) {
 				$("#login_style_left").toggleClass("hidden");
 				$("#login_style_center").toggleClass("hidden");
-
 			});
 		</script>
 	</div>

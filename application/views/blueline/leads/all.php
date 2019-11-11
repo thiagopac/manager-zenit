@@ -8,7 +8,8 @@
         ?>
 
 		<div id="kanban-page">
-
+                
+                
                 <a v-if="stages.length > 1" href="<?=base_url()?>leads/create" class="btn btn-primary" data-toggle="mainmodal" v-cloak>
                     <?=$this->lang->line('application_create_lead');?>
                 </a>
@@ -57,7 +58,6 @@
 
                 <kanban-board :stages="stages" :blocks="getLeads" @update-block="updateBlock" @delete-block="deleteBlock">
                     <div v-for="(stage, index) in stages" :slot="stage.name" v-cloak>
-
                         <?php if($condition == 1) { ?>
 
                             <div class="btn-group pull-right-responsive">
@@ -494,17 +494,20 @@ jQuery(document).ready(function($) {
             $(".tippy").removeClass("lead-status-tv-title")
             $("#block-price, #block-subtitle").toggle();
             $("#block-price").is(":hidden") ? $(".drag-list").css("height", "1400px") : $(".drag-list").css("height", "auto");
+            $("#block-all-leads").css("background-image", "");
         }
     });
 
     $(".tv-screen").on('click', function () {
         if ($("#block-all-leads").fullScreen() != null) {
+
             $(".drag-column").addClass("lead-screen-tv-size");
             $(".block-title").addClass("lead-title-tv-size");
             $(".tippy").addClass("lead-status-tv-title");
             $("#block-price, #block-subtitle").toggle();
             $("#block-all-leads").toggleFullScreen();
             $("#block-price").is(":hidden") ? $(".drag-list").css("height", "1400px") : $(".drag-list").css("height", "auto");
+            $("#block-all-leads").css({"background-image":"url('<?= base_url()?>assets/blueline/images/backgrounds/<?= $core_settings->lead_background?>')"});
         }
     });
 });

@@ -36,7 +36,7 @@ CREATE TABLE `stock_area` (
 
 CREATE TABLE `material` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `description` varchar(45) NOT NULL,
+  `description` varchar(255) NOT NULL,
   `unity` ENUM('unity') NOT NULL,
   `stock_area_id` int UNSIGNED NOT NULL,
   `status` varchar(255) DEFAULT 'active' NOT NULL,
@@ -52,5 +52,9 @@ CREATE TABLE `deposit_stock_area` (
   `deposit_id` int UNSIGNED NOT NULL,
   `stock_area_id` int UNSIGNED NOT NULL,
   `capacity` int UNSIGNED NOT NULL,
-  `status` varchar(255) DEFAULT 'active' NOT NULL
+  `status` varchar(255) DEFAULT 'active' NOT NULL,
   PRIMARY KEY (`id`));
+
+
+-- Adicioando campo de lead_background na tabela core
+ALTER TABLE `core` ADD COLUMN lead_background varchar(255);
