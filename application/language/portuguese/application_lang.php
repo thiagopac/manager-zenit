@@ -663,6 +663,7 @@ $lang['application_theme_options'] = 'Opções De Tema';
 $lang['application_login_page'] = 'Página De Início De Sessão';
 $lang['application_login_background'] = 'Fundo Login';
 $lang['application_lead_background'] = 'Fundo Funil de Vendas';
+$lang['application_terrain_background'] = 'Fundo Captação de terrenos';
 $lang['application_upload_background'] = 'Upload De Fundo';
 $lang['application_color_customization'] = 'Personalizações De Cor';
 $lang['application_background_color'] = 'Cor De Fundo';

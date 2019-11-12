@@ -169,6 +169,24 @@
 
 			<div class="form-group">
 				<label>
+					<?=$this->lang->line('application_terrain_background');?>
+				</label>
+				<select name="terrain_background" id="terrain_background" class="formcontrol chosen-select ">
+					<?php foreach ($backgrounds as $value) {
+            ?>
+					<option value="<?=$value; ?>" <?php if ($settings->terrain_background == $value) {
+                ?>selected=""
+						<?php
+            } ?> >
+							<?=$value; ?>
+					</option>
+					<?php
+        } ?>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label>
 					<?=$this->lang->line('application_upload_background');?>
 				</label>
 				<div>

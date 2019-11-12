@@ -704,6 +704,7 @@ class Settings extends MY_Controller
                     $data = ['upload_data' => $this->upload->data()];
                     $_POST['login_background'] = $data['upload_data']['file_name'];
                     $_POST['lead_background'] = $data['upload_data']['file_name'];
+                    $_POST['terrain_background'] = $data['upload_data']['file_name'];
                 }
             }
             if (is_uploaded_file($_FILES['userfile2']['tmp_name'])) {

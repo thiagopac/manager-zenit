@@ -494,6 +494,7 @@ jQuery(document).ready(function($) {
             $(".tippy").removeClass("terrain-status-tv-title")
             $("#block-price, #block-subtitle").toggle();
             $("#block-price").is(":hidden") ? $(".drag-list").css("height", "1400px") : $(".drag-list").css("height", "auto");
+            $("#block-all-terrains").css("background-image", "");
         }
     });
 
@@ -505,6 +506,7 @@ jQuery(document).ready(function($) {
             $("#block-price, #block-subtitle").toggle();
             $("#block-all-terrains").toggleFullScreen();
             $("#block-price").is(":hidden") ? $(".drag-list").css("height", "1400px") : $(".drag-list").css("height", "auto");
+            $("#block-all-terrains").css({"background-image":"url('<?= base_url()?>assets/blueline/images/backgrounds/<?= $core_settings->lead_background?>')"});
         }
     });
 });
