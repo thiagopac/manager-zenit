@@ -219,7 +219,7 @@ $lang['messages_delete_deposit_error'] = "Erro ao excluir depósito";
 
 $lang['messages_save_stock_area_success'] = "Área de depósito salva com sucesso";
 $lang['messages_save_stock_area_error'] = "Erro ao salvar área de depósito";
-$lang['messages_save_material'] = "Material salvo com sucesso";
+$lang['messages_save_material_success'] = "Material salvo com sucesso";
 
 $lang['messages_create_stock_area_success'] = "Área de depósito criada com sucesso";
 $lang['messages_create_stock_area_error'] = "Erro ao criar área de depósito";
@@ -239,3 +239,11 @@ $lang['messages_create_deposit_stock_area_exists'] = "Relação depósito x áre
 
 $lang['messages_delete_deposit_stock_area_success'] = "Relação depósito x área excluida com sucesso";
 $lang['messages_delete_deposit_stock_area_error'] = "Erro ao excluir relação depósito x área";
+
+$lang['messages_save_material_type_success'] = "Tipo de material salvo com sucesso";
+$lang['messages_create_material_type_error'] = "Erro ao criar tipo de material";
+$lang['messages_create_material_type_success'] = "Tipo de material criado com sucesso";
+$lang['messages_create_material_type_exists'] = "Tipo de material já existente";
+
+$lang['messages_delete_material_type_success'] = "Tipo de material excluído com sucesso";
+$lang['messages_delete_material_type_error'] = "Erro ao excluir tipo de material";

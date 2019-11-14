@@ -6,11 +6,7 @@ class StockArea extends ActiveRecord\Model{
 
     public static $has_many = array(
         array('deposit_stock_area', 'foreign_key' => 'stock_area_id'),
-        array('material', 'foreign_key' => 'stock_area_id')
+        array('material_type', 'foreign_key' => 'stock_area_id')
     );
-
-    public static $belongs_to = [
-        ['material', 'foreign_key' => 'material_id']
-    ];
 }
 ?>

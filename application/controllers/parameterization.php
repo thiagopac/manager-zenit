@@ -26,6 +26,7 @@ class Parameterization extends MY_Controller
             $this->lang->line('application_deposits') => 'parameterization/deposits',
             $this->lang->line('application_stock_areas') => 'parameterization/stock_areas',
             $this->lang->line('application_materials') => 'parameterization/materials',
+            $this->lang->line('application_material_types') => 'parameterization/material_types',
             $this->lang->line('application_deposit_stock_areas') => 'parameterization/deposit_stock_areas'
         ];
 
@@ -35,6 +36,7 @@ class Parameterization extends MY_Controller
             'parameterization/deposits' => 'dripicons-store',
             'parameterization/stock_areas' => 'dripicons-view-thumb',
             'parameterization/materials' => 'dripicons-suitcase',
+            'parameterization/material_types' => 'dripicons-list',
             'parameterization/deposit_stock_areas' => 'dripicons-view-list-large'
         ];
 
@@ -335,10 +337,10 @@ class Parameterization extends MY_Controller
         $options = ['conditions' => ['id = ?', $stock_area]];
         $stock_area = StockArea::find($options);
         
-        $materials = Material::find('all', ['conditions' => ['stock_area_id = ?', $stock_area->id]]);
+        $material_types = MaterialType::find('all', ['conditions' => ['stock_area_id = ?', $stock_area->id]]);
         $deposits = DepositStockArea::find('all', ['conditions' => ['stock_area_id = ?', $stock_area->id]]);
         
-        if(!$materials && !$deposits){
+        if(!$material_types && !$deposits){
             $stock_area->status = 'deleted';
             $stock_area->save();
             $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_stock_area_success'));
@@ -373,7 +375,7 @@ class Parameterization extends MY_Controller
         } else {
             $this->view_data['material'] = $material;
             $this->theme_view = 'modal';
-            $this->view_data['stock_areas'] = StockArea::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['material_types'] = MaterialType::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
             $this->view_data['title'] = $this->lang->line('application_edit_material');
             $this->view_data['form_action'] = 'parameterization/material_update/' . $material->id;
             $this->content_view = 'parameterization/_materialform';
@@ -400,7 +402,7 @@ class Parameterization extends MY_Controller
         } else {
             $this->theme_view = 'modal';
             $this->view_data['title'] = $this->lang->line('application_add_material');
-            $this->view_data['stock_areas'] = StockArea::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['material_types'] = MaterialType::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
             $this->view_data['form_action'] = 'parameterization/material_create/';
             $this->content_view = 'parameterization/_materialform';
         }
@@ -497,5 +499,81 @@ class Parameterization extends MY_Controller
             $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_deposit_stock_area_error'));
         }
         redirect('parameterization/deposit_stock_areas');
+    }
+
+    public function material_types(){
+
+        $this->view_data['breadcrumb'] = $this->lang->line('application_material_types');
+        $this->view_data['breadcrumb_id'] = 'parameterization/material_types';
+
+        $material_types = MaterialType::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+        $this->view_data['material_types'] = $material_types;
+        $this->content_view = 'parameterization/material_types';
+    }
+
+    public function material_type_update($material_type = false){
+
+        $options = ['conditions' => ['id = ?', $material_type]];
+        $material_type = MaterialType::find($options);
+        
+        if ($_POST) {
+            
+            $material_type->update_attributes($_POST);
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_material_type_success'));
+            redirect('parameterization/material_types');
+        } else {
+            $this->view_data['material_type'] = $material_type;
+            $this->theme_view = 'modal';
+            $this->view_data['stock_areas'] = StockArea::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['title'] = $this->lang->line('application_edit_material_type');
+            $this->view_data['form_action'] = 'parameterization/material_type_update/' . $material_type->id;
+            $this->content_view = 'parameterization/_materialtypeform';
+        }
+    }
+
+    public function material_type_create(){
+
+        if ($_POST) {
+
+            $options = ['conditions' => ['name = ?', $_POST['name']]];
+            $material_type_exists = MaterialType::find($options);
+            if (empty($material_type_exists)) {
+                $material_type = MaterialType::create($_POST);
+                if (!$material_type) {
+                    $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_material_type_error'));
+                } else {
+                    $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_create_material_type_success'));
+                }
+            } else {
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_material_type_exists'));
+            }
+            redirect('parameterization/material_types');
+        } else {
+            $this->theme_view = 'modal';
+            $this->view_data['title'] = $this->lang->line('application_add_material_type');
+            $this->view_data['stock_areas'] = StockArea::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['form_action'] = 'parameterization/material_type_create/';
+            $this->content_view = 'parameterization/_materialtypeform';
+        }
+    }
+
+    public function material_type_delete($material_type = false){
+
+        $options = ['conditions' => ['id = ?', $material_type]];
+        $material_type = MaterialType::find($options);
+        
+        $materials = Material::find('all', ['conditions' => ['material_type_id = ?', $material_type->id]]);
+        
+        if(!$materials){
+            $material_type->status = 'deleted';
+            $material_type->save();
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_material_type_success'));
+        }
+        else{
+            $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_material_type_error'));
+        }
+
+        $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_material_type_error'));
+        redirect('parameterization/material_types');
     }
 }

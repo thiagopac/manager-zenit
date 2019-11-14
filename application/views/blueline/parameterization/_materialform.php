@@ -27,15 +27,15 @@ echo form_open_multipart($form_action, $attributes);
     </div>
 
     <div class="form-group">
-        <label for="stock_area_id">
-            <?=$this->lang->line('application_area');?> *
+        <label for="material_type_id">
+            <?=$this->lang->line('application_types');?> *
         </label>
         <?php
-            $stock_areas_arr = [];
-            foreach($stock_areas as $s){
-                $stock_areas_arr[$s->id] = $s->name;
+            $material_type_arr = [];
+            foreach($material_types as $m){
+                $material_type_arr[$m->id] = $m->name;
             }
-            echo form_dropdown('stock_area_id', $stock_areas_arr, $material->stock_area_id, 'style="width:100%" class="chosen-select"');?>
+            echo form_dropdown('material_type_id', $material_type_arr, $material->material_type_id, 'style="width:100%" class="chosen-select"');?>
     </div>
 
     <div class="modal-footer">
