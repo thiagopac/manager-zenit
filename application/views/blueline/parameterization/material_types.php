@@ -22,6 +22,9 @@
                         <?=$this->lang->line('application_name');?>
                     </th>
                     <th class="hidden-xs">
+                        <?=$this->lang->line('application_stock_area');?>
+                    </th>
+                    <th class="hidden-xs">
                         <?=$this->lang->line('application_action');?>
                     </th>
                     </thead>
@@ -33,6 +36,9 @@
                             </td>
                             <td>
                                 <?=$material_type->name;?>
+                            </td>
+                            <td>
+                                <?=$material_type->stock_area->name;?>
                             </td>
 
                             <td class="option" width="8%">

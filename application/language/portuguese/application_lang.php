@@ -995,6 +995,7 @@ $lang['application_terrain_status_user_notification'] = 'Notificar colaboradores
 
 $lang['application_deposits'] = "Depósitos";
 $lang['application_stock_areas'] = "Áreas de Depósito";
+$lang['application_stock_area'] = "Área de Depósito";
 $lang['application_materials'] = "Materiais";
 $lang['application_material_types'] = "Tipos de material";
 $lang['application_add_deposit'] = "Adicionar depósito";
