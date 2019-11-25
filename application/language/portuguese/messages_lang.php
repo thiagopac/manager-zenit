@@ -247,3 +247,20 @@ $lang['messages_create_material_type_exists'] = "Tipo de material já existente"
 
 $lang['messages_delete_material_type_success'] = "Tipo de material excluído com sucesso";
 $lang['messages_delete_material_type_error'] = "Erro ao excluir tipo de material";
+
+$lang['messages_create_entrance_success'] = "Entrada criada com sucesso";
+$lang['messages_create_entrance_error'] = "Erro ao criar entrada";
+
+$lang['messages_create_output_success'] = "Saída criada com sucesso";
+$lang['messages_create_output_error'] = "Erro ao criar saída";
+
+$lang['messages_save_entrance_success'] = "Entrada salva com sucesso";
+$lang['messages_save_output_success'] = "Saída salva com sucesso";
+
+$lang['messages_delete_entrance_success'] = "Entrada excluída com sucesso";
+$lang['messages_delete_entrance_error'] = "Erro ao excluir entrada";
+
+$lang['messages_delete_output_success'] = "Saída excluída com sucesso";
+$lang['messages_delete_output_error'] = "Erro ao excluir saída";
+
+$lang['messages_output_error'] = "Quantidade no estoque inferior a requerida";

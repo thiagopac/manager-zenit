@@ -128,6 +128,7 @@ $lang['application_project_id'] = 'ID do Projeto';
 $lang['application_project_name'] = 'Nome do projeto';
 $lang['application_projects'] = 'Projetos';
 $lang['application_quantity_hours'] = 'Quantidade/Horas';
+$lang['application_quantity'] = 'Quantidade';
 $lang['application_quick_access'] = 'Acesso Rápido';
 $lang['application_reference_id'] = 'ID de Referência';
 $lang['application_release_date'] = 'Data de Lançamento';
@@ -994,9 +995,11 @@ $lang['application_terrain_warning_receiver'] = "Quero receber alertas de movime
 $lang['application_terrain_status_user_notification'] = 'Notificar colaboradores ao Terreno atingir estágio';
 
 $lang['application_deposits'] = "Depósitos";
+$lang['application_deposit'] = "Depósito";
 $lang['application_stock_areas'] = "Áreas de Depósito";
 $lang['application_stock_area'] = "Área de Depósito";
 $lang['application_materials'] = "Materiais";
+$lang['application_material'] = "Material";
 $lang['application_material_types'] = "Tipos de material";
 $lang['application_add_deposit'] = "Adicionar depósito";
 
@@ -1025,3 +1028,12 @@ $lang['application_capacity'] = "Capacidade";
 
 $lang['application_edit_deposit_stock_area'] = "Editar relação depósito x área";
 
+$lang['application_materialmanagement'] = "Movimentação de materiais";
+
+$lang['application_entrances'] = "Entradas";
+$lang['application_outputs'] = "Saídas";
+$lang['application_add_entrance'] = "Nova entrada de material";
+$lang['application_add_output'] = "Nova saída de material";
+
+$lang['application_edit_entrance'] = "Editar entrada de material";
+$lang['application_edit_output'] = "Editar saída de material";
