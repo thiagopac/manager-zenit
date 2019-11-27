@@ -2,20 +2,23 @@
 $attributes = ['class' => '', 'id' => 'entranceform'];
 echo form_open_multipart($form_action, $attributes);
 ?>
-
-    <div class="form-group">
-        <label for="deposit">
-            <?=$this->lang->line('application_deposit');?> *
-        </label>
-        
-        <?php
-            $deposit_arr = [];
-            foreach($deposits as $d){
-                $deposit_arr[$d->id] = $d->name;
-            }
-            echo form_dropdown('deposit_id', $deposit_arr, $entrance->deposit_id, 'style="width:100%" class="chosen-select"');
-        ?>
-    </div>
+    <?php if(!$deposit_id): ?>
+        <div class="form-group">
+            <label for="deposit">
+                <?=$this->lang->line('application_deposit');?> *
+            </label>
+            
+            <?php
+                $deposit_arr = [];
+                foreach($deposits as $d){
+                    $deposit_arr[$d->id] = $d->name;
+                }
+                echo form_dropdown('deposit_id', $deposit_arr, $entrance->deposit_id, 'style="width:100%" class="chosen-select"');
+            ?>
+        </div>
+    <?php else:?>
+        <input type="hidden" value="<?=$deposit_id?>" />
+    <?php endif?>
 
     <div class="form-group">
         <label for="material">
@@ -41,7 +44,7 @@ echo form_open_multipart($form_action, $attributes);
         <label for="date">
             <?=$this->lang->line('application_date');?> *
         </label>
-        <input id="date" type="date" name="date" class="required form-control" value="<?php if(isset($entrance)){echo $entrance->date;}?>"  required />
+        <input id="date" type="date" name="date" class="form-control" data-enable-time="true" value="<?php if(isset($entrance)){echo $entrance->date;}?>"  required />
     </div>
 
     <div class="form-group hidden">

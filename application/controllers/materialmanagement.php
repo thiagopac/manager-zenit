@@ -20,15 +20,31 @@ class MaterialManagement extends MY_Controller{
         }
     }
 
-    public function index(){
-        $entrances = MaterialHandling::find('all', ['conditions' => ["status != ? AND handling_type = ?", "deleted", "entrance"], 'include' => ['deposit', 'material']]);
-        $outputs = MaterialHandling::find('all', ['conditions' => ["status != ? AND handling_type = ?", "deleted", "output"], 'include' => ['deposit', 'material']]);
+    public function filter($deposit_id = false){
+
+        $this->view_data['selected_deposit_id'] = $deposit_id;
+
+        $entrances = MaterialHandling::find('all', ['conditions' => ["status != ? AND handling_type = ? AND deposit_id = ?", "deleted", "entrance", $deposit_id], 'include' => ['deposit', 'material']]);
+        $outputs = MaterialHandling::find('all', ['conditions' => ["status != ? AND handling_type = ? AND deposit_id = ?", "deleted", "output", $deposit_id], 'include' => ['deposit', 'material']]);
+        $deposits = Deposit::all();
         $this->view_data['entrances'] = $entrances;
         $this->view_data['outputs'] = $outputs;
+        $this->view_data['deposits'] = $deposits;
         $this->content_view = 'materialhandling/all';
     }
 
-    public function entrance_create(){
+    public function index($id = false){
+        
+        $entrances = MaterialHandling::find('all', ['conditions' => ["status != ? AND handling_type = ?", "deleted", "entrance"], 'include' => ['deposit', 'material']]);
+        $outputs = MaterialHandling::find('all', ['conditions' => ["status != ? AND handling_type = ?", "deleted", "output"], 'include' => ['deposit', 'material']]);
+        $deposits = Deposit::all();
+        $this->view_data['entrances'] = $entrances;
+        $this->view_data['outputs'] = $outputs;
+        $this->view_data['deposits'] = $deposits;
+        $this->content_view = 'materialhandling/all';
+    }
+
+    public function entrance_create($deposit_id = false){
 
         if($_POST){
 
@@ -69,7 +85,12 @@ class MaterialManagement extends MY_Controller{
         else{
             $this->theme_view = 'modal';
             $this->view_data['title'] = $this->lang->line('application_add_entrance');
-            $this->view_data['deposits'] = Deposit::find('all', ['conditions' => ["status != ? ORDER BY id ASC", "deleted"]]);
+            if($deposit_id){
+                $this->view_data['deposit_id'] = $deposit_id;
+            }
+            else{
+                $this->view_data['deposits'] = Deposit::find('all', ['conditions' => ["status != ? ORDER BY id ASC", "deleted"]]);
+            }
             $this->view_data['materials'] = Material::find('all', ['conditions' => ["status != ? ORDER BY id ASC", "deleted"]]);
             $this->view_data['form_action'] = 'materialmanagement/entrance_create';
             $this->content_view = 'materialhandling/_entranceform';
@@ -146,7 +167,7 @@ class MaterialManagement extends MY_Controller{
 
     }
 
-    public function output_create(){
+    public function output_create($deposit_id = false){
 
         if($_POST){
 
@@ -178,11 +199,20 @@ class MaterialManagement extends MY_Controller{
             redirect('materialmanagement/index');
         }
         else{
-
+            
             $this->theme_view = 'modal';
             $this->view_data['title'] = $this->lang->line('application_add_output');
-            $this->view_data['deposits'] = Deposit::find('all', ['conditions' => ["status != ? ORDER BY id ASC", "deleted"]]);
-            $this->view_data['materials'] = DepositAmount::find_by_sql("SELECT DISTINCT material_id, description FROM deposit_amount INNER JOIN material on material.id = deposit_amount.material_id WHERE quantity > 0 ORDER BY material.id ASC;");
+            if($deposit_id){
+                $this->view_data['deposit_id'] = $deposit_id;
+                $this->view_data['materials'] = DepositAmount::find_by_sql("SELECT material_id, description FROM deposit_amount INNER JOIN material on material.id = deposit_amount.material_id WHERE deposit_id = ? AND quantity > 0 ORDER BY material.id ASC", [$deposit_id]);
+            }
+            else{
+                $deposits = DepositAmount::find_by_sql("SELECT DISTINCT deposit_amount.deposit_id, deposit.name FROM deposit_amount INNER JOIN deposit on deposit.id = deposit_amount.deposit_id WHERE quantity > 0 ORDER BY deposit.id ASC");
+                $materials = DepositAmount::find_by_sql("SELECT DISTINCT material_id, description FROM deposit_amount INNER JOIN material on material.id = deposit_amount.material_id WHERE quantity > 0 ORDER BY material.id ASC");
+                $this->view_data['deposits'] = $deposits;
+                $this->view_data['materials'] = $materials;
+            }
+
             $this->view_data['form_action'] = 'materialmanagement/output_create';
             $this->content_view = 'materialhandling/_outputform';
         }

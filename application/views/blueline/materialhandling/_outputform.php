@@ -1,36 +1,36 @@
 <?php
-$attributes = ['class' => '', 'id' => 'entranceform'];
+$attributes = ['class' => '', 'id' => 'outputform'];
 echo form_open_multipart($form_action, $attributes);
 ?>
-
-    <div class="form-group">
-        <label for="deposit">
-            <?=$this->lang->line('application_deposit');?> *
-        </label>
-
-        <?php
-            $deposit_arr = [];
-            foreach($deposits as $d){
-                $deposit_arr[$d->id] = $d->name;
-            }
-            echo form_dropdown('deposit_id', $deposit_arr, $entrance->deposit_id, 'style="width:100%" class="chosen-select"');
-        ?>
-
-    </div>
+    <?php if(!$deposit_id): ?>
+        <div class="form-group">
+            <label for="deposit">
+                <?=$this->lang->line('application_deposit');?> *
+            </label>
+            
+            <?php
+                $deposit_arr = [];
+                foreach($deposits as $d){
+                    $deposit_arr[$d->deposit_id] = $d->name;
+                }
+                echo form_dropdown('deposit_id', $deposit_arr, $output->deposit_id, 'style="width:100%" class="chosen-select"');
+            ?>
+        </div>
+    <?php else:?>
+        <input type="hidden" value="<?=$deposit_id?>" />
+    <?php endif?>
 
     <div class="form-group">
         <label for="material">
             <?=$this->lang->line('application_material');?> *
         </label>
-
         <?php
             $material_arr = [];
             foreach($materials as $m){
                 $material_arr[$m->material_id] = $m->description;
             }
-            echo form_dropdown('material_id', $material_arr, $entrance->material_id, 'style="width:100%" class="chosen-select"');
+            echo form_dropdown('material_id', $material_arr, $output->material_id, 'style="width:100%" class="chosen-select"');
         ?>
-
     </div>
 
     <div class="form-group">
@@ -59,7 +59,3 @@ echo form_open_multipart($form_action, $attributes);
         </a>
     </div>
 <?php echo form_close(); ?>
-
-<script>
-    alert("teste");
-</script>

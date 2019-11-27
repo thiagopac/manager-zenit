@@ -1,12 +1,39 @@
 <div id="row">
     <div class="col-md-12">
+    <div class="row">
+        <div class="btn-group pull-right-responsive margin-right-3">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                
+                <?php if($selected_deposit_id):?>
+                    <?php foreach($deposits as $deposit):?>
+                        <?php if($deposit->id == $selected_deposit_id):?>
+                            <?php echo $deposit->name?>
+                        <?php endif?>
+                    <?endforeach?>
+                <?php else:?>
+                    <?php echo $this->lang->line('application_deposits');?>
+                <?php endif?>
+
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+            <li><a href="<?=base_url()?>materialmanagement"><?=$this->lang->line('application_all');?></a></li>
+                <?php foreach ($deposits as $deposit):?>
+                    <li><a id="" name="id" href="<?=base_url()?>materialmanagement/filter/<?=$deposit->id?>"><?=$deposit->name?></a></li>
+                <?php endforeach;?>
+
+            </ul>
+        </div>
+    </div>
         <div class="box-shadow">
             <div class="table-head">
                 <?=$this->lang->line('application_entrances');?>
                 <span class="pull-right">
-					<a href="<?=base_url()?>materialmanagement/entrance_create" class="btn btn-primary" data-toggle="mainmodal">
-						<?=$this->lang->line('application_add_entrance');?>
-					</a>
+                    <?php if($selected_deposit_id):?>
+                        <a href="<?=base_url()?>materialmanagement/entrance_create/<?=$selected_deposit_id?>" class="btn btn-primary" data-toggle="mainmodal">
+                            <?=$this->lang->line('application_add_entrance');?>
+                        </a>
+                    <?php endif?>
 				</span>
             </div>
             <div class="table-div responsive">
@@ -74,10 +101,13 @@
             <div class="table-head">
                 <?=$this->lang->line('application_outputs');?>
                 <span class="pull-right">
-					<a href="<?=base_url()?>materialmanagement/output_create" class="btn btn-primary" data-toggle="mainmodal">
-						<?=$this->lang->line('application_add_output');?>
-					</a>
+                    <?php if($selected_deposit_id):?>
+                        <a  href="<?=base_url()?>materialmanagement/output_create/<?=$selected_deposit_id?>" class="btn btn-primary" data-toggle="mainmodal">
+                            <?=$this->lang->line('application_add_output');?>
+                        </a>
+                    <?php endif?>
 				</span>
+                
             </div>
             <div class="table-div responsive">
                 <table id="outputs" class="data-no-search table" cellspacing="0" cellpadding="0">
