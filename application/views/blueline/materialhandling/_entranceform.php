@@ -4,7 +4,7 @@ echo form_open_multipart($form_action, $attributes);
 ?>
     <?php if(!$deposit_id): ?>
         <div class="form-group">
-            <label for="deposit">
+            <label for="deposit_id">
                 <?=$this->lang->line('application_deposit');?> *
             </label>
             
@@ -17,7 +17,7 @@ echo form_open_multipart($form_action, $attributes);
             ?>
         </div>
     <?php else:?>
-        <input type="hidden" value="<?=$deposit_id?>" />
+        <input type="hidden" name="deposit_id" value="<?=$deposit_id?>" />
     <?php endif?>
 
     <div class="form-group">

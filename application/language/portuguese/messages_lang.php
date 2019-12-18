@@ -264,3 +264,11 @@ $lang['messages_delete_output_success'] = "Saída excluída com sucesso";
 $lang['messages_delete_output_error'] = "Erro ao excluir saída";
 
 $lang['messages_output_error'] = "Quantidade no estoque inferior a requerida";
+
+$lang['messages_create_rule_success'] = "Regra criada com sucesso";
+$lang['messages_create_rule_error'] = "Erro ao criar a regra";
+
+$lang['messages_save_rule_success'] = "Regra salva com sucesso";
+
+$lang['messages_delete_rule_success'] = "Regra excluída com sucesso";
+$lang['messages_delete_rule_success'] = "Erro ao excluir regra";

@@ -502,7 +502,7 @@ class MaterialManagement extends MY_Controller{
             $rule->rule = json_encode($rule->rule);
             $rule->save();
             $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_rule_success'));
-            redirect('materialmanagement/rules');
+            redirect('materialhandling/rules');
         }
         else{
 
@@ -544,7 +544,7 @@ class MaterialManagement extends MY_Controller{
                 $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_rule_error'));
             }
 
-            redirect('materialmanagement/rules');
+            redirect('materialhandling/rules');
         }
         else{
             $this->theme_view = 'modal';
@@ -575,7 +575,7 @@ class MaterialManagement extends MY_Controller{
             $rule->rule = json_encode($rule->rule);
             $rule->save();
             $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_rule_success'));
-            redirect('materialmanagement/rules');
+            redirect('materialhandling/rules');
         }
         else{
 
@@ -603,7 +603,7 @@ class MaterialManagement extends MY_Controller{
             $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_rule_error'));
         }
 
-        redirect('materialmanagement/rules');
+        redirect('materialhandling/rules');
     }
 
     public function rule_check(){

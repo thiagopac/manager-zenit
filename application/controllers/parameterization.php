@@ -2,8 +2,7 @@
 
 class Parameterization extends MY_Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
         $access = false;
         unset($_POST['DataTables_Table_0_length']);
@@ -43,8 +42,7 @@ class Parameterization extends MY_Controller
         $this->config->load('defaults');
     }
     
-    public function index()
-    {
+    public function index(){
         $this->view_data['breadcrumb'] = $this->lang->line('application_parameterization');
         $this->view_data['breadcrumb_id'] = 'parameterization/departments';
 
@@ -54,8 +52,7 @@ class Parameterization extends MY_Controller
         $this->load->helper('curl');
     }
 
-    public function departments()
-    {
+    public function departments(){
         $this->view_data['breadcrumb'] = $this->lang->line('application_departments');
         $this->view_data['breadcrumb_id'] = 'parameterization/departments';
         
@@ -65,8 +62,7 @@ class Parameterization extends MY_Controller
         $this->content_view = 'parameterization/departments';
     }
     
-    public function department_update($department = false)
-    {
+    public function department_update($department = false){
         $department = Department::find($department);
         
         if ($_POST) {
@@ -84,8 +80,7 @@ class Parameterization extends MY_Controller
         }
     }
     
-    public function department_create()
-    {
+    public function department_create(){
         if ($_POST) {
 
             $options = ['conditions' => ['name = ?', $_POST['name']]];
@@ -109,8 +104,7 @@ class Parameterization extends MY_Controller
         }
     }
     
-    public function department_delete($department = false)
-    {
+    public function department_delete($department = false){
 
         if ($this->department->id != $department) {
             $options = ['conditions' => ['id = ?', $department]];
@@ -124,8 +118,7 @@ class Parameterization extends MY_Controller
         redirect('parameterization/departments');
     }
 
-    public function areas()
-    {
+    public function areas(){
         $this->view_data['breadcrumb'] = $this->lang->line('application_areas');
         $this->view_data['breadcrumb_id'] = 'parameterization/areas';
 
@@ -135,8 +128,7 @@ class Parameterization extends MY_Controller
         $this->content_view = 'parameterization/areas';
     }
 
-    public function area_update($area = false)
-    {
+    public function area_update($area = false){
         $area = DepartmentArea::find($area);
 
         if ($_POST) {
@@ -159,8 +151,7 @@ class Parameterization extends MY_Controller
         }
     }
 
-    public function area_create()
-    {
+    public function area_create(){
         if ($_POST) {
 
             $area = DepartmentArea::create($_POST);
@@ -183,8 +174,7 @@ class Parameterization extends MY_Controller
         }
     }
 
-    public function area_delete($area = false)
-    {
+    public function area_delete($area = false){
 
         if ($this->area->id != $area) {
             $options = ['conditions' => ['id = ?', $area]];
@@ -198,8 +188,7 @@ class Parameterization extends MY_Controller
         redirect('parameterization/areas');
     }
 
-    public function deposits()
-    {
+    public function deposits(){
         $this->view_data['breadcrumb'] = $this->lang->line('application_deposits');
         $this->view_data['breadcrumb_id'] = 'parameterization/deposits';
 
@@ -208,8 +197,7 @@ class Parameterization extends MY_Controller
         $this->content_view = 'parameterization/deposits';
     }
 
-    public function deposit_update($deposit = false)
-    {
+    public function deposit_update($deposit = false){
         $deposit = Deposit::find($deposit);
 
         if ($_POST) {
@@ -227,8 +215,7 @@ class Parameterization extends MY_Controller
         }
     }
 
-    public function deposit_create()
-    {
+    public function deposit_create(){
         if ($_POST) {
 
             $options = ['conditions' => ['name = ?', $_POST['name']]];
@@ -252,9 +239,7 @@ class Parameterization extends MY_Controller
         }
     }
 
-
-    public function deposit_delete($deposit = false)
-    {
+    public function deposit_delete($deposit = false){
 
         if ($this->deposit->id != $deposit) {
             $options = ['conditions' => ['id = ?', $deposit]];
@@ -275,8 +260,7 @@ class Parameterization extends MY_Controller
         redirect('parameterization/deposits');
     }
 
-    public function stock_areas()
-    {
+    public function stock_areas(){
         $this->view_data['breadcrumb'] = $this->lang->line('application_stock_areas');
         $this->view_data['breadcrumb_id'] = 'parameterization/stock_areas';
 
@@ -285,8 +269,7 @@ class Parameterization extends MY_Controller
         $this->content_view = 'parameterization/stock_areas';
     }
 
-    public function stock_area_update($stock_area = false)
-    {
+    public function stock_area_update($stock_area = false){
         $stock_area = StockArea::find($stock_area);
 
         if ($_POST) {
@@ -308,8 +291,7 @@ class Parameterization extends MY_Controller
         }
     }
 
-    public function stock_area_create()
-    {
+    public function stock_area_create(){
         if ($_POST) {
 
             $stock_area = StockArea::create($_POST);
@@ -331,8 +313,7 @@ class Parameterization extends MY_Controller
         }
     }
 
-    public function stock_area_delete($stock_area = false)
-    {
+    public function stock_area_delete($stock_area = false){
 
         $options = ['conditions' => ['id = ?', $stock_area]];
         $stock_area = StockArea::find($options);
@@ -353,8 +334,7 @@ class Parameterization extends MY_Controller
         redirect('parameterization/stock_areas');
     }
 
-    public function materials()
-    {
+    public function materials(){
         $this->view_data['breadcrumb'] = $this->lang->line('application_materials');
         $this->view_data['breadcrumb_id'] = 'parameterization/materials';
         
@@ -363,8 +343,7 @@ class Parameterization extends MY_Controller
         $this->content_view = 'parameterization/materials';
     }
     
-    public function material_update($material = false)
-    {
+    public function material_update($material = false){
         $material = Material::find($material);
         
         if ($_POST) {
@@ -382,8 +361,7 @@ class Parameterization extends MY_Controller
         }
     }
     
-    public function material_create()
-    {
+    public function material_create(){
         if ($_POST) {
 
             $options = ['conditions' => ['description = ?', $_POST['description']]];
@@ -408,8 +386,7 @@ class Parameterization extends MY_Controller
         }
     }
     
-    public function material_delete($material = false)
-    {
+    public function material_delete($material = false){
 
         if ($this->material->id != $material) {
             $options = ['conditions' => ['id = ?', $material]];
@@ -423,8 +400,7 @@ class Parameterization extends MY_Controller
         redirect('parameterization/materials');
     }
 
-    public function deposit_stock_areas()
-    {
+    public function deposit_stock_areas(){
         $this->view_data['breadcrumb'] = $this->lang->line('application_deposit_stock_areas');
         $this->view_data['breadcrumb_id'] = 'parameterization/deposit_stock_areas';
         
@@ -435,8 +411,7 @@ class Parameterization extends MY_Controller
         $this->content_view = 'parameterization/deposit_stock_areas';
     }
 
-    public function deposit_stock_area_update($deposit_id = false, $stock_area_id = false)
-    {
+    public function deposit_stock_area_update($deposit_id = false, $stock_area_id = false){
         
         if ($_POST) {
             
@@ -458,8 +433,7 @@ class Parameterization extends MY_Controller
         }
     }
     
-    public function deposit_stock_area_create()
-    {
+    public function deposit_stock_area_create(){
         if ($_POST) {
 
             $options = ['conditions' => ['deposit_id = ? AND stock_area_id = ?', $_POST['deposit_id'], $_POST['stock_area_id']]];

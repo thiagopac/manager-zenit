@@ -1037,3 +1037,25 @@ $lang['application_add_output'] = "Nova saída de material";
 
 $lang['application_edit_entrance'] = "Editar entrada de material";
 $lang['application_edit_output'] = "Editar saída de material";
+
+$lang['application_deposit_amount'] = "Quantidade no depósito";
+
+$lang['application_dynamic_alarms'] = "Avisos";
+
+$lang['application_material_rules'] = "Regras de material";
+$lang['application_stock_area_rules'] = "Regras de área de depósito";
+
+$lang['application_add_material_rule'] = "Adiconar regra de material";
+$lang['application_edit_material_rule'] = "Editar regra de material";
+$lang['application_add_stock_area_rule'] = "Adiconar regra de área de depósito";
+
+$lang['application_verification'] = "Verificação";
+$lang['application_value'] = "Valor";
+
+$lang['application_less_than'] = "Menor que";
+$lang['application_greater_than'] = "Maior que";
+$lang['application_equals'] = "Igual a";
+
+$lang['application_rule_check'] = "Checar regra";
+
+$lang['application_entrance_output'] = "Entrada e Saída";

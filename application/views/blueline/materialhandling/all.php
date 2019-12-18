@@ -1,7 +1,16 @@
 <div id="row">
-    <div class="col-md-12">
-    <div class="row">
-        <div class="btn-group pull-right-responsive margin-right-3">
+
+    <?php include 'materialhandling_menu.php'; ?>
+    
+    <div>
+        <div class="btn-group pull-right" style="margin-bottom: 15px; margin-right: 20px;">
+
+            <?php if($selected_deposit_id):?>
+                <a href="<?=base_url()?>materialmanagement/deposit_amount/<?=$selected_deposit_id?>" class="btn btn-primary margin-right-3" data-toggle="mainmodal">
+                    <?=$this->lang->line('application_deposit_amount');?>
+                </a>
+            <?php endif?>
+
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                 
                 <?php if($selected_deposit_id):?>
@@ -19,13 +28,17 @@
             <ul class="dropdown-menu pull-right" role="menu">
             <li><a href="<?=base_url()?>materialmanagement"><?=$this->lang->line('application_all');?></a></li>
                 <?php foreach ($deposits as $deposit):?>
-                    <li><a id="" name="id" href="<?=base_url()?>materialmanagement/filter/<?=$deposit->id?>"><?=$deposit->name?></a></li>
+                    <li><a id="deposit_id" name="deposit_id" href="<?=base_url()?>materialmanagement/filter/<?=$deposit->id?>"><?=$deposit->name?></a></li>
                 <?php endforeach;?>
 
             </ul>
         </div>
     </div>
+
+    <div class="col-md-9 col-lg-10">
+        
         <div class="box-shadow">
+            
             <div class="table-head">
                 <?=$this->lang->line('application_entrances');?>
                 <span class="pull-right">
@@ -36,6 +49,7 @@
                     <?php endif?>
 				</span>
             </div>
+
             <div class="table-div responsive">
                 <table id="entrances" class="data-no-search table" cellspacing="0" cellpadding="0">
                     <thead>
@@ -90,14 +104,15 @@
 
                     <?php endforeach;?>
                 </table>
+            
             </div>
         </div>
     </div>
-</div>
 
-<div id="row">
-    <div class="col-md-12">
+    <div class="col-md-9 col-lg-10">
+    
         <div class="box-shadow">
+        
             <div class="table-head">
                 <?=$this->lang->line('application_outputs');?>
                 <span class="pull-right">
@@ -107,8 +122,8 @@
                         </a>
                     <?php endif?>
 				</span>
-                
             </div>
+            
             <div class="table-div responsive">
                 <table id="outputs" class="data-no-search table" cellspacing="0" cellpadding="0">
                     <thead>

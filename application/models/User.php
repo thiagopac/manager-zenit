@@ -13,6 +13,7 @@ class User extends ActiveRecord\Model {
          ['project_task'],
          ['project_timesheet'],
          ['notification'],
+         ['rule', 'foreign_key' => 'user_id']
     ];
     public static $belongs_to = [
      ['queue', 'primary_key' => 'queue'],

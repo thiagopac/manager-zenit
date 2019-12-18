@@ -143,3 +143,7 @@
     border-radius: 100%;
     margin-right: 10px;
 }
+
+.height{
+    height: 100vh !important;
+}
