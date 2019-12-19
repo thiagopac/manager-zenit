@@ -21,12 +21,22 @@ class MaterialManagement extends MY_Controller{
 
         $this->view_data['submenu'] = [
             $this->lang->line('application_entrance_output') => 'materialmanagement',
-            $this->lang->line('application_dynamic_alarms') => 'materialmanagement/rules'
+            $this->lang->line('application_dynamic_alarms') => 'materialmanagement/rules',
+            $this->lang->line('application_deposits') => 'materialmanagement/deposits',
+            $this->lang->line('application_stock_areas') => 'materialmanagement/stock_areas',
+            $this->lang->line('application_deposit_stock_areas') => 'materialmanagement/deposit_stock_areas',
+            $this->lang->line('application_material_types') => 'materialmanagement/material_types',
+            $this->lang->line('application_materials') => 'materialmanagement/materials'
         ];
 
         $this->view_data['iconlist'] = [
             'materialmanagement' => 'dripicons-swap',
-            'materialmanagement/rules' => 'dripicons-warning'
+            'materialmanagement/rules' => 'dripicons-warning',
+            'materialmanagement/deposits' => 'dripicons-store',
+            'materialmanagement/stock_areas' => 'dripicons-view-thumb',
+            'materialmanagement/deposit_stock_areas' => 'dripicons-view-list-large',
+            'materialmanagement/material_types' => 'dripicons-list',
+            'materialmanagement/materials' => 'dripicons-suitcase'
         ];
 
         $this->config->load('defaults');
@@ -472,7 +482,7 @@ class MaterialManagement extends MY_Controller{
                 $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_rule_error'));
             }
 
-            redirect('materialhandling/rules');
+            redirect('materialmanagement/rules');
         }
         else{
             $this->theme_view = 'modal';
@@ -678,5 +688,377 @@ class MaterialManagement extends MY_Controller{
             $rule->rule = json_encode($rule->rule);
             $rule->save();
         }
+    }
+    // refatorar a partir daqui
+    public function deposits(){
+        // $this->view_data['breadcrumb'] = $this->lang->line('application_deposits');
+        // $this->view_data['breadcrumb_id'] = 'parameterization/deposits';
+
+        $deposits = Deposit::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+        $this->view_data['deposits'] = $deposits;
+        $this->content_view = 'materialhandling/deposits';
+    }
+
+    public function deposit_update($deposit = false){
+        $deposit = Deposit::find($deposit);
+
+        if ($_POST) {
+
+            $deposit->update_attributes($_POST);
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_deposit_success'));
+            redirect('materialmanagement/deposits');
+        } else {
+            $this->view_data['deposit'] = $deposit;
+            $this->theme_view = 'modal';
+
+            $this->view_data['title'] = $this->lang->line('application_edit_deposit');
+            $this->view_data['form_action'] = 'materialmanagement/deposit_update/' . $deposit->id;
+            $this->content_view = 'materialhandling/_depositform';
+        }
+    }
+
+    public function deposit_create(){
+
+        if ($_POST) {
+
+            $options = ['conditions' => ['name = ?', $_POST['name']]];
+            $deposit_exists = Deposit::find($options);
+            if (empty($deposit_exists)) {
+                $deposit = Deposit::create($_POST);
+                if (!$deposit) {
+                    $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_deposit_error'));
+                } else {
+                    $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_create_deposit_success'));
+                }
+            } else {
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_deposit_exists'));
+            }
+            redirect('materialmanagement/deposits');
+        } else {
+            $this->theme_view = 'modal';
+            $this->view_data['title'] = $this->lang->line('application_add_deposit');
+            $this->view_data['form_action'] = 'materialmanagement/deposit_create/';
+            $this->content_view = 'materialhandling/_depositform';
+        }
+    }
+
+    public function deposit_delete($deposit = false){
+
+        if ($this->deposit->id != $deposit) {
+            $options = ['conditions' => ['id = ?', $deposit]];
+            $deposit = Deposit::find($options);
+            $stock_areas = DepositStockArea::find('all', ['conditions' => ['deposit_id = ?', $deposit->id]]);
+            if(!$stock_areas){
+
+                $deposit->status = 'deleted';
+                $deposit->save();
+                $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_deposit_success'));
+            }
+            else{
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_deposit_error'));
+            }
+        } else {
+            $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_deposit_error'));
+        }
+        redirect('materialmanagement/deposits');
+    }
+
+    public function stock_areas(){
+
+        $this->view_data['breadcrumb'] = $this->lang->line('application_stock_areas');
+        $this->view_data['breadcrumb_id'] = 'parameterization/stock_areas';
+
+        $stock_areas = StockArea::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+        $this->view_data['stock_areas'] = $stock_areas;
+        $this->content_view = 'materialhandling/stock_areas';
+    }
+
+    public function stock_area_update($stock_area = false){
+
+        $stock_area = StockArea::find($stock_area);
+
+        if ($_POST) {
+
+            $stock_area->update_attributes($_POST);
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_stock_area_success'));
+            redirect('materialmanagement/stock_areas');
+        } else {
+            $this->view_data['stock_area'] = $stock_area;
+            $this->theme_view = 'modal';
+
+            $stock_areas = StockArea::all();
+            $this->view_data['bd_stock_areas'] = $stock_areas;
+
+
+            $this->view_data['title'] = $this->lang->line('application_edit_stock_area');
+            $this->view_data['form_action'] = 'materialmanagement/stock_area_update/' . $stock_area->id;
+            $this->content_view = 'materialhandling/_stockareaform';
+        }
+    }
+
+    public function stock_area_create(){
+        
+        if ($_POST) {
+
+            $stock_area = StockArea::create($_POST);
+            if (!$stock_area) {
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_stock_area_error'));
+            } else {
+                $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_create_stock_area_success'));
+            }
+            redirect('materialmanagement/stock_areas');
+        } else {
+            $this->theme_view = 'modal';
+
+            $stock_areas = StockArea::all();
+            $this->view_data['bd_stock_areas'] = $stock_areas;
+
+            $this->view_data['title'] = $this->lang->line('application_add_stock_area');
+            $this->view_data['form_action'] = 'materialmanagement/stock_area_create/';
+            $this->content_view = 'materialhandling/_stockareaform';
+        }
+    }
+
+    public function stock_area_delete($stock_area = false){
+
+        $options = ['conditions' => ['id = ?', $stock_area]];
+        $stock_area = StockArea::find($options);
+        
+        $material_types = MaterialType::find('all', ['conditions' => ['stock_area_id = ?', $stock_area->id]]);
+        $deposits = DepositStockArea::find('all', ['conditions' => ['stock_area_id = ?', $stock_area->id]]);
+        
+        if(!$material_types && !$deposits){
+            $stock_area->status = 'deleted';
+            $stock_area->save();
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_stock_area_success'));
+        }
+        else{
+            $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_stock_area_error'));
+        }
+
+        $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_stock_area_error'));
+        redirect('materialmanagement/stock_areas');
+    }
+
+    public function materials(){
+
+        $this->view_data['breadcrumb'] = $this->lang->line('application_materials');
+        $this->view_data['breadcrumb_id'] = 'parameterization/materials';
+        
+        $materials = Material::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+        $this->view_data['materials'] = $materials;
+        $this->content_view = 'materialhandling/materials';
+    }
+    
+    public function material_update($material = false){
+
+        $material = Material::find($material);
+        
+        if ($_POST) {
+            
+            $material->update_attributes($_POST);
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_material_success'));
+            redirect('materialmanagement/materials');
+        } else {
+            $this->view_data['material'] = $material;
+            $this->theme_view = 'modal';
+            $this->view_data['material_types'] = MaterialType::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['title'] = $this->lang->line('application_edit_material');
+            $this->view_data['form_action'] = 'materialmanagement/material_update/' . $material->id;
+            $this->content_view = 'materialhandling/_materialform';
+        }
+    }
+    
+    public function material_create(){
+
+        if ($_POST) {
+
+            $options = ['conditions' => ['description = ?', $_POST['description']]];
+            $material_exists = Material::find($options);
+            if (empty($material_exists)) {
+                $material = Material::create($_POST);
+                if (!$material) {
+                    $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_material_error'));
+                } else {
+                    $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_create_material_success'));
+                }
+            } else {
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_material_exists'));
+            }
+            redirect('materialmanagement/materials');
+        } else {
+            $this->theme_view = 'modal';
+            $this->view_data['title'] = $this->lang->line('application_add_material');
+            $this->view_data['material_types'] = MaterialType::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['form_action'] = 'materialmanagement/material_create/';
+            $this->content_view = 'materialhandling/_materialform';
+        }
+    }
+    
+    public function material_delete($material = false){
+
+        if ($this->material->id != $material) {
+            $options = ['conditions' => ['id = ?', $material]];
+            $material = Material::find($options);
+            $material->status = 'deleted';
+            $material->save();
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_material_success'));
+        } else {
+            $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_material_error'));
+        }
+        redirect('materialmanagement/materials');
+    }
+
+    public function deposit_stock_areas(){
+
+        $this->view_data['breadcrumb'] = $this->lang->line('application_deposit_stock_areas');
+        $this->view_data['breadcrumb_id'] = 'parameterization/deposit_stock_areas';
+        
+        $deposit_stock_areas = DepositStockArea::find('all', ['conditions' => ['status != ?', "deleted"], 'include' => ['deposit', 'stock_area']]);
+        $deposits = Deposit::find('all');
+
+        $this->view_data['deposit_stock_areas'] = $deposit_stock_areas;
+        $this->content_view = 'materialhandling/deposit_stock_areas';
+    }
+
+    public function deposit_stock_area_update($deposit_id = false, $stock_area_id = false){
+        
+        if ($_POST) {
+            
+            $options = ['conditions' => ['deposit_id = ? AND stock_area_id = ?', $_POST['deposit_id'], $_POST['stock_area_id']]];
+            $deposit_stock_area = DepositStockArea::first($options);
+            $deposit_stock_area->update_attributes($_POST);
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_deposit_stock_area_success'));
+            redirect('materialmanagement/deposit_stock_areas');
+        } else {
+            $options = ['conditions' => ['deposit_id = ? AND stock_area_id = ?', $deposit_id, $stock_area_id]];
+            $deposit_stock_area = DepositStockArea::first($options);
+            $this->theme_view = 'modal';
+            $this->view_data['title'] = $this->lang->line('application_edit_deposit_stock_area');
+            $this->view_data['deposit_stock_area'] = $deposit_stock_area;
+            $this->view_data['deposits'] = Deposit::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['stock_areas'] = StockArea::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['form_action'] = 'materialmanagement/deposit_stock_area_update/' . $deposit_stock_area->deposit_id;
+            $this->content_view = 'materialhandling/_depositstockareaform';
+        }
+    }
+    
+    public function deposit_stock_area_create(){
+        
+        if ($_POST) {
+
+            $options = ['conditions' => ['deposit_id = ? AND stock_area_id = ?', $_POST['deposit_id'], $_POST['stock_area_id']]];
+            $deposit_stock_area_exists = DepositStockArea::find($options);
+            if (empty($deposit_stock_area_exists)) {
+                $deposit_stock_area = DepositStockArea::create($_POST);
+                if (!$deposit_stock_area) {
+                    $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_deposit_stock_area_error'));
+                } else {
+                    $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_create_deposit_stock_area_success'));
+                }
+            } else {
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_deposit_stock_area_exists'));
+            }
+            redirect('materialmanagement/deposit_stock_areas');
+        } else {
+            $this->theme_view = 'modal';
+            $this->view_data['title'] = $this->lang->line('application_add_deposit_stock_area');
+            $this->view_data['deposits'] = Deposit::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['stock_areas'] = StockArea::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['form_action'] = 'materialmanagement/deposit_stock_area_create/';
+            $this->content_view = 'materialhandling/_depositstockareaform';
+        }
+    }
+
+    public function deposit_stock_area_delete($deposit_stock_area = false){
+
+        if ($this->deposit_stock_area->id != $deposit_stock_area) {
+            $options = ['conditions' => ['id = ?', $deposit_stock_area]];
+            $deposit_stock_area = DepositStockArea::find($options);
+
+            $deposit_stock_area->status = 'deleted';
+            $deposit_stock_area->save();
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_deposit_stock_area_success'));
+
+        } else {
+            $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_deposit_stock_area_error'));
+        }
+        redirect('materialmanagement/deposit_stock_areas');
+    }
+
+    public function material_types(){
+
+        $this->view_data['breadcrumb'] = $this->lang->line('application_material_types');
+        $this->view_data['breadcrumb_id'] = 'parameterization/material_types';
+
+        $material_types = MaterialType::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+        $this->view_data['material_types'] = $material_types;
+        $this->content_view = 'materialhandling/material_types';
+    }
+
+    public function material_type_update($material_type = false){
+
+        $options = ['conditions' => ['id = ?', $material_type]];
+        $material_type = MaterialType::find($options);
+        
+        if ($_POST) {
+            
+            $material_type->update_attributes($_POST);
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_material_type_success'));
+            redirect('materialmanagement/material_types');
+        } else {
+            $this->view_data['material_type'] = $material_type;
+            $this->theme_view = 'modal';
+            $this->view_data['stock_areas'] = StockArea::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['title'] = $this->lang->line('application_edit_material_type');
+            $this->view_data['form_action'] = 'materialmanagement/material_type_update/' . $material_type->id;
+            $this->content_view = 'materialhandling/_materialtypeform';
+        }
+    }
+
+    public function material_type_create(){
+
+        if ($_POST) {
+
+            $options = ['conditions' => ['name = ?', $_POST['name']]];
+            $material_type_exists = MaterialType::find($options);
+            if (empty($material_type_exists)) {
+                $material_type = MaterialType::create($_POST);
+                if (!$material_type) {
+                    $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_material_type_error'));
+                } else {
+                    $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_create_material_type_success'));
+                }
+            } else {
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_create_material_type_exists'));
+            }
+            redirect('materialmanagement/material_types');
+        } else {
+            $this->theme_view = 'modal';
+            $this->view_data['title'] = $this->lang->line('application_add_material_type');
+            $this->view_data['stock_areas'] = StockArea::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['form_action'] = 'materialmanagement/material_type_create/';
+            $this->content_view = 'materialhandling/_materialtypeform';
+        }
+    }
+
+    public function material_type_delete($material_type = false){
+
+        $options = ['conditions' => ['id = ?', $material_type]];
+        $material_type = MaterialType::find($options);
+        
+        $materials = Material::find('all', ['conditions' => ['material_type_id = ?', $material_type->id]]);
+        
+        if(!$materials){
+            $material_type->status = 'deleted';
+            $material_type->save();
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_material_type_success'));
+        }
+        else{
+            $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_material_type_error'));
+        }
+
+        $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_delete_material_type_error'));
+        redirect('materialmanagement/material_types');
     }
 }
