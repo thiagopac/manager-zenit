@@ -21,22 +21,23 @@ class MaterialManagement extends MY_Controller{
 
         $this->view_data['submenu'] = [
             $this->lang->line('application_entrance_output') => 'materialmanagement',
+            $this->lang->line('application_materials') => 'materialmanagement/materials',
             $this->lang->line('application_dynamic_alarms') => 'materialmanagement/rules',
-            $this->lang->line('application_deposits') => 'materialmanagement/deposits',
+            'devider1' => 'devider',
+            $this->lang->line('application_material_types') => 'materialmanagement/material_types',
             $this->lang->line('application_stock_areas') => 'materialmanagement/stock_areas',
             $this->lang->line('application_deposit_stock_areas') => 'materialmanagement/deposit_stock_areas',
-            $this->lang->line('application_material_types') => 'materialmanagement/material_types',
-            $this->lang->line('application_materials') => 'materialmanagement/materials'
+            $this->lang->line('application_deposits') => 'materialmanagement/deposits'
         ];
 
         $this->view_data['iconlist'] = [
             'materialmanagement' => 'dripicons-swap',
+            'materialmanagement/materials' => 'dripicons-suitcase',
             'materialmanagement/rules' => 'dripicons-warning',
-            'materialmanagement/deposits' => 'dripicons-store',
+            'materialmanagement/material_types' => 'dripicons-list',
             'materialmanagement/stock_areas' => 'dripicons-view-thumb',
             'materialmanagement/deposit_stock_areas' => 'dripicons-view-list-large',
-            'materialmanagement/material_types' => 'dripicons-list',
-            'materialmanagement/materials' => 'dripicons-suitcase'
+            'materialmanagement/deposits' => 'dripicons-store'
         ];
 
         $this->config->load('defaults');
