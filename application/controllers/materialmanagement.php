@@ -690,7 +690,7 @@ class MaterialManagement extends MY_Controller{
             $rule->save();
         }
     }
-    // refatorar a partir daqui
+
     public function deposits(){
         // $this->view_data['breadcrumb'] = $this->lang->line('application_deposits');
         // $this->view_data['breadcrumb_id'] = 'parameterization/deposits';
