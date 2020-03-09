@@ -231,8 +231,7 @@ $message_icon = false;
                       <!-- <a href="#"><?=$this->lang->line('application_announcements');?></a> -->
                   </div>
                    <ul style="overflow-y: scroll; ">
-                        <?php
-                              foreach ($notification_list as $notification): ?>
+                        <?php foreach ($notification_list as $notification): ?>
                                    <li id="notification_<?=$notification->id?>" class="<?=$notification->status == 'new' ? 'new-notification' : '';?>">
                                        <div class="col col-1"><span class="dot"></span></div>
                                        <a href="<?=$notification->url == null ? "#" : $notification->url; ?>" style="cursor: <?=$notification->url == null ? 'default' : 'pointer' ?>;font-weight:normal; color: black;"><p class="truncate <?=$notification->status?>" style="white-space: normal"><?=$notification->message;?></p></a>
@@ -243,7 +242,7 @@ $message_icon = false;
                                        </div>
 
                                    </li>
-                        <?php endforeach;?>
+                            <?php endforeach;?>
                         <?php if ($notification_count == 0) {
                                   ?>
                                    <li> <p class="truncate"><?=$this->lang->line('application_no_notifications_yet'); ?></p></li>

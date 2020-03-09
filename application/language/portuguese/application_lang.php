@@ -1059,3 +1059,23 @@ $lang['application_equals'] = "Igual a";
 $lang['application_rule_check'] = "Checar regra";
 
 $lang['application_entrance_output'] = "Entrada e Saída";
+
+$lang['application_suppliers'] = "Fornecedores";
+$lang['application_supplier'] = "Fornecedor";
+$lang['application_new_supplier'] = "Novo fornecedor";
+$lang['application_edit_supplier'] = "Editar fornecedor";
+
+$lang['application_registered_number'] = "CNPJ";
+$lang['application_state_registration'] = "Inscrição";
+$lang['application_neighborhood'] = "Bairro";
+$lang['application_zipcode'] = "CEP";
+$lang['application_supplier_category'] = "Categoria";
+$lang['application_payment_condition'] = "Condições de pagamento";
+$lang['application_supplier_deadline'] = "Prazo de entrega";
+$lang['application_bank'] = "Banco";
+$lang['application_branch'] = "Agência";
+$lang['application_account'] = "Conta";
+$lang['application_state'] = "Estado";
+$lang['application_new_category'] = "Nova categoria";
+$lang['application_categories'] = "Categorias";
+$lang['application_none'] = "Nenhum";

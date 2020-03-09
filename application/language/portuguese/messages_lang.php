@@ -272,3 +272,11 @@ $lang['messages_save_rule_success'] = "Regra salva com sucesso";
 
 $lang['messages_delete_rule_success'] = "Regra excluída com sucesso";
 $lang['messages_delete_rule_success'] = "Erro ao excluir regra";
+
+$lang['messages_add_success'] = "Registro criado com sucesso";
+$lang['messages_add_error'] = "Erro ao criar registro";
+$lang['messages_add_exists'] = "Registro já existente";
+$lang['messages_edit_success'] = "Registro atualizado com sucesso";
+$lang['messages_edit_error'] = "Erro ao atualizar registro";
+$lang['messages_delete_success'] = "Registro excluído com sucesso";
+$lang['messages_delete_error'] = "Erro ao excluir registro";
