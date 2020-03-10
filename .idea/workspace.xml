@@ -2,19 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="498798ec-50f4-449c-872c-6dbc26a6cb09" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/application/controllers/suppliers.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/models/Bank.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/models/Supplier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/models/SupplierCategory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/views/blueline/suppliers/_category.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/views/blueline/suppliers/_supplier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/views/blueline/suppliers/all.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/views/blueline/materialhandling/_depositstockvalue.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/views/blueline/materialhandling/deposits_reports.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/materialmanagement.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/materialmanagement.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/language/portuguese/application_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/language/portuguese/application_lang.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/language/portuguese/messages_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/language/portuguese/messages_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Deposit.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Deposit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/Material.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/Material.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/MaterialHandling.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/MaterialHandling.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/blueline/materialhandling/_entranceform.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/materialhandling/_entranceform.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/blueline/materialhandling/_materialform.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/materialhandling/_materialform.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/blueline/materialhandling/_outputform.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/materialhandling/_outputform.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/blueline/materialhandling/all.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/materialhandling/all.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/theme/application.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/theme/application.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/blueline/materialhandling/materialhandling_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/materialhandling/materialhandling_menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/blueline/materialhandling/materials.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/materialhandling/materials.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/blueline/parameterization/parameterization_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/parameterization/parameterization_menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/blueline/suppliers/_supplier.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/suppliers/_supplier.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/blueline/suppliers/all.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/suppliers/all.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/vendor/composer/" />
@@ -39,58 +43,44 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/language/portuguese/application_lang.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16200">
-              <caret line="1080" column="35" selection-start-line="1080" selection-start-column="35" selection-end-line="1080" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/suppliers.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="34" lean-forward="true" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
+            <state relative-caret-position="843">
+              <caret line="1104" column="52" selection-start-line="1104" selection-start-column="52" selection-end-line="1104" selection-end-column="52" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/views/blueline/materialhandling/all.php">
+        <entry file="file://$PROJECT_DIR$/application/controllers/materialmanagement.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="306" column="42" lean-forward="true" selection-start-line="306" selection-start-column="42" selection-end-line="307" selection-end-column="41" />
+            <state relative-caret-position="755">
+              <caret line="1266" column="94" selection-start-line="1266" selection-start-column="94" selection-end-line="1266" selection-end-column="94" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/blueline/materialhandling/deposits_reports.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="689">
+              <caret line="46" column="58" lean-forward="true" selection-start-line="46" selection-start-column="31" selection-end-line="46" selection-end-column="58" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#2;n#div#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#th#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#th#2;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#th#3;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#3;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/materialmanagement.php">
+        <entry file="file://$PROJECT_DIR$/application/views/blueline/materialhandling/_depositstockvalue.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="350" column="83" selection-start-line="350" selection-start-column="82" selection-end-line="350" selection-end-column="83" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/blueline/suppliers/all.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="66" selection-start-line="18" selection-start-column="66" selection-end-line="18" selection-end-column="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/blueline/suppliers/_supplier.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1230">
-              <caret line="82" column="12" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="12" />
+            <state relative-caret-position="375">
+              <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
+              <folding>
+                <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,36 +89,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>-&gt;projects</find>
-      <find />
-      <find>Type::</find>
-      <find>ticket-&gt;type</find>
-      <find>'users'</find>
-      <find>(SELECT</find>
-      <find>users</find>
-      <find>&lt;th class=&quot;hidden-xs hidden-lg hidden-md hidden-sm hidden-print hidden&quot;&gt;&lt;/th&gt;</find>
-      <find>'Sim'</find>
-      <find>zipcode</find>
-      <find>$supplier</find>
-      <find>messages_add_error</find>
-      <find>messages_save_company_error</find>
-      <find>-&gt;delete</find>
-      <find>application_edit_supplier</find>
-      <find>company</find>
-      <find>application_categories</find>
-      <find>http</find>
-      <find>zipc</find>
-      <find>required</find>
-      <find>application_new_category</find>
-      <find>ilter</find>
+      <find>money_symbol</find>
+      <find>display_m</find>
+      <find>application_min_qty</find>
+      <find>application_price</find>
+      <find>$materials</find>
+      <find>rightAlign</find>
+      <find>all</find>
+      <find>$id</find>
+      <find>application_last_update</find>
+      <find>withdraw</find>
+      <find>core_settings-&gt;date</find>
+      <find>$core_settings-&gt;date_format</find>
+      <find>date($core_settings-&gt;date_format</find>
+      <find>date($core_settings-&gt;date_format.' '.$core_settings-&gt;date_time_format,</find>
+      <find>date($core_settings-&gt;date_format.' '.$core_settings-&gt;date_time_format</find>
+      <find>$date</find>
+      <find>date</find>
       <find>$core_settings</find>
-      <find>$key =&gt; $value</find>
-      <find>website</find>
-      <find>categ</find>
-      <find>supplier_categories</find>
-      <find>materialmanagement/output_update</find>
-      <find>output_update</find>
-      <find>entrance-&gt;date</find>
+      <find>alert alert-warning</find>
+      <find>$this-&gt;user-&gt;ad</find>
+      <find>deposits</find>
+      <find>application_corporate_name</find>
+      <find>deposits(</find>
+      <find>application_at</find>
+      <find>segmento</find>
+      <find>application_category</find>
+      <find>eye</find>
+      <find>-gear</find>
+      <find>new</find>
+      <find>_depositamount</find>
     </findStrings>
     <replaceStrings>
       <replace>-&gt;project</replace>
@@ -147,17 +137,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/models/SupplierCategory.php" />
-        <option value="$PROJECT_DIR$/application/models/Supplier.php" />
-        <option value="$PROJECT_DIR$/application/language/portuguese/messages_lang.php" />
-        <option value="$PROJECT_DIR$/application/views/blueline/suppliers/_supplier.php" />
-        <option value="$PROJECT_DIR$/application/views/blueline/suppliers/_category.php" />
-        <option value="$PROJECT_DIR$/application/language/portuguese/application_lang.php" />
-        <option value="$PROJECT_DIR$/application/views/blueline/suppliers/all.php" />
-        <option value="$PROJECT_DIR$/application/controllers/suppliers.php" />
-        <option value="$PROJECT_DIR$/application/views/blueline/theme/application.php" />
-        <option value="$PROJECT_DIR$/application/controllers/materialmanagement.php" />
+        <option value="$PROJECT_DIR$/application/views/blueline/materialhandling/_entranceform.php" />
+        <option value="$PROJECT_DIR$/application/views/blueline/materialhandling/_outputform.php" />
         <option value="$PROJECT_DIR$/application/views/blueline/materialhandling/all.php" />
+        <option value="$PROJECT_DIR$/application/models/Deposit.php" />
+        <option value="$PROJECT_DIR$/application/models/Material.php" />
+        <option value="$PROJECT_DIR$/application/views/blueline/suppliers/_supplier.php" />
+        <option value="$PROJECT_DIR$/application/views/blueline/suppliers/all.php" />
+        <option value="$PROJECT_DIR$/application/views/blueline/materialhandling/deposits_reports.php" />
+        <option value="$PROJECT_DIR$/application/language/portuguese/application_lang.php" />
+        <option value="$PROJECT_DIR$/application/views/blueline/materialhandling/_depositstockvalue.php" />
+        <option value="$PROJECT_DIR$/application/controllers/materialmanagement.php" />
       </list>
     </option>
   </component>
@@ -222,7 +212,7 @@
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="blueline" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
+              <item name="materialhandling" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="zenit" type="b2602c69:ProjectViewProjectNode" />
@@ -231,14 +221,6 @@
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="blueline" type="462c0819:PsiDirectoryNode" />
               <item name="suppliers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zenit" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zenit" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="blueline" type="462c0819:PsiDirectoryNode" />
-              <item name="theme" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -250,12 +232,13 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/application/views/blueline/suppliers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/application/views/blueline/materialhandling" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/application/views/blueline/materialhandling" />
       <recent name="$PROJECT_DIR$/application/views/blueline/suppliers" />
       <recent name="$PROJECT_DIR$/application/controllers" />
       <recent name="$PROJECT_DIR$/application/models" />
@@ -286,17 +269,26 @@
       <workItem from="1583411749280" duration="98000" />
       <workItem from="1583411867896" duration="3952000" />
       <workItem from="1583470853209" duration="21292000" />
-      <workItem from="1583758902867" duration="1756000" />
+      <workItem from="1583758902867" duration="22588000" />
     </task>
+    <task id="LOCAL-00001" summary="Update code">
+      <created>1583760868973</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1583760868974</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27098000" />
+    <option name="totallyTimeSpent" value="47930000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1057" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27635783" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27635783" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24973376" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Gulp" order="3" side_tool="true" />
@@ -309,7 +301,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.32953367" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32953367" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5005325" side_tool="true" weight="0.32953367" />
       <window_info anchor="bottom" id="File Transfer" order="11" sideWeight="0.49946752" weight="0.32953367" />
@@ -354,88 +346,94 @@
     <option name="LAST_COMMIT_MESSAGE" value="Update code" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/blueline/dashboard/dashboard.php">
+    <entry file="file://$PROJECT_DIR$/application/views/blueline/materialhandling/materialhandling_menu.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/blueline/materialhandling/all.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="822">
-          <caret line="79" column="16" lean-forward="true" selection-start-line="36" selection-start-column="10" selection-end-line="79" selection-end-column="16" />
+        <state relative-caret-position="615">
+          <caret line="41" column="12" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
+          <folding>
+            <element signature="n#style#0;n#th#0;n#thead#0;n#table#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#6;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#4;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#td#4;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#3762#7645#0#HTML" />
+            <element signature="e#10886#14721#0#HTML" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
+    <entry file="file://$PROJECT_DIR$/application/models/MaterialHandling.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2336">
-          <caret line="172" column="4" lean-forward="true" selection-start-line="172" selection-start-column="4" selection-end-line="226" selection-end-column="5" />
+        <state relative-caret-position="180">
+          <caret line="12" column="2" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sparks/php-activerecord/0.0.3/vendor/php-activerecord/lib/Model.php">
+    <entry file="file://$PROJECT_DIR$/application/models/Material.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="1450" column="27" selection-start-line="1450" selection-start-column="27" selection-end-line="1450" selection-end-column="27" />
+        <state relative-caret-position="135">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Setting.php">
+    <entry file="file://$PROJECT_DIR$/application/models/Deposit.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="14" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/language/portuguese/application_lang.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16200">
-          <caret line="1080" column="35" selection-start-line="1080" selection-start-column="35" selection-end-line="1080" selection-end-column="35" />
+        <state relative-caret-position="75">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/blueline/suppliers/_supplier.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1230">
-          <caret line="82" column="12" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/blueline/theme/application.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
-          <folding>
-            <element signature="e#6#127#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/suppliers.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="34" lean-forward="true" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
+        <state relative-caret-position="244">
+          <caret line="149" column="65" selection-start-line="149" selection-start-column="65" selection-end-line="149" selection-end-column="65" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/blueline/suppliers/all.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="66" selection-start-line="18" selection-start-column="66" selection-end-line="18" selection-end-column="66" />
+        <state relative-caret-position="45">
+          <caret line="3" column="156" selection-start-line="3" selection-start-column="156" selection-end-line="3" selection-end-column="156" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/portuguese/application_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="843">
+          <caret line="1104" column="52" selection-start-line="1104" selection-start-column="52" selection-end-line="1104" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/blueline/materialhandling/deposits_reports.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="689">
+          <caret line="46" column="58" lean-forward="true" selection-start-line="46" selection-start-column="31" selection-end-line="46" selection-end-column="58" />
+          <folding>
+            <element signature="n#style#0;n#th#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#2;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#3;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#0;n#table#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/blueline/materialhandling/_depositstockvalue.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
+          <folding>
+            <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/materialmanagement.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="350" column="83" selection-start-line="350" selection-start-column="82" selection-end-line="350" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/blueline/materialhandling/all.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="306" column="42" lean-forward="true" selection-start-line="306" selection-start-column="42" selection-end-line="307" selection-end-column="41" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#1;n#div#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#2;n#div#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="755">
+          <caret line="1266" column="94" selection-start-line="1266" selection-start-column="94" selection-end-line="1266" selection-end-column="94" />
         </state>
       </provider>
     </entry>

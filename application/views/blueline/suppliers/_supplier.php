@@ -22,6 +22,13 @@ echo form_open_multipart($form_action, $attributes);
 </div>
 
 <div class="form-group">
+    <label for="name"><?=$this->lang->line('application_corporate_name');?> *</label>
+    <input id="corporate_name" type="text" name="corporate_name" class="required form-control" value="<?php if (isset($supplier)) {
+        echo $supplier->corporate_name;
+    } ?>" />
+</div>
+
+<div class="form-group">
     <label for="name">
         <?=$this->lang->line('application_registered_number');?> *
     </label>
@@ -36,6 +43,15 @@ echo form_open_multipart($form_action, $attributes);
     </label>
     <input id="state_registration" type="text" name="state_registration" class=" form-control" value="<?php if (isset($supplier)) {
         echo $supplier->state_registration;
+    } ?>" />
+</div>
+
+<div class="form-group">
+    <label for="name">
+        <?=$this->lang->line('application_municipal_registration');?> *
+    </label>
+    <input id="municipal_registration" type="text" name="municipal_registration" class=" form-control" value="<?php if (isset($supplier)) {
+        echo $supplier->municipal_registration;
     } ?>" />
 </div>
 
@@ -89,9 +105,7 @@ echo form_open_multipart($form_action, $attributes);
  <div class="form-group">
         <label for="website"><?=$this->lang->line('application_website');?></label>
          <div class="input-group"> <div class="input-group-addon">HTTP://</div>
-        <input id="website" type="text" name="website" class="form-control" value="<?php if (isset($supplier)) {
-    echo $supplier->website;
-} ?>" />
+        <input id="website" type="text" name="website" class="form-control" value="<?php if (isset($supplier)) { echo $supplier->website;} ?>" />
         </div>
 </div>
 
@@ -133,7 +147,7 @@ echo form_open_multipart($form_action, $attributes);
 
 
 <div class="form-group">
-    <label for="users"><?=$this->lang->line('application_categories');?></label>
+    <label for="users"><?=$this->lang->line('application_segments');?></label>
     <?php
     $options = array();
     $cats = array();
@@ -197,7 +211,8 @@ echo form_open_multipart($form_action, $attributes);
     $(document).ready(function() {
 
         $('#registered_number').mask('00.000.000/0000-00', {reverse: false})
-        $('#state_registration').mask('00.000.0000-0', {reverse: false})
+        $('#state_registration').mask('000000000.00-00', {reverse: false})
+        $('#municipal_registration').mask('00.000/00-0', {reverse: false})
 
     });
 </script>

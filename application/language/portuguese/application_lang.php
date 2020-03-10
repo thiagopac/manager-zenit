@@ -1028,7 +1028,7 @@ $lang['application_capacity'] = "Capacidade";
 
 $lang['application_edit_deposit_stock_area'] = "Editar relação depósito x área";
 
-$lang['application_materialmanagement'] = "Movimentação de materiais";
+$lang['application_materialmanagement'] = "Almoxarifado";
 
 $lang['application_entrances'] = "Entradas";
 $lang['application_outputs'] = "Saídas";
@@ -1066,7 +1066,8 @@ $lang['application_new_supplier'] = "Novo fornecedor";
 $lang['application_edit_supplier'] = "Editar fornecedor";
 
 $lang['application_registered_number'] = "CNPJ";
-$lang['application_state_registration'] = "Inscrição";
+$lang['application_state_registration'] = "Inscrição Estadual";
+$lang['application_municipal_registration'] = "Inscrição Municipal";
 $lang['application_neighborhood'] = "Bairro";
 $lang['application_zipcode'] = "CEP";
 $lang['application_supplier_category'] = "Categoria";
@@ -1079,3 +1080,26 @@ $lang['application_state'] = "Estado";
 $lang['application_new_category'] = "Nova categoria";
 $lang['application_categories'] = "Categorias";
 $lang['application_none'] = "Nenhum";
+$lang['application_segments'] = "Segmentos";
+$lang['application_segment'] = "Segmento";
+$lang['application_new_segment'] = "Novo segmento";
+
+$lang['application_entrances_and_outputs'] = "Entradas e saídas";
+$lang['application_warehouse'] = "almoxarifado";
+$lang['application_price'] = "Preço";
+$lang['application_min_qty'] = "Quantidade mínima";
+$lang['application_current_qty'] = "Quantidade atual";
+$lang['application_all_deposits'] = "Todos depósitos";
+$lang['application_include'] = "Incluir";
+$lang['application_withdraw'] = "Retirar";
+$lang['application_last_update'] = "Última atualização";
+$lang['application_at'] = "em";
+$lang['application_add_entrance_batch'] = "Entrada em massa";
+$lang['application_add_output_batch'] = "Saída em massa";
+$lang['application_select_deposit_notice'] = "Atenção: Para fazer a movimentação de materiais, você precisa selecionar um depósito no filtro ao lado";
+$lang['application_deposits_reports'] = "Relatório de depósitos";
+$lang['application_corporate_name'] = "Razão Social";
+$lang['application_stock_value'] = "Valor em estoque";
+$lang['application_deposit_stock_value'] = "Valores em estoque do depósito";
+$lang['application_see_stock'] = "Ver estoque";
+$lang['application_stock_quantity'] = "Quantidade em estoque";

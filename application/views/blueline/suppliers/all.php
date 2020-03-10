@@ -1,7 +1,7 @@
 <div class="col-sm-12  col-md-12 main">
 		<div class="row">
 			<a href="<?=base_url()?>suppliers/supplier/create" class="btn btn-primary" data-toggle="mainmodal"><?=$this->lang->line('application_new_supplier');?></a>
-            <a href="<?=base_url()?>suppliers/category/create" class="btn btn-success" data-toggle="mainmodal"><?=$this->lang->line('application_new_category');?></a>
+            <a href="<?=base_url()?>suppliers/category/create" class="btn btn-success" data-toggle="mainmodal"><?=$this->lang->line('application_new_segment');?></a>
 
             <div class="btn-group pull-right margin-right-3">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -42,10 +42,11 @@
 		<table class="data table" id="suppliers" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
 		<thead>
 
-        <th><?=$this->lang->line('application_id');?></th>
+            <th><?=$this->lang->line('application_id');?></th>
 			<th><?=$this->lang->line('application_name');?></th>
             <th><?=$this->lang->line('application_registered_number');?></th>
             <th><?=$this->lang->line('application_state_registration');?></th>
+            <th><?=$this->lang->line('application_municipal_registration');?></th>
 <!--            <th>--><?//=$this->lang->line('application_address');?><!--</th>-->
 <!--            <th>--><?//=$this->lang->line('application_neighborhood');?><!--</th>-->
             <th><?=$this->lang->line('application_city');?></th>
@@ -55,7 +56,7 @@
 			<th><?=$this->lang->line('application_contact');?></th>
 <!--            <th>--><?//=$this->lang->line('application_phone');?><!--</th>-->
 <!--			<th>--><?//=$this->lang->line('application_email');?><!--</th>-->
-            <th><?=$this->lang->line('application_categories');?></th>
+            <th><?=$this->lang->line('application_segments');?></th>
             <th><?=$this->lang->line('application_payment_condition');?></th>
             <th><?=$this->lang->line('application_supplier_deadline');?></th>
 <!--            <th>--><?//=$this->lang->line('application_bank');?><!--</th>-->
@@ -71,6 +72,7 @@
 			<td><?=$value->name; ?></td>
             <td><?=$value->registered_number; ?></td>
             <td><?=$value->state_registration; ?></td>
+            <td><?=$value->municipal_registration; ?></td>
 			<td><?=$value->city ?></td>
             <td><?=$value->state ?></td>
             <td><?=$value->zipcode; ?></td>

@@ -38,6 +38,20 @@ echo form_open_multipart($form_action, $attributes);
             echo form_dropdown('material_type_id', $material_type_arr, $material->material_type_id, 'style="width:100%" class="chosen-select"');?>
     </div>
 
+    <div class="form-group">
+        <label for="price"><?=$this->lang->line('application_price');?></label>
+        <div class="input-group"> <div class="input-group-addon"><?=$core_settings->money_symbol?></div>
+            <input id="price" type="text" name="price" class="form-control" value="<?php if (isset($material)) { echo $material->price;} ?>" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="description">
+            <?=$this->lang->line('application_min_qty');?> *
+        </label>
+        <input id="min_qty" type="number" name="min_qty" class="required form-control"  value="<?php if(isset($material)){echo $material->min_qty;}?>"  required/>
+    </div>
+
     <div class="modal-footer">
         <input type="submit" class="btn btn-primary" value="
 			<?=$this->lang->line('application_save');?>"/>
@@ -46,3 +60,24 @@ echo form_open_multipart($form_action, $attributes);
         </a>
     </div>
 <?php echo form_close(); ?>
+
+<script>
+    $(document).ready(function() {
+
+        $("#price").inputmask('decimal', {
+            'alias': 'numeric',
+            'autoGroup': true,
+            'digits': 2,
+            'radixPoint': ",",
+            'digitsOptional': false,
+            'allowMinus': false,
+            'rightAlign': false,
+            'unmaskAsNumber': true,
+            'placeholder': '',
+            'removeMaskOnSubmit': true
+        })
+
+        // $("#price").mask('#.##0,00', {reverse: true});
+
+    });
+</script>

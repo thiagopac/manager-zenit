@@ -6,7 +6,8 @@ class MaterialHandling extends ActiveRecord\Model {
 
     public static $belongs_to = array(
         array('material', 'foreign_key' => 'material_id'),
-        array('deposit', 'foreing_key' => 'deposit_id')
+        array('deposit', 'foreing_key' => 'deposit_id'),
+        array('user', 'foreing_key' => 'user_id')
     );
 }
 ?>

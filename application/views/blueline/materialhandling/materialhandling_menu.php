@@ -9,9 +9,6 @@
                     }
                 $badge = '';
                 $active = '';
-                if ($value == 'settings/updates' && $update_count) {
-                    $badge = '<span class="badge badge-success">' . $update_count . '</span>';
-                }
                 if (str_replace('settings/', '', $value) == $breadcrumb_id) {
                     $active = 'active';
                 }

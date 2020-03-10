@@ -4,6 +4,11 @@ class Material extends ActiveRecord\Model {
 
     public static $table_name = 'material';
 
+    public $amount;
+    public $handling_in;
+    public $handling_out;
+    public $handling_last;
+
     public static $belongs_to = array(
         array('material_type', 'foreign_key' => 'material_type_id')
     );

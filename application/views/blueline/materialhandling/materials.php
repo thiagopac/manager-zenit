@@ -25,6 +25,12 @@
                         <?=$this->lang->line('application_type');?>
                     </th>
                     <th class="hidden-xs">
+                        <?=$this->lang->line('application_price');?>
+                    </th>
+                    <th class="hidden-xs">
+                        <?=$this->lang->line('application_min_qty');?>
+                    </th>
+                    <th class="hidden-xs">
                         <?=$this->lang->line('application_action');?>
                     </th>
                     </thead>
@@ -40,7 +46,12 @@
                             <td>
                                 <?=$material->material_type->name;?>
                             </td>
-
+                            <td>
+                                <?=$core_settings->money_symbol?> <?=display_money($material->price)?>
+                            </td>
+                            <td>
+                                <?=$material->min_qty;?>
+                            </td>
                             <td class="option" width="8%">
                                 <button type="button" class="btn-option delete po" data-toggle="popover" data-placement="left" data-content="<a class='btn btn-danger po-delete ajax-silent' href='<?=base_url()?>materialmanagement/material_delete/<?=$material->id;?>'><?=$this->lang->line('application_yes_im_sure');?></a> <button class='btn po-close'><?=$this->lang->line('application_no');?></button> <input type='hidden' name='td-id' class='id' value='<?=$material->id;?>'>"
                                         data-original-title="<b><?=$this->lang->line('application_really_delete');?></b>">

@@ -40,12 +40,12 @@ echo form_open_multipart($form_action, $attributes);
         <input id="quantity" type="number" min="1" name="quantity" class="required form-control" value="<?php if(isset($entrance)){echo $entrance->quantity;}?>"  required />
     </div>
 
-    <div class="form-group">
+    <!--<div class="form-group">
         <label for="date">
-            <?=$this->lang->line('application_date');?> *
+            <?/*=$this->lang->line('application_date');*/?> *
         </label>
-        <input id="date" type="date" name="date" class="form-control" data-enable-time="true" value="<?php if(isset($entrance)){echo $entrance->date;}?>"  required />
-    </div>
+        <input id="date" type="datetime-local" name="date" class="form-control" data-enable-time="true" value="<?php /*if(isset($entrance)){echo $entrance->date;}*/?>"  required />
+    </div>-->
 
     <div class="form-group hidden">
         <input id="id" type="number" name="id" class="required form-control" value="<?php if(isset($entrance)){echo $entrance->id;}?>" />
