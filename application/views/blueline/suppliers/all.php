@@ -78,7 +78,15 @@
             <td><?=$value->zipcode; ?></td>
 <!--            <td>--><?//="<a href='http://$value->website' target='_blank'>".$value->website."</a>"?><!--</td>-->
 
-            <td><button class="label label-info"  onclick=" window.open('<?="https://".$value->website?>', '_blank'); return false;"><?=$value->website?></button></td>
+            <td>
+
+                <?php $websites = explode(' ',$value->website);?>
+                <?php foreach ($websites as $website) : ?>
+                    <p><button class="label label-info"  onclick=" window.open('<?="http://".$website?>', '_blank'); return false;"><?=$website?></button></p>
+                <?php endforeach; ?>
+            </td>
+
+
 
 
             <td><?=$value->contact; ?></td>

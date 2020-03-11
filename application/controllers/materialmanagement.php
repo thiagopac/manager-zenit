@@ -200,6 +200,8 @@ class MaterialManagement extends MY_Controller{
 
         $this->theme_view = 'blank';
 
+        $this->rule_check();
+
         redirect('materialmanagement/filter/'.$deposit_id);
     }
 
@@ -236,6 +238,8 @@ class MaterialManagement extends MY_Controller{
         $entrance->save();
 
         $this->theme_view = 'blank';
+
+        $this->rule_check();
 
         redirect('materialmanagement/filter/'.$deposit_id);
     }
@@ -277,6 +281,8 @@ class MaterialManagement extends MY_Controller{
             else{
                 $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_create_entrance_success'));
             }
+
+            $this->rule_check();
 
             redirect('materialmanagement/filter/'.$deposit_id);
         }

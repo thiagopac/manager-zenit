@@ -14,7 +14,10 @@
                 <?=$this->lang->line('application_stock_quantity');?>
             </th>
             <th>
-                <?=$this->lang->line('application_value');?>
+                <?=$this->lang->line('application_unit_price');?>
+            </th>
+            <th>
+                <?=$this->lang->line('application_total_value');?>
             </th>
             </thead>
             <?php foreach ($materials as $material):?>
@@ -25,6 +28,9 @@
                     </td>
                     <td style="text-align: center">
                         <?=$material->quantity?>
+                    </td>
+                    <td>
+                        <?=$core_settings->money_symbol." ".display_money($material->price);?>
                     </td>
                     <td>
                         <?=$core_settings->money_symbol." ".display_money($material->quantity * $material->price);?>

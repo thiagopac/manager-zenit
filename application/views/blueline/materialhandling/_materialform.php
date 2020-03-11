@@ -28,7 +28,7 @@ echo form_open_multipart($form_action, $attributes);
 
     <div class="form-group">
         <label for="material_type_id">
-            <?=$this->lang->line('application_types');?> *
+            <?=$this->lang->line('application_type');?> *
         </label>
         <?php
             $material_type_arr = [];
