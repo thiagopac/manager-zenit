@@ -15,20 +15,20 @@
             <div class="table-div responsive">
                 <table id="stock_areas" class="data-no-search table" cellspacing="0" cellpadding="0">
                     <thead>
-                    <th style="width:80px" class="hidden-xs">
+                    <th style="width:80px" class="">
                         <?=$this->lang->line('application_id');?>
                     </th>
-                    <th class="hidden-xs">
+                    <th class="">
                         <?=$this->lang->line('application_name');?>
                     </th>
-                    <th class="hidden-xs">
+                    <th class="no-sort">
                         <?=$this->lang->line('application_action');?>
                     </th>
                     </thead>
                     <?php foreach ($stock_areas as $stock_area):?>
 
                         <tr id="<?=$stock_area->id;?>">
-                            <td class="hidden-xs">
+                            <td class="">
                                 <?=$stock_area->id;?>
                             </td>
                             <td>

@@ -18,20 +18,20 @@
                     <th style="width:80px" class="hidden-xs">
                         <?=$this->lang->line('application_id');?>
                     </th>
-                    <th class="hidden-xs">
+                    <th class="">
                         <?=$this->lang->line('application_name');?>
                     </th>
-                    <th class="hidden-xs">
+                    <th class="">
                         <?=$this->lang->line('application_stock_area');?>
                     </th>
-                    <th class="hidden-xs">
+                    <th class="no-sort">
                         <?=$this->lang->line('application_action');?>
                     </th>
                     </thead>
                     <?php foreach ($material_types as $material_type):?>
 
                         <tr id="<?=$material_type->id;?>">
-                            <td class="hidden-xs">
+                            <td class="">
                                 <?=$material_type->id;?>
                             </td>
                             <td>

@@ -24,19 +24,19 @@
                     <th class="hidden-xs" style='text-align:center;'>
                         <?=$this->lang->line('application_supplier');?>
                     </th>
-                    <th class="hidden-xs" style='text-align:center;'>
+                    <th class="no-sort" style='text-align:center;'>
                         <?=$this->lang->line('application_image');?>
                     </th>
-                    <th class="hidden-xs" style='text-align:center;'>
+                    <th class="" style='text-align:center;'>
                         <?=$this->lang->line('application_type');?>
                     </th>
-                    <th class="hidden-xs" style='text-align:center;'>
+                    <th class="" style='text-align:center;'>
                         <?=$this->lang->line('application_price');?>
                     </th>
-                    <th class="hidden-xs" style='text-align:center;'>
+                    <th class="" style='text-align:center;'>
                         <?=$this->lang->line('application_min_qty');?>
                     </th>
-                    <th class="hidden-xs" style='text-align:center;'>
+                    <th class="hidden-xs no-sort" style='text-align:center;'>
                         <?=$this->lang->line('application_action');?>
                     </th>
                     </thead>

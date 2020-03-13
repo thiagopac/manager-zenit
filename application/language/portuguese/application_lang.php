@@ -1110,3 +1110,6 @@ $lang['application_deposit_area'] = "Área de depósito";
 $lang['application_action_single'] = "Ação unitária";
 $lang['application_action_batch'] = "Ação em massa";
 $lang['application_handling_logs'] = "Logs";
+
+$lang['application_min_qty_abrv'] = "Qtd. mínima";
+$lang['application_current_qty_abrv'] = "Qtd. atual";

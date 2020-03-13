@@ -34,7 +34,7 @@
                     <th class="" style='text-align:center;'>
                         <?=$this->lang->line('application_last_update'); ?>
                     </th>
-                    <th style='text-align:center;'>
+                    <th class="no-sort" style='text-align:center;'>
                         <?=$this->lang->line('application_action');?>
                     </th>
                     </thead>
@@ -113,7 +113,7 @@
                     <th style='text-align:center;'>
                         <?=$this->lang->line('application_last_update');?>
                     </th>
-                    <th style='text-align:center;'>
+                    <th class="no-sort" style='text-align:center;'>
                         <?=$this->lang->line('application_action');?>
                     </th>
                     </thead>

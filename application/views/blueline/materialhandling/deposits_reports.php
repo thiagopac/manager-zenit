@@ -20,7 +20,7 @@
                     <th style="width:300px">
                         <?=$this->lang->line('application_stock_value');?>
                     </th>
-                    <th style="width:80px">
+                    <th class="no-sort" style="width:80px">
                         <?=$this->lang->line('application_see_stock');?>
                     </th>
                     </thead>

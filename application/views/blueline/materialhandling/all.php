@@ -45,35 +45,35 @@
         <div class="table-div responsive">
             <table id="materials" class="data table" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
                 <thead>
-                <th style='text-align:center;'>
+                <th width="25%" style='text-align:center;'>
                     <?=$this->lang->line('application_name'); ?>
                 </th>
-                <th style='text-align:center;'>
+                <th width="12%" style='text-align:center;'>
                     <?=$this->lang->line('application_deposit_area'); ?>
                 </th>
-                <th style='text-align:center;'>
+                <th width="12%" style='text-align:center;'>
                     <?=$this->lang->line('application_supplier'); ?>
                 </th>
-                <th style='text-align:center;'>
+                <th class="no-sort" width="5%" style='text-align:center;'>
                     <?=$this->lang->line('application_image'); ?>
                 </th>
-                <th class="hidden-sm hidden-xs" style='text-align:center;'>
+                <th width="5%" class="hidden-sm hidden-xs" style='text-align:center;'>
                     <?=$this->lang->line('application_measurement'); ?>
                 </th>
-                <th class="hidden-sm hidden-xs" style='text-align:center;'>
-                    <?=$this->lang->line('application_min_qty'); ?>
+                <th width="5%" class="hidden-sm hidden-xs" style='text-align:center;'>
+                    <?=$this->lang->line('application_min_qty_abrv'); ?>
                 </th>
-                <th style='text-align:center;'>
-                    <?=$this->lang->line('application_current_qty'); ?>
+                <th width="5%" style='text-align:center;'>
+                    <?=$this->lang->line('application_current_qty_abrv'); ?>
                 </th>
                 <?php if ($filtered == true) : ?>
-                    <th class="hidden-sm hidden-xs" style='text-align:center;'>
+                    <th width="10%" style='text-align:center;'>
                         <?=$this->lang->line('application_last_update'); ?>
                     </th>
-                    <th style="width: 200px;text-align:center;">
+                    <th class="no-sort" width="15%" style="text-align:center;">
                         <?=$this->lang->line('application_action_single'); ?>
                     </th>
-                    <th style="width: 200px;text-align:center;">
+                    <th class="no-sort" width="5%" style="text-align:center;">
                         <?=$this->lang->line('application_action_batch'); ?>
                     </th>
                 <?php endif; ?>
@@ -81,7 +81,7 @@
                 <?php foreach ($all_materials as $value):?>
 
                     <tr id="<?=$value->id; ?>">
-                        <td style='text-align:center;vertical-align:middle'>
+                        <td style='text-align:center;vertical-align:middle;'>
                             <?=$value->description; ?>
                         </td>
                         <td style='text-align:center;vertical-align:middle'>

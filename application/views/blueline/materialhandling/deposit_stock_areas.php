@@ -24,7 +24,7 @@
                     <th class="hidden-xs">
                         <?=$this->lang->line('application_capacity');?>
                     </th>
-                    <th class="hidden-xs">
+                    <th class="hidden-xs no-sort">
                         <?=$this->lang->line('application_action');?>
                     </th>
                     </thead>

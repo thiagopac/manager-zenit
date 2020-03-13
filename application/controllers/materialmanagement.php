@@ -121,6 +121,8 @@ class MaterialManagement extends MY_Controller{
             }
         }
 
+        $this->view_data['breadcrumb_id'] = 'materialmanagement';
+
         $this->view_data['filtered'] = true;
 
         $this->view_data['all_materials'] = $all_materials;
