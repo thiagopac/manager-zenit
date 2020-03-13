@@ -46,43 +46,49 @@
 
         <div class="table-head">
             <?=$this->lang->line('application_entrances_and_outputs');?>
-            <span class="pull-right">
-                    <?php if($selected_deposit_id):?>
-                        <a href="<?=base_url()?>materialmanagement/entrance_create/<?=$selected_deposit_id?>" class="btn btn-success" data-toggle="mainmodal">
-                            <?=$this->lang->line('application_add_entrance_batch');?> (+)
+            <!--<span class="pull-right">
+                    <?php /*if($selected_deposit_id):*/?>
+                        <a href="<?/*=base_url()*/?>materialmanagement/entrance_create/<?/*=$selected_deposit_id*/?>" class="btn btn-success" data-toggle="mainmodal">
+                            <?/*=$this->lang->line('application_add_entrance_batch');*/?> (+)
                         </a>
 
-                        <a href="<?=base_url()?>materialmanagement/output_create/<?=$selected_deposit_id?>" class="btn btn-danger" data-toggle="mainmodal">
-                            <?=$this->lang->line('application_add_output_batch');?> (–)
+                        <a href="<?/*=base_url()*/?>materialmanagement/output_create/<?/*=$selected_deposit_id*/?>" class="btn btn-danger" data-toggle="mainmodal">
+                            <?/*=$this->lang->line('application_add_output_batch');*/?> (–)
                         </a>
 
-                    <?php endif?>
-				</span>
+                    <?php /*endif*/?>
+            </span>-->
         </div>
 
         <div class="table-div responsive">
-            <table id="materials" class="data-no-search table noclick" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
+            <table id="materials" class="data table" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
                 <thead>
-                <th class="hidden-xs" style="width:70px">
-                    <?=$this->lang->line('application_type'); ?>
-                </th>
-                <th>
+                <th style='text-align:center;'>
                     <?=$this->lang->line('application_name'); ?>
                 </th>
-                <th class="hidden-sm hidden-xs">
-                    <?=$this->lang->line('application_unity'); ?>
+                <th style='text-align:center;'>
+                    <?=$this->lang->line('application_deposit_area'); ?>
                 </th>
-                <th class="hidden-sm hidden-xs">
+                <th style='text-align:center;'>
+                    <?=$this->lang->line('application_supplier'); ?>
+                </th>
+                <th style='text-align:center;'>
+                    <?=$this->lang->line('application_image'); ?>
+                </th>
+                <th class="hidden-sm hidden-xs" style='text-align:center;'>
+                    <?=$this->lang->line('application_measurement'); ?>
+                </th>
+                <th class="hidden-sm hidden-xs" style='text-align:center;'>
                     <?=$this->lang->line('application_min_qty'); ?>
                 </th>
-                <th>
+                <th style='text-align:center;'>
                     <?=$this->lang->line('application_current_qty'); ?>
                 </th>
                 <?php if ($filtered == true) : ?>
-                    <th class="hidden-sm hidden-xs">
+                    <th class="hidden-sm hidden-xs" style='text-align:center;'>
                         <?=$this->lang->line('application_last_update'); ?>
                     </th>
-                    <th style="width: 200px;">
+                    <th style="width: 200px;text-align:center;">
                         <?=$this->lang->line('application_action'); ?>
                     </th>
                 <?php endif; ?>
@@ -90,19 +96,26 @@
                 <?php foreach ($all_materials as $value):?>
 
                     <tr id="<?=$value->id; ?>">
-                        <td class="hidden-xs" style="width:70px">
-                            <?=$value->material_type_id?>
-                        </td>
-                        <td>
+                        <td style='text-align:center;vertical-align:middle'>
                             <?=$value->description; ?>
                         </td>
-                        <td class="hidden-sm hidden-xs">
+                        <td style='text-align:center;vertical-align:middle'>
+                            <?=$value->material_type->stock_area->name; ?>
+                        </td>
+                        <td style='text-align:center;vertical-align:middle'>
+                            <?=$value->supplier->name; ?>
+                        </td>
+                        <td style='text-align:center;vertical-align:middle'>
+                            <?php $value->image = $value->image != null ? $value->image : "no-pic.png"; ?>
+                            <img data-action="zoom" src="<?=base_url()."/files/materials/".$value->image;?>">
+                        </td>
+                        <td class="hidden-sm hidden-xs" style='text-align:center;vertical-align:middle'>
                             <?=$this->lang->line("application_$value->unity"); ?>
                         </td>
-                        <td class="hidden-sm hidden-xs">
+                        <td class="hidden-sm hidden-xs" style='text-align:center;vertical-align:middle'>
                             <?=$value->min_qty; ?>
                         </td>
-                        <td>
+                        <td style='text-align:center;vertical-align:middle'>
                             <?php if ($value->amount->quantity >= $value->min_qty) : ?>
                                 <span style="color:green">
                                     <?=$value->amount->quantity != null ? $value->amount->quantity : 0; ?>
@@ -115,7 +128,7 @@
                         </td>
                         <?php if ($filtered == true) : ?>
                             <?php if($value->handling_last != null)  : ?>
-                                <td class="hidden-sm hidden-xs">
+                                <td class="hidden-sm hidden-xs" style='text-align:center;vertical-align:middle'>
                                     <?=$value->handling_last->user->firstname; ?>
                                     <?=$this->lang->line('application_at'); ?>
                                     <?php
@@ -127,7 +140,7 @@
                                 <td>
                                 </td>
                             <?php endif; ?>
-                        <td>
+                        <td style='text-align:center;vertical-align:middle'>
                             <a href="<?=base_url()?>materialmanagement/quick_entrance/<?=$selected_deposit_id?>/<?=$value->id?>" class="btn btn-success"><?=$this->lang->line('application_include');?> (+)</a>
                             <a href="<?=base_url()?>materialmanagement/quick_output/<?=$selected_deposit_id?>/<?=$value->id?>" class="btn btn-danger"><?=$this->lang->line('application_withdraw');?> (–)</a>
                         </td>
@@ -138,151 +151,4 @@
         </div>
     </div>
     </div>
-
-    <!--<div class="col-md-9 col-lg-10">
-        
-        <div class="box-shadow">
-            
-            <div class="table-head">
-                <?/*=$this->lang->line('application_entrances');*/?>
-                <span class="pull-right">
-                    <?php /*if($selected_deposit_id):*/?>
-                        <a href="<?/*=base_url()*/?>materialmanagement/entrance_create/<?/*=$selected_deposit_id*/?>" class="btn btn-primary" data-toggle="mainmodal">
-                            <?/*=$this->lang->line('application_add_entrance');*/?>
-                        </a>
-                    <?php /*endif*/?>
-				</span>
-            </div>
-
-            <div class="table-div responsive">
-                <table id="entrances" class="data-no-search table" cellspacing="0" cellpadding="0">
-                    <thead>
-                    <th style="width:80px" class="hidden-xs">
-                        <?/*=$this->lang->line('application_id');*/?>
-                    </th>
-                    <th class="hidden-xs">
-                        <?/*=$this->lang->line('application_deposit');*/?>
-                    </th>
-                    <th class="hidden-xs">
-                        <?/*=$this->lang->line('application_material');*/?>
-                    </th>
-                    <th class="hidden-xs">
-                        <?/*=$this->lang->line('application_quantity');*/?>
-                    </th>
-                    <th class="hidden-xs">
-                        <?/*=$this->lang->line('application_date');*/?>
-                    </th>
-                    <th class="hidden-xs">
-                        <?/*=$this->lang->line('application_action');*/?>
-                    </th>
-                    </thead>
-                    <?php /*foreach ($entrances as $entrance):*/?>
-
-                        <tr id="<?/*=$entrance->id;*/?>">
-                            <td class="hidden-xs">
-                                <?/*=$entrance->id;*/?>
-                            </td>
-                            <td>
-                                <?/*=$entrance->deposit->name;*/?>
-                            </td>
-                            <td>
-                                <?/*=$entrance->material->description;*/?>
-                            </td>
-                            <td>
-                                <?/*=$entrance->quantity;*/?>
-                            </td>
-                            <td>
-                                <?/*=$entrance->date;*/?>
-                            </td>
-
-                            <td class="option" width="8%">
-                                <button type="button" class="btn-option delete po" data-toggle="popover" data-placement="left" data-content="<a class='btn btn-danger po-delete ajax-silent' href='<?/*=base_url()*/?>materialmanagement/entrance_delete/<?/*=$entrance->id;*/?>'><?/*=$this->lang->line('application_yes_im_sure');*/?></a> <button class='btn po-close'><?/*=$this->lang->line('application_no');*/?></button> <input type='hidden' name='td-id' class='id' value='<?/*=$entrance->id;*/?>'>"
-                                        data-original-title="<b><?/*=$this->lang->line('application_really_delete');*/?></b>">
-                                    <i class="icon dripicons-cross"></i>
-                                </button>
-                                <a href="<?/*=base_url()*/?>materialmanagement/entrance_update/<?/*=$entrance->id;*/?>/<?/*=$entrance->deposit_id;*/?>/<?/*=$entrance->material_id*/?>/<?/*=$entrance->quantity*/?>" class="btn-option" data-toggle="mainmodal">
-                                    <i class="icon dripicons-gear"></i>
-                                </a>
-                            </td>
-                        </tr>
-
-                    <?php /*endforeach;*/?>
-                </table>
-            
-            </div>
-        </div>
-    </div>-->
-
-    <!--<div class="col-md-9 col-lg-10">
-    
-        <div class="box-shadow">
-        
-            <div class="table-head">
-                <?/*=$this->lang->line('application_outputs');*/?>
-                <span class="pull-right">
-                    <?php /*if($selected_deposit_id):*/?>
-                        <a  href="<?/*=base_url()*/?>materialmanagement/output_create/<?/*=$selected_deposit_id*/?>" class="btn btn-primary" data-toggle="mainmodal">
-                            <?/*=$this->lang->line('application_add_output');*/?>
-                        </a>
-                    <?php /*endif*/?>
-				</span>
-            </div>
-            
-            <div class="table-div responsive">
-                <table id="outputs" class="data-no-search table" cellspacing="0" cellpadding="0">
-                    <thead>
-                    <th style="width:80px" class="hidden-xs">
-                        <?/*=$this->lang->line('application_id');*/?>
-                    </th>
-                    <th class="hidden-xs">
-                        <?/*=$this->lang->line('application_deposit');*/?>
-                    </th>
-                    <th class="hidden-xs">
-                        <?/*=$this->lang->line('application_material');*/?>
-                    </th>
-                    <th class="hidden-xs">
-                        <?/*=$this->lang->line('application_quantity');*/?>
-                    </th>
-                    <th class="hidden-xs">
-                        <?/*=$this->lang->line('application_date');*/?>
-                    </th>
-                    <th class="hidden-xs">
-                        <?/*=$this->lang->line('application_action');*/?>
-                    </th>
-                    </thead>
-                    <?php /*foreach ($outputs as $output):*/?>
-
-                        <tr id="<?/*=$output->id;*/?>">
-                            <td class="hidden-xs">
-                                <?/*=$output->id;*/?>
-                            </td>
-                            <td>
-                                <?/*=$output->deposit->name;*/?>
-                            </td>
-                            <td>
-                                <?/*=$output->material->description;*/?>
-                            </td>
-                            <td>
-                                <?/*=$output->quantity;*/?>
-                            </td>
-                            <td>
-                                <?/*=$output->date;*/?>
-                            </td>
-
-                            <td class="option" width="8%">
-                                <button type="button" class="btn-option delete po" data-toggle="popover" data-placement="left" data-content="<a class='btn btn-danger po-delete ajax-silent' href='<?/*=base_url()*/?>materialmanagement/output_delete/<?/*=$output->id;*/?>'><?/*=$this->lang->line('application_yes_im_sure');*/?></a> <button class='btn po-close'><?/*=$this->lang->line('application_no');*/?></button> <input type='hidden' name='td-id' class='id' value='<?/*=$output->id;*/?>'>"
-                                        data-original-title="<b><?/*=$this->lang->line('application_really_delete');*/?></b>">
-                                    <i class="icon dripicons-cross"></i>
-                                </button>
-                                <a href="<?/*=base_url()*/?>materialmanagement/output_update/<?/*=$output->id;*/?>/<?/*=$output->deposit_id;*/?>/<?/*=$output->material_id*/?>/<?/*=$output->quantity*/?>" class="btn-option" data-toggle="mainmodal">
-                                    <i class="icon dripicons-gear"></i>
-                                </a>
-                            </td>
-                        </tr>
-
-                    <?php /*endforeach;*/?>
-                </table>
-            </div>
-        </div>
-    </div>-->
 </div>

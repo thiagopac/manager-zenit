@@ -1026,6 +1026,50 @@ class MaterialManagement extends MY_Controller{
         $material = Material::find($material);
         
         if ($_POST) {
+
+            $config['upload_path'] = './files/materials/';
+            $config['encrypt_name'] = true;
+            $config['allowed_types'] = '*';
+
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload()) {
+//                $error = $this->upload->display_errors('', ' ');
+//                $this->session->set_flashdata('message', 'error:'.$error);
+//                redirect('materialmanagement/materials');
+            } else {
+                $data = array('upload_data' => $this->upload->data());
+
+                $_POST['file_name'] = $data['upload_data']['orig_name'];
+                $_POST['image'] = $data['upload_data']['file_name'];
+//                $_POST['type'] = $data['upload_data']['file_type'];
+
+                //check image processor extension
+                if (extension_loaded('gd2')) {
+                    $lib = 'gd2';
+                } else {
+                    $lib = 'gd';
+                }
+                $config['image_library'] = $lib;
+                $config['source_image']    = './files/materials/'.$_POST['image'];
+                $config['create_thumb'] = false;
+                $config['maintain_ratio'] = true;
+//                $config['width']    = 170;
+//                $config['height']    = 170;
+                $config['master_dim']    = "height";
+                $config['quality']    = "100%";
+
+                $this->load->library('image_lib');
+                $this->image_lib->initialize($config);
+                $this->image_lib->resize();
+                $this->image_lib->clear();
+            }
+
+            unset($_POST['send']);
+            unset($_POST['userfile']);
+            unset($_POST['file-name']);
+            unset($_POST['files']);
+            unset($_POST['file_name']);
             
             $material->update_attributes($_POST);
             $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_material_success'));
@@ -1034,6 +1078,7 @@ class MaterialManagement extends MY_Controller{
             $this->view_data['material'] = $material;
             $this->theme_view = 'modal';
             $this->view_data['material_types'] = MaterialType::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['suppliers'] = Supplier::find('all');
             $this->view_data['title'] = $this->lang->line('application_edit_material');
             $this->view_data['form_action'] = 'materialmanagement/material_update/' . $material->id;
             $this->content_view = 'materialhandling/_materialform';
@@ -1043,6 +1088,50 @@ class MaterialManagement extends MY_Controller{
     public function material_create(){
 
         if ($_POST) {
+
+            $config['upload_path'] = './files/materials/';
+            $config['encrypt_name'] = true;
+            $config['allowed_types'] = '*';
+
+            $this->load->library('upload', $config);
+
+            if (! $this->upload->do_upload()) {
+//                $error = $this->upload->display_errors('', ' ');
+//                $this->session->set_flashdata('message', 'error:'.$error);
+//                redirect('materialmanagement/materials');
+            } else {
+                $data = array('upload_data' => $this->upload->data());
+
+                $_POST['file_name'] = $data['upload_data']['orig_name'];
+                $_POST['image'] = $data['upload_data']['file_name'];
+//                $_POST['type'] = $data['upload_data']['file_type'];
+
+                //check image processor extension
+                if (extension_loaded('gd2')) {
+                    $lib = 'gd2';
+                } else {
+                    $lib = 'gd';
+                }
+                $config['image_library'] = $lib;
+                $config['source_image']    = './files/materials/'.$_POST['image'];
+                $config['create_thumb'] = false;
+                $config['maintain_ratio'] = true;
+//                $config['width']    = 170;
+//                $config['height']    = 170;
+                $config['master_dim']    = "height";
+                $config['quality']    = "100%";
+
+                $this->load->library('image_lib');
+                $this->image_lib->initialize($config);
+                $this->image_lib->resize();
+                $this->image_lib->clear();
+            }
+
+            unset($_POST['send']);
+            unset($_POST['userfile']);
+            unset($_POST['file-name']);
+            unset($_POST['files']);
+            unset($_POST['file_name']);
 
             $options = ['conditions' => ['description = ?', $_POST['description']]];
             $material_exists = Material::find($options);
@@ -1061,6 +1150,7 @@ class MaterialManagement extends MY_Controller{
             $this->theme_view = 'modal';
             $this->view_data['title'] = $this->lang->line('application_add_material');
             $this->view_data['material_types'] = MaterialType::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+            $this->view_data['suppliers'] = Supplier::find('all');
             $this->view_data['form_action'] = 'materialmanagement/material_create/';
             $this->content_view = 'materialhandling/_materialform';
         }

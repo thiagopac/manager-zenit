@@ -143,7 +143,7 @@ class Suppliers extends MY_Controller {
                 } else {
 
                     $this->theme_view = 'modal';
-                    $this->view_data['title'] = $this->lang->line('application_new_category');
+                    $this->view_data['title'] = $this->lang->line('application_new_segment');
                     $this->view_data['form_action'] = 'suppliers/category/create';
                     $this->content_view = 'suppliers/_category';
                 }

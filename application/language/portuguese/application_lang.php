@@ -1104,3 +1104,6 @@ $lang['application_deposit_stock_value'] = "Valores em estoque do depósito";
 $lang['application_see_stock'] = "Ver estoque";
 $lang['application_stock_quantity'] = "Quantidade em estoque";
 $lang['application_total_value'] = "Valor total";
+$lang['application_measurement'] = "Medida";
+$lang['application_image'] = "Imagem";
+$lang['application_deposit_area'] = "Área de depósito";

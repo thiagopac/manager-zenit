@@ -76,3 +76,6 @@ storage.json
 blob_storage
 GPUCache
 Cache
+
+#image files
+files/materials
