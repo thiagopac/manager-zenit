@@ -1406,7 +1406,7 @@ class MaterialManagement extends MY_Controller{
         $this->view_data['entrances'] = $entrances;
         $this->view_data['outputs'] = $outputs;
 
-        $this->view_data['breadcrumb_id'] = 'materialmanagement';
+        $this->view_data['breadcrumb_id'] = 'materialmanagement/handling_logs';
         $this->view_data['deposits'] = $deposits;
         $this->content_view = 'materialhandling/logs';
     }
