@@ -1,5 +1,5 @@
-<div class="col-md-3 col-lg-2 no-padding height">
-	<div class="list-group">
+<div class="col-md-12 col-lg-12">
+	<div class="list-group" style="display:-webkit-inline-box !important;">
 		<?php 
 
                 foreach ($submenu as $name => $value):

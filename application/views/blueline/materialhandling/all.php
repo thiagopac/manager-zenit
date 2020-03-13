@@ -1,15 +1,9 @@
 <div id="row">
-
-    <?php include 'materialhandling_menu.php'; ?>
+        <?php include 'materialhandling_menu.php'; ?>
 
     <div>
         <div class="btn-group pull-right" style="margin-bottom: 15px; margin-right: 20px;">
 
-<!--            --><?php //if($selected_deposit_id):?>
-<!--                <a href="--><?//=base_url()?><!--materialmanagement/deposit_amount/--><?//=$selected_deposit_id?><!--" class="btn btn-primary margin-right-3" data-toggle="mainmodal">-->
-<!--                    --><?//=$this->lang->line('application_deposit_amount');?>
-<!--                </a>-->
-<!--            --><?php //endif?>
 
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                 
@@ -35,29 +29,17 @@
         </div>
     </div>
 
-
-    <div class="col-md-9 col-lg-10">
-
-        <?php if ($selected_deposit_id == null) : ?>
-            <div class="alert alert-warning"><?=$this->lang->line('application_select_deposit_notice');?></div><br/>
-        <?php endif; ?>
+    <?php if ($selected_deposit_id == null) : ?>
+        <span class="alert alert-warning" style="margin-left: 15px;text-transform: initial;">
+            <?=$this->lang->line('application_select_deposit_notice');?>
+        </span>
+    <?php endif; ?>
+    <div class="col-md-12 col-lg-12">
 
         <div class="box-shadow">
 
         <div class="table-head">
             <?=$this->lang->line('application_entrances_and_outputs');?>
-            <!--<span class="pull-right">
-                    <?php /*if($selected_deposit_id):*/?>
-                        <a href="<?/*=base_url()*/?>materialmanagement/entrance_create/<?/*=$selected_deposit_id*/?>" class="btn btn-success" data-toggle="mainmodal">
-                            <?/*=$this->lang->line('application_add_entrance_batch');*/?> (+)
-                        </a>
-
-                        <a href="<?/*=base_url()*/?>materialmanagement/output_create/<?/*=$selected_deposit_id*/?>" class="btn btn-danger" data-toggle="mainmodal">
-                            <?/*=$this->lang->line('application_add_output_batch');*/?> (–)
-                        </a>
-
-                    <?php /*endif*/?>
-            </span>-->
         </div>
 
         <div class="table-div responsive">
@@ -89,7 +71,10 @@
                         <?=$this->lang->line('application_last_update'); ?>
                     </th>
                     <th style="width: 200px;text-align:center;">
-                        <?=$this->lang->line('application_action'); ?>
+                        <?=$this->lang->line('application_action_single'); ?>
+                    </th>
+                    <th style="width: 200px;text-align:center;">
+                        <?=$this->lang->line('application_action_batch'); ?>
                     </th>
                 <?php endif; ?>
                     </thead>
@@ -143,6 +128,11 @@
                         <td style='text-align:center;vertical-align:middle'>
                             <a href="<?=base_url()?>materialmanagement/quick_entrance/<?=$selected_deposit_id?>/<?=$value->id?>" class="btn btn-success"><?=$this->lang->line('application_include');?> (+)</a>
                             <a href="<?=base_url()?>materialmanagement/quick_output/<?=$selected_deposit_id?>/<?=$value->id?>" class="btn btn-danger"><?=$this->lang->line('application_withdraw');?> (–)</a>
+                        </td>
+
+                        <td style='text-align:center;vertical-align:middle'>
+                            <a href="<?=base_url()?>materialmanagement/entrance_create/<?=$selected_deposit_id?>/<?=$value->id?>" data-toggle="mainmodal" class="btn btn-success">+</a>
+                            <a href="<?=base_url()?>materialmanagement/output_create/<?=$selected_deposit_id?>/<?=$value->id?>" data-toggle="mainmodal" class="btn btn-danger">–</a>
                         </td>
                         <?php endif; ?>
                     </tr>

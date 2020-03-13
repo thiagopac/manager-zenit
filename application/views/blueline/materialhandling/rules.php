@@ -2,7 +2,7 @@
 
     <?php include 'materialhandling_menu.php'; ?>
 
-    <div class="col-md-9 col-lg-10">
+    <div class="col-md-12 col-lg-12">
         <div class="box-shadow">
             <div class="table-head">
                 <?=$this->lang->line('application_material_rules');?>
@@ -68,7 +68,7 @@
         </div>
     </div>
 
-    <div class="col-md-9 col-lg-10">
+    <div class="col-md-12 col-lg-12">
         <div class="box-shadow">
             <div class="table-head">
                 <?=$this->lang->line('application_stock_area_rules');?>

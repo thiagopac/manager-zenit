@@ -1107,3 +1107,6 @@ $lang['application_total_value'] = "Valor total";
 $lang['application_measurement'] = "Medida";
 $lang['application_image'] = "Imagem";
 $lang['application_deposit_area'] = "Área de depósito";
+$lang['application_action_single'] = "Ação unitária";
+$lang['application_action_batch'] = "Ação em massa";
+$lang['application_handling_logs'] = "Logs";

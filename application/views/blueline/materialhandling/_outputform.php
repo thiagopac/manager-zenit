@@ -20,18 +20,27 @@ echo form_open_multipart($form_action, $attributes);
         <input type="hidden" name="deposit_id" value="<?=$deposit_id?>" />
     <?php endif?>
 
-    <div class="form-group">
+    <!--<div class="form-group">
         <label for="material">
-            <?=$this->lang->line('application_material');?> *
+            <?/*=$this->lang->line('application_material');*/?> *
         </label>
         <?php
-            $material_arr = [];
+/*            $material_arr = [];
             foreach($materials as $m){
                 $material_arr[$m->id] = $m->description;
             }
-            echo form_dropdown('material_id', $material_arr, $output->material_id, 'style="width:100%" class="chosen-select"');
-        ?>
+            echo form_dropdown('material_id', $material_arr, $material_id, 'style="width:100%" class="chosen-select" readonly');
+        */?>
+    </div>-->
+
+    <div class="form-group">
+        <label for="quantity">
+            <?=$this->lang->line('application_material');?> *
+        </label>
+        <input type="text" readonly class="form-control" value="<?php echo Material::find($material_id)->description;?>" />
     </div>
+
+    <input type="hidden" name="material_id" value="<?=$material_id?>" />
 
     <div class="form-group">
         <label for="quantity">
