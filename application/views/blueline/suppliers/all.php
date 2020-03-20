@@ -5,8 +5,8 @@
 
             <div class="btn-group pull-right margin-right-3">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                    <?php if (isset($active_task_filter)) {
-                        echo $this->lang->line('application_' . $active_state_filter);
+                    <?php if ($active_state_filter) {
+                        echo $active_state_filter;
                     } else {
                         echo $this->lang->line('application_state');
                     } ?>
@@ -16,7 +16,7 @@
 
                     <li>
                         <a id="" href="<?=base_url()?>suppliers">
-                            <?=$this->lang->line('application_none');?>
+                            <?=$this->lang->line('application_all');?>
                         </a>
                     </li>
                     <?php
@@ -45,8 +45,8 @@
             <th><?=$this->lang->line('application_id');?></th>
 			<th><?=$this->lang->line('application_name');?></th>
             <th><?=$this->lang->line('application_registered_number');?></th>
-            <th><?=$this->lang->line('application_state_registration');?></th>
-            <th><?=$this->lang->line('application_municipal_registration');?></th>
+            <th><?=$this->lang->line('application_state_registration_abrv');?></th>
+            <th><?=$this->lang->line('application_municipal_registration_abrv');?></th>
 <!--            <th>--><?//=$this->lang->line('application_address');?><!--</th>-->
 <!--            <th>--><?//=$this->lang->line('application_neighborhood');?><!--</th>-->
             <th><?=$this->lang->line('application_city');?></th>
@@ -57,7 +57,7 @@
 <!--            <th>--><?//=$this->lang->line('application_phone');?><!--</th>-->
 <!--			<th>--><?//=$this->lang->line('application_email');?><!--</th>-->
             <th><?=$this->lang->line('application_segments');?></th>
-            <th><?=$this->lang->line('application_payment_condition');?></th>
+            <th><?=$this->lang->line('application_payment_condition_abrv');?></th>
             <th><?=$this->lang->line('application_supplier_deadline');?></th>
 <!--            <th>--><?//=$this->lang->line('application_bank');?><!--</th>-->
 <!--            <th>--><?//=$this->lang->line('application_branch');?><!--</th>-->
@@ -111,27 +111,3 @@
 
 	</div>
 </div>
-
-<!--
-id
-name
-registered_number
-state_registration
-address
-neighborhood
-city
-state
-zipcode
-website
-contact
-phone
-email
-supplier_category_ids
-payment_condition
-supplier_deadline
-bank_id
-branch
-account
-created_at
-updated_at
- -->

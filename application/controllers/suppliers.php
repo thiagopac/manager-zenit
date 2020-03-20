@@ -32,9 +32,25 @@ class Suppliers extends MY_Controller {
 
         if ($_GET['state'] != null){
             $this->view_data['suppliers'] = Supplier::find('all', $state_filter);
+
+            $settings = Setting::first();
+            $statesList = $settings->list_states();
+
+            foreach($statesList as $key => $value){
+
+                if ($key == $_GET['state']){
+                    $active_state_filter = $value;
+                }
+            }
         }else{
             $this->view_data['suppliers'] = Supplier::find('all');
         }
+
+        if ($_GET['state'] == null){
+            $active_state_filter = $this->lang->line("application_state");
+        }
+
+        $this->view_data['active_state_filter'] = $active_state_filter;
 
         $this->content_view = 'suppliers/all';
     }
@@ -49,6 +65,8 @@ class Suppliers extends MY_Controller {
                     $_POST['supplier_category_ids'] = $str_cats;
 
                     unset($_POST['supplier_categories']);
+
+                    $_POST['city'] = ucwords(strtolower($_POST['city']));
 
                     $supplier = Supplier::create($_POST);
 
@@ -76,6 +94,8 @@ class Suppliers extends MY_Controller {
                         $view = $_POST['view'];
                         unset($_POST['view']);
                     }
+
+                    $_POST['city'] = ucwords(strtolower($_POST['city']));
 
                     $str_cats = implode(",",$_POST['supplier_categories']);
                     $_POST['supplier_category_ids'] = $str_cats;
@@ -149,36 +169,6 @@ class Suppliers extends MY_Controller {
                 }
                 break;
         }
-    }
-
-    public function filter($filter){
-
-        switch ($filter) {
-            case 'all':
-                $taskquery = Supplier::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ?', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
-                break;
-            case 'delayed':
-                $taskquery = Supplier::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ? and NOW() > due_date', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
-                break;
-            case 'today':
-                $taskquery = Supplier::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ? and due_date BETWEEN NOW() AND NOW() + INTERVAL 1 DAY', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
-                break;
-            case 'two':
-                $taskquery = Supplier::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ? and due_date BETWEEN NOW() AND NOW() + INTERVAL 2 DAY', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
-                break;
-            case 'week':
-                $taskquery = Supplier::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ? and due_date BETWEEN NOW() AND NOW() + INTERVAL 1 WEEK', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
-                break;
-            case 'weekahead':
-                $taskquery = Supplier::find('all', ['conditions' => ['user_id = ? and status != ? and start_date != ? and due_date != ? and due_date BETWEEN NOW() + INTERVAL 1 WEEK AND NOW() + INTERVAL 1 YEAR', $this->user->id, 'done', '', ''], 'order' => 'project_id asc']);
-                break;
-        }
-
-
-        $this->view_data['suppliers'] = $taskquery;
-        $this->view_data['active_state_filter'] = $filter;
-
-        $this->content_view = 'suppliers/all';
     }
 
 }

@@ -213,6 +213,7 @@ echo form_open_multipart($form_action, $attributes);
         $('#registered_number').mask('00.000.000/0000-00', {reverse: false})
         $('#state_registration').mask('000000000.00-00', {reverse: false})
         $('#municipal_registration').mask('00.000/00-0', {reverse: false})
+        $('#zipcode').mask('00000-000', {reverse: false})
 
     });
 </script>

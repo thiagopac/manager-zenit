@@ -15,28 +15,28 @@
             <div class="table-div responsive">
                 <table id="materials" class="data-no-search table" cellspacing="0" cellpadding="0">
                     <thead>
-                    <th style="width:80px;text-align:center;" class="hidden-xs">
+                    <th style="width:80px;text-align:center;" class="hidden-xs hidden-sm">
                         <?=$this->lang->line('application_id');?>
                     </th>
-                    <th class="hidden-xs" style='text-align:center;'>
+                    <th style='text-align:center;'>
                         <?=$this->lang->line('application_name');?>
                     </th>
-                    <th class="hidden-xs" style='text-align:center;'>
+                    <th class="hidden-xs hidden-sm" style='text-align:center;'>
                         <?=$this->lang->line('application_supplier');?>
                     </th>
-                    <th class="no-sort" style='text-align:center;'>
+                    <th class="no-sort hidden-xs hidden-sm" style='text-align:center;' class="hidden-xs hidden-sm">
                         <?=$this->lang->line('application_image');?>
                     </th>
-                    <th class="" style='text-align:center;'>
+                    <th class="hidden-xs hidden-sm" style='text-align:center;' class="hidden-xs hidden-sm">
                         <?=$this->lang->line('application_type');?>
                     </th>
-                    <th class="" style='text-align:center;'>
+                    <th class="hidden-xs hidden-sm" style='text-align:center;' class="hidden-xs hidden-sm">
                         <?=$this->lang->line('application_price');?>
                     </th>
-                    <th class="" style='text-align:center;'>
+                    <th class="hidden-xs hidden-sm" style='text-align:center;' class="hidden-xs hidden-sm">
                         <?=$this->lang->line('application_min_qty');?>
                     </th>
-                    <th class="hidden-xs no-sort" style='text-align:center;'>
+                    <th class="no-sort" style='text-align:center;'>
                         <?=$this->lang->line('application_action');?>
                     </th>
                     </thead>
@@ -49,20 +49,20 @@
                             <td style='text-align:center;vertical-align:middle'>
                                 <?=$material->description;?>
                             </td>
-                            <td style='text-align:center;vertical-align:middle'>
+                            <td style='text-align:center;vertical-align:middle' class="hidden-xs hidden-sm">
                                 <?=$material->supplier->name;?>
                             </td>
-                            <td style='text-align:center;vertical-align:middle'>
+                            <td style='text-align:center;vertical-align:middle' class="hidden-xs hidden-sm">
                                 <?php $material->image = $material->image != null ? $material->image : "no-pic.png"; ?>
                                 <img data-action="zoom" src="<?=base_url()."/files/materials/".$material->image;?>" height="40">
                             </td>
-                            <td style='text-align:center;vertical-align:middle'>
+                            <td style='text-align:center;vertical-align:middle' class="hidden-xs hidden-sm">
                                 <?=$material->material_type->name;?>
                             </td>
-                            <td style='text-align:center;vertical-align:middle'>
+                            <td style='text-align:center;vertical-align:middle' class="hidden-xs hidden-sm">
                                 <?=$core_settings->money_symbol?> <?=display_money($material->price)?>
                             </td>
-                            <td style='text-align:center;vertical-align:middle'>
+                            <td style='text-align:center;vertical-align:middle' class="hidden-xs hidden-sm">
                                 <?=$material->min_qty;?>
                             </td>
                             <td class="option" width="8%" style='text-align:center;vertical-align:middle'>
