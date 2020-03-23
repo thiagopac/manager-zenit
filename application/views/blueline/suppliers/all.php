@@ -82,7 +82,19 @@
 
                 <?php $websites = explode(' ',$value->website);?>
                 <?php foreach ($websites as $website) : ?>
-                    <p><button class="label label-info"  onclick=" window.open('<?="http://".$website?>', '_blank'); return false;"><?=$website?></button></p>
+                <?php
+                    $size_break = 27;
+                    if (strlen($website) > $size_break){
+                        $website_url = $website;
+                        $break = "<br />";
+                        $_1_website = substr($website, 0, $size_break).$break;
+                        $_2_website = substr($website, strlen($_1_website) - strlen($break), strlen($website) - strlen($_1_website) + strlen($break));
+                        $website = $_1_website.$_2_website;
+
+//                        $website = (strlen($website));
+                    }
+                ?>
+                    <p><button class="label label-info"  onclick=" window.open('<?="http://".$website_url?>', '_blank'); return false;"><?=$website?></button></p>
                 <?php endforeach; ?>
             </td>
 

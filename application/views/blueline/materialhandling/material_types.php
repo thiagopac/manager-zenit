@@ -13,9 +13,9 @@
 				</span>
             </div>
             <div class="table-div responsive">
-                <table id="material_types" class="data-no-search table" cellspacing="0" cellpadding="0">
+                <table id="material_types" class="data-no-search table noclick" cellspacing="0" cellpadding="0">
                     <thead>
-                    <th style="width:80px" class="hidden-xs">
+                    <th style="width:80px" class="hidden-xs hidden-sm">
                         <?=$this->lang->line('application_id');?>
                     </th>
                     <th class="">
@@ -31,7 +31,7 @@
                     <?php foreach ($material_types as $material_type):?>
 
                         <tr id="<?=$material_type->id;?>">
-                            <td class="">
+                            <td class="hidden-xs hidden-sm">
                                 <?=$material_type->id;?>
                             </td>
                             <td>

@@ -9,7 +9,7 @@
             </div>
 
             <div class="table-div responsive">
-                <table id="deposits_stock_value" class="data-no-search table" cellspacing="0" cellpadding="0">
+                <table id="deposits_stock_value" class="data-no-search table noclick" cellspacing="0" cellpadding="0">
                     <thead>
                     <th style="width:80px">
                         <?=$this->lang->line('application_id');?>

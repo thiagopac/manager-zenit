@@ -996,10 +996,13 @@ $lang['application_terrain_status_user_notification'] = 'Notificar colaboradores
 
 $lang['application_deposits'] = "Depósitos";
 $lang['application_deposit'] = "Depósito";
+$lang['application_deposit_abrv'] = "Dep.";
 $lang['application_stock_areas'] = "Áreas de Depósito";
 $lang['application_stock_area'] = "Área de Depósito";
+$lang['application_stock_area_abrv'] = "Área de Dep.";
 $lang['application_materials'] = "Materiais";
 $lang['application_material'] = "Material";
+$lang['application_material_abrv'] = "Mat.";
 $lang['application_material_types'] = "Tipos de material";
 $lang['application_add_deposit'] = "Adicionar depósito";
 
@@ -1025,6 +1028,7 @@ $lang['application_kilo'] = "Quilo";
 $lang['application_deposit_stock_areas'] = "Depósito x Área";
 $lang['application_add_deposit_stock_area'] = "Relacionar depósito x área";
 $lang['application_capacity'] = "Capacidade";
+$lang['application_capacity_abrv'] = "Cap.";
 
 $lang['application_edit_deposit_stock_area'] = "Editar relação depósito x área";
 
@@ -1050,6 +1054,7 @@ $lang['application_edit_material_rule'] = "Editar regra de material";
 $lang['application_add_stock_area_rule'] = "Adiconar regra de área de depósito";
 
 $lang['application_verification'] = "Verificação";
+$lang['application_verification_abrv'] = "Verif.";
 $lang['application_value'] = "Valor";
 
 $lang['application_less_than'] = "Menor que";

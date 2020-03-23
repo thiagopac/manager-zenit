@@ -13,18 +13,24 @@
 				</span>
             </div>
             <div class="table-div responsive">
-                <table id="deposit_stock_areas" class="data-no-search table" cellspacing="0" cellpadding="0">
+                <table id="deposit_stock_areas" class="data-no-search table noclick" cellspacing="0" cellpadding="0">
                     <thead>
-                    <th style="width:80px" class="hidden-xs">
-                        <?=$this->lang->line('application_deposits');?>
+                    <th style="width:80px" class="">
+                        <?=$this->lang->line('application_deposit');?>
                     </th>
-                    <th class="hidden-xs">
-                        <?=$this->lang->line('application_stock_areas');?>
+                    <th class="hidden-sm hidden-xs">
+                        <?=$this->lang->line('application_stock_area');?>
                     </th>
-                    <th class="hidden-xs">
+                    <th class="hidden-md hidden-lg">
+                        <?=$this->lang->line('application_stock_area_abrv');?>
+                    </th>
+                    <th class="hidden-sm hidden-xs">
                         <?=$this->lang->line('application_capacity');?>
                     </th>
-                    <th class="hidden-xs no-sort">
+                    <th class="hidden-md hidden-lg">
+                        <?=$this->lang->line('application_capacity_abrv');?>
+                    </th>
+                    <th class="no-sort">
                         <?=$this->lang->line('application_action');?>
                     </th>
                     </thead>
@@ -32,15 +38,15 @@
 
                         <tr id="<?=$deposit_stock_area->deposit_id;?>">
                             
-                            <td class="hidden-xs">
+                            <td class="">
                                 <?=$deposit_stock_area->deposit->name;?>
                             </td>
 
-                            <td class="hidden-xs">
+                            <td class="">
                                 <?=$deposit_stock_area->stock_area->name;?>
                             </td>
 
-                            <td class="hidden-xs">
+                            <td class="">
                                 <?=$deposit_stock_area->capacity;?>
                             </td>
 

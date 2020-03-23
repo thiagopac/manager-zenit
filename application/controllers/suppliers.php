@@ -36,12 +36,8 @@ class Suppliers extends MY_Controller {
             $settings = Setting::first();
             $statesList = $settings->list_states();
 
-            foreach($statesList as $key => $value){
+            $active_state_filter = $statesList[$_GET['state']];
 
-                if ($key == $_GET['state']){
-                    $active_state_filter = $value;
-                }
-            }
         }else{
             $this->view_data['suppliers'] = Supplier::find('all');
         }

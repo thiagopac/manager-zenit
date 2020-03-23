@@ -17,7 +17,7 @@
             </div>
 
             <div class="table-div responsive">
-                <table id="entrances" class="data table" cellspacing="0" cellpadding="0">
+                <table id="entrances" class="data table noclick" cellspacing="0" cellpadding="0">
                     <thead>
                     <th style="text-align:center;width:80px">
                         <?=$this->lang->line('application_id');?>
@@ -96,7 +96,7 @@
             </div>
 
             <div class="table-div responsive">
-                <table id="outputs" class="data table" cellspacing="0" cellpadding="0">
+                <table id="outputs" class="data table noclick" cellspacing="0" cellpadding="0">
                     <thead>
                     <th style="text-align:center;width:80px">
                         <?=$this->lang->line('application_id');?>

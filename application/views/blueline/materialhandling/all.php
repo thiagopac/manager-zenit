@@ -33,16 +33,18 @@
 
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <span class="alert alert-warning hidden-xs hidden-sm" style="text-transform: initial;margin-bottom: 16px">
-                <?=$this->lang->line('application_select_deposit_notice');?>
-            </span>
-            <span class="alert alert-warning hidden-md hidden-lg" style="text-transform: initial; padding:6px">
-                <small><?=$this->lang->line('application_select_deposit_notice_mobile');?></small>
-            </span>
+    <?php if (!$filtered) : ?>
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-md-12">
+                <span class="alert alert-warning hidden-xs hidden-sm" style="text-transform: initial;margin-bottom: 16px">
+                    <?=$this->lang->line('application_select_deposit_notice');?>
+                </span>
+                <span class="alert alert-warning hidden-md hidden-lg" style="text-transform: initial; padding:6px">
+                    <small><?=$this->lang->line('application_select_deposit_notice_mobile');?></small>
+                </span>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
 
     <div class="row">
         <div class="col-md-12 col-lg-12">
@@ -54,7 +56,7 @@
                 </div>
 
                 <div class="table-div responsive">
-                    <table style="width: 100%" id="materials" class="data table" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
+                    <table style="width: 100%" id="materials" class="data table noclick" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
                         <thead>
                         <th width="25%" style='text-align:center;'>
                             <?=$this->lang->line('application_name'); ?>
@@ -81,6 +83,7 @@
                             <th class="hidden-xs hidden-sm" width="10%" style='text-align:center;'>
                                 <?=$this->lang->line('application_last_update'); ?>
                             </th>
+
                             <th class="no-sort hidden-xs hidden-sm" width="15%" style="text-align:center;">
                                 <?=$this->lang->line('application_action_single'); ?>
                             </th>
@@ -155,7 +158,12 @@
                                         <a href="<?=base_url()?>materialmanagement/quick_output/<?=$selected_deposit_id?>/<?=$value->id?>" class="btn btn-danger">–</a>
                                     </td>
 
-                                    <td style='text-align:center;vertical-align:middle'>
+                                    <td class="hidden-sm hidden-xs" style='text-align:center;vertical-align:middle'>
+                                        <a href="<?=base_url()?>materialmanagement/entrance_create/<?=$selected_deposit_id?>/<?=$value->id?>" data-toggle="mainmodal" class="btn btn-success">+</a>
+                                        <a href="<?=base_url()?>materialmanagement/output_create/<?=$selected_deposit_id?>/<?=$value->id?>" data-toggle="mainmodal" class="btn btn-danger">–</a>
+                                    </td>
+
+                                    <td class="hidden-md hidden-lg" style='text-align:center;vertical-align:middle'>
                                         <a href="<?=base_url()?>materialmanagement/entrance_create/<?=$selected_deposit_id?>/<?=$value->id?>" data-toggle="mainmodal" class="btn btn-success">+</a>
                                         <a href="<?=base_url()?>materialmanagement/output_create/<?=$selected_deposit_id?>/<?=$value->id?>" data-toggle="mainmodal" class="btn btn-danger">–</a>
                                     </td>

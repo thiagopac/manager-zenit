@@ -13,7 +13,7 @@
 				</span>
             </div>
             <div class="table-div responsive">
-                <table id="stock_areas" class="data-no-search table" cellspacing="0" cellpadding="0">
+                <table id="stock_areas" class="data-no-search table noclick" cellspacing="0" cellpadding="0">
                     <thead>
                     <th style="width:80px" class="">
                         <?=$this->lang->line('application_id');?>
