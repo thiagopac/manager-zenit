@@ -89,10 +89,10 @@ $message_icon = false;
               <?php
           if (is_array($menu) || is_object($menu)) {
               foreach ($menu as $key => $value) {
-                  if (strtolower($value->name) == 'messages') {
+                  if (strtolower($value->link) == 'messages') {
                       $message_icon = true;
                   } ?>
-               <li id="<?=strtolower($value->name); ?>" class="<?php if ($act_uri == strtolower($value->name)) {
+               <li id="<?=strtolower($value->link); ?>" class="<?php if ($act_uri == strtolower($value->link)) {
                       echo 'active';
                   } ?>">
                   <a href="<?=site_url($value->link); ?>" data-turbolinks="<?=($value->link != 'leads') ? 'true' : 'false' ?>">
@@ -316,7 +316,8 @@ $message_icon = false;
     <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/jquery.mask.js"></script>
     <script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.19/sorting/natural.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-fullscreen-plugin/1.1.4/jquery.fullscreen-min.js"></script>
-
+    <script type="text/javascript" src="<?=base_url()?>node_modules/formBuilder/dist/form-builder.min.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>node_modules/formBuilder/dist/form-render.min.js"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
         <script>

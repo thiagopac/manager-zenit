@@ -118,7 +118,7 @@
                                     <img data-action="zoom" src="<?=base_url()."/files/materials/".$value->image;?>">
                                 </td>
                                 <td class="hidden-xs hidden-sm" class="hidden-sm hidden-xs" style='text-align:center;vertical-align:middle'>
-                                    <?=$this->lang->line("application_$value->unity"); ?>
+                                    <?=$value->unity?>
                                 </td>
                                 <td class="hidden-xs hidden-sm" class="hidden-sm hidden-xs" style='text-align:center;vertical-align:middle'>
                                     <?=$value->min_qty; ?>

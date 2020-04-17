@@ -21,6 +21,7 @@
     "bootstrap-sass": "^3.3.5",
     "datatables.net-bs": "^1.10.16",
     "flatpickr": "^4.1.4",
+    "formBuilder": "^3.4.2",
     "lodash.orderby": "^4.6.0",
     "phone-formatter": "0.0.2",
     "tippy.js": "^1.4.2",

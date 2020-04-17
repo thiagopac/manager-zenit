@@ -51,7 +51,7 @@ $(document).ready(function(){
               ['color', ['color']],
               ['para', ['ul', 'ol', 'paragraph']],
               ['height', ['height']],
-              ['insert', []], //for Custom Templates
+              ['insert', ['table','hr']], //for Custom Templates
             ]
           });
          var postForm = function() {

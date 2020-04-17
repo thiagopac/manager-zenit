@@ -15,7 +15,7 @@
             <div class="table-div responsive">
                 <table id="stock_areas" class="data-no-search table noclick" cellspacing="0" cellpadding="0">
                     <thead>
-                    <th style="width:80px" class="">
+                    <th style="width:80px" class="hidden-xs hidden-sm">
                         <?=$this->lang->line('application_id');?>
                     </th>
                     <th class="">
@@ -28,7 +28,7 @@
                     <?php foreach ($stock_areas as $stock_area):?>
 
                         <tr id="<?=$stock_area->id;?>">
-                            <td class="">
+                            <td class="hidden-xs hidden-sm">
                                 <?=$stock_area->id;?>
                             </td>
                             <td>

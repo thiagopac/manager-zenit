@@ -38,13 +38,18 @@ echo form_open_multipart($form_action, $attributes);
             <?=$this->lang->line('application_measurement');?> *
         </label>
         <?php
-            $unities = ['unity' => $this->lang->line('application_unity'),
-                        'piece' => $this->lang->line('application_piece'),
-                        'package' => $this->lang->line('application_package'),
-                        'coil' => $this->lang->line('application_coil'),
-                        'box' => $this->lang->line('application_box'),
-                        'meter' => $this->lang->line('application_meter'),
-                        'kilo' => $this->lang->line('application_kilo')];
+
+            $unities = ['unidade' => 'unidade',
+                        'peça' => 'peça',
+                        'pacote' => 'pacote',
+                        'rolo' => 'rolo',
+                        'caixa' => 'caixa',
+                        'metro' => 'metro',
+                        'quilo' => 'quilo',
+                        'pedaço' => 'pedaço',
+                        'barra' => 'barra',
+                        'tubo' => 'tubo',
+                        'par' => 'par'];
 
             echo form_dropdown('unity', $unities, $material->unity, 'style="width:100%" class="chosen-select"');?>
     </div>

@@ -215,3 +215,54 @@ img.zoom-img {
 .table-div.responsive{
     overflow-x: unset !important;
 }
+
+.comment-content {
+    padding-bottom: 10px !important;
+}
+
+
+#form-render-wrap .form-group input {
+    margin-left: 0px !important;
+    border: 0px !important;
+}
+
+#form-render-wrap .form-group textarea {
+    margin-left: 4px !important;
+    border: 0px !important;
+}
+
+input:focus, input.form-control:focus, textarea:focus {
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+#form-render-wrap .form-group select {
+    border: 0px solid !important;
+}
+
+#form-render-wrap .form-group label:first-child {
+    padding: 7px 10px 0 !important;
+    margin-bottom: 0 !important;
+    color: #4a4a4a !important;
+    font-weight: 700 !important;
+    -webkit-font-smoothing: antialiased !important;
+}
+
+
+#form-render-wrap .radio-group {
+    padding-left: 10px !important;
+}
+
+/*#form-render-wrap div > button {*/
+/*    float: right !important;*/
+/*}*/
+
+/*#form-render-wrap  .form-group:last-child{*/
+/*    margin-top: 5px !important;*/
+/*    padding: 20px 0 5px !important;*/
+/*    border: 0px !important;*/
+/*    border-top: 1px solid #eee !important;*/
+/*}*/

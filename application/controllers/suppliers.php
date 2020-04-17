@@ -28,25 +28,117 @@ class Suppliers extends MY_Controller {
     }
 
     public function index(){
-        $state_filter = ['conditions' => ['state = ?',  $_GET['state']]];
 
-        if ($_GET['state'] != null){
-            $this->view_data['suppliers'] = Supplier::find('all', $state_filter);
+        if ($_GET['state'] == $this->lang->line('application_state')){
+            $_GET['state'] = null;
+        }
 
-            $settings = Setting::first();
-            $statesList = $settings->list_states();
+        if ($_GET['deadline'] == $this->lang->line('application_supplier_deadline')){
+            $_GET['deadline'] = null;
+        }
 
-            $active_state_filter = $statesList[$_GET['state']];
+        if ($_GET['payment'] == $this->lang->line('application_payment_condition')){
+            $_GET['payment'] = null;
+        }
 
+        if ($_GET['segment'] == $this->lang->line('application_segments')){
+            $_GET['segment'] = null;
+        }
+
+        if ($_GET['state'] != null || $_GET['deadline'] != null || $_GET['payment'] != null || $_GET['segment'] != null){
+
+            if ($_GET['state'] == null){
+                $_GET['state'] = "%";
+            }
+
+            if ($_GET['deadline'] == null){
+                $_GET['deadline'] = "%";
+            }
+
+            if ($_GET['payment'] == null){
+                $_GET['payment'] = "%";
+            }
+
+
+            $segment_id = null;
+
+            if ($_GET['segment'] == null){
+                $_GET['segment'] = "%";
+                $segment_id = '%';
+            }
+
+            $all_segments = SupplierCategory::find('all');
+
+            if ($_GET['segment'] != null){
+                foreach ($all_segments as $segment){
+                    if ($segment->name == $_GET['segment']){
+                        $segment_id = "%$segment->id%";
+                    }
+                }
+            }
+
+            $filter = ['conditions' => ['state LIKE ? AND supplier_deadline LIKE ? AND payment_condition LIKE ? AND supplier_category_ids LIKE ?',  $_GET['state'], $_GET['deadline'], $_GET['payment'], $segment_id]];
+
+            $this->view_data['suppliers'] = Supplier::find('all', $filter);
         }else{
             $this->view_data['suppliers'] = Supplier::find('all');
         }
 
-        if ($_GET['state'] == null){
-            $active_state_filter = $this->lang->line("application_state");
+        if ($_GET['state'] == '%'){
+            $active_state_filter = $this->lang->line('application_state');
+        }else{
+            $active_state_filter = $_GET['state'];
+        }
+
+        if ($_GET['deadline'] == '%'){
+            $active_deadline_filter = $this->lang->line('application_supplier_deadline');
+        }else{
+            $active_deadline_filter = $_GET['deadline'];
+        }
+
+        if ($_GET['payment'] == '%'){
+            $active_payment_filter = $this->lang->line('application_payment_condition');
+        }else{
+            $active_payment_filter = $_GET['payment'];
+        }
+
+        if ($_GET['segment'] == '%'){
+            $active_segment_filter = $this->lang->line('application_segments');
+        }else{
+            $active_segment_filter = $_GET['segment'];
         }
 
         $this->view_data['active_state_filter'] = $active_state_filter;
+        $this->view_data['active_deadline_filter'] = $active_deadline_filter;
+        $this->view_data['active_payment_filter'] = $active_payment_filter;
+        $this->view_data['active_segment_filter'] = $active_segment_filter;
+
+        $stateList = array();
+        $deadlineList = array();
+        $paymentList = array();
+        $segmentList = array();
+
+        $all_suppliers = Supplier::find('all');
+        $all_segments = SupplierCategory::all();
+
+        foreach ($all_suppliers as $supplier){
+            array_push($stateList, $supplier->state);
+            array_push($deadlineList, $supplier->supplier_deadline);
+            array_push($paymentList, $supplier->payment_condition);
+        }
+
+        foreach ($all_segments as $segment){
+            array_push($segmentList, $segment->name);
+        }
+
+        $stateList = array_unique($stateList);
+        $deadlineList = array_unique($deadlineList);
+        $paymentList = array_unique($paymentList);
+
+        $this->view_data['stateList'] = $stateList;
+        $this->view_data['deadlineList'] = $deadlineList;
+        $this->view_data['paymentList'] = $paymentList;
+        $this->view_data['segmentList'] = $segmentList;
 
         $this->content_view = 'suppliers/all';
     }

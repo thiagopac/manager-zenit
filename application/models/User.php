@@ -117,4 +117,9 @@ class User extends ActiveRecord\Model {
         $CI = &get_instance();
         $CI->session->sess_destroy();
     }
+
+    public static function getUserByEmail($email = false){
+
+        return User::find('first', ['conditions' => ['email = ?', $email]]);
+    }
 }

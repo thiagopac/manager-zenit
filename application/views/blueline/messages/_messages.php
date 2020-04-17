@@ -21,7 +21,7 @@ echo form_open_multipart($form_action, $attributes);
 </div>
  <div class="form-group">
                         <label for="message"><?=$this->lang->line('application_message');?></label>
-                        <textarea class="input-block-level summernote-modal"  id="textfield" name="message"></textarea>
+                        <textarea class="input-block-level summernote summernote-modal"  id="textfield" name="message"></textarea>
 </div>
 <div class="form-group">
 <label><?=$this->lang->line('application_attachment');?></label>

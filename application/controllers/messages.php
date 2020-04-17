@@ -4,8 +4,7 @@ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
-class messages extends MY_Controller
-{
+class Messages extends MY_Controller {
 
 
     public function __construct()
@@ -121,15 +120,13 @@ class messages extends MY_Controller
                 $attachment = $data['upload_data']['file_name'];
             }
 
-
-//ONDE CRIA NOVAS MENSAGENS
             $_POST = array_map('htmlspecialchars', $_POST);
             $_POST['message'] = $message;
             $_POST['time'] = date('Y-m-d H:i', time());
             $_POST['sender'] = 'u'.$this->user->id;
             $_POST['status'] = 'New';
             if (!isset($_POST['conversation'])) {
-                $_POST['conversation'] = random_string('sha1');
+                $_POST['conversation'] = random_string('alnum', 32);
             }
             if (isset($_POST['previousmessage'])) {
                 $status = PrivateMessage::find_by_id($_POST['previousmessage']);

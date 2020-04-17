@@ -119,7 +119,7 @@ class cMessages extends MY_Controller {
 
 						}
 
-			if(!isset($_POST['conversation'])){$_POST['conversation'] = random_string('sha1');}
+			if(!isset($_POST['conversation'])){$_POST['conversation'] = random_string('alnum', 32);}
 			if(isset($_POST['previousmessage'])){
 			    $status = PrivateMessage::find_by_id($_POST['previousmessage']);
 			    if($receiveremail == $this->client->email){

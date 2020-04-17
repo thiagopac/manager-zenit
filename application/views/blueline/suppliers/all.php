@@ -4,7 +4,7 @@
             <a href="<?=base_url()?>suppliers/category/create" class="btn btn-success" data-toggle="mainmodal"><?=$this->lang->line('application_new_segment');?></a>
 
             <div class="btn-group pull-right margin-right-3">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <button type="button" class="btn <?=$active_state_filter != $this->lang->line('application_state') && $active_state_filter != null  ? 'btn-danger' : 'btn-primary'?> dropdown-toggle" data-toggle="dropdown">
                     <?php if ($active_state_filter) {
                         echo $active_state_filter;
                     } else {
@@ -15,25 +15,104 @@
                 <ul class="dropdown-menu pull-right" role="menu">
 
                     <li>
-                        <a id="" href="<?=base_url()?>suppliers">
+                        <a id="" href="<?=base_url()?>suppliers?state=&deadline=<?=$active_deadline_filter?>&payment=<?=$active_payment_filter?>&segment=<?=$active_segment_filter?>">
+                            <?=$this->lang->line('application_all');?>
+                        </a>
+                    </li>
+                    <? foreach($stateList as $state) : ?>
+                            <li>
+                                <a id="<?=$state?>" href="<?=base_url()?>suppliers?state=<?=$state?>&deadline=<?=$active_deadline_filter?>&payment=<?=$active_payment_filter?>&segment=<?=$active_segment_filter?>">
+                                    <?=$state?>
+                                </a>
+                            </li>
+                    <? endforeach; ?>
+                </ul>
+            </div>
+
+            <div class="btn-group pull-right margin-right-3">
+                <button type="button" class="btn <?=$active_deadline_filter != $this->lang->line('application_supplier_deadline') && $active_deadline_filter != null ? 'btn-danger' : 'btn-primary'?> dropdown-toggle" data-toggle="dropdown">
+                    <?php if ($active_deadline_filter) {
+                        echo $active_deadline_filter;
+                    } else {
+                        echo $this->lang->line('application_supplier_deadline');
+                    } ?>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+
+                    <li>
+                        <a id="" href="<?=base_url()?>suppliers?state=<?=$active_state_filter?>&deadline=&payment=<?=$active_payment_filter?>&segment=<?=$active_segment_filter?>">
                             <?=$this->lang->line('application_all');?>
                         </a>
                     </li>
                     <?php
-                        $settings = Setting::first();
-                        $statesList = $settings->list_states();
                     ?>
-                    <? foreach($statesList as $key => $value) : ?>
-                        <?php if ($key != null) : ?>
+                    <? foreach($deadlineList as $deadline) : ?>
                             <li>
-                                <a id="<?=$key?>" href="<?=base_url()?>suppliers?state=<?=$key?>">
-                                    <?=$value?>
+                                <a id="<?=$deadline?>" href="<?=base_url()?>suppliers?state=<?=$active_state_filter?>&deadline=<?=$deadline?>&payment=<?=$active_payment_filter?>&segment=<?=$active_segment_filter?>">
+                                    <?=$deadline?>
                                 </a>
                             </li>
-                        <? endif; ?>
                     <? endforeach; ?>
                 </ul>
             </div>
+
+            <div class="btn-group pull-right margin-right-3">
+                <button type="button" class="btn <?=$active_payment_filter != $this->lang->line('application_payment_condition') && $active_payment_filter != null  ? 'btn-danger' : 'btn-primary'?> dropdown-toggle" data-toggle="dropdown">
+                    <?php if ($active_payment_filter) {
+                        echo $active_payment_filter;
+                    } else {
+                        echo $this->lang->line('application_payment_condition');
+                    } ?>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+
+                    <li>
+                        <a id="" href="<?=base_url()?>suppliers?state=<?=$active_state_filter?>&deadline=<?=$active_deadline_filter?>&payment=&segment=<?=$active_segment_filter?>">
+                            <?=$this->lang->line('application_all');?>
+                        </a>
+                    </li>
+                    <?php
+                    ?>
+                    <? foreach($paymentList as $payment) : ?>
+                        <li>
+                            <a id="<?=$payment?>" href="<?=base_url()?>suppliers?state=<?=$active_state_filter?>&deadline=<?=$active_deadline_filter?>&payment=<?=$payment?>&segment=<?=$active_segment_filter?>">
+                                <?=$payment?>
+                            </a>
+                        </li>
+                    <? endforeach; ?>
+                </ul>
+            </div>
+
+            <div class="btn-group pull-right margin-right-3">
+                <button type="button" class="btn <?=$active_segment_filter != $this->lang->line('application_segments')  && $active_deadline_filter != null  ? 'btn-danger' : 'btn-primary'?> dropdown-toggle" data-toggle="dropdown">
+                    <?php if ($active_segment_filter) {
+                        echo $active_segment_filter;
+                    } else {
+                        echo $this->lang->line('application_segments');
+                    } ?>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+
+                    <li>
+                        <a id="" href="<?=base_url()?>suppliers?state=<?=$active_state_filter?>&deadline=<?=$active_deadline_filter?>&payment=<?=$active_payment_filter?>&segment=">
+                            <?=$this->lang->line('application_all');?>
+                        </a>
+                    </li>
+                    <?php
+                    ?>
+                    <? foreach($segmentList as $segment) : ?>
+                        <li>
+                            <a id="<?=$segment?>" href="<?=base_url()?>suppliers?state=<?=$active_state_filter?>&deadline=<?=$active_deadline_filter?>&payment=<?=$active_payment_filter?>&segment=<?=$segment?>">
+                                <?=$segment?>
+                            </a>
+                        </li>
+                    <? endforeach; ?>
+                </ul>
+            </div>
+
 		</div>
 		<div class="row">
 		<div class="box-shadow">
