@@ -7,15 +7,16 @@ echo form_open_multipart($form_action, $attributes);
 <div class="modal-footer">
     <?php foreach ($actions as $action) : ?>
         <?php if ($action->progress == true) : ?>
-            <button name="submit_1" class="btn btn-success button-loader"><?=$action->name?></button>
+            <input type="submit" name="submit_1" class="btn btn-success button-loader" value="<?=$action->name?>" />
         <?php else : ?>
-            <button name="submit_0" class="btn btn-danger button-loader"><?=$action->name?></button>
+            <input type="submit" name="submit_0" class="btn btn-danger button-loader" <?=$action->name?> />
         <?php endif; ?>
 
     <?php endforeach; ?>
     <a class="btn btn-default" data-dismiss="modal"><?=$this->lang->line('application_close');?></a>
 </div>
 <?php echo form_close(); ?>
+
 <script>
     jQuery(function() {
         var formData = JSON.parse(<?=$form?>),
@@ -27,8 +28,52 @@ echo form_open_multipart($form_action, $attributes);
         var renderedForm = $('#form-render-wrap');
         renderedForm.formRender(formRenderOpts);
 
-        // console.log(renderedForm.html());
 
-        console.log(JSON.parse(<?=$form?>));
+        //console.log(JSON.parse(<?//=$form?>//));
+    });
+
+    $(document).ready(function() {
+
+        $(".mask-money").inputmask('decimal', {
+            'prefix' : 'R$ ',
+            'alias': 'numeric',
+            'autoGroup': true,
+            'digits': 2,
+            'radixPoint': ",",
+            'digitsOptional': false,
+            'allowMinus': false,
+            'rightAlign': false,
+            'unmaskAsNumber': true,
+            'placeholder': '',
+            'removeMaskOnSubmit': true
+        })
+
+        function checkForm() {
+            // here, "this" is an input element
+            var isValidForm = true;
+            $(this.form).find(':input[required]:visible').each(function() {
+                if (!this.value.trim()) {
+                    isValidForm = false;
+                }
+            });
+            // $(this.form).find('.button-loader').prop('disabled', !isValidForm);
+            isValidForm == false ? toastr.error('Você precisa preencher todos os campos obrigatórios') : '';
+
+            return isValidForm;
+        }
+
+        $('.button-loader').closest('form')
+        // indirectly bind the handler to form
+            .submit(function() {
+                return checkForm.apply($(this).find(':input')[0]);
+            })
+            // look for input elements
+            .find(':input[required]:visible')
+            // bind the handler to input elements
+            .keyup(checkForm)
+            // immediately fire it to initialize buttons state
+            .keyup();
+
+
     });
 </script>

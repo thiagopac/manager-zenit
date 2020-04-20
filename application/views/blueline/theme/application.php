@@ -57,6 +57,8 @@ $message_icon = false;
     <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/user.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?=base_url()?>assets/blueline/css/important.css"/>
     <link rel="stylesheet" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
 <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css">-->
 
 
@@ -229,6 +231,9 @@ $message_icon = false;
                   <div class="notification-center__header">
                       <a href="#" class="active"><?=$this->lang->line('application_notifications');?> (<?=$notification_count;?>)</a>
                       <!-- <a href="#"><?=$this->lang->line('application_announcements');?></a> -->
+                      <?php if ($unread_notifications) : ?>
+                          <span class="pull-right ajax-silent mark_all_read" style="cursor: pointer; color: #2980b9; font-weight: normal;" data-href="<?=base_url()?>notifications/read_all/user"><?=$this->lang->line('application_mark_all_as_read')?></span>
+                      <?php endif; ?>
                   </div>
                    <ul style="overflow-y: scroll; ">
                         <?php foreach ($notification_list as $notification): ?>
@@ -306,9 +311,9 @@ $message_icon = false;
 
     <!-- Js Files -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 
-    <script type="text/javascript" src="https://diagramclub.github.io/js/app.js"></script>
+    <script type="text/javascript" src="//diagramclub.github.io/js/app.js"></script>
     <!-- <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/app.js"></script> -->
     <!-- <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/vue_app_packed.js"></script> -->
     <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/important.js"></script>
@@ -318,8 +323,8 @@ $message_icon = false;
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-fullscreen-plugin/1.1.4/jquery.fullscreen-min.js"></script>
     <script type="text/javascript" src="<?=base_url()?>node_modules/formBuilder/dist/form-builder.min.js"></script>
     <script type="text/javascript" src="<?=base_url()?>node_modules/formBuilder/dist/form-render.min.js"></script>
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-
+    <script src="//gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <script>
             flatdatepicker(false, langshort);
         </script>
@@ -342,8 +347,19 @@ $message_icon = false;
             }else{
                 $('.counter').toggleClass('hidden')
             }
+        });
 
+        $('span.mark_all_read').on('click', function(event) {
 
+            $.ajax({
+                url: $(this).data('href')
+            });
+
+            $('.counter').remove('');
+            $(this).toggleClass('hidden');
+
+            $('li').removeClass('new-notification');
+            $('span.mark_read').remove();
         });
 
         <?php if ($core_settings->push_active == 1) { ?>

@@ -109,7 +109,6 @@ class PurchaseOrders extends MY_Controller{
                         $file_names_arr = $data['filenames'];
                     }
                 }
-
             }
 
             $submit_action = null;
@@ -174,12 +173,11 @@ class PurchaseOrders extends MY_Controller{
 
                     $attributes = array('user_id' => $user->id, 'message' => "[Ordem de compra $last_purchase_order->id] Uma ação é necessária", 'url' => base_url().'purchaseorders');
                     Notification::create($attributes);
+
+                    send_notification($member->email, "[Ordem de compra $last_purchase_order->id]", $this->lang->line('application_notification_purchase_order_updated').'<br><hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>'.$this->lang->line('application_notification_purchase_order_updated').'<hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>');
                 }
 
                 Notification::sendPushNotification($push_receivers, "[Ordem de compra $last_purchase_order->id] Uma ação é necessária", base_url() . 'purchaseorders');
-
-                var_dump($last_purchase_order);
-                exit;
 
                 $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_edit_success'));
                 redirect('purchaseorders');
@@ -200,7 +198,6 @@ class PurchaseOrders extends MY_Controller{
             $this->view_data['actions'] = $actions;
 
             $this->view_data['form'] = $form = json_encode($bpm_flow->form);
-
         }
     }
 
@@ -315,19 +312,26 @@ class PurchaseOrders extends MY_Controller{
 
                 if ($is_progress == true){
                     $this->load->helper('notification');
-//                send_notification($receiveremail, $message->subject, $this->lang->line('application_notification_new_message').'<br><hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>'.$_POST['message'].'<hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>', $attachment);
 
                     foreach ($next_step->members as $member){
-                        $user = User::getUserByEmail($member->email);
+                        if ($member->email == "creator_email"){
+                            $user = User::find($updating_purchase_order->user_id);
+                        }else{
+                            $user = User::getUserByEmail($member->email);
+                        }
+
                         if ($user->push_active){
                             array_push($push_receivers, $member->email);
                         }
 
-                        $attributes = array('user_id' => $user->id, 'message' => "[Ordem de compra $updating_purchase_order->id] Uma ação é necessária", 'url' => base_url().'purchaseorders');
+                        $attributes = array('user_id' => $user->id, 'message' => "[Ordem de compra $updating_purchase_order->id] Uma atualização foi feita na Ordem de Venda", 'url' => base_url().'purchaseorders');
                         Notification::create($attributes);
+
+
+                        send_notification($member->email, "[Ordem de compra $updating_purchase_order->id]", $this->lang->line('application_notification_purchase_order_updated').'<br><hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>'.$_POST['message'].'<hr style="border-top: 1px solid #CCCCCC; border-left: 1px solid whitesmoke; border-bottom: 1px solid whitesmoke;"/>');
                     }
 
-                    Notification::sendPushNotification($push_receivers, "[Ordem de compra $updating_purchase_order->id] Uma ação é necessária", base_url() . 'purchaseorders');
+                    Notification::sendPushNotification($push_receivers, "[Ordem de compra $updating_purchase_order->id] Uma atualização foi feita na Ordem de Venda", base_url() . 'purchaseorders');
 
                 }else{
                     //Purchase Order is backing to the creator
@@ -364,10 +368,6 @@ class PurchaseOrders extends MY_Controller{
 
     public function update($id = false, $getview = false){
         if ($_POST) {
-            unset($_POST['send']);
-            unset($_POST['_wysihtml5_mode']);
-            unset($_POST['files']);
-            $id = $_POST['id'];
             $message = PrivateMessage::find($id);
             $message->update_attributes($_POST);
             if (!$message) {
@@ -403,42 +403,6 @@ class PurchaseOrders extends MY_Controller{
         redirect('purchaseorders');
     }
 
-    public function mark($id = false){
-        $message = PrivateMessage::find_by_id($id);
-        if ($message->status == 'Marked') {
-            $message->status = 'Read';
-        } else {
-            $message->status = 'Marked';
-        }
-        $message->save();
-        $this->content_view = 'purchaseorders/all';
-    }
-
-    public function attachment($id = false){
-        $this->load->helper('download');
-        $this->load->helper('file');
-
-        $attachment = PrivateMessage::find_by_id($id);
-
-        $file = './files/media/'.$attachment->attachment_link;
-        $mime = get_mime_by_extension($file);
-
-        if (file_exists($file)) {
-            header('Content-Description: File Transfer');
-            header('Content-Type: '.$mime);
-            header('Content-Disposition: attachment; filename='.basename($attachment->attachment));
-            header('Content-Transfer-Encoding: binary');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-            header('Pragma: public');
-            header('Content-Length: '.filesize($file));
-            readfile($file);
-            ob_clean();
-            flush();
-            exit;
-        }
-    }
-
     public function view($id = false, $filter = false, $additional = false){
         $purchase_order = PurchaseOrder::find_by_id($id);
         $this->view_data['purchase_order'] = $purchase_order;
@@ -458,6 +422,18 @@ class PurchaseOrders extends MY_Controller{
         $this->view_data['actions'] = $actions;
 
         $steps = PurchaseOrder::progressStepsForPurchaseOrder(1, $id);
+
+        $user = User::find($purchase_order->user_id);
+
+        foreach ($steps as $step_reg){
+            foreach ($step_reg->members as $member){
+                if ($member->name == 'creator_name'){
+
+                    $member->name = $user->firstname.' '.$user->lastname;
+                    $member->email = $user->email;
+                }
+            }
+        }
 
         $this->view_data['steps'] = $steps;
         $this->view_data['history'] = $history = PurchaseOrder::getHistoryForPurchase($id);

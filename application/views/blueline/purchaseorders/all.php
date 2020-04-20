@@ -8,20 +8,20 @@
                 <div class="message-list-header">
                     <span id="inbox-folder"><i class="icon dripicons-inbox"></i> <?=$this->lang->line('application_INBOX');?></span>
                     <span id="sent-folder"><i class="icon dripicons-user"></i> <?=$this->lang->line('application_created_by_me');?></span>
-                    <span id="finished-folder"><i class="icon dripicons-flag"></i> <?=$this->lang->line('application_finished');?></span>
+                    <span id="finished-folder"><i class="icon dripicons-thumbs-up"></i> <?=$this->lang->line('application_finished');?></span>
                     <span id="canceled-folder"><i class="icon dripicons-thumbs-down"></i> <?=$this->lang->line('application_Canceled');?></span>
                 </div>
             </h1>
         </header>
         <div class="action-bar">
             <ul>
-                <li><a class="btn btn-success" data-toggle="mainmodal" role="button" href="<?=base_url()?>purchaseorders/write" title="<?=$this->lang->line('application_write_message');?>"><i class="icon dripicons-pencil space"></i> <span class="hidden-xs"><?=$this->lang->line('application_new_purchase_order');?></span></a></li>
+                <li><a class="btn btn-primary" data-toggle="mainmodal" role="button" href="<?=base_url()?>purchaseorders/write" title="<?=$this->lang->line('application_write_message');?>"><i class="icon dripicons-pencil space"></i> <span class="hidden-xs"><?=$this->lang->line('application_new_purchase_order');?></span></a></li>
                 <li>
                     <div class="btn-group">
                         <a class="btn btn-primary message-list-load inbox-folder" id="message-trigger" role="button" href="<?=base_url()?>purchaseorders/listing" title="Inbox"><i class="icon dripicons-inbox space"></i> <span class="hidden-xs"><?=$this->lang->line('application_INBOX');?></span></a>
                         <a class="btn btn-primary message-list-load sent-folder" role="button" href="<?=base_url()?>purchaseorders/filter/sent" title="Sent Folder"><i class="icon dripicons-user space"></i> <span class="hidden-xs"><?=$this->lang->line('application_created_by_me');?></span></a>
-                        <a class="btn btn-primary message-list-load finished-folder" role="button" href="<?=base_url()?>purchaseorders/filter/finished" title="Finished Folder"><i class="icon dripicons-flag space"></i> <span class="hidden-xs"><?=$this->lang->line('application_finished');?></span></a>
-                        <a class="btn btn-primary message-list-load canceled-folder" role="button" href="<?=base_url()?>purchaseorders/filter/canceled" title="Finished Folder"><i class="icon dripicons-thumbs-down space"></i> <span class="hidden-xs"><?=$this->lang->line('application_Canceled');?></span></a>
+                        <a class="btn btn-success message-list-load finished-folder" role="button" href="<?=base_url()?>purchaseorders/filter/finished" title="Finished Folder"><i class="icon dripicons-thumbs-up space"></i> <span class="hidden-xs"><?=$this->lang->line('application_finished');?></span></a>
+                        <a class="btn btn-danger message-list-load canceled-folder" role="button" href="<?=base_url()?>purchaseorders/filter/canceled" title="Finished Folder"><i class="icon dripicons-thumbs-down space"></i> <span class="hidden-xs"><?=$this->lang->line('application_Canceled');?></span></a>
                     </div>
                 </li>
 

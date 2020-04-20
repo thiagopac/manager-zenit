@@ -118,4 +118,26 @@ class Notifications extends MY_Controller
         $notification->save();
 
     }
+
+    public function read_all($type){
+
+        if ($type == "user"){
+            Notification::update_all([
+                'set' => [
+                    'status' => 'read'
+                ],
+                'conditions' => ['user_id = ? AND status = ?', $this->user->id, 'new']
+            ]);
+        }else{
+            ClientNotification::update_all([
+                'set' => [
+                    'status' => 'read'
+                ],
+                'conditions' => ['client_id = ? AND status = ?', $this->client->id, 'new']
+            ]);
+        }
+
+
+
+    }
 }

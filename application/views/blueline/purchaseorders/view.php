@@ -3,10 +3,7 @@
         <div class="header">
             <div class="message-content-menu">
                 <button class="message-reply-button btn btn-success" <?=count($actions) > 0 && $purchase_order->finished != 1 ? '' : 'disabled'; ?> role="button"><i class="icon dripicons-forward"></i> <?=$this->lang->line('application_actions'); ?></button>
-
-                <?php if (1 != 1) : ?>
-                    <a class="btn btn-danger" href="<?=base_url()?>purchaseorders/delete/<?=end($conversation)->id?>" role="button"><i class="icon dripicons-trash"></i> <?=$this->lang->line('application_delete'); ?></a>
-                <?php endif; ?>
+<!--                    <a class="btn btn-danger" href="--><?//=base_url()?><!--purchaseorders/delete/--><?//=end($conversation)->id?><!--" role="button"><i class="icon dripicons-trash"></i> --><?//=$this->lang->line('application_delete'); ?><!--</a>-->
             </div>
 
             <h1 class="page-title"><a class="icon glyphicon glyphicon-chevron-right trigger-message-close"></a><br><span class="dot"></span><?=$value->subject; ?>
@@ -19,10 +16,16 @@
         <div class="message-container">
 
             <div class="container-fluid">
-                <ul class="list-unstyled multi-steps">
-                    <?php foreach ($steps as $step) : ?>
-                        <li class="<?=$purchase_order->step == $step->id && $purchase_order->finished != 1 ? 'is-active' : ''; ?>"><?=$step->name; ?></li>
-                    <?php endforeach; ?>
+                <ul class="list-unstyled multi-steps" style="cursor: pointer">
+                    <?php if ($purchase_order->canceled != true) : ?>
+                        <?php foreach ($steps as $step) : ?>
+                            <li title="<?=implode('&#xD;', array_column($step->members, 'name'))?>" class="<?=$purchase_order->step == $step->id && $purchase_order->finished != 1 ? 'is-active' : ''; ?>"><?=$step->name; ?></li>
+                        <?php endforeach; ?>
+                    <?php else : ?>
+                        <?php foreach ($history->steps as $step) : ?>
+                            <li class="danger canceled"><?=$step->name; ?></li>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </ul>
             </div>
             <br />
@@ -92,7 +95,6 @@
                                     </p>
                                     </p>
                                 <?php endif; ?>
-
                             </div>
                         </li>
                     <?php endforeach; ?>

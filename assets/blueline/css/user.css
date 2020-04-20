@@ -172,6 +172,18 @@
     color: limegreen;
 }
 
+.multi-steps > li.canceled {
+    color: orangered;
+}
+
+.multi-steps > li.canceled:before {
+    border-color: orangered;
+}
+
+.multi-steps > li.canceled:after {
+    background-color: orangered;
+}
+
 .multi-steps > li.is-active {
     color: orangered;
 }
