@@ -7,11 +7,10 @@ class PurchaseOrder extends ActiveRecord\Model{
         array('user', 'foreign_key' => 'user_id'),
     );
 
-    public static function progressStepsIdsForPurchaseOrder($id = false, $purchase_order_id){
+    public static function progressStepsIdsForPurchaseOrder($purchase_order_id){
 
-        $bpm_flow = BpmFlow::find($id);
         $purchase_order = PurchaseOrder::find($purchase_order_id);
-        $flow = json_decode($bpm_flow->flow);
+        $flow = json_decode($purchase_order->flow);
 
         foreach ($flow->conditions as $condition) {
 
@@ -63,14 +62,13 @@ class PurchaseOrder extends ActiveRecord\Model{
 
     }
 
-    public static function progressStepsForPurchaseOrder($bpm_flow_id = false, $purchase_order_id){
+    public static function progressStepsForPurchaseOrder($purchase_order_id){
 
-        $bpm_flow = BpmFlow::find($bpm_flow_id);
-        $flow = json_decode($bpm_flow->flow);
         $purchase_order = PurchaseOrder::find($purchase_order_id);
+        $flow = json_decode($purchase_order->flow);
         $current_history = json_decode($purchase_order->history);
 
-        $progress_step_ids = PurchaseOrder::progressStepsIdsForPurchaseOrder($bpm_flow_id, $purchase_order_id);
+        $progress_step_ids = PurchaseOrder::progressStepsIdsForPurchaseOrder($purchase_order_id);
 
         $steps = array();
         $timeline = array();
@@ -102,10 +100,10 @@ class PurchaseOrder extends ActiveRecord\Model{
 
     }
 
-    public static function getStepWithId($bpm_flow_id = false, $step_id){
+    public static function getPurchaseOrderStepWithId($purchase_id = false, $step_id){
 
-        $bpm_flow = BpmFlow::find($bpm_flow_id);
-        $flow = json_decode($bpm_flow->flow);
+        $purchase_order = PurchaseOrder::find($purchase_id);
+        $flow = json_decode($purchase_order->flow);
         $desired_step = false;
 
         foreach ($flow->steps as $step){
@@ -118,11 +116,10 @@ class PurchaseOrder extends ActiveRecord\Model{
         return $desired_step;
     }
 
-    public static function currentStepForPurchaseOrder($bpm_flow_id = false, $purchase_order_id){
+    public static function currentStepForPurchaseOrder($purchase_order_id){
 
-        $bpm_flow = BpmFlow::find($bpm_flow_id);
-        $flow = json_decode($bpm_flow->flow);
         $purchase_order = PurchaseOrder::find($purchase_order_id);
+        $flow = json_decode($purchase_order->flow);
         $current = false;
 
         foreach ($flow->steps as $step){
@@ -135,15 +132,15 @@ class PurchaseOrder extends ActiveRecord\Model{
         return $current;
     }
 
-    public static function nextStepForPurchaseOrderAfterCurrentStep($bpm_flow_id = false, $purchase_order_id, $current_step_id){
+    public static function nextStepForPurchaseOrderAfterCurrentStep($purchase_order_id, $current_step_id){
 
-        $bpm_flow = BpmFlow::find($bpm_flow_id);
-        $flow = json_decode($bpm_flow->flow);
+        $purchase_order = PurchaseOrder::find($purchase_order_id);
+        $flow = json_decode($purchase_order->flow);
         $next_step_id = null;
         $next_step = null;
         $next = false;
 
-        $progress_step_ids = PurchaseOrder::progressStepsIdsForPurchaseOrder($bpm_flow_id, $purchase_order_id);
+        $progress_step_ids = PurchaseOrder::progressStepsIdsForPurchaseOrder($purchase_order_id);
 
         foreach ($progress_step_ids as $step_id){
 
@@ -165,7 +162,7 @@ class PurchaseOrder extends ActiveRecord\Model{
         return null;
     }
 
-    public static function createHistoryForBpmPurchaseStepAndUser($bpm_flow_id = false, $purchase_id = false, $step = false, $user_id, $reply = false, $is_progress = false){
+    public static function createHistoryForPurchaseStepAndUser($purchase_id = false, $step = false, $user_id, $reply = false, $is_progress = false){
 
         $purchase_order = PurchaseOrder::find($purchase_id);
 

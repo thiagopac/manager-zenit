@@ -113,7 +113,14 @@
                         <tr>
                             <?php if ($response->$fieldname != null) :  ?>
                                 <?php if (!is_array($response->$fieldname)) :  ?>
-                                    <td><strong><?=$field->label?></strong></td> <td><?=$response->$fieldname?></td>
+                                    <td><strong><?=$field->label?></strong></td>
+                                    <?php if ($field->className == 'form-control mask-money') : ?>
+                                        <td>
+                                            <?=$core_settings->money_symbol?><?=display_money($response->$fieldname)?>
+                                        </td>
+                                    <?php else : ?>
+                                        <td><?=$response->$fieldname?></td>
+                                    <?php endif; ?>
                                 <?php else : ?>
                                     <td><strong><?=$field->label?></strong></td>
                                     <td><?php foreach ($response->$fieldname as $field) : ?>
@@ -143,5 +150,20 @@
                 messageIsOpen = false;
                 $('body').removeClass('show-main-overlay');
             });
+
+            $(".mask-money").inputmask('decimal', {
+                'prefix' : 'R$ ',
+                'alias': 'numeric',
+                'autoGroup': true,
+                'digits': 2,
+                'radixPoint': ",",
+                'digitsOptional': false,
+                'allowMinus': false,
+                'rightAlign': false,
+                'unmaskAsNumber': true,
+                'placeholder': '',
+                'removeMaskOnSubmit': true
+            })
+
         });
     </script>

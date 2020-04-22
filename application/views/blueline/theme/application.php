@@ -321,10 +321,10 @@ $message_icon = false;
     <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/jquery.mask.js"></script>
     <script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.19/sorting/natural.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-fullscreen-plugin/1.1.4/jquery.fullscreen-min.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>node_modules/formBuilder/dist/form-builder.min.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>node_modules/formBuilder/dist/form-render.min.js"></script>
     <script src="//gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="//formbuilder.online/assets/js/form-builder.min.js"></script>
+    <script src="//formbuilder.online/assets/js/form-render.min.js"></script>
         <script>
             flatdatepicker(false, langshort);
         </script>
