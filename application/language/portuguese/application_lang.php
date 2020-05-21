@@ -1146,3 +1146,5 @@ $lang['application_attached_files'] = "Arquivos anexados";
 $lang['application_mark_all_as_read'] = 'Marcar todos como lidos';
 $lang['application_notification_purchase_order_action_required'] = 'Uma ação é necessária';
 $lang['application_notification_purchase_order_updated'] = 'Uma atualização foi feita na Ordem de Compra';
+$lang['application_notification_purchase_order_updated_mail'] = 'Uma atualização foi feita na Ordem de Compra. Verifique o registro e confira se há alguma ação necessária.';
+$lang['application_transit'] = "Em trânsito";

@@ -1,19 +1,29 @@
+<style>
+    #materials_paginate{
+        visibility: hidden;
+    }
+</style>
 <div id="row">
-
     <?php include 'materialhandling_menu.php'; ?>
 
     <div class="col-md-12 col-lg-12">
         <div class="box-shadow">
             <div class="table-head">
-                <?=$this->lang->line('application_materials');?>
-                <span class="pull-right">
+                <div class="pull-left" style="display: inline-flex"><?=trim($this->lang->line('application_materials'));?>
+                    <div style="margin-left: 10px">
+                        <?php foreach (range('A', 'Z') as $char) : ?>
+                            <span><a <?=$current_char == $char ? 'style="color:red;text-decoration: underline"' : ''; ?> href="<?=base_url()?>materialmanagement/materials/<?=$char?>"><?=$char?></a></span>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <span class="pull-right" style="margin-right: 160px">
 					<a href="<?=base_url()?>materialmanagement/material_create" class="btn btn-primary" data-toggle="mainmodal">
 						<?=$this->lang->line('application_add_material');?>
 					</a>
 				</span>
             </div>
             <div class="table-div responsive">
-                <table id="materials" class="data-no-search table noclick" cellspacing="0" cellpadding="0">
+                <table id="materials" class="data-natural table noclick" data-page-length="<?=count($materials)?>" cellspacing="0" cellpadding="0">
                     <thead>
                     <th style="width:80px;text-align:center;" class="hidden-xs hidden-sm">
                         <?=$this->lang->line('application_id');?>
@@ -78,6 +88,13 @@
 
                     <?php endforeach;?>
                 </table>
+                <div>
+                    <div style="text-align: left; margin-bottom: 10px;">
+                        <?php foreach (range('A', 'Z') as $char) : ?>
+                                <span><a <?=$current_char == $char ? 'style="color:red;text-decoration: underline"' : ''; ?> href="<?=base_url()?>materialmanagement/materials/<?=$char?>"><?=$char?></a></span>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

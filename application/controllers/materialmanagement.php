@@ -96,75 +96,55 @@ class MaterialManagement extends MY_Controller{
         $this->content_view = 'materialhandling/_depositamount';
     }
 
-    public function filter($deposit_id = false){
+    public function filter($deposit_id = false, $char = false){
 
-        $entrances = MaterialHandling::find('all', ['conditions' => ["status != ? AND handling_type = ? AND deposit_id = ?", "deleted", "entrance", $deposit_id], 'include' => ['deposit', 'material', 'user']]);
-        $outputs = MaterialHandling::find('all', ['conditions' => ["status != ? AND handling_type = ? AND deposit_id = ?", "deleted", "output", $deposit_id], 'include' => ['deposit', 'material', 'user']]);
+        $this->view_data['current_char'] = $char;
 
         $this->view_data['selected_deposit_id'] = $deposit_id;
-        $all_materials = Material::all();
+        $this->view_data['all_materials'] = $all_materials = Material::find('all',  array('conditions' => array('description LIKE ?', "$char%"),'include' => array('deposit_amount')));//, 'limit' => $results_per_page, 'offset' => $offset
 
+//        var_dump($all_materials[0]->deposit_amount);
+//        exit;
 
-        $materials_amount = DepositAmount::find_by_sql("SELECT material.id, material.description, stock_area.name, quantity FROM deposit_amount
-                                                INNER JOIN material on material.id = deposit_amount.material_id
-                                                INNER JOIN material_type on material_type.id = material.material_type_id
-                                                INNER JOIN stock_area on stock_area.id = material_type.stock_area_id
-                                                where deposit_amount.deposit_id = ?", [$deposit_id]);
-
-        foreach ($materials_amount as $mat_amount){
-            foreach ($all_materials as $mat){
-                if ($mat_amount->id == $mat->id){
-                    $mat->amount = $mat_amount;
-                }
-
-                $mat->handling_last = MaterialHandling::last(['conditions' => ['material_id = ? and deposit_id = ?', $mat->id, $deposit_id]]);
-            }
-        }
+//        $this->view_data["previous_page"] = $previous_page = $page - 1;
+//        $this->view_data["next_page"] = $next_page = $page + 1;
 
         $this->view_data['breadcrumb_id'] = 'materialmanagement';
-
         $this->view_data['filtered'] = true;
 
-        $this->view_data['all_materials'] = $all_materials;
-        $this->view_data['materials'] = $materials_amount;
-
         $deposits = Deposit::all();
-        $this->view_data['entrances'] = $entrances;
-        $this->view_data['outputs'] = $outputs;
         $this->view_data['deposits'] = $deposits;
         $this->content_view = 'materialhandling/all';
     }
 
-    public function index() {
+    public function index($char = false) {
 
-        $entrances = MaterialHandling::find('all', ['conditions' => ["status != ? AND handling_type = ?", "deleted", "entrance"], 'include' => ['deposit', 'material']]);
-        $outputs = MaterialHandling::find('all', ['conditions' => ["status != ? AND handling_type = ?", "deleted", "output"], 'include' => ['deposit', 'material']]);
+//        $char = $char == false ? 'A' : $char;
 
-        $materials_amount = DepositAmount::find_by_sql("SELECT material.id, material.description, stock_area.name, SUM(quantity) AS quantity FROM deposit_amount
-                                                INNER JOIN material on material.id = deposit_amount.material_id
-                                                INNER JOIN material_type on material_type.id = material.material_type_id
-                                                INNER JOIN stock_area on stock_area.id = material_type.stock_area_id
-                                                GROUP BY material.id");
-        $this->view_data['materials'] = $materials_amount;
+        $this->view_data['current_char'] = $char;
 
-        $this->view_data['all_materials'] = $all_materials = Material::all();
-
-        foreach ($materials_amount as $mat_amount){
-            foreach ($all_materials as $mat){
-                if ($mat_amount->id == $mat->id){
-                    $mat->amount = $mat_amount;
-                }
-
-                $mat->handling_last = MaterialHandling::last(['conditions' => ['material_id = ?', $mat->id]]);
-            }
-        }
+        $this->view_data['all_materials'] = $all_materials = Material::find('all',  array('conditions' => array('description LIKE ?', "$char%"),'include' => array('deposit_amount')));//, 'limit' => $results_per_page, 'offset' => $offset
 
         $this->view_data['filtered'] = false;
 
+        $this->view_data['selected_deposit'] = null;
         $deposits = Deposit::all();
 
-        $this->view_data['entrances'] = $entrances;
-        $this->view_data['outputs'] = $outputs;
+        $this->view_data['breadcrumb_id'] = 'materialmanagement';
+        $this->view_data['deposits'] = $deposits;
+        $this->content_view = 'materialhandling/all';
+    }
+
+    public function all($char = false) {
+
+        $this->view_data['current_char'] = $char;
+
+        $this->view_data['all_materials'] = $all_materials = Material::find('all',  array('conditions' => array('description LIKE ?', "$char%"),'include' => array('deposit_amount')));//, 'limit' => $results_per_page, 'offset' => $offset
+
+        $this->view_data['filtered'] = false;
+
+        $this->view_data['selected_deposit'] = null;
+        $deposits = Deposit::all();
 
         $this->view_data['breadcrumb_id'] = 'materialmanagement';
         $this->view_data['deposits'] = $deposits;
@@ -1023,12 +1003,16 @@ class MaterialManagement extends MY_Controller{
         redirect('materialmanagement/stock_areas');
     }
 
-    public function materials(){
+    public function materials($char = false){
+
+//        $char = $char == false ? "A" : $char;
+
+        $this->view_data['current_char'] = $char;
 
         $this->view_data['breadcrumb'] = $this->lang->line('application_materials');
         $this->view_data['breadcrumb_id'] = 'materialmanagement/materials';
         
-        $materials = Material::find('all', array('conditions' => array("status != ? ORDER BY id ASC ", "deleted")));
+        $materials = Material::find('all', array('conditions' => array("status != ? AND description LIKE ?", "deleted", "$char%")));
         $this->view_data['materials'] = $materials;
         $this->content_view = 'materialhandling/materials';
     }
@@ -1036,6 +1020,8 @@ class MaterialManagement extends MY_Controller{
     public function material_update($material = false){
 
         $material = Material::find($material);
+
+        $char = strtoupper(substr($material->description,0,1));
         
         if ($_POST) {
 
@@ -1085,7 +1071,7 @@ class MaterialManagement extends MY_Controller{
             
             $material->update_attributes($_POST);
             $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_save_material_success'));
-            redirect('materialmanagement/materials');
+            redirect("materialmanagement/materials/$char");
         } else {
             $this->view_data['material'] = $material;
             $this->theme_view = 'modal';

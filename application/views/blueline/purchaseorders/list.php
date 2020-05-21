@@ -8,7 +8,7 @@ if($purchase_orders){
                 <p class="title"><?php if($value->user_id != null){echo User::find($value->user_id)->firstname;}else{ echo $value->id; } ?></p><span class="star-toggle icon"></span>
             </div>
             <div class="col col-2">
-                <div class="subject">[<?=$this->lang->line('application_purchase_order');?> <?=$value->id;?>] <?=$value->subject;?></div>
+                <div class="subject"><strong>[<?=$this->lang->line('application_purchase_order');?> <?=$value->id;?>]</strong> <?=$value->subject;?></div>
                 <div class="date"><?php echo time_ago($unix, true);?></div>
             </div>
         </li>

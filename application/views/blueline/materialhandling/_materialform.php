@@ -75,9 +75,9 @@ echo form_open_multipart($form_action, $attributes);
 
     <div class="form-group">
         <label for="description">
-            <?=$this->lang->line('application_min_qty');?> *
+            <?=$this->lang->line('application_min_qty');?>
         </label>
-        <input id="min_qty" type="number" name="min_qty" class="required form-control"  value="<?php if(isset($material)){echo $material->min_qty;}?>"  required/>
+        <input id="min_qty" type="number" name="min_qty" class="form-control"  value="<?php if(isset($material)){echo $material->min_qty;}?>"/>
     </div>
 
     <div class="modal-footer">

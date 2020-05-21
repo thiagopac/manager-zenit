@@ -214,7 +214,7 @@ function reminder_notification($class, $user = false, $module = false, $reminder
     }
 }
 
-function send_bpm_notification($email, $subject, $text, $attachment = false, $link = false)
+function send_bpm_notification($email, $subject, $text, $attachment = false, $link = false, $actions = false, $document = false)
 {
     $instance = &get_instance();
     $instance->email->clear();
@@ -233,6 +233,12 @@ function send_bpm_notification($email, $subject, $text, $attachment = false, $li
             $instance->email->attach('files/media/' . $attachment);
         }
     }
+
+    $action1 = $actions[0];
+    $action2 = $actions[1];
+
+    $document = 'teste';
+
     //Set parse values
     $parse_data = [
         'company' => $data['core_settings']->company,
@@ -240,15 +246,13 @@ function send_bpm_notification($email, $subject, $text, $attachment = false, $li
         'logo' => '<img src="' . base_url() . '' . $data['core_settings']->logo . '" alt="' . $data['core_settings']->company . '"/>',
         'company_logo' => '<img src="' . base_url() . '' . $data['core_settings']->company_logo . '" alt="' . $data['core_settings']->company . '"/>',
         'message' => $text,
+        'document' => $document,
+        '$action1href' => $action1->href,
+        '$action1title' => $action1->title,
+        '$action2href' => $action2->href,
+        '$action2title' => $action2->title,
         'link' => ($link) ? $link : base_url(),
     ];
-    $find_client = Client::find_by_email($email);
-    $find_user = User::find_by_email($email);
-    $recepient = ($find_client) ? $find_client : $find_user;
-    $parse_data['client_contact'] = (isset($recepient->firstname)) ? $recepient->firstname . ' ' . $recepient->lastname : '';
-    $parse_data['client_company'] = ($find_client) ? $recepient->company->name : '';
-    $parse_data['first_name'] = (isset($recepient->firstname)) ? $recepient->firstname : '';
-    $parse_data['last_name'] = (isset($recepient->firstname)) ? $recepient->lastname : '';
 
     $email_message = read_file('./application/views/' . $data['core_settings']->template . '/templates/bpm_notification.html');
     $message = $instance->parser->parse_string($email_message, $parse_data);

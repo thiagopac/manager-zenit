@@ -10,6 +10,7 @@ class PurchaseOrder extends ActiveRecord\Model{
     public static function progressStepsIdsForPurchaseOrder($purchase_order_id){
 
         $purchase_order = PurchaseOrder::find($purchase_order_id);
+
         $flow = json_decode($purchase_order->flow);
 
         foreach ($flow->conditions as $condition) {
@@ -19,39 +20,53 @@ class PurchaseOrder extends ActiveRecord\Model{
             $operator = $condition->operator;
             $target = $condition->target;
 
+//            var_dump($property_value);
+//            var_dump($operator);
+//            $target = floatval($target);
+//            var_dump($target);
+
+//            var_dump($condition->operator);
+//            var_dump($condition->progress_order);
+
+//            var_dump($flow->conditions);
+
+            $comparisons_made = array();
+
             switch ($operator) {
                 case "<":
-                    if ($property_value < $target){
+                    if ($property_value < $target && !in_array("<", $comparisons_made)){
                         array_push($comparisons_made, "<");
+//                        var_dump($condition->progress_order);
                         return $condition->progress_order;
                     }
                     break;
                 case "<=":
-                    if ($property_value <= $target){
-                        array_push($comparisons_made, "<=");
+                    if ($property_value <= $target && !in_array("<=", $comparisons_made)){
+//                        var_dump($condition->progress_order);
                         return $condition->progress_order;
                     }
                     break;
                 case ">":
-                    if ($property_value > $target){
+                    if ($property_value > $target && !in_array(">", $comparisons_made)){
                         array_push($comparisons_made, ">");
+//                        var_dump($condition->progress_order);
                         return $condition->progress_order;
                     }
                     break;
                 case ">=":
-                    if ($property_value >= $target){
+                    if ($property_value >= $target && !in_array(">=", $comparisons_made)){
                         array_push($comparisons_made, ">=");
                         return $condition->progress_order;
                     }
                     break;
                 case "!=":
-                    if ($property_value != $target){
+                    if ($property_value != $target && !in_array("!=", $comparisons_made)){
                         array_push($comparisons_made, "!=");
                         return $condition->progress_order;
                     }
                     break;
                 case "==":
-                    if ($property_value == $target){
+                    if ($property_value == $target && !in_array("==", $comparisons_made)){
                         array_push($comparisons_made, "==");
                         return $condition->progress_order;
                     }
@@ -69,6 +84,8 @@ class PurchaseOrder extends ActiveRecord\Model{
         $current_history = json_decode($purchase_order->history);
 
         $progress_step_ids = PurchaseOrder::progressStepsIdsForPurchaseOrder($purchase_order_id);
+
+//        var_dump($progress_step_ids);
 
         $steps = array();
         $timeline = array();
@@ -95,6 +112,9 @@ class PurchaseOrder extends ActiveRecord\Model{
 
             array_push($timeline, $flow_step);
         }
+
+//        var_dump($steps);
+//        exit;
 
         return $steps;
 

@@ -1,3 +1,8 @@
+<style>
+    #materials_paginate{
+        visibility: hidden;
+    }
+</style>
 <div id="row">
         <?php include 'materialhandling_menu.php'; ?>
 
@@ -52,12 +57,28 @@
             <div class="box-shadow">
 
                 <div class="table-head">
-                    <?=$this->lang->line('application_entrances_and_outputs');?>
+                    <div class="pull-left">
+                        <?=$this->lang->line('application_entrances_and_outputs');?>
+                    </div>
+                    <div class="" style="padding-left: 140px">
+                        <div style="text-align: left;">
+                            <?php foreach (range('A', 'Z') as $char) : ?>
+                                <?php if ($filtered != false) : ?>
+                                    <span><a <?=$current_char == $char ? 'style="color:red;text-decoration: underline"' : ''; ?> href="<?=base_url()?>materialmanagement/filter/<?=$selected_deposit_id?>/<?=$char?>"><?=$char?></a></span>
+                                <?php else : ?>
+                                    <span><a <?=$current_char == $char ? 'style="color:red;text-decoration: underline"' : ''; ?> href="<?=base_url()?>materialmanagement/all/<?=$char?>"><?=$char?></a></span>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="table-div responsive">
-                    <table style="width: 100%" id="materials" class="data table noclick" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
+                    <table style="width: 100%" id="materials" class="data-natural table noclick" data-page-length="<?=count($all_materials)?>" rel="<?=base_url()?>" cellspacing="0" cellpadding="0">
                         <thead>
+                        <th width="5%" style='text-align:center;'>
+                            <?=$this->lang->line('application_id'); ?>
+                        </th>
                         <th width="25%" style='text-align:center;'>
                             <?=$this->lang->line('application_name'); ?>
                         </th>
@@ -105,6 +126,9 @@
 
                             <tr id="<?=$value->id; ?>">
                                 <td style='text-align:center;vertical-align:middle;'>
+                                    <?=$value->id; ?>
+                                </td>
+                                <td style='text-align:center;vertical-align:middle;'>
                                     <?=$value->description; ?>
                                 </td>
                                 <td class="hidden-xs hidden-sm" style='text-align:center;vertical-align:middle'>
@@ -124,17 +148,34 @@
                                     <?=$value->min_qty; ?>
                                 </td>
                                 <td class="" style='text-align:center;vertical-align:middle'>
-                                    <?php if ($value->amount->quantity >= $value->min_qty) : ?>
-                                        <span style="color:green">
-                                            <?=$value->amount->quantity != null ? $value->amount->quantity : 0; ?>
-                                        </span>
-                                    <?php else : ?>
-                                        <span style="color:red">
-                                            <?=$value->amount->quantity != null ? $value->amount->quantity : 0; ?>
-                                        </span>
-                                    <?php endif; ?>
+                                    <?php foreach ($value->deposit_amount as $amount) : ?>
+                                        <?php if ($amount->deposit_id == $selected_deposit_id) : ?>
+                                            <?php if ($amount->quantity >= $value->min_qty) : ?>
+                                                <span style="color:green">
+                                                    <?=$amount->quantity != null ? $amount->quantity : 0; ?>
+                                                </span>
+                                            <?php else : ?>
+                                                <span style="color:red">
+                                                    <?=$amount->quantity != null ? $amount->quantity : 0; ?>
+                                                </span>
+                                            <?php endif; ?>
+                                        <?php elseif($selected_deposit_id == null) : ?>
+                                            <?php
+                                                $sum = $amount->quantity;
+
+                                                if ($printed == true){
+                                                    echo " / ".$sum;
+                                                }else{
+                                                    echo $sum;
+                                                }
+                                            ?>
+                                        <?php else : ?>
+                                            <?='0'?>
+                                        <?php endif;?>
+                                    <?php endforeach; ?>
                                 </td>
                                 <?php if ($filtered == true) : ?>
+                                    <?php $mat->handling_last = MaterialHandling::last(['conditions' => ['material_id = ?', $value->id]]); ?>
                                     <?php if($value->handling_last != null)  : ?>
                                         <td class="hidden-sm hidden-xs" style='text-align:center;vertical-align:middle'>
                                             <?=$value->handling_last->user->firstname; ?>
@@ -171,6 +212,24 @@
                             </tr>
                         <?php endforeach; ?>
                     </table>
+                    <div>
+                        <div style="text-align: left; margin-bottom: 10px;">
+                            <?php foreach (range('A', 'Z') as $char) : ?>
+                                    <?php if ($selected_deposit_id != null) : ?>
+                                        <span><a <?=$current_char == $char ? 'style="color:red;text-decoration: underline"' : ''; ?> href="<?=base_url()?>materialmanagement/filter/<?=$selected_deposit_id?>/<?=$char?>"><?=$char?></a></span>
+                                    <?php else : ?>
+                                        <span><a <?=$current_char == $char ? 'style="color:red;text-decoration: underline"' : ''; ?> href="<?=base_url()?>materialmanagement/all/<?=$char?>"><?=$char?></a></span>
+                                    <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+<!--                    <div style="text-align: right; margin-bottom: 10px;">-->
+<!--                        --><?php //if ($previous_page != 0) : ?>
+<!--                        <span><a href="--><?//=base_url()?><!--materialmanagement/filter/--><?//=$deposit->id?><!--/--><?//=$previous_page?><!--"><< Anterior</a></span>-->
+<!--                        <span>•</span>-->
+<!--                        --><?php //endif; ?>
+<!--                        <span><a href="--><?//=base_url()?><!--materialmanagement/filter/--><?//=$deposit->id?><!--/--><?//=$next_page?><!--">Próxima >></a></span>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>

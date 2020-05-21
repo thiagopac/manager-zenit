@@ -15,7 +15,7 @@
 
         <div class="message-container">
 
-            <div class="container-fluid">
+            <div class="container-fluid" style="width:100%;margin: 0px;padding: 0px;">
                 <ul class="list-unstyled multi-steps" style="cursor: pointer">
                     <?php if ($purchase_order->canceled != true) : ?>
                         <?php foreach ($steps as $step) : ?>
@@ -54,8 +54,10 @@
                         <?php foreach ($actions as $action) : ?>
                             <?php if ($action->progress == true) : ?>
                                 <button name="submit_1" class="btn btn-success button-loader"><?=$action->name?></button>
-                            <?php else : ?>
+                            <?php elseif ($action->progress == false && $action->jump == false) : ?>
                                 <button name="submit_0" class="btn btn-danger button-loader"><?=$action->name?></button>
+                            <?php elseif ($action->jump == true) : ?>
+
                             <?php endif; ?>
 
                         <?php endforeach; ?>
@@ -117,6 +119,10 @@
                                     <?php if ($field->className == 'form-control mask-money') : ?>
                                         <td>
                                             <?=$core_settings->money_symbol?><?=display_money($response->$fieldname)?>
+                                        </td>
+                                    <?php elseif ($field->className == 'form-control mask-date') : ?>
+                                        <td>
+                                            <?=date($core_settings->date_format, human_to_unix($response->$fieldname.' 00:00'))?>
                                         </td>
                                     <?php else : ?>
                                         <td><?=$response->$fieldname?></td>
