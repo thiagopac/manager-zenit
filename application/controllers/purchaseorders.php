@@ -135,7 +135,6 @@ class PurchaseOrders extends MY_Controller{
 
             $bpm_flow = BpmFlow::find(1);
             $_POST['flow'] = $bpm_flow->flow;
-            $_POST['form'] = $bpm_flow->form;
             $_POST['response'] = json_encode($response);
 
             $_POST['price'] = $price;
@@ -170,13 +169,25 @@ class PurchaseOrders extends MY_Controller{
                     $attributes = array('user_id' => $user->id, 'message' => "[Ordem de compra $last_purchase_order->id] Uma ação é necessária", 'url' => base_url().'purchaseorders');
                     Notification::create($attributes);
 
+                    $document = PurchaseOrder::purchasebody($last_purchase_order->id);
+                    $history = PurchaseOrder::purchasehistory($last_purchase_order->id);
+
+                    $actions = array();
+                    foreach ($next_step->actions as $action){
+                        $action->title = $action->name;
+                        $action->href = base_url().'mailaction/updatepurchaseorder/'.str_replace('@ownergy.com.br', '', $member->email).'/'.$last_purchase_order->id.'/'.intval(boolval($action->progress)).'/'.$next_step->id;
+                        array_push($actions, $action);
+                    }
+
                     send_bpm_notification($member->email,
                                     "[Ordem de compra $last_purchase_order->id]",
                                     $this->lang->line('application_notification_purchase_order_updated_mail'),
                          null,
                                 base_url().'purchaseorders',
-                        $next_step->actions,
-                        $new_purchase_order);
+                        $actions,
+                        $document,
+                        $history
+                        );
                 }
 
                 Notification::sendPushNotification($push_receivers, "[Ordem de compra $last_purchase_order->id] Uma ação é necessária", base_url() . 'purchaseorders');
@@ -199,104 +210,9 @@ class PurchaseOrders extends MY_Controller{
             $actions = $flow->steps[0]->actions;
             $this->view_data['actions'] = $actions;
 
-            $this->view_data['form'] = $form = json_encode($bpm_flow->form);
-        }
-    }
+            $form =  $flow->steps[0]->form;
+            $this->view_data['form'] = json_encode($form);
 
-    public function mailaction($email, $purchase_order_id, $action_id){
-        $updating_purchase_order = PurchaseOrder::find($purchase_order_id);
-        $flow = json_decode($updating_purchase_order->flow);
-        $user = User::getUserByEmail($email);
-        $is_progress = $action_id;
-
-        $history_registry = new stdClass;
-
-        if ($is_progress == false){
-
-            foreach ($flow->steps as $step){
-                if ($step->canceled == true){
-                    $canceled_step = $step;
-                }
-            }
-
-            $_POST['step']  = $canceled_step->id;
-            $_POST['canceled'] = 1;
-
-            $current_step = PurchaseOrder::currentStepForPurchaseOrder($purchase_order_id);
-
-            //criação de registro de histórico
-            PurchaseOrder::createHistoryForPurchaseStepAndUser($purchase_order_id, $current_step, $user->id, $history_registry, $is_progress);
-
-            if ($_POST['canceled'] == 1){
-                // passo final precisa criar registro de histórico quando o penúltimo passo estiver sendo registrado
-                PurchaseOrder::createHistoryForPurchaseStepAndUser($purchase_order_id, $canceled_step, $user->id, $is_progress);
-            }
-
-        }else{
-
-            $current_step = PurchaseOrder::currentStepForPurchaseOrder($purchase_order_id);
-
-            $next_step = PurchaseOrder::nextStepForPurchaseOrderAfterCurrentStep($purchase_order_id, $current_step->id);
-            $_POST['step']  = $next_step->id;
-
-            //criação de registro de histórico
-            PurchaseOrder::createHistoryForPurchaseStepAndUser($purchase_order_id, $current_step, $user->id, $history_registry, $is_progress);
-
-            if ($next_step->finish == true){
-                // passo final precisa criar registro de histórico quando o penúltimo passo estiver sendo registrado
-                PurchaseOrder::createHistoryForPurchaseStepAndUser($purchase_order_id, $next_step, $user->id, $is_progress);
-                $_POST['finished'] = 1;
-            }
-        }
-
-        $updating_purchase_order->update_attributes($_POST);
-
-        $push_receivers = array();
-        if (!$updating_purchase_order) {
-            $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_edit_error'));
-        } else {
-
-            if ($is_progress == true){
-                $this->load->helper('notification');
-
-                foreach ($next_step->members as $member){
-                    if ($member->email == "creator_email"){
-                        $user = User::find($updating_purchase_order->user_id);
-                    }else{
-                        $user = User::getUserByEmail($member->email);
-                    }
-
-                    if ($user->push_active){
-                        array_push($push_receivers, $member->email);
-                    }
-
-                    $attributes = array('user_id' => $user->id, 'message' => "[Ordem de compra $updating_purchase_order->id] Uma atualização foi feita na Ordem de Compra", 'url' => base_url().'purchaseorders');
-                    Notification::create($attributes);
-
-
-                    send_bpm_notification($member->email,
-                                "[Ordem de compra $updating_purchase_order->id]",
-                                $this->lang->line('application_notification_purchase_order_updated_mail'),
-                                null,
-                            base_url().'purchaseorders',
-                            $next_step->actions,
-                            $updating_purchase_order);
-                }
-
-                Notification::sendPushNotification($push_receivers, "[Ordem de compra $updating_purchase_order->id] Uma atualização foi feita na Ordem de Compra", base_url() . 'purchaseorders');
-
-            }else{
-                //Purchase Order is backing to the creator
-                array_push($push_receivers, $this->user->email);
-
-                $attributes = array('user_id' => $updating_purchase_order->user_id, 'message' => "[Ordem de compra $updating_purchase_order->id] Ordem de compra cancelada, verifique o histórico", 'url' => base_url().'purchaseorders');
-                Notification::create($attributes);
-
-                Notification::sendPushNotification($push_receivers, "[Ordem de compra $updating_purchase_order->id] Ordem de Compra cancelada, verifique o histórico", base_url() . 'purchaseorders');
-            }
-
-            $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_edit_success'));
-            redirect('purchaseorders');
         }
     }
 
@@ -324,8 +240,8 @@ class PurchaseOrders extends MY_Controller{
                     $config['upload_path'] = './files/purchaseorders/';
                     $config['encrypt_name'] = true;
                     $config['allowed_types'] = '*';
-                    $config['max_size'] = '10000'; // max_size in kb
-                    $config['file_name'] = $_FILES['files']['name'][$i];
+                    $config['max_size'] = '15000'; // max_size in kb
+                    $config['file_name'] = $_FILES['files']['name']['type'][$i];
 
                     //Load upload library
                     $this->load->library('upload',$config);
@@ -354,9 +270,25 @@ class PurchaseOrders extends MY_Controller{
 
             $history_registry = new stdClass;
             $history_registry->history_files = $file_names_arr;
+            $history_registry->history_data = array();
+
+            $current_step = PurchaseOrder::currentStepForPurchaseOrder($id);
 
             foreach ($_POST as $key => $value) {
-                $history_registry->$key = $value;
+                foreach ($current_step->form as $form_field){
+
+                    if ($key == $form_field->name){
+                        $history_reg = new stdClass();
+
+                        $history_reg->label = $form_field->label;
+                        $history_reg->value = $value;
+                        $history_reg->name = $key;
+                        $history_reg->className = $form_field->className;
+                        if ($value != null){
+                            array_push($history_registry->history_data, $history_reg);
+                        }
+                    }
+                }
                 unset($_POST["$key"]);
             }
 
@@ -380,7 +312,7 @@ class PurchaseOrders extends MY_Controller{
 
                 if ($_POST['canceled'] == 1){
                     // passo final precisa criar registro de histórico quando o penúltimo passo estiver sendo registrado
-                    PurchaseOrder::createHistoryForPurchaseStepAndUser($id, $canceled_step, $this->user->id, $is_progress);
+                    PurchaseOrder::createHistoryForPurchaseStepAndUser($id, $canceled_step, $this->user->id, false, $is_progress);
                 }
 
             }else{
@@ -395,7 +327,7 @@ class PurchaseOrders extends MY_Controller{
 
                 if ($next_step->finish == true){
                     // passo final precisa criar registro de histórico quando o penúltimo passo estiver sendo registrado
-                    PurchaseOrder::createHistoryForPurchaseStepAndUser($id, $next_step, $this->user->id, $is_progress);
+                    PurchaseOrder::createHistoryForPurchaseStepAndUser($id, $next_step, $this->user->id, false, $is_progress);
                     $_POST['finished'] = 1;
                 }
             }
@@ -424,14 +356,24 @@ class PurchaseOrders extends MY_Controller{
                         $attributes = array('user_id' => $user->id, 'message' => "[Ordem de compra $updating_purchase_order->id] Uma atualização foi feita na Ordem de Compra", 'url' => base_url().'purchaseorders');
                         Notification::create($attributes);
 
+                        $document = PurchaseOrder::purchasebody($updating_purchase_order->id);
+                        $history = PurchaseOrder::purchasehistory($updating_purchase_order->id);
+
+                        $actions = array();
+                        foreach ($next_step->actions as $action){
+                            $action->title = $action->name;
+                            $action->href = base_url().'mailaction/updatepurchaseorder/'.str_replace('@ownergy.com.br', '', $member->email).'/'.$updating_purchase_order->id.'/'.intval(boolval($action->progress)).'/'.$next_step->id;
+                            array_push($actions, $action);
+                        }
 
                         send_bpm_notification($member->email,
                                     "[Ordem de compra $updating_purchase_order->id]",
                                     $this->lang->line('application_notification_purchase_order_updated_mail'),
                                 null,
                                 base_url().'purchaseorders',
-                                $next_step->actions,
-                                $updating_purchase_order);
+                                $actions,
+                                $document,
+                                $history);
                     }
 
                     Notification::sendPushNotification($push_receivers, "[Ordem de compra $updating_purchase_order->id] Uma atualização foi feita na Ordem de Compra", base_url() . 'purchaseorders');
@@ -457,27 +399,14 @@ class PurchaseOrders extends MY_Controller{
         }
     }
 
-    public function update($id = false, $getview = false){
-        if ($_POST) {
-            $message = PrivateMessage::find($id);
-            $message->update_attributes($_POST);
-            if (!$message) {
-                $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_write_message_error'));
-            } else {
-                $this->session->set_flashdata('message', 'success:'.$this->lang->line('messages_write_message_success'));
-            }
-            if (isset($view)) {
-                redirect('purchaseorders/view/'.$id);
-            } else {
-                redirect('messages');
-            }
-        } else {
-            $this->view_data['id'] = $id;
-            $this->theme_view = 'modal';
-            $this->view_data['title'] = $this->lang->line('application_edit_message');
-            $this->view_data['form_action'] = 'messages/update';
-            $this->content_view = 'purchaseorders/_pruchaseorder_update';
-        }
+    public function purchasedata($purchase_order_id = false){
+
+        $this->theme_view = 'blank';
+
+        $purchase_order_data = PurchaseOrder::purchasehistory($purchase_order_id);
+//        $purchase_order_data = PurchaseOrder::purchasebody($purchase_order_id);
+
+        echo $purchase_order_data;
     }
 
     public function delete($id = false){
@@ -527,7 +456,30 @@ class PurchaseOrders extends MY_Controller{
         $this->view_data['steps'] = $steps;
         $this->view_data['history'] = $history = PurchaseOrder::getHistoryForPurchase($id);
 
-        $this->view_data['form'] = json_decode($purchase_order->form);
+        $form = $steps[0]->form;
+        $this->view_data['form'] = $form;
         $this->view_data['response'] = json_decode($purchase_order->response);
+
+        $step_form =  $flow->steps[$purchase_order->step]->form;
+        $this->view_data['step_form'] = json_encode($step_form);
     }
+
+    /*public function preview($id = false, $attachment = false) {
+        $this->load->helper(['dompdf', 'file']);
+        $this->load->library('parser');
+        $purchase_order = PurchaseOrder::find($id);
+        $data['purchase_order'] = $purchase_order;
+        $data['body'] = InvoiceHasItem::find('all', ['conditions' => ['invoice_id=?', $id]]);
+        $data['core_settings'] = Setting::first();
+
+        $parse_data = [
+            'company' => $data['core_settings']->company,
+            'logo' => '<img src="' . base_url() . '' . $data['core_settings']->logo . '" alt="' . $data['core_settings']->company . '"/>',
+        ];
+        $html = $this->load->view('blueline/templates/pruchaseorder/template', $data, true);
+        $html = $this->parser->parse_string($html, $parse_data);
+
+        $filename = 'purchaseorder'.'_'.$purchase_order->id;
+        pdf_create($html, $filename, true, $attachment);
+    }*/
 }

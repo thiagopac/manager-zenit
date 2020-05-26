@@ -200,8 +200,8 @@ class PurchaseOrder extends ActiveRecord\Model{
         $new_object->date = date('Y-m-d H:i:s');
 
         if ($reply){
-            $new_object->history_text = $reply->history_text;
             $new_object->history_files = $reply->history_files;
+            $new_object->history_data = $reply->history_data;
         }
 
         foreach ($step->actions as $action){
@@ -215,7 +215,7 @@ class PurchaseOrder extends ActiveRecord\Model{
         $current_history = json_encode($current_history);
         $purchase_order->history = $current_history;
 
-        $purchase_order->save();
+            $purchase_order->save();
     }
 
     public static function getHistoryForPurchase($purchase_id){
@@ -223,6 +223,103 @@ class PurchaseOrder extends ActiveRecord\Model{
         $current_history = json_decode($purchase_order->history);
 
         return $current_history;
+    }
+
+    public static function purchasehistory($purchase_order_id){
+
+        $core_settings = Setting::first();
+        $purchase_order = PurchaseOrder::find($purchase_order_id);
+        $history = json_decode($purchase_order->history);
+
+        $content = '<div style="text-align:center !important; color: #b6b6b6; font-size: 18px">Histórico da Ordem de Compra</div>';
+        $content.= '<div style="text-align: left !important; font-size:14px !important;">';
+        foreach ($history->steps as $reg){
+            $content.= '<p>';
+            $content.= '<span style="font-weight: 700; color: #555;">'.$reg->name.':</span> <span style="font-weight: 300; color: #555;">'.$reg->message.'</span><br />';
+            $content.= '<small><span style="color: #555;"> Feito por: '.'<span style="font-weight: 700; color: #555">'.User::find($reg->user_id)->firstname.' '.User::find($reg->user_id)->lastname.'</span></span>';
+            $content.= ' em <b><span style="color: #555">'.date($core_settings->date_format."</span></b> à\s <b><\span style='color: #555'>".$core_settings->date_time_format, human_to_unix($reg->date)).'</\span></b></small><br />';
+            if ($reg->history_data != null){
+                foreach ($reg->history_data as $history_reg){
+                    if ($history_reg->className == "form-control mask-money"){
+                        $history_reg->value = $core_settings->money_symbol.''.display_money($history_reg->value);
+                    }else if ($history_reg->className == "form-control mask-date"){
+                        $history_reg->value = date($core_settings->date_format, human_to_unix($history_reg->value.' 00:00'));
+                    }
+                    $content .= '<small><b><span style="color: #555;">'.$history_reg->label.': </span></b><span style="color: #555;">'.$history_reg->value.'</span></small><br />';
+                }
+            }
+            if ($reg->history_files != null){
+                $content.='<small><b><span style="color: #555;">Anexos: </span></b></small>';
+                foreach ($reg->history_files as $idx=>$file){
+                    $index = $idx+1;
+                    $content.='<small><span style="color: #555;"><a href="'.base_url().'files/purchaseorders/'.$file.'" target="_blank">Anexo '.$index.'</a></span></small>';
+                    $content.= '<span style="color: #555;"><small> (.'.explode('.', $file)[1].') </small></span>';
+                }
+            }
+            $content.= '</p>';
+        }
+
+        $content.= '</div>';
+
+        return $content;
+    }
+
+    public static function purchasebody($purchase_order_id = false){
+
+        $core_settings = Setting::first();
+        $purchase_order = PurchaseOrder::find($purchase_order_id);
+        $form = json_decode($purchase_order->flow->steps[0]->form);
+        $response = json_decode($purchase_order->response);
+
+        $content = '<div style="text-align:center !important; color: #b6b6b6; font-size: 18px">Dados da Ordem de Compra</div>';
+        $content.= '<br />';
+        $content.= '<table border="1" cellpadding="6" style="border: 1px #ddd;border-collapse: collapse;">';
+        $content.= '<thead style="background:#ececec">
+                        <th style="width: 30%; color: #555;">Campo</th>
+                        <th style="color: #555">Preenchimento</th>
+                    </thead>';
+
+        foreach ($form as $field){
+            $fieldname = $field->name;
+            $content.= '<tr style="text-align:left !important;">';
+
+            if ($response->$fieldname != null){
+                if (!is_array($response->$fieldname)){
+                    $content.= '<td style="color: #555"><strong>'.htmlspecialchars_decode(stripslashes(($field->label))).'</strong></td>';
+                    if ($field->className == 'form-control mask-money'){
+                        $content.= '<td style="color: #555">';
+                        $content.= $core_settings->money_symbol.' '.display_money($response->$fieldname);
+                        $content.= '</td>';
+
+                    }
+                    else if ($field->className == 'form-control mask-date'){
+                        $content.= '<td style="color: #555">';
+                        $content.= date($core_settings->date_format, human_to_unix($response->$fieldname.' 00:00'));
+                        $content.= '</td>';
+                    }else{
+                        $content.= '<td style="color: #555">';
+                        $content.= $response->$fieldname;
+                        $content.= '</td>';
+                    }
+                }else{
+                    $content.='<td style="color: #555"><strong>'.$field->label.'</strong></td>';
+                    $content.='<td style="color: #555">';
+                        foreach ($response->$fieldname as $idx=>$field){
+                            $index = $idx + 1;
+                            $content.='<a href="'.base_url().'files/purchaseorders/'.$field.'" target="_blank">Anexo '.$index.'</a>';
+                            $content.= '<small> (.'.explode('.', $field)[1].') </small>';
+                        }
+
+                    $content.='</td>';
+                }
+            }
+
+            $content.= '</tr>';
+        }
+
+        $content.= '</table>';
+
+        return $content;
     }
 
 }

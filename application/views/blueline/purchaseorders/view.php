@@ -9,6 +9,15 @@
             <h1 class="page-title"><a class="icon glyphicon glyphicon-chevron-right trigger-message-close"></a><br><span class="dot"></span><?=$value->subject; ?>
                 <span class="grey"><?=$purchase_order->subject?></span>
             </h1>
+            <!--<div class="btn-group pull-right">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    PDF <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="https://ownergy.com.br/zenit/invoices/preview/1275">Download</a></li>
+                    <li><a href="https://ownergy.com.br/zenit/invoices/preview/1275/show" target="_blank">Preview</a></li>
+                </ul>
+            </div>-->
             <?php $unix = human_to_unix($purchase_order->created_at); ?>
             <p class="subtitle"><?=$this->lang->line('application_claimant'); ?>: <?=$purchase_order->user->firstname?>, <?=$this->lang->line('application_started_on'); ?> <?php  echo date($core_settings->date_format . ' ' . $core_settings->date_time_format, $unix); ?></p>
         </div>
@@ -39,15 +48,7 @@
                 <div class="container-fluid">
                     <label><?=$this->lang->line('application_actions'); ?></label>
 
-                    <div class="form-group">
-                        <label for="history_text"><?=$this->lang->line('application_considerations');?></label>
-                        <input type="text" name="history_text" class="form-control" id="history_text" placeholder=""/>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="history_files"><?=$this->lang->line('application_attach_files');?></label>
-                        <input name="files[]" type="file" access="false" multiple="true" class="form-control" id="files">
-                    </div>
+                    <div id="form-render-wrap"></div>
 
                     <div class="textarea-footer message-footer">
 
@@ -62,12 +63,6 @@
 
                         <?php endforeach; ?>
 
-                        <!--<div class="pull-right small-upload"><input id="uploadFile" class="form-control uploadFile" placeholder="" disabled="disabled" />
-                            <div class="fileUpload btn btn-primary">
-                                <span><i class="icon dripicons-upload"></i><span class="hidden-xs"></span></span>
-                                <input id="uploadBtn" type="file" name="userfile" class="upload" />
-                            </div>
-                        </div>-->
                     </div>
                 </div>
                 <?php echo form_close(); ?>
@@ -82,8 +77,18 @@
                             <div class="comment-content">
                                 <h5><span style="font-weight: 500"><?=$reg->name?>:</span> <span style="font-weight: 300"><?=$reg->message?></span></h5>
                                 <p><?=$this->lang->line('application_made_by');?> <b><?=User::find($reg->user_id)->firstname.' '.User::find($reg->user_id)->lastname?></b> <?=$this->lang->line('application_at'); ?> <b><?=date($core_settings->date_format . '</b> à\s <b>' . $core_settings->date_time_format, human_to_unix($reg->date)).'</b>';?></p>
-                                <?php if ($reg->history_text != null) : ?>
-                                    <p><b><?=$this->lang->line('application_considerations');?>:</b> <?=$reg->history_text;?></p>
+                                <?php if ($reg->history_data != null) : ?>
+                                    <?php foreach ($reg->history_data as $reg_data) :?>
+                                        <p><b><?=$reg_data->label;?>:</b>
+                                            <?php
+                                            if ($reg_data->className == "form-control mask-money"){
+                                                $reg_data->value = $core_settings->money_symbol.''.display_money($reg_data->value);
+                                            }else if ($reg_data->className == "form-control mask-date"){
+                                                $reg_data->value = date($core_settings->date_format, human_to_unix($reg_data->value.' 00:00'));
+                                            }
+                                            ?>
+                                            <?=$reg_data->value;?></p>
+                                    <?php endforeach; ?>
                                 <?php endif; ?>
                                 <?php if ($reg->history_files != null) : ?>
                                     <p><b><?=$this->lang->line('application_attached_files');?>:</b>
@@ -147,7 +152,35 @@
 
     <br><br>
     <script>
+
+        jQuery(function() {
+
+            var formData = <?=$step_form?>,
+                formRenderOpts = {
+                    dataType: 'json',
+                    formData: formData
+                };
+
+            var renderedForm = $('#form-render-wrap');
+            renderedForm.formRender(formRenderOpts);
+
+        });
+
         jQuery(document).ready(function($) {
+
+            $('input[data-effect="hide"]').parent().hide();
+
+            const affectators = $('[data-affect]');
+
+            $(affectators).on('change', function() {
+                if ($(this).data('result') == 'unhide'){
+                    if ($(this).data('condition') == this.value) {
+                        $("#form-render-wrap").find("[id='" + $(this).data('affect') + "']").parent().show();
+                    }else{
+                        $("#form-render-wrap").find("[id='" + $(this).data('affect') + "']").parent().hide();
+                    }
+                }
+            });
 
             $('.nano').nanoScroller();
             $('.trigger-message-close').on('click', function() {
@@ -170,6 +203,32 @@
                 'placeholder': '',
                 'removeMaskOnSubmit': true
             })
+
+            $('.button-loader').closest('form')
+            // indirectly bind the handler to form
+                .submit(function() {
+                    return checkForm.apply($(this).find(':input')[0]);
+                })
+                // look for input elements
+                .find(':input[required]:visible')
+                // bind the handler to input elements
+                .keyup(checkForm)
+                // immediately fire it to initialize buttons state
+                .keyup();
+
+            function checkForm() {
+                // here, "this" is an input element
+                var isValidForm = true;
+                $(this.form).find(':input[required]:visible').each(function() {
+                    if (!this.value.trim()) {
+                        isValidForm = false;
+                    }
+                });
+                // $(this.form).find('.button-loader').prop('disabled', !isValidForm);
+                isValidForm == false ? toastr.error('Você precisa preencher todos os campos obrigatórios') : '';
+
+                return isValidForm;
+            }
 
         });
     </script>

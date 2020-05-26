@@ -4,8 +4,7 @@
 /**
  * Notification Helper
  */
-function send_notification($email, $subject, $text, $attachment = false, $link = false)
-{
+function send_notification($email, $subject, $text, $attachment = false, $link = false) {
     $instance = &get_instance();
     $instance->email->clear();
     $instance->load->helper('file');
@@ -48,8 +47,7 @@ function send_notification($email, $subject, $text, $attachment = false, $link =
     return $send;
 }
 
-function send_ticket_notification($email, $subject, $text, $ticket_id, $attachment = false)
-{
+function send_ticket_notification($email, $subject, $text, $ticket_id, $attachment = false) {
     $instance = &get_instance();
     $instance->email->clear();
     $instance->load->helper('file');
@@ -118,8 +116,7 @@ function send_ticket_notification($email, $subject, $text, $ticket_id, $attachme
     $instance->email->send();
 }
 
-function receipt_notification($clientId, $subject = false, $paymentId = false)
-{
+function receipt_notification($clientId, $subject = false, $paymentId = false) {
     $instance = &get_instance();
     $instance->email->clear();
     $instance->load->helper('file');
@@ -150,8 +147,7 @@ function receipt_notification($clientId, $subject = false, $paymentId = false)
     $instance->email->send();
 }
 
-function reminder_notification($class, $user = false, $module = false, $reminder = false)
-{
+function reminder_notification($class, $user = false, $module = false, $reminder = false) {
     $instance = &get_instance();
     $instance->email->clear();
     $instance->load->helper('file');
@@ -214,8 +210,7 @@ function reminder_notification($class, $user = false, $module = false, $reminder
     }
 }
 
-function send_bpm_notification($email, $subject, $text, $attachment = false, $link = false, $actions = false, $document = false)
-{
+function send_bpm_notification($email, $subject, $text, $attachment = false, $link = false, $actions = false, $document = false, $history = false) {
     $instance = &get_instance();
     $instance->email->clear();
     $instance->load->helper('file');
@@ -237,7 +232,7 @@ function send_bpm_notification($email, $subject, $text, $attachment = false, $li
     $action1 = $actions[0];
     $action2 = $actions[1];
 
-    $document = 'teste';
+    $message = $subject .' - '.$text;
 
     //Set parse values
     $parse_data = [
@@ -245,12 +240,13 @@ function send_bpm_notification($email, $subject, $text, $attachment = false, $li
         'link' => base_url(),
         'logo' => '<img src="' . base_url() . '' . $data['core_settings']->logo . '" alt="' . $data['core_settings']->company . '"/>',
         'company_logo' => '<img src="' . base_url() . '' . $data['core_settings']->company_logo . '" alt="' . $data['core_settings']->company . '"/>',
-        'message' => $text,
+        'message' => $message,
         'document' => $document,
-        '$action1href' => $action1->href,
-        '$action1title' => $action1->title,
-        '$action2href' => $action2->href,
-        '$action2title' => $action2->title,
+        'action1title' => $action1->title,
+        'action1href' => $action1->href,
+        'action2title' => $action2->title,
+        'action2href' => $action2->href,
+        'history' => $history,
         'link' => ($link) ? $link : base_url(),
     ];
 

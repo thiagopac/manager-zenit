@@ -170,6 +170,7 @@
     display: table-cell;
     position: relative;
     color: limegreen;
+    font-size: smaller;
 }
 
 .multi-steps > li.canceled {
@@ -197,9 +198,9 @@
     display: block;
     margin: 0 auto 4px;
     background-color: #fff;
-    width: 36px;
-    height: 36px;
-    line-height: 32px;
+    width: 26px;
+    height: 26px;
+    line-height: 22px;
     text-align: center;
     font-weight: bold;
     border-width: 2px;
@@ -215,7 +216,7 @@
     width: 100%;
     background-color: limegreen;
     position: absolute;
-    top: 16px;
+    top: 12px;
     left: 50%;
     z-index: -1;
 }

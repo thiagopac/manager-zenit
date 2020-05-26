@@ -122,4 +122,9 @@ class User extends ActiveRecord\Model {
 
         return User::find('first', ['conditions' => ['email = ?', $email]]);
     }
+
+    public static function getUserByUsername($username = false){
+
+        return User::find('first', ['conditions' => ['username = ?', $username]]);
+    }
 }

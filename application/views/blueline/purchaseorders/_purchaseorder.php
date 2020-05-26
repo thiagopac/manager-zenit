@@ -16,10 +16,12 @@ echo form_open_multipart($form_action, $attributes);
     <a class="btn btn-default" data-dismiss="modal"><?=$this->lang->line('application_close');?></a>
 </div>
 <?php echo form_close(); ?>
-
+<?php
+//var_dump($form) ?>
 <script>
     jQuery(function() {
-        var formData = JSON.parse(<?=$form?>),
+
+        var formData = <?=$form?>,
             formRenderOpts = {
                 dataType: 'json',
                 formData: formData
@@ -28,11 +30,24 @@ echo form_open_multipart($form_action, $attributes);
         var renderedForm = $('#form-render-wrap');
         renderedForm.formRender(formRenderOpts);
 
-
-        //console.log(JSON.parse(<?//=$form?>//));
+        //console.log(<?//=$form?>//);
     });
 
     $(document).ready(function() {
+
+        $('input[data-effect="hide"]').parent().hide();
+
+        const affectators = $('[data-affect]');
+
+        $(affectators).on('change', function() {
+            if ($(this).data('result') == 'unhide'){
+                if ($(this).data('condition') == this.value) {
+                    $("#form-render-wrap").find("[id='" + $(this).data('affect') + "']").parent().show();
+                }else{
+                    $("#form-render-wrap").find("[id='" + $(this).data('affect') + "']").parent().hide();
+                }
+            }
+        });
 
         $(".mask-money").inputmask('decimal', {
             'prefix' : 'R$ ',
