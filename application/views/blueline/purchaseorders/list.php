@@ -138,7 +138,15 @@ if($purchase_orders){
 // Enable sexy scrollbars
         $('.nano').nanoScroller();
 
-
+        $('.message-list-load').click(function(){
+            $('.message-list-load').removeClass('active').addClass('inactive');
+            $(this).removeClass('inactive').addClass('active');
+        });
 
     });
 </script>
+<style>
+    .message-list-load.active {
+        box-shadow:inset 0 0 0 100px rgba(0,0,0,0.1);
+    }
+</style>

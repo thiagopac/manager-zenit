@@ -21,11 +21,10 @@ class PurchaseOrders extends MY_Controller{
         } else {
             redirect('login');
         }
-
-
     }
 
     public function index(){
+        $this->view_data['is_viewer'] = $is_viewer = BpmFlow::isViewer(1, $this->user->email);
         $this->content_view = 'purchaseorders/all';
     }
 
@@ -33,12 +32,12 @@ class PurchaseOrders extends MY_Controller{
 
         $my_steps = BpmFlow::stepsUserIs(1, $this->user->email);
 
-        $is_viewer = BpmFlow::isViewer(1, $this->user->email);
+//        $is_viewer = BpmFlow::isViewer(1, $this->user->email);
 
-        $purchase_orders = PurchaseOrder::find('all', ['conditions' => ['step IN (?) ORDER BY id DESC', $my_steps]]);
-        if ($is_viewer == true){
-            $purchase_orders = PurchaseOrder::find('all', ['conditions' => ['1 = 1 ORDER BY id DESC']]);
-        }
+        $purchase_orders = PurchaseOrder::find('all', ['conditions' => ['step IN (?) AND canceled != 1 AND finished != 1 ORDER BY id DESC', $my_steps]]);
+//        if ($is_viewer == true){
+//            $purchase_orders = PurchaseOrder::find('all', ['conditions' => ['1 = 1 ORDER BY id DESC']]);
+//        }
 
         $this->view_data['purchase_orders'] = $purchase_orders;
 
@@ -61,8 +60,12 @@ class PurchaseOrders extends MY_Controller{
             case "canceled" :
                 $this->view_data['purchase_orders'] = PurchaseOrder::find('all', ['conditions' => ['canceled = ? ORDER BY id DESC', 1]]);
                 break;
+            case "all" :
+                $this->view_data['purchase_orders'] = PurchaseOrder::find('all', ['conditions' => ['1 = 1 ORDER BY id DESC']]);
+                break;
         }
 
+        $this->view_data['filter'] = $condition;
         $this->theme_view = 'ajax';
         $this->content_view = 'purchaseorders/list';
     }
@@ -181,7 +184,7 @@ class PurchaseOrders extends MY_Controller{
 
                     send_bpm_notification($member->email,
                                     "[Ordem de compra $last_purchase_order->id]",
-                                    $this->lang->line('application_notification_purchase_order_updated_mail'),
+                                    sprintf($this->lang->line('application_notification_purchase_order_updated_mail'), base_url().'purchaseorders'),
                          null,
                                 base_url().'purchaseorders',
                         $actions,
@@ -345,6 +348,7 @@ class PurchaseOrders extends MY_Controller{
                     foreach ($next_step->members as $member){
                         if ($member->email == "creator_email"){
                             $user = User::find($updating_purchase_order->user_id);
+                            $member->email = $user->email;
                         }else{
                             $user = User::getUserByEmail($member->email);
                         }
@@ -368,7 +372,7 @@ class PurchaseOrders extends MY_Controller{
 
                         send_bpm_notification($member->email,
                                     "[Ordem de compra $updating_purchase_order->id]",
-                                    $this->lang->line('application_notification_purchase_order_updated_mail'),
+                            sprintf($this->lang->line('application_notification_purchase_order_updated_mail'), base_url().'purchaseorders'),
                                 null,
                                 base_url().'purchaseorders',
                                 $actions,
@@ -434,24 +438,29 @@ class PurchaseOrders extends MY_Controller{
 
         $this->view_data['flow'] = $flow = json_decode($purchase_order->flow);
 
-
-        $actions = BpmFlow::actionsForUserInStep(1, $this->user->email, $purchase_order->step);
-
-        $this->view_data['actions'] = $actions;
-
         $steps = PurchaseOrder::progressStepsForPurchaseOrder($id);
 
         $user = User::find($purchase_order->user_id);
 
+        $creator_email = '';
         foreach ($steps as $step_reg){
             foreach ($step_reg->members as $member){
                 if ($member->name == 'creator_name'){
 
                     $member->name = $user->firstname.' '.$user->lastname;
                     $member->email = $user->email;
+                    $creator_email =  $user->email;
                 }
             }
         }
+
+        $actions = BpmFlow::actionsForUserInStep(1, $this->user->email, $purchase_order->step);
+
+        if ($creator_email != ''){
+            $actions = BpmFlow::actionsForUserInStep(1, $creator_email, $purchase_order->step, $this->user);
+        }
+
+        $this->view_data['actions'] = $actions;
 
         $this->view_data['steps'] = $steps;
         $this->view_data['history'] = $history = PurchaseOrder::getHistoryForPurchase($id);

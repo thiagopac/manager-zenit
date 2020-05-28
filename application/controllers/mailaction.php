@@ -103,7 +103,7 @@ class MailAction extends MY_Controller {
 
                     send_bpm_notification($member->email,
                         "[Ordem de compra $updating_purchase_order->id]",
-                        $this->lang->line('application_notification_purchase_order_updated_mail'),
+                        sprintf($this->lang->line('application_notification_purchase_order_updated_mail'), base_url().'purchaseorders'),
                         null,
                         base_url() . 'purchaseorders',
                         $actions,

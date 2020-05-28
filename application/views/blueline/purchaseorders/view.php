@@ -2,7 +2,9 @@
     <div class="nano-content">
         <div class="header">
             <div class="message-content-menu">
-                <button class="message-reply-button btn btn-success" <?=count($actions) > 0 && $purchase_order->finished != 1 ? '' : 'disabled'; ?> role="button"><i class="icon dripicons-forward"></i> <?=$this->lang->line('application_actions'); ?></button>
+                <button class="message-reply-button btn btn-success" <?=count($actions) > 0 && $purchase_order->finished != 1 ? '' : 'disabled'; ?> role="button">
+                    <i class="icon dripicons-forward"></i> <?=$this->lang->line('application_actions'); ?>
+                </button>
 <!--                    <a class="btn btn-danger" href="--><?//=base_url()?><!--purchaseorders/delete/--><?//=end($conversation)->id?><!--" role="button"><i class="icon dripicons-trash"></i> --><?//=$this->lang->line('application_delete'); ?><!--</a>-->
             </div>
 

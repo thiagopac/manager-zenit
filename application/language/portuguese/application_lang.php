@@ -1147,5 +1147,5 @@ $lang['application_attached_files'] = "Arquivos anexados";
 $lang['application_mark_all_as_read'] = 'Marcar todos como lidos';
 $lang['application_notification_purchase_order_action_required'] = 'Uma ação é necessária';
 $lang['application_notification_purchase_order_updated'] = 'Uma atualização foi feita na Ordem de Compra';
-$lang['application_notification_purchase_order_updated_mail'] = 'Revise os dados da Ordem de Compra e tome uma ação.';
+$lang['application_notification_purchase_order_updated_mail'] = 'Revise os dados da Ordem de Compra e tome uma ação. Para ver mais ações ao dar prosseguimento a essa Ordem de Compra, acesse o Zenit através do link: %s';
 $lang['application_transit'] = "Em trânsito";

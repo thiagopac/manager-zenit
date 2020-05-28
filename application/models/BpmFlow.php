@@ -38,14 +38,16 @@ class BpmFlow extends ActiveRecord\Model {
             foreach ($step->members as $member){
                 if ($member->email == $email){
                     array_push($steps, $idx);
+                }else if ($member->name == 'creator_name'){
+                    array_push($steps, $idx);
                 }
             }
         }
 
-        return $steps;
+        return $steps !== null ? $steps : null;
     }
 
-    public static function actionsForUserInStep($id = false, $email = false, $desired_step = false){
+    public static function actionsForUserInStep($id = false, $email = false, $desired_step = false, $logged_user = false){
 
         $actions = array();
 
@@ -57,6 +59,11 @@ class BpmFlow extends ActiveRecord\Model {
                 foreach ($step->members as $member){
                     if ($member->email == $email){
                         $actions = $step->actions;
+                    }else if($member->email == 'creator_email'){
+
+                        if ($logged_user->email == $email){
+                            $actions = $step->actions;
+                        }
                     }
                 }
 

@@ -237,7 +237,7 @@ class PurchaseOrder extends ActiveRecord\Model{
             $content.= '<p>';
             $content.= '<span style="font-weight: 700; color: #555;">'.$reg->name.':</span> <span style="font-weight: 300; color: #555;">'.$reg->message.'</span><br />';
             $content.= '<small><span style="color: #555;"> Feito por: '.'<span style="font-weight: 700; color: #555">'.User::find($reg->user_id)->firstname.' '.User::find($reg->user_id)->lastname.'</span></span>';
-            $content.= ' em <b><span style="color: #555">'.date($core_settings->date_format."</span></b> à\s <b><\span style='color: #555'>".$core_settings->date_time_format, human_to_unix($reg->date)).'</\span></b></small><br />';
+            $content.= ' em <b><span style="color: #555">'.date($core_settings->date_format."</span></b> à\s <b><\s\p\a\\n \s\\t\y\l\\e='\c\o\l\o\\r:#555'>".$core_settings->date_time_format, human_to_unix($reg->date)).'</span></b></small><br />';
             if ($reg->history_data != null){
                 foreach ($reg->history_data as $history_reg){
                     if ($history_reg->className == "form-control mask-money"){
@@ -268,7 +268,8 @@ class PurchaseOrder extends ActiveRecord\Model{
 
         $core_settings = Setting::first();
         $purchase_order = PurchaseOrder::find($purchase_order_id);
-        $form = json_decode($purchase_order->flow->steps[0]->form);
+        $flow = json_decode($purchase_order->flow);
+        $form = $flow->steps[0]->form;
         $response = json_decode($purchase_order->response);
 
         $content = '<div style="text-align:center !important; color: #b6b6b6; font-size: 18px">Dados da Ordem de Compra</div>';
@@ -278,6 +279,7 @@ class PurchaseOrder extends ActiveRecord\Model{
                         <th style="width: 30%; color: #555;">Campo</th>
                         <th style="color: #555">Preenchimento</th>
                     </thead>';
+
 
         foreach ($form as $field){
             $fieldname = $field->name;

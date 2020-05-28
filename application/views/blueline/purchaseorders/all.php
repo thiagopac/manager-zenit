@@ -1,5 +1,4 @@
 <link href="<?=base_url()?>assets/blueline/css/plugins/messages.css" rel="stylesheet">
-
 <div class="col-sm-13 col-md-12 messages" onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
     <main id="main" >
         <div class="overlay"></div>
@@ -10,6 +9,7 @@
                     <span id="sent-folder"><i class="icon dripicons-user"></i> <?=$this->lang->line('application_created_by_me');?></span>
                     <span id="finished-folder"><i class="icon dripicons-thumbs-up"></i> <?=$this->lang->line('application_finished');?></span>
                     <span id="canceled-folder"><i class="icon dripicons-thumbs-down"></i> <?=$this->lang->line('application_Canceled');?></span>
+                    <span id="all-folder"><i class="icon dripicons-folder"></i> <?=$this->lang->line('application_all');?></span>
                 </div>
             </h1>
         </header>
@@ -22,6 +22,9 @@
                         <a class="btn btn-primary message-list-load sent-folder" role="button" href="<?=base_url()?>purchaseorders/filter/sent" title="Sent Folder"><i class="icon dripicons-user space"></i> <span class="hidden-xs"><?=$this->lang->line('application_created_by_me');?></span></a>
                         <a class="btn btn-success message-list-load finished-folder" role="button" href="<?=base_url()?>purchaseorders/filter/finished" title="Finished Folder"><i class="icon dripicons-thumbs-up space"></i> <span class="hidden-xs"><?=$this->lang->line('application_finished');?></span></a>
                         <a class="btn btn-danger message-list-load canceled-folder" role="button" href="<?=base_url()?>purchaseorders/filter/canceled" title="Finished Folder"><i class="icon dripicons-thumbs-down space"></i> <span class="hidden-xs"><?=$this->lang->line('application_Canceled');?></span></a>
+                        <?php if ($is_viewer == true) : ?>
+                            <a class="btn btn-warning message-list-load all-folder" role="button" href="<?=base_url()?>purchaseorders/filter/all" title="All Folder"><i class="icon dripicons-folder space"></i> <span class="hidden-xs"><?=$this->lang->line('application_all');?></span></a>
+                        <?php endif; ?>
                     </div>
                 </li>
 
