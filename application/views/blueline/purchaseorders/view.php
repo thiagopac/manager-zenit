@@ -9,7 +9,7 @@
             </div>
 
             <h1 class="page-title"><a class="icon glyphicon glyphicon-chevron-right trigger-message-close"></a><br><span class="dot"></span><?=$value->subject; ?>
-                <span class="grey"><?=$purchase_order->subject?></span>
+                <span class="grey">[<?=$this->lang->line('application_purchase_order');?> <?=$purchase_order->id?>] - <?=$purchase_order->subject?></span>
             </h1>
             <!--<div class="btn-group pull-right">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -1128,6 +1128,7 @@ $lang['application_current_qty_abrv'] = "Qtd. atual";
 $lang['application_purchase_orders'] = "Ordens de compra";
 $lang['application_purchaseorders'] = "Ordens de compra";
 $lang['application_purchase_order'] = "Ordem de compra";
+$lang['application_po'] = "OC";
 $lang['application_flow'] = "Fluxo";
 $lang['application_new_purchase_order'] = "Nova ordem de compra";
 $lang['application_actions'] = "Ações";

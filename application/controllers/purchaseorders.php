@@ -345,13 +345,26 @@ class PurchaseOrders extends MY_Controller{
                 if ($is_progress == true){
                     $this->load->helper('notification');
 
+                    $next_step_members = array();
+
                     foreach ($next_step->members as $member){
-                        if ($member->email == "creator_email"){
+
+                        array_push($arr_emails_in_step, $member->email);
+                        if ($member->name == 'creator_name'){
+
                             $user = User::find($updating_purchase_order->user_id);
+                            $member->name = $user->firstname.' '.$user->lastname;
                             $member->email = $user->email;
-                        }else{
-                            $user = User::getUserByEmail($member->email);
                         }
+
+                        array_push($next_step_members, $member);
+                    }
+
+                    $next_step_members = $this->my_array_unique($next_step_members);
+
+
+                    foreach ($next_step_members as $member){
+                        $user = User::getUserByEmail($member->email);
 
                         if ($user->push_active){
                             array_push($push_receivers, $member->email);
@@ -445,6 +458,8 @@ class PurchaseOrders extends MY_Controller{
         $creator_email = '';
         foreach ($steps as $step_reg){
             foreach ($step_reg->members as $member){
+
+                array_push($arr_emails_in_step, $member->email);
                 if ($member->name == 'creator_name'){
 
                     $member->name = $user->firstname.' '.$user->lastname;
@@ -452,6 +467,8 @@ class PurchaseOrders extends MY_Controller{
                     $creator_email =  $user->email;
                 }
             }
+
+            $step_reg->members = $this->my_array_unique($step_reg->members);
         }
 
         $actions = BpmFlow::actionsForUserInStep(1, $this->user->email, $purchase_order->step);
