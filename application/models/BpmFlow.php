@@ -47,12 +47,11 @@ class BpmFlow extends ActiveRecord\Model {
         return $steps !== null ? $steps : null;
     }
 
-    public static function actionsForUserInStep($id = false, $email = false, $desired_step = false, $logged_user = false){
+    public static function actionsForUserInStep($object = false, $email = false, $desired_step = false, $logged_user = false){
 
         $actions = array();
 
-        $bpm_flow = BpmFlow::find($id);
-        $flow = json_decode($bpm_flow->flow);
+        $flow = json_decode($object->flow);
 
         foreach ($flow->steps as $idx => $step){
             if ($step->id == $desired_step){

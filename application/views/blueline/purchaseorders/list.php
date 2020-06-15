@@ -4,12 +4,18 @@ if($purchase_orders){
     foreach ($purchase_orders as $value):
         $unix = human_to_unix($value->created_at); ?>
         <li class="<?php if($filter){echo $filter;}?> hidden" data-link="<?=base_url()?>purchaseorders/view/<?=$value->id;?><?php if(isset($filter)){echo "/".$filter;} ?><?php if(isset($filter)){ if($filter == "Sent"){echo "/".$value->id;} } ?>">
-            <div class="col col-1"><span class="dot"></span>
-                <p class="title"><?php if($value->user_id != null){echo User::find($value->user_id)->firstname;}else{ echo $value->id; } ?></p><span class="star-toggle icon"></span>
+            <div class="col col-1">
+                <p class="title">
+                    <strong>[<?=$this->lang->line('application_purchase_order');?> <?=$value->id;?>]</strong>
+                    <?=json_decode($value->response)->work?>
+                </p>
             </div>
             <div class="col col-2">
-                <div class="subject"><strong>[<?=$this->lang->line('application_purchase_order');?> <?=$value->id;?>]</strong> <?=$value->subject;?></div>
-                <div class="date"><?php echo time_ago($unix, true);?></div>
+                <div class="subject"><?=$value->subject;?></div>
+                <div class="date">
+                    <?php if($value->user_id != null){echo User::find($value->user_id)->firstname;}else{ echo $value->id; } ?> -
+                    <?php echo time_ago($unix, true);?>
+                </div>
             </div>
         </li>
     <?php endforeach;?>

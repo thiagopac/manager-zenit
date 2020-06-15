@@ -4,9 +4,11 @@
     <list default="true" id="498798ec-50f4-449c-872c-6dbc26a6cb09" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/purchaseorders.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/purchaseorders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/core/MY_Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/core/MY_Controller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/language/portuguese/application_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/language/portuguese/application_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/models/BpmFlow.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/BpmFlow.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/blueline/purchaseorders/list.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/purchaseorders/list.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/blueline/purchaseorders/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/purchaseorders/view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/blueline/css/plugins/messages.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/css/plugins/messages.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/vendor/composer/" />
@@ -32,7 +34,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/PurchaseOrder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="3645">
               <caret line="243" column="113" selection-start-line="243" selection-start-column="113" selection-end-line="243" selection-end-column="113" />
             </state>
           </provider>
@@ -41,17 +43,35 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/purchaseorders.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="366" column="69" selection-start-line="366" selection-start-column="69" selection-end-line="366" selection-end-column="69" />
+            <state relative-caret-position="349">
+              <caret line="238" column="47" selection-start-line="238" selection-start-column="47" selection-end-line="238" selection-end-column="47" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/core/MY_Controller.php">
+        <entry file="file://$PROJECT_DIR$/application/models/BpmFlow.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="874">
-              <caret line="237" column="5" selection-start-line="237" selection-start-column="5" selection-end-line="237" selection-end-column="5" />
+            <state relative-caret-position="570">
+              <caret line="49" column="126" selection-start-line="49" selection-start-column="126" selection-end-line="49" selection-end-column="126" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/list.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/all.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="46" column="40" lean-forward="true" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -59,8 +79,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="60" lean-forward="true" selection-start-line="31" selection-start-column="60" selection-end-line="31" selection-end-column="60" />
+            <state relative-caret-position="365">
+              <caret line="60" column="69" lean-forward="true" selection-start-line="60" selection-start-column="69" selection-end-line="60" selection-end-column="69" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/language/portuguese/application_lang.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="814">
+              <caret line="1152" column="31" selection-start-line="1152" selection-start-column="7" selection-end-line="1152" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -69,36 +101,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$reg</find>
-      <find>$current_step</find>
-      <find>response</find>
-      <find>$reply</find>
-      <find>createHistoryForPurchaseStepAndUser</find>
-      <find>Form Rendered</find>
-      <find>data-affect</find>
-      <find>form-render-wrap</find>
-      <find>$core_settings</find>
-      <find>histo</find>
-      <find>application_claimant</find>
-      <find>creator_</find>
-      <find>application_welcome_back</find>
-      <find>%s</find>
-      <find>sprintf($this-&gt;lang-&gt;line('application_notification_purchase_order_updated_mail'), BaseUbase_url().'mailaction/updatepurchaseorder/'),</find>
-      <find>BaseUbase_url().'mailaction/updatepurchaseorder/')</find>
-      <find>$PROJECT_DIR$/application/views/blueline/purchaseorders/view.php</find>
-      <find>$this-&gt;user-&gt;email</find>
-      <find>actionsForUserInStep</find>
-      <find>Revise os dados da Ordem de Compra e tome uma ação</find>
-      <find>$member-&gt;email</find>
-      <find>mailact</find>
-      <find>-apple-system,BlinkMacSystemFont</find>
-      <find>creator</find>
       <find>acti</find>
       <find>purchasedata</find>
       <find>/all</find>
       <find>application_purchase_order</find>
       <find>555</find>
       <find>application_notification_purchase_order_updated_mail</find>
+      <find>actionsForUserInStep</find>
+      <find>current_</find>
+      <find>img</find>
+      <find>Notifica</find>
+      <find>.subject</find>
+      <find>title</find>
+      <find>subject</find>
+      <find>col-1 {</find>
+      <find>left: 100</find>
+      <find>message-nano-wrapper</find>
+      <find>action-bar</find>
+      <find>date</find>
+      <find>$logged_user</find>
+      <find>#main .message-list li .col-2 .subject</find>
+      <find>data-</find>
+      <find>application_actions</find>
+      <find>Etapa atual</find>
+      <find>$creator_email</find>
+      <find>application_current_step</find>
+      <find>mail</find>
+      <find>mailaction</find>
+      <find>$updating_purchase_order-&gt;step</find>
+      <find>hidden</find>
+      <find>current_st</find>
     </findStrings>
     <replaceStrings>
       <replace>-&gt;project</replace>
@@ -120,16 +152,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/views/blueline/purchaseorders/_purchaseorder.php" />
-        <option value="$PROJECT_DIR$/application/controllers/mailaction.php" />
         <option value="$PROJECT_DIR$/application/views/blueline/templates/bpm_notification.html" />
         <option value="$PROJECT_DIR$/application/models/PurchaseOrder.php" />
-        <option value="$PROJECT_DIR$/application/views/blueline/purchaseorders/list.php" />
         <option value="$PROJECT_DIR$/application/views/blueline/purchaseorders/all.php" />
+        <option value="$PROJECT_DIR$/application/core/MY_Controller.php" />
         <option value="$PROJECT_DIR$/application/models/BpmFlow.php" />
+        <option value="$USER_HOME$/Desktop/oc.html" />
+        <option value="$PROJECT_DIR$/application/views/blueline/purchaseorders/list.php" />
+        <option value="$PROJECT_DIR$/assets/blueline/css/plugins/messages.css" />
         <option value="$PROJECT_DIR$/application/language/portuguese/application_lang.php" />
         <option value="$PROJECT_DIR$/application/views/blueline/purchaseorders/view.php" />
-        <option value="$PROJECT_DIR$/application/core/MY_Controller.php" />
         <option value="$PROJECT_DIR$/application/controllers/purchaseorders.php" />
       </list>
     </option>
@@ -158,7 +190,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -176,6 +207,12 @@
               <item name="zenit" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zenit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zenit" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="zenit" type="b2602c69:ProjectViewProjectNode" />
@@ -210,6 +247,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -270,7 +308,10 @@
       <workItem from="1589379945521" duration="52000" />
       <workItem from="1589383775123" duration="359000" />
       <workItem from="1589900667723" duration="63997000" />
-      <workItem from="1591010878940" duration="6390000" />
+      <workItem from="1591010878940" duration="7104000" />
+      <workItem from="1591625725168" duration="7276000" />
+      <workItem from="1591904001765" duration="3000" />
+      <workItem from="1592230405547" duration="1929000" />
     </task>
     <task id="LOCAL-00001" summary="Update code">
       <created>1583760868973</created>
@@ -377,18 +418,25 @@
       <option name="project" value="LOCAL" />
       <updated>1590675317257</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Progress Purchase Order module">
+      <created>1591274312762</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1591274312763</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="334579000" />
+    <option name="totallyTimeSpent" value="344501000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6626298" visible="true" weight="0.26091588" />
-      <window_info id="Structure" order="1" sideWeight="0.33737025" side_tool="true" visible="true" weight="0.26091588" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6601036" visible="true" weight="0.26890308" />
+      <window_info id="Structure" order="1" sideWeight="0.33989638" side_tool="true" visible="true" weight="0.26890308" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Gulp" order="3" side_tool="true" />
       <window_info id="npm" order="4" side_tool="true" />
@@ -399,7 +447,7 @@
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" />
       <window_info anchor="bottom" id="Database Changes" order="6" />
-      <window_info active="true" anchor="bottom" id="Debug" order="7" visible="true" weight="0.40103626" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.40103626" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49946752" weight="0.32953367" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5005325" side_tool="true" weight="0.32953367" />
@@ -480,80 +528,179 @@
     <option name="LAST_COMMIT_MESSAGE" value="Progress Purchase Order module" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/all.php">
+    <entry file="file://$PROJECT_DIR$/application/models/oc.html" />
+    <entry file="file://$USER_HOME$/Desktop/oc.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
+        <state relative-caret-position="330">
+          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+          <folding>
+            <element signature="e#31#39#0" expanded="true" />
+            <element signature="e#155#163#0" expanded="true" />
+            <element signature="e#163#171#0" expanded="true" />
+            <element signature="e#310#318#0" expanded="true" />
+            <element signature="e#341#349#0" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#p#2;n#!!top" expanded="true" />
+            <element signature="e#601#609#0" expanded="true" />
+            <element signature="e#624#632#0" expanded="true" />
+            <element signature="e#632#640#0" expanded="true" />
+            <element signature="e#647#655#0" expanded="true" />
+            <element signature="e#655#663#0" expanded="true" />
+            <element signature="e#708#716#0" expanded="true" />
+            <element signature="e#801#808#0" expanded="true" />
+            <element signature="e#821#829#0" expanded="true" />
+            <element signature="e#829#837#0" expanded="true" />
+            <element signature="e#895#903#0" expanded="true" />
+            <element signature="e#982#990#0" expanded="true" />
+            <element signature="e#1009#1017#0" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#p#3;n#!!top" expanded="true" />
+            <element signature="e#1176#1184#0" expanded="true" />
+            <element signature="e#1184#1192#0" expanded="true" />
+            <element signature="e#1223#1231#0" expanded="true" />
+            <element signature="e#1231#1239#0" expanded="true" />
+            <element signature="e#1299#1307#0" expanded="true" />
+            <element signature="e#1321#1329#0" expanded="true" />
+            <element signature="e#1329#1337#0" expanded="true" />
+            <element signature="e#1354#1362#0" expanded="true" />
+            <element signature="e#1369#1377#0" expanded="true" />
+            <element signature="e#1521#1529#0" expanded="true" />
+            <element signature="e#1529#1537#0" expanded="true" />
+            <element signature="e#1560#1568#0" expanded="true" />
+            <element signature="e#1571#1579#0" expanded="true" />
+            <element signature="e#1579#1587#0" expanded="true" />
+            <element signature="e#1623#1631#0" expanded="true" />
+            <element signature="e#1638#1646#0" expanded="true" />
+            <element signature="e#1702#1710#0" expanded="true" />
+            <element signature="e#1718#1726#0" expanded="true" />
+            <element signature="e#1732#1740#0" expanded="true" />
+            <element signature="e#1740#1748#0" expanded="true" />
+            <element signature="e#1788#1796#0" expanded="true" />
+            <element signature="e#1850#1858#0" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#p#4;n#!!top" expanded="true" />
+            <element signature="e#2043#2051#0" expanded="true" />
+            <element signature="e#2051#2059#0" expanded="true" />
+            <element signature="e#2173#2181#0" expanded="true" />
+            <element signature="e#2181#2189#0" expanded="true" />
+            <element signature="e#2194#2202#0" expanded="true" />
+            <element signature="e#2233#2241#0" expanded="true" />
+            <element signature="e#2241#2249#0" expanded="true" />
+            <element signature="e#2272#2280#0" expanded="true" />
+            <element signature="e#2280#2288#0" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#p#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#p#6;n#!!top" expanded="true" />
+            <element signature="e#2593#2601#0" expanded="true" />
+            <element signature="e#2601#2609#0" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#p#7;n#!!top" expanded="true" />
+            <element signature="e#2782#2790#0" expanded="true" />
+            <element signature="e#2827#2835#0" expanded="true" />
+            <element signature="e#2845#2853#0" expanded="true" />
+            <element signature="e#2860#2868#0" expanded="true" />
+            <element signature="e#2868#2876#0" expanded="true" />
+            <element signature="e#2883#2891#0" expanded="true" />
+            <element signature="e#2898#2906#0" expanded="true" />
+            <element signature="e#2914#2922#0" expanded="true" />
+            <element signature="e#3023#3031#0" expanded="true" />
+            <element signature="e#3046#3054#0" expanded="true" />
+            <element signature="e#3063#3071#0" expanded="true" />
+            <element signature="e#3071#3079#0" expanded="true" />
+            <element signature="e#3102#3110#0" expanded="true" />
+            <element signature="e#3133#3141#0" expanded="true" />
+            <element signature="e#3148#3156#0" expanded="true" />
+            <element signature="e#3213#3221#0" expanded="true" />
+            <element signature="e#3228#3235#0" expanded="true" />
+            <element signature="e#3244#3252#0" expanded="true" />
+            <element signature="e#3313#3321#0" expanded="true" />
+            <element signature="e#3346#3354#0" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#p#11;n#!!top" expanded="true" />
+            <element signature="e#3592#3600#0" expanded="true" />
+            <element signature="e#3634#3641#0" expanded="true" />
+            <element signature="e#3642#3650#0" expanded="true" />
+            <element signature="e#3658#3666#0" expanded="true" />
+            <element signature="e#3715#3723#0" expanded="true" />
+            <element signature="e#3723#3731#0" expanded="true" />
+            <element signature="e#3846#3853#0" expanded="true" />
+            <element signature="e#3877#3884#0" expanded="true" />
+            <element signature="e#3988#3996#0" expanded="true" />
+            <element signature="e#4014#4022#0" expanded="true" />
+            <element signature="e#4066#4074#0" expanded="true" />
+            <element signature="e#4325#4333#0" expanded="true" />
+            <element signature="e#4364#4372#0" expanded="true" />
+            <element signature="e#4376#4384#0" expanded="true" />
+            <element signature="e#4391#4399#0" expanded="true" />
+            <element signature="e#4475#4483#0" expanded="true" />
+            <element signature="e#4567#4575#0" expanded="true" />
+            <element signature="e#4705#4713#0" expanded="true" />
+            <element signature="e#4768#4776#0" expanded="true" />
+            <element signature="e#4811#4819#0" expanded="true" />
+            <element signature="e#4819#4827#0" expanded="true" />
+            <element signature="e#4873#4881#0" expanded="true" />
+            <element signature="e#4881#4889#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/BpmFlow.php">
+    <entry file="file://$PROJECT_DIR$/assets/blueline/css/plugins/messages.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/mailaction.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="105" column="133" selection-start-line="105" selection-start-column="133" selection-end-line="105" selection-end-column="133" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/language/portuguese/application_lang.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="1129" column="7" selection-start-line="1129" selection-start-column="7" selection-end-line="1129" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/_purchaseorder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="49" selection-end-column="11" />
+        <state relative-caret-position="341">
+          <caret line="505" column="9" selection-start-line="505" selection-start-column="9" selection-end-line="505" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/PurchaseOrder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="3645">
           <caret line="243" column="113" selection-start-line="243" selection-start-column="113" selection-end-line="243" selection-end-column="113" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../bin/phpMyAdmin/index.php">
+    <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/all.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="323">
+          <caret line="46" column="40" lean-forward="true" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/standard_8.php">
+    <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/list.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="840" column="9" selection-start-line="840" selection-start-column="9" selection-end-line="840" selection-end-column="9" />
+        <state relative-caret-position="270">
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/core/MY_Controller.php">
+    <entry file="file://$PROJECT_DIR$/application/models/BpmFlow.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="237" column="5" selection-start-line="237" selection-start-column="5" selection-end-line="237" selection-end-column="5" />
+        <state relative-caret-position="570">
+          <caret line="49" column="126" selection-start-line="49" selection-start-column="126" selection-end-line="49" selection-end-column="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/portuguese/application_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="814">
+          <caret line="1152" column="31" selection-start-line="1152" selection-start-column="7" selection-end-line="1152" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/mailaction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="142" selection-start-line="11" selection-start-column="137" selection-end-line="11" selection-end-column="142" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="60" lean-forward="true" selection-start-line="31" selection-start-column="60" selection-end-line="31" selection-end-column="60" />
+        <state relative-caret-position="365">
+          <caret line="60" column="69" lean-forward="true" selection-start-line="60" selection-start-column="69" selection-end-line="60" selection-end-column="69" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/purchaseorders.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="366" column="69" selection-start-line="366" selection-start-column="69" selection-end-line="366" selection-end-column="69" />
+        <state relative-caret-position="349">
+          <caret line="238" column="47" selection-start-line="238" selection-start-column="47" selection-end-line="238" selection-end-column="47" />
         </state>
       </provider>
     </entry>

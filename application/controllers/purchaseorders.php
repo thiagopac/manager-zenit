@@ -224,6 +224,22 @@ class PurchaseOrders extends MY_Controller{
             $id = $_POST['id'];
             $updating_purchase_order = PurchaseOrder::find($id);
             $flow = json_decode($updating_purchase_order->flow);
+            $step = $_POST['current_step'];
+
+            if ($updating_purchase_order->canceled == true || $updating_purchase_order->finished == true || $updating_purchase_order->step > $step){
+
+                if ($updating_purchase_order->canceled == true){
+                    $this->session->set_flashdata('message', 'error:'.'Esta Ordem de Compra está com status de cancelada');
+                    redirect('purchaseorders');
+                }else if ($updating_purchase_order->finished == true){
+                    $this->session->set_flashdata('message', 'error:'.'Esta Ordem de Compra está com status de finalizada');
+                    redirect('purchaseorders');
+                }else if($updating_purchase_order->step > $step){
+                    $this->session->set_flashdata('message', 'error:'.'Esta Ordem de Compra já teve esta etapa completada previamente');
+                    redirect('purchaseorders');
+                }
+
+            }
 
             $countfiles = count($_FILES['files']['name']);
             $file_names_arr = array();
@@ -455,7 +471,6 @@ class PurchaseOrders extends MY_Controller{
 
         $user = User::find($purchase_order->user_id);
 
-        $creator_email = '';
         foreach ($steps as $step_reg){
             foreach ($step_reg->members as $member){
 
@@ -464,20 +479,19 @@ class PurchaseOrders extends MY_Controller{
 
                     $member->name = $user->firstname.' '.$user->lastname;
                     $member->email = $user->email;
-                    $creator_email =  $user->email;
                 }
             }
 
             $step_reg->members = $this->my_array_unique($step_reg->members);
         }
 
-        $actions = BpmFlow::actionsForUserInStep(1, $this->user->email, $purchase_order->step);
+        $actions = BpmFlow::actionsForUserInStep($purchase_order, $this->user->email, $purchase_order->step, $this->user);
 
-        if ($creator_email != ''){
-            $actions = BpmFlow::actionsForUserInStep(1, $creator_email, $purchase_order->step, $this->user);
-        }
+//        var_dump($actions);
 
         $this->view_data['actions'] = $actions;
+
+        $this->view_data['current_step'] = PurchaseOrder::currentStepForPurchaseOrder($purchase_order->id);
 
         $this->view_data['steps'] = $steps;
         $this->view_data['history'] = $history = PurchaseOrder::getHistoryForPurchase($id);

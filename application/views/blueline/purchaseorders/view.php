@@ -46,6 +46,7 @@
                 echo form_open_multipart('purchaseorders/reply', $attributes); ?>
 
                 <input type="hidden" name="id" value="<?=$id;?>">
+                <input type="hidden" name="current_step" value="<?=$current_step->id;?>">
 
                 <div class="container-fluid">
                     <label><?=$this->lang->line('application_actions'); ?></label>
@@ -53,6 +54,8 @@
                     <div id="form-render-wrap"></div>
 
                     <div class="textarea-footer message-footer">
+
+                        <p><?=$this->lang->line('application_current_step');?>: <label class="badge badge-success"><?=$current_step->name?></label></p>
 
                         <?php foreach ($actions as $action) : ?>
                             <?php if ($action->progress == true) : ?>
