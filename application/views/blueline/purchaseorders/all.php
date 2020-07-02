@@ -19,11 +19,11 @@
                 <li>
                     <div class="btn-group">
                         <a class="btn btn-primary message-list-load inbox-folder" id="message-trigger" role="button" href="<?=base_url()?>purchaseorders/listing" title="Inbox"><i class="icon dripicons-inbox space"></i> <span class="hidden-xs"><?=$this->lang->line('application_INBOX');?></span></a>
-                        <a class="btn btn-primary message-list-load sent-folder" role="button" href="<?=base_url()?>purchaseorders/filter/sent" title="Sent Folder"><i class="icon dripicons-user space"></i> <span class="hidden-xs"><?=$this->lang->line('application_created_by_me');?></span></a>
-                        <a class="btn btn-success message-list-load finished-folder" role="button" href="<?=base_url()?>purchaseorders/filter/finished" title="Finished Folder"><i class="icon dripicons-thumbs-up space"></i> <span class="hidden-xs"><?=$this->lang->line('application_finished');?></span></a>
-                        <a class="btn btn-danger message-list-load canceled-folder" role="button" href="<?=base_url()?>purchaseorders/filter/canceled" title="Finished Folder"><i class="icon dripicons-thumbs-down space"></i> <span class="hidden-xs"><?=$this->lang->line('application_Canceled');?></span></a>
+                        <a class="btn btn-primary message-list-load sent-folder" role="button" href="<?=base_url()?>purchaseorders/filter/sent/0" title="Sent Folder"><i class="icon dripicons-user space"></i> <span class="hidden-xs"><?=$this->lang->line('application_created_by_me');?></span></a>
+                        <a class="btn btn-success message-list-load finished-folder" role="button" href="<?=base_url()?>purchaseorders/filter/finished/0" title="Finished Folder"><i class="icon dripicons-thumbs-up space"></i> <span class="hidden-xs"><?=$this->lang->line('application_finished');?></span></a>
+                        <a class="btn btn-danger message-list-load canceled-folder" role="button" href="<?=base_url()?>purchaseorders/filter/canceled" title="Canceled Folder"><i class="icon dripicons-thumbs-down space"></i> <span class="hidden-xs"><?=$this->lang->line('application_Canceled');?></span></a>
                         <?php if ($is_viewer == true) : ?>
-                            <a class="btn btn-warning message-list-load all-folder" role="button" href="<?=base_url()?>purchaseorders/filter/all" title="All Folder"><i class="icon dripicons-folder space"></i> <span class="hidden-xs"><?=$this->lang->line('application_all');?></span></a>
+                            <a class="btn btn-warning message-list-load all-folder" role="button" href="<?=base_url()?>purchaseorders/filter/all/0" title="All Folder"><i class="icon dripicons-folder space"></i> <span class="hidden-xs"><?=$this->lang->line('application_all');?></span></a>
                         <?php endif; ?>
                     </div>
                 </li>
@@ -31,7 +31,7 @@
             </ul>
         </div>
         <div id="main-nano-wrapper" class="nano">
-            <div class="nano-content">
+            <div class="nano-content" id="purchaseorderslist">
                 <ul id="message-list" class="message-list">
 
                 </ul>

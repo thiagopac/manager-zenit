@@ -5,6 +5,7 @@ echo form_open_multipart($form_action, $attributes);
 <div id="form-render-wrap"></div>
 
 <div class="modal-footer">
+    <a class="btn btn-danger" data-dismiss="modal"><?=$this->lang->line('application_close');?></a>
     <?php foreach ($actions as $action) : ?>
         <?php if ($action->progress == true) : ?>
             <input type="submit" name="submit_1" class="btn btn-success button-loader" value="<?=$action->name?>" />
@@ -13,7 +14,6 @@ echo form_open_multipart($form_action, $attributes);
         <?php endif; ?>
 
     <?php endforeach; ?>
-    <a class="btn btn-default" data-dismiss="modal"><?=$this->lang->line('application_close');?></a>
 </div>
 <?php echo form_close(); ?>
 <?php

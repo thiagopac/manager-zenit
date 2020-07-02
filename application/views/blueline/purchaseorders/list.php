@@ -24,12 +24,36 @@ if($purchase_orders){
     <li style="padding-left:21px"><?=$this->lang->line('application_no_messages');?></li>
 <?php } ?>
 
+<?php //if (!$filter) : ?>
+<!--    <div class="col-md-12" align="center">-->
+<!--        <a id="prev" name="prev" class="message-list-load sent-folder btn btn-primary" href="--><?//=base_url()."purchaseorders/listing/".$obj_list_page_prev?><!--">Anterior</a>-->
+<!--        <a id="next" name="next" class="message-list-load sent-folder btn btn-primary" href="--><?//=base_url()."purchaseorders/listing/".$obj_list_page_next?><!--">Próxima</a>-->
+<!--    </div>-->
+<?php //else : ?>
+<!--    <div class="col-md-12" align="center">-->
+<!--        <a id="prev" name="prev" class="message-list-load sent-folder btn btn-primary" href="--><?//=base_url()."purchaseorders/filter/".strtolower($filter)."/".$obj_list_page_prev?><!--">Anterior</a>-->
+<!--        <a id="next" name="next" class="message-list-load sent-folder btn btn-primary" href="--><?//=base_url()."purchaseorders/filter/".strtolower($filter)."/".$obj_list_page_next?><!--">Próxima</a>-->
+<!--    </div>-->
+<?php //endif; ?>
+
 <script>
     jQuery(document).ready(function($) {
         $("#main .message-list li").removeClass("hidden").delay(300).addClass("visible");
-        var cols = {},
 
-            messageIsOpen = false;
+
+        //if (<?//=$current_page?>// < 1){
+        //    $('#prev').hide();
+        //}else{
+        //    $('#prev').show();
+        //}
+        //
+        //if (<?//=$show_next?>// == 0){
+        //    $('#next').hide();
+        //}else{
+        //    $('#next').show();
+        //}
+
+        var cols = {}, messageIsOpen = false;
 
         cols.showOverlay = function() {
             $('body').addClass('show-main-overlay');
@@ -154,5 +178,9 @@ if($purchase_orders){
 <style>
     .message-list-load.active {
         box-shadow:inset 0 0 0 100px rgba(0,0,0,0.1);
+    }
+
+    #purchaseorderslist{
+        bottom: <?=count($purchase_orders) * 1 ?>mm !important;
     }
 </style>

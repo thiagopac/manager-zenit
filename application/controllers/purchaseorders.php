@@ -28,43 +28,96 @@ class PurchaseOrders extends MY_Controller{
         $this->content_view = 'purchaseorders/all';
     }
 
-    public function listing(){
+    public function listing($con = false){
+
+        $limit = 999999;
+
+        if (is_numeric($con)) {
+            $max_value = $con.',';
+        } else {
+            $max_value = false;
+        }
 
         $my_steps = BpmFlow::stepsUserIs(1, $this->user->email);
-
-//        $is_viewer = BpmFlow::isViewer(1, $this->user->email);
-
         $purchase_orders = PurchaseOrder::find('all', ['conditions' => ['step IN (?) AND canceled != 1 AND finished != 1 ORDER BY id DESC', $my_steps]]);
-//        if ($is_viewer == true){
-//            $purchase_orders = PurchaseOrder::find('all', ['conditions' => ['1 = 1 ORDER BY id DESC']]);
-//        }
+        $progress_purchase_orders = PurchaseOrder::find('all', ['conditions' => ['canceled != 1 AND finished != 1 ORDER BY id DESC'], 'limit' => $limit, 'offset' => $max_value]);
+
+        foreach ($progress_purchase_orders as $purchase_order){
+            $flow = json_decode($purchase_order->flow);
+
+            foreach ($flow->steps as $step){
+
+                if ($purchase_order->step == $step->id){
+
+                    foreach ($step->members as $member){
+                        if ($member->name == "creator_name" && $purchase_order->user_id == $this->user->id){
+                            if(!in_array($purchase_order, $purchase_orders)){
+                                array_push($purchase_orders, $purchase_order);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        usort($purchase_orders, function($a, $b) { return $b->id - $a->id; });
+
+//        $obj_list_page_next = $con + $limit;
+//        $obj_list_page_prev = $con - $limit;
+//        $this->view_data['obj_list_page_next'] = $obj_list_page_next;
+//        $this->view_data['obj_list_page_prev'] = $obj_list_page_prev;
+//        $current_page = intval($con);
+//        $this->view_data['current_page'] = $current_page;
+//        $show_next = count($purchase_orders);
+//        $this->view_data['show_next'] = $show_next;
 
         $this->view_data['purchase_orders'] = $purchase_orders;
+        $this->view_data['my_steps'] = $my_steps;
 
         $this->view_data['filter'] = false;
         $this->theme_view = 'ajax';
         $this->content_view = 'purchaseorders/list';
     }
 
-    public function filter($condition = false){
+    public function filter($condition = false, $con = false){
+
+        $limit = 99999;
+        if (is_numeric($con)) {
+            $max_value = $con.',';
+        } else {
+            $max_value = false;
+        }
 
         $this->view_data['filter'] = ucfirst($condition);
+        $purchase_orders = array();
 
         switch ($condition){
             case 'sent' :
-                $this->view_data['purchase_orders'] = PurchaseOrder::find('all', ['conditions' => ['user_id = ? ORDER BY id DESC', $this->user->id]]);
+                $purchase_orders = PurchaseOrder::find('all', ['conditions' => ['user_id = ? ORDER BY id DESC', $this->user->id], 'limit' => $limit, 'offset' => $max_value]);
                 break;
             case "finished" :
-                $this->view_data['purchase_orders'] = PurchaseOrder::find('all', ['conditions' => ['finished = ? ORDER BY id DESC', 1]]);
+                $purchase_orders =  PurchaseOrder::find('all', ['conditions' => ['finished = ? ORDER BY id DESC', 1], 'limit' => $limit, 'offset' => $max_value]);
                 break;
             case "canceled" :
-                $this->view_data['purchase_orders'] = PurchaseOrder::find('all', ['conditions' => ['canceled = ? ORDER BY id DESC', 1]]);
+                $purchase_orders =  PurchaseOrder::find('all', ['conditions' => ['canceled = ? ORDER BY id DESC', 1], 'limit' => $limit, 'offset' => $max_value]);
                 break;
             case "all" :
-                $this->view_data['purchase_orders'] = PurchaseOrder::find('all', ['conditions' => ['1 = 1 ORDER BY id DESC']]);
+                $purchase_orders =  PurchaseOrder::find('all', ['conditions' => ['1 = 1 ORDER BY id DESC'], 'limit' => $limit, 'offset' => $max_value]);
                 break;
         }
 
+//        var_dump($purchase_orders);
+
+//        $obj_list_page_next = $con + $limit;
+//        $obj_list_page_prev = $con - $limit;
+//        $this->view_data['obj_list_page_next'] = $obj_list_page_next;
+//        $this->view_data['obj_list_page_prev'] = $obj_list_page_prev;
+//        $current_page = intval($con);
+//        $this->view_data['current_page'] = $current_page;
+//        $show_next = count($purchase_orders) ;
+//        $this->view_data['show_next'] = $show_next;
+
+        $this->view_data['purchase_orders'] = $purchase_orders;
         $this->view_data['filter'] = $condition;
         $this->theme_view = 'ajax';
         $this->content_view = 'purchaseorders/list';
@@ -72,6 +125,11 @@ class PurchaseOrders extends MY_Controller{
 
     public function write($ajax = false){
         if ($_POST) {
+
+            if ($_POST['price'] == null || $_POST['price'] == ''){
+                $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_purchase_order_incomplete'));
+                redirect('purchaseorders');
+            }
 
             $countfiles = count($_FILES['files']['name']);
             $file_names_arr = array();
@@ -220,6 +278,10 @@ class PurchaseOrders extends MY_Controller{
     }
 
     public function reply($ajax = false){
+
+        var_dump($_POST);
+
+
         if ($_POST) {
             $id = $_POST['id'];
             $updating_purchase_order = PurchaseOrder::find($id);
@@ -485,7 +547,9 @@ class PurchaseOrders extends MY_Controller{
             $step_reg->members = $this->my_array_unique($step_reg->members);
         }
 
-        $actions = BpmFlow::actionsForUserInStep($purchase_order, $this->user->email, $purchase_order->step, $this->user);
+        $creator = User::find($purchase_order->user_id);
+
+        $actions = BpmFlow::actionsForUserInStep($purchase_order, $this->user->email, $purchase_order->step, $creator);
 
 //        var_dump($actions);
 

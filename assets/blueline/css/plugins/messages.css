@@ -457,7 +457,7 @@ a:hover {
   border-color: #9ae14f;
 }
 #main .message-list li .col-1 {
-  width: 400px;
+  width: 480px;
 }
 #main .message-list li .col-1 .star-toggle,
 #main .message-list li .col-1 .checkbox-wrapper,
@@ -490,7 +490,7 @@ a:hover {
   left: 20px;
   right: 0;
   text-overflow: ellipsis;
-  overflow: visible;
+  overflow: hidden;
   white-space: nowrap;
 }
 #main .message-list li .col-2 {

@@ -280,3 +280,5 @@ $lang['messages_edit_success'] = "Registro atualizado com sucesso";
 $lang['messages_edit_error'] = "Erro ao atualizar registro";
 $lang['messages_delete_success'] = "Registro excluído com sucesso";
 $lang['messages_delete_error'] = "Erro ao excluir registro";
+
+$lang['messages_purchase_order_incomplete'] = "Erro ao criar Ordem de Compra. Preencha os campos obrigatórios";
