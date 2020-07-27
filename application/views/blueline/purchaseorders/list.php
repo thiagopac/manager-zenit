@@ -2,7 +2,7 @@
 if($purchase_orders){
 
     foreach ($purchase_orders as $value):
-        $unix = human_to_unix($value->created_at); ?>
+        $datetime = new DateTime($value->created_at);?>
         <li class="<?php if($filter){echo $filter;}?> hidden" data-link="<?=base_url()?>purchaseorders/view/<?=$value->id;?><?php if(isset($filter)){echo "/".$filter;} ?><?php if(isset($filter)){ if($filter == "Sent"){echo "/".$value->id;} } ?>">
             <div class="col col-1">
                 <p class="title">
@@ -14,7 +14,7 @@ if($purchase_orders){
                 <div class="subject"><?=$value->subject;?></div>
                 <div class="date">
                     <?php if($value->user_id != null){echo User::find($value->user_id)->firstname;}else{ echo $value->id; } ?> -
-                    <?php echo time_ago($unix, true);?>
+                    <?= $datetime->format('d/m/Y H:i');?>
                 </div>
             </div>
         </li>
@@ -181,6 +181,7 @@ if($purchase_orders){
     }
 
     #purchaseorderslist{
-        bottom: <?=count($purchase_orders) * 1 ?>mm !important;
+        /*bottom: */<?//=count($purchase_orders) * 0.55 ?>/*mm !important;*/
+        bottom: 35mm !important;
     }
 </style>

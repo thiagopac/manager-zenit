@@ -4,12 +4,7 @@
     <list default="true" id="498798ec-50f4-449c-872c-6dbc26a6cb09" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/purchaseorders.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/purchaseorders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/language/portuguese/messages_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/language/portuguese/messages_lang.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/BpmFlow.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/BpmFlow.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/purchaseorders/_purchaseorder.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/purchaseorders/_purchaseorder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/purchaseorders/all.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/purchaseorders/all.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/views/blueline/purchaseorders/list.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/purchaseorders/list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/blueline/css/plugins/messages.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/blueline/css/plugins/messages.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/vendor/composer/" />
@@ -35,32 +30,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/PurchaseOrder.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="183" lean-forward="true" selection-start-line="183" selection-end-line="183" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#small#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#span#0;n#small#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#b#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#b#0;n#small#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#small#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#b#0;n#small#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#small#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#thead#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#tr#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="2745">
+              <caret line="183" selection-start-line="183" selection-end-line="183" />
             </state>
           </provider>
         </entry>
@@ -77,8 +48,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/purchaseorders.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5865">
-              <caret line="391" column="44" selection-start-line="391" selection-start-column="31" selection-end-line="391" selection-end-column="66" />
+            <state relative-caret-position="-22">
+              <caret line="30" column="24" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -86,8 +57,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/list.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="798">
-              <caret line="183" column="51" selection-start-line="183" selection-start-column="51" selection-end-line="183" selection-end-column="51" />
+            <state relative-caret-position="315">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
@@ -95,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/all.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="693">
-              <caret line="80" column="43" lean-forward="true" selection-start-line="80" selection-start-column="43" selection-end-line="80" selection-end-column="43" />
+            <state relative-caret-position="1200">
+              <caret line="80" column="43" selection-start-line="80" selection-start-column="43" selection-end-line="80" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -104,7 +75,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1014">
+            <state relative-caret-position="1245">
               <caret line="83" column="103" selection-start-line="83" selection-start-column="99" selection-end-line="83" selection-end-column="103" />
             </state>
           </provider>
@@ -114,13 +85,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mail</find>
-      <find>mailaction</find>
-      <find>hidden</find>
-      <find>current_st</find>
-      <find>$updating_purchase_order-&gt;step</find>
-      <find>stepsUserIs</find>
-      <find>comment-item</find>
       <find>message-content-reply</find>
       <find>col col-2</find>
       <find>col col-1</find>
@@ -144,6 +108,13 @@
       <find>createHistoryForPurchaseStepAndUser</find>
       <find>fullCalendar</find>
       <find>* 6</find>
+      <find>sav</find>
+      <find>$updating_purchase_order</find>
+      <find>list</find>
+      <find>$value-&gt;created_at</find>
+      <find>format(</find>
+      <find>$unix</find>
+      <find>-&gt;format('Y-m-d H:i') . &quot;'</find>
     </findStrings>
     <replaceStrings>
       <replace>-&gt;project</replace>
@@ -173,8 +144,8 @@
         <option value="$PROJECT_DIR$/application/language/portuguese/messages_lang.php" />
         <option value="$PROJECT_DIR$/application/models/BpmFlow.php" />
         <option value="$PROJECT_DIR$/application/views/blueline/purchaseorders/all.php" />
-        <option value="$PROJECT_DIR$/application/controllers/purchaseorders.php" />
         <option value="$PROJECT_DIR$/application/views/blueline/purchaseorders/view.php" />
+        <option value="$PROJECT_DIR$/application/controllers/purchaseorders.php" />
         <option value="$PROJECT_DIR$/application/views/blueline/purchaseorders/list.php" />
       </list>
     </option>
@@ -203,6 +174,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -260,7 +232,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -329,7 +300,11 @@
       <workItem from="1592401346920" duration="1435000" />
       <workItem from="1592923499586" duration="9311000" />
       <workItem from="1593037170841" duration="3229000" />
-      <workItem from="1593458560036" duration="890000" />
+      <workItem from="1593458560036" duration="996000" />
+      <workItem from="1594219809994" duration="752000" />
+      <workItem from="1594646459459" duration="294000" />
+      <workItem from="1595871197898" duration="1780000" />
+      <workItem from="1595880684104" duration="350000" />
     </task>
     <task id="LOCAL-00001" summary="Update code">
       <created>1583760868973</created>
@@ -450,17 +425,24 @@
       <option name="project" value="LOCAL" />
       <updated>1592233269722</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Progress Purchase Order module">
+      <created>1593692411944</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1593692411944</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="365927000" />
+    <option name="totallyTimeSpent" value="369209000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.65595853" visible="true" weight="0.2113951" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.65595853" visible="true" weight="0.21991481" />
       <window_info id="Structure" order="1" sideWeight="0.34404144" side_tool="true" weight="0.20926517" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Gulp" order="3" side_tool="true" />
@@ -476,7 +458,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49946752" weight="0.32953367" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5005325" side_tool="true" weight="0.32953367" />
-      <window_info anchor="bottom" id="File Transfer" order="11" sideWeight="0.49946752" weight="0.32953367" />
+      <window_info anchor="bottom" id="File Transfer" order="11" sideWeight="0.49946752" visible="true" weight="0.32953367" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Command Line Tools Console" order="13" weight="0.32953367" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -581,20 +563,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/BpmFlow.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1065">
-          <caret line="71" column="43" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/purchaseorders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5865">
-          <caret line="391" column="44" selection-start-line="391" selection-start-column="31" selection-end-line="391" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
@@ -604,53 +572,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/PurchaseOrder.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="183" lean-forward="true" selection-start-line="183" selection-end-line="183" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#small#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#span#0;n#small#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#b#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#b#0;n#small#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#small#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#b#0;n#small#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#small#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#thead#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#tr#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="2745">
+          <caret line="183" selection-start-line="183" selection-end-line="183" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/view.php">
+    <entry file="file://$PROJECT_DIR$/application/models/BpmFlow.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1014">
-          <caret line="83" column="103" selection-start-line="83" selection-start-column="99" selection-end-line="83" selection-end-column="103" />
+        <state relative-caret-position="1065">
+          <caret line="71" column="43" selection-start-line="71" selection-start-column="43" selection-end-line="71" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/all.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="693">
-          <caret line="80" column="43" lean-forward="true" selection-start-line="80" selection-start-column="43" selection-end-line="80" selection-end-column="43" />
+        <state relative-caret-position="1200">
+          <caret line="80" column="43" selection-start-line="80" selection-start-column="43" selection-end-line="80" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1245">
+          <caret line="83" column="103" selection-start-line="83" selection-start-column="99" selection-end-line="83" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/purchaseorders.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-22">
+          <caret line="30" column="24" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/blueline/purchaseorders/list.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
-          <caret line="183" column="51" selection-start-line="183" selection-start-column="51" selection-end-line="183" selection-end-column="51" />
+        <state relative-caret-position="315">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>

@@ -343,6 +343,13 @@ class PurchaseOrders extends MY_Controller{
 
             $is_progress = null;
 
+            $total_price = null;
+
+            if ($_POST['total_price'] != null){
+                $total_price = $_POST['total_price'];
+                $updating_purchase_order->total_price = $total_price;
+            }
+
             foreach ($_POST as $key => $value) {
                 if (strpos($key, 'submit_') !== 0) continue;
                 $is_progress = substr($key, 7);
