@@ -149,28 +149,44 @@
                                 </td>
                                 <td class="" style='text-align:center;vertical-align:middle'>
                                     <?php foreach ($value->deposit_amount as $amount) : ?>
+                                        <?php $not_printed = true; ?>
                                         <?php if ($amount->deposit_id == $selected_deposit_id) : ?>
                                             <?php if ($amount->quantity >= $value->min_qty) : ?>
                                                 <span style="color:green">
-                                                    <?=$amount->quantity != null ? $amount->quantity : 0; ?>
+                                                    <?php if ($filtered == true) : ?>
+                                                        <a href="<?=base_url()?>materialmanagement/material_amount_update/<?=$selected_deposit_id?>/<?=$value->id?>" data-toggle="mainmodal" class=""><?=$amount->quantity != null ? $amount->quantity : 0; ?></a>
+                                                        <?php $not_printed = false; ?>
+                                                    <?php else : ?>
+                                                        <?=$amount->quantity != null ? $amount->quantity : 0; ?>
+                                                        <?php $not_printed = false; ?>
+                                                    <?php endif; ?>
                                                 </span>
                                             <?php else : ?>
                                                 <span style="color:red">
-                                                    <?=$amount->quantity != null ? $amount->quantity : 0; ?>
+                                                    <?php if ($filtered == true) : ?>
+                                                        <a href="<?=base_url()?>materialmanagement/material_amount_update/<?=$selected_deposit_id?>/<?=$value->id?>" data-toggle="mainmodal" class=""><?=$amount->quantity != null ? $amount->quantity : 0; ?></a>
+                                                        <?php $not_printed = false; ?>
+                                                    <?php else : ?>
+                                                        <?=$amount->quantity != null ? $amount->quantity : 0; ?>
+                                                        <?php $not_printed = false; ?>
+                                                    <?php endif; ?>
                                                 </span>
                                             <?php endif; ?>
                                         <?php elseif($selected_deposit_id == null) : ?>
                                             <?php
                                                 $sum = $amount->quantity;
 
-                                                if ($printed == true){
-                                                    echo " / ".$sum;
-                                                }else{
+                                                if ($filtered == false)
                                                     echo $sum;
-                                                }
+                                                else
+                                                    echo '';
                                             ?>
                                         <?php else : ?>
-                                            <?='0'?>
+                                            <?php if ($filtered == true && $not_printed == true) : ?>
+                                                <a href="<?=base_url()?>materialmanagement/material_amount_update/<?=$selected_deposit_id?>/<?=$value->id?>" data-toggle="mainmodal" class="">0</a>
+                                            <?php else : ?>
+                                                0
+                                            <?php endif; ?>
                                         <?php endif;?>
                                     <?php endforeach; ?>
                                 </td>

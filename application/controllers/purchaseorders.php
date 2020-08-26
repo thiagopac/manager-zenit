@@ -26,6 +26,21 @@ class PurchaseOrders extends MY_Controller{
     public function index(){
         $this->view_data['is_viewer'] = $is_viewer = BpmFlow::isViewer(1, $this->user->email);
         $this->content_view = 'purchaseorders/all';
+        $this->view_data['form_action'] = 'purchaseorders/search';
+    }
+
+    public function search(){
+        if ($_POST){
+            $this->view_data['is_viewer'] = $is_viewer = BpmFlow::isViewer(1, $this->user->email);
+            $purchase_orders = PurchaseOrder::find(1);
+
+            $this->view_data['purchase_orders'] = $purchase_orders;
+
+            $search = 'search';
+            $this->view_data['filter'] = $search;
+            $this->theme_view = 'ajax';
+            $this->content_view = 'purchaseorders/list';
+        }
     }
 
     public function listing($con = false){
@@ -79,7 +94,7 @@ class PurchaseOrders extends MY_Controller{
         $this->content_view = 'purchaseorders/list';
     }
 
-    public function filter($condition = false, $con = false){
+    public function filter($condition = false, $con){
 
         $limit = 99999;
         if (is_numeric($con)) {
@@ -87,6 +102,9 @@ class PurchaseOrders extends MY_Controller{
         } else {
             $max_value = false;
         }
+
+        $con = rawurldecode($con);
+//        var_dump($con);exit;
 
         $this->view_data['filter'] = ucfirst($condition);
         $purchase_orders = array();
@@ -103,6 +121,9 @@ class PurchaseOrders extends MY_Controller{
                 break;
             case "all" :
                 $purchase_orders =  PurchaseOrder::find('all', ['conditions' => ['1 = 1 ORDER BY id DESC'], 'limit' => $limit, 'offset' => $max_value]);
+                break;
+            case "search" :
+                $purchase_orders =  PurchaseOrder::find('all', ['conditions' => ["response LIKE '%$con%' OR history LIKE '%$con%' OR id LIKE '%$con%' ORDER BY id DESC"]]);
                 break;
         }
 
@@ -279,7 +300,7 @@ class PurchaseOrders extends MY_Controller{
 
     public function reply($ajax = false){
 
-        var_dump($_POST);
+//        var_dump($_POST);
 
 
         if ($_POST) {
@@ -348,6 +369,7 @@ class PurchaseOrders extends MY_Controller{
             if ($_POST['total_price'] != null){
                 $total_price = $_POST['total_price'];
                 $updating_purchase_order->total_price = $total_price;
+                $updating_purchase_order->save();
             }
 
             foreach ($_POST as $key => $value) {

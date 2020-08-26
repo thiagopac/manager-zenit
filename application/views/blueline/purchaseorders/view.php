@@ -173,6 +173,12 @@
 
         jQuery(document).ready(function($) {
 
+            $("button[name='submit_0'").click(function () {
+                $(this.form).find(':input[required]:visible').each(function() {
+                    $(this).removeAttr('required')
+                });
+            })
+
             $('input[data-effect="hide"]').parent().hide();
 
             const affectators = $('[data-affect]');

@@ -248,6 +248,9 @@ $lang['messages_create_material_type_exists'] = "Tipo de material já existente"
 $lang['messages_delete_material_type_success'] = "Tipo de material excluído com sucesso";
 $lang['messages_delete_material_type_error'] = "Erro ao excluir tipo de material";
 
+$lang['messages_material_amount_update_success'] = "Quantidade atualizada com sucesso";
+$lang['messages_material_amount_update_error'] = "Erro ao atualizar a quantidade";
+
 $lang['messages_create_entrance_success'] = "Entrada criada com sucesso";
 $lang['messages_create_entrance_error'] = "Erro ao criar entrada";
 

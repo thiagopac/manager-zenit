@@ -4,6 +4,13 @@
         <div class="overlay"></div>
         <header class="header">
             <h1 class="page-title">
+                <div class="pull-right margin-right-2" style="display: inline-flex">
+                    <input class="form-control" type="text" id="search" style="height: 30px" name="search" placeholder="Buscar..."/>
+                    <a class="btn btn-primary message-list-load all-folder" id="search_button" name="search_button" style="margin-left: 5px" role="button" href="<?=base_url()?>purchaseorders/filter/search/">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </div>
+
                 <div class="message-list-header">
                     <span id="inbox-folder"><i class="icon dripicons-inbox"></i> <?=$this->lang->line('application_INBOX');?></span>
                     <span id="sent-folder"><i class="icon dripicons-user"></i> <?=$this->lang->line('application_created_by_me');?></span>
@@ -12,6 +19,7 @@
                     <span id="all-folder"><i class="icon dripicons-folder"></i> <?=$this->lang->line('application_all');?></span>
                 </div>
             </h1>
+
         </header>
         <div class="action-bar">
             <ul>
@@ -77,9 +85,15 @@
 
         }
 
-        $('.search-box input').on('focus', function() {
-            if($(window).width() <= 1360) {
-                cols.hideMessage();
+        $("#search_button"). click(function(){
+            var str = $("#search"). val();
+            let url = '<?=base_url()?>'+'purchaseorders/filter/search/'
+            $(this).attr("href", url+str)
+        });
+
+        $(document).on('keypress',function(e) {
+            if(e.which == 13) {
+                $('#search_button').click()
             }
         });
 

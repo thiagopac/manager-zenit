@@ -101,7 +101,7 @@ class MaterialManagement extends MY_Controller{
         $this->view_data['current_char'] = $char;
 
         $this->view_data['selected_deposit_id'] = $deposit_id;
-        $this->view_data['all_materials'] = $all_materials = Material::find('all',  array('conditions' => array('description LIKE ?', "$char%"),'include' => array('deposit_amount')));//, 'limit' => $results_per_page, 'offset' => $offset
+        $this->view_data['all_materials'] = $all_materials = Material::find('all',  array('conditions' => array('description LIKE ? AND status != "deleted"', "$char%"),'include' => array('deposit_amount')));//, 'limit' => $results_per_page, 'offset' => $offset
 
 //        var_dump($all_materials[0]->deposit_amount);
 //        exit;
@@ -123,7 +123,7 @@ class MaterialManagement extends MY_Controller{
 
         $this->view_data['current_char'] = $char;
 
-        $this->view_data['all_materials'] = $all_materials = Material::find('all',  array('conditions' => array('description LIKE ?', "$char%"),'include' => array('deposit_amount')));//, 'limit' => $results_per_page, 'offset' => $offset
+        $this->view_data['all_materials'] = $all_materials = Material::find('all',  array('conditions' => array('description LIKE ? AND status != "deleted"', "$char%"),'include' => array('deposit_amount')));//, 'limit' => $results_per_page, 'offset' => $offset
 
         $this->view_data['filtered'] = false;
 
@@ -139,7 +139,7 @@ class MaterialManagement extends MY_Controller{
 
         $this->view_data['current_char'] = $char;
 
-        $this->view_data['all_materials'] = $all_materials = Material::find('all',  array('conditions' => array('description LIKE ?', "$char%"),'include' => array('deposit_amount')));//, 'limit' => $results_per_page, 'offset' => $offset
+        $this->view_data['all_materials'] = $all_materials = Material::find('all',  array('conditions' => array('description LIKE ? AND status != "deleted"', "$char%"),'include' => array('deposit_amount')));//, 'limit' => $results_per_page, 'offset' => $offset
 
         $this->view_data['filtered'] = false;
 
@@ -283,6 +283,54 @@ class MaterialManagement extends MY_Controller{
             $this->view_data['material_id'] = $material_id;
             $this->view_data['form_action'] = 'materialmanagement/entrance_create/' . $deposit_id;
             $this->content_view = 'materialhandling/_entranceform';
+        }
+    }
+
+    public function material_amount_update($deposit_id = false, $material_id = false){
+
+        if($_POST){
+
+            $deposit_id = $_POST['deposit_id'];
+            $material_id = $_POST['material_id'];
+            $quantity = $_POST['quantity'];
+
+            $deposit_amount = DepositAmount::first(['conditions' => ["deposit_id = ? AND material_id = ?", $deposit_id, $material_id]]);
+
+            if($deposit_amount){
+                $deposit_amount->quantity = $quantity;
+                $deposit_amount->save();
+            }
+            else{
+
+                $deposit_amount = new DepositAmount();
+
+                $deposit_amount->deposit_id = $deposit_id;
+                $deposit_amount->material_id = $material_id;
+                $deposit_amount->quantity = $quantity;
+
+                $deposit_amount->save();
+            }
+
+            if(!$deposit_amount){
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_material_amount_update_error'));
+            }
+            else{
+                $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_material_amount_update_success'));
+            }
+
+            $this->rule_check();
+
+            redirect('materialmanagement/filter/'.$deposit_id);
+        }
+        else{
+            $this->theme_view = 'modal';
+            $this->view_data['title'] = $this->lang->line('application_material_amount_update');
+            $this->view_data['deposit_id'] = $deposit_id;
+
+            $this->view_data['material_id'] = $material_id;
+            $this->view_data['deposit_amount'] = DepositAmount::find('first', ['conditions' => ["deposit_id = ? AND material_id = ?", $deposit_id, $material_id]]);
+            $this->view_data['form_action'] = 'materialmanagement/material_amount_update/'.$deposit_id;
+            $this->content_view = 'materialhandling/_materialamountupdate';
         }
     }
 
@@ -1397,6 +1445,17 @@ class MaterialManagement extends MY_Controller{
         $this->view_data['breadcrumb_id'] = 'materialmanagement/handling_logs';
         $this->view_data['deposits'] = $deposits;
         $this->content_view = 'materialhandling/logs';
+    }
+
+    public function insert_deposit_amount($from, $to){
+
+
+        for ($i = $from; $i == $to, $i++;){
+
+            echo 'INSERT INTO `deposit_amount` (`deposit_id`, `material_id`, `quantity`) VALUES (2, 653, 0)';
+
+        }
+
     }
 
 }

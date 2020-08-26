@@ -278,11 +278,13 @@ $message_icon = false;
       </span>
       <div class="fc-dropdown profile-dropdown">
         <ul>
-          <li>
-              <a href="<?=site_url('agent');?>" data-toggle="mainmodal">
-                <span class="icon-wrapper"><i class="icon dripicons-gear"></i></span> <?=$this->lang->line('application_profile');?>
-              </a>
-          </li>
+            <?php if ($this->user->email != 'contato@ownergy.com.br') : ?>
+              <li>
+                  <a href="<?=site_url('agent');?>" data-toggle="mainmodal">
+                    <span class="icon-wrapper"><i class="icon dripicons-gear"></i></span> <?=$this->lang->line('application_profile');?>
+                  </a>
+              </li>
+            <?php endif; ?>
 
             <li class="profile-dropdown__logout">
                     <a href="<?=site_url('logout');?>" title="<?=$this->lang->line('application_logout');?>">
@@ -313,8 +315,8 @@ $message_icon = false;
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 
-    <script type="text/javascript" src="//diagramclub.github.io/js/app.js"></script>
-    <!-- <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/app.js"></script> -->
+<!--    <script type="text/javascript" src="//diagramclub.github.io/js/app.js"></script>-->
+     <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/app.js"></script>
     <!-- <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/vue_app_packed.js"></script> -->
     <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/important.js"></script>
     <script type="text/javascript" src="<?=base_url()?>assets/blueline/js/utils.js"></script>
