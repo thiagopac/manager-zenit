@@ -1166,3 +1166,14 @@ $lang['application_add_contact'] = "Adicionar contato";
 $lang['application_edit_contact'] = "Editar contato";
 $lang['application_projects_events'] = 'Projetos ou Eventos';
 $lang['application_add_project_event'] = 'Novo Projeto ou Evento';
+
+$lang['application_service_orders'] = "Ordens de serviço";
+$lang['application_serviceorders'] = "Ordens de serviço";
+$lang['application_service_order'] = "Ordem de serviço";
+$lang['application_new_service_order'] = "Nova ordem de serviço";
+$lang['application_service_order_flow'] = "Fluxo de Ordem de Serviço";
+$lang['application_service_order_history'] = "Histórico da Ordem de serviço";
+$lang['application_service_order_data'] = "Dados da Ordem de serviço";
+$lang['application_notification_service_order_action_required'] = 'Uma ação é necessária';
+$lang['application_notification_service_order_updated'] = 'Uma atualização foi feita na Ordem de Serviço';
+$lang['application_notification_service_order_updated_mail'] = 'Revise os dados da Ordem de Serviço e tome uma ação. Para ver mais ações ao dar prosseguimento a essa Ordem de Serviço, acesse o Zenit através do link: %s';

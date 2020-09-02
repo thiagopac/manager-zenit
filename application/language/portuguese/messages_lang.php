@@ -285,3 +285,4 @@ $lang['messages_delete_success'] = "Registro excluído com sucesso";
 $lang['messages_delete_error'] = "Erro ao excluir registro";
 
 $lang['messages_purchase_order_incomplete'] = "Erro ao criar Ordem de Compra. Preencha os campos obrigatórios";
+$lang['messages_service_order_incomplete'] = "Erro ao criar Ordem de Serviço. Preencha os campos obrigatórios";
