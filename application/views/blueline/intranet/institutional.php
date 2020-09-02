@@ -2,9 +2,13 @@
 
     <?php include 'intranet_menu.php'; ?>
 
-    <div class="col-md-10 col-lg-10" style="margin-bottom: 20px;">
+    <div class="col-md-10 col-lg-10">
 
-        <?php foreach ($institutional_posts as $post) : ?>
+        <div class="col-md-10 col-lg-10">
+            <div class="alert alert-info"><i class="glyphicon glyphicon-exclamation-sign"></i> Aqui você poderá conhecer a cultura e curiosidades da Ownergy.</div>
+        </div>
+
+        <?php foreach ($institutional_posts as $key => $post) : ?>
         <div class="col-md-10 col-lg-10">
             <div class="article-content">
                 <div class="article">
@@ -39,6 +43,7 @@
             </div>
         </div>
         <?php endforeach; ?>
+
     </div>
 
 </div>

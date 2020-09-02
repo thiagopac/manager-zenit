@@ -1162,3 +1162,7 @@ $lang['application_photo_gallery'] = "Galeria de fotos";
 $lang['application_videos'] = "Vídeos";
 $lang['application_video'] = "Vídeo";
 $lang['application_view_file'] = "Visualizar arquivo";
+$lang['application_add_contact'] = "Adicionar contato";
+$lang['application_edit_contact'] = "Editar contato";
+$lang['application_projects_events'] = 'Projetos ou Eventos';
+$lang['application_add_project_event'] = 'Novo Projeto ou Evento';

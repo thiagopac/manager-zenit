@@ -2,7 +2,11 @@
 
     <?php include 'intranet_menu.php'; ?>
 
-    <div class="col-md-10 col-lg-10" style="margin-bottom: 20px;">
+    <div class="col-md-10 col-lg-10">
+
+        <div class="col-md-10 col-lg-10">
+            <div class="alert alert-info"><i class="glyphicon glyphicon-exclamation-sign"></i> Aqui você encontrará as orientações e manuais de procedimentos dos projetos.</div>
+        </div>
 
         <?php foreach ($procedures_projects as $project) : ?>
 

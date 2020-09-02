@@ -2,7 +2,11 @@
 
     <?php include 'intranet_menu.php'; ?>
 
-    <div class="col-md-9 col-lg-9" style="margin-bottom: 20px;">
+    <div class="col-md-10 col-lg-10">
+
+        <div class="col-md-10 col-lg-10">
+            <div class="alert alert-info"><i class="glyphicon glyphicon-exclamation-sign"></i> Aqui você pode deixar suas ideias e sugestões.</div>
+        </div>
 
         <div class="col-md-10 col-lg-10">
             <div class="article-content">
@@ -25,7 +29,7 @@
             'form': '//ownergy.com.br/auditor/app/embed'
         };
         s.type= 'text/javascript';
-        s.src = 'http://ownergy.com.br/auditor/static_files/js/form.widget.js';
+        s.src = 'https://ownergy.com.br/auditor/static_files/js/form.widget.js';
         s.onload = s.onreadystatechange = function() {
             var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
             try { (new EasyForms()).initialize(options).display() } catch (e) { }

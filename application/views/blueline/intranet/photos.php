@@ -2,11 +2,15 @@
 
     <?php include 'intranet_menu.php'; ?>
 
-    <div class="col-md-10 col-lg-10" style="margin-bottom: 20px;">
+    <div class="col-md-10 col-lg-10">
+
+        <div class="col-md-10 col-lg-10">
+            <div class="alert alert-info"><i class="glyphicon glyphicon-exclamation-sign"></i> Aqui você encontrará as fotos dos projetos e eventos da empresa. Clique para dar zoom.</div>
+        </div>
 
         <?php foreach ($photo_projects as $project) : ?>
-
-        <?php $photos = IntranetPhoto::all(['conditions' => ['deleted != ? AND intranet_project_id = ? ORDER BY id DESC', 1, $project->id]]) ?>
+        <?php $photos =  $project->intranet_photo; ?>
+        <?php if (count($photos) > 0) : ?>
             <div class="col-md-10 col-lg-10">
                 <div class="article-content">
                     <div class="article">
@@ -19,7 +23,7 @@
                         <div class="article-body">
                             <div>
                                 <?php foreach ($photos as $photo) : ?>
-                                    <img data-action="zoom" style="margin: 4px; width: 200px; height: 150px" src="<?=base_url()?>files/intranet/<?=$photo->file?>" />
+                                    <img data-action="zoom" style="margin: 4px; width: 200px; height: 130px" src="<?=base_url()?>files/intranet/<?=$photo->file?>" />
                                 <?php endforeach; ?>
                             </div>
 
@@ -30,6 +34,7 @@
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
         <?php endforeach; ?>
     </div>
 

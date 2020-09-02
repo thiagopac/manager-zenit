@@ -2,22 +2,21 @@
 
     <?php include 'intranet_menu.php'; ?>
 
-    <div class="col-md-9 col-lg-9" style="margin-bottom: 20px;">
+    <div class="col-md-10 col-lg-10">
+
+        <div class="col-md-10 col-lg-10">
+            <div class="alert alert-info"><i class="glyphicon glyphicon-exclamation-sign"></i> Aqui vocês encontrará os contatos dos colaboradores.</div>
+        </div>
 
         <div class="col-md-10 col-lg-10">
             <div class="box-shadow">
                 <div class="table-head">
                     <?=$this->lang->line('application_contacts');?>
-                    <span class="pull-right">
-<!--					<a href="--><?//=base_url()?><!--intranet/contact_create" class="btn btn-primary" data-toggle="mainmodal">-->
-<!--						--><?//=$this->lang->line('application_add_contact');?>
-<!--					</a>-->
-				</span>
                 </div>
                 <div class="table-div responsive">
-                    <table id="contacts" class="data-no-search table" cellspacing="0" cellpadding="0">
+                    <table id="contacts" class="data-sorting table noclick" data-page-length="<?=count($intranet_contacts) ?>" cellspacing="0" cellpadding="0">
                         <thead>
-                        <th style="width:80px">
+                        <th>
                             <?=$this->lang->line('application_name');?>
                         </th>
                         <th>
@@ -69,6 +68,13 @@
                 </div>
             </div>
         </div>
+        <?php if ($this->user->department_has_user("RH", $this->user) == true) : ?>
+            <div class="col-md-2 col-lg-2">
+                <a href="<?=base_url()?>intranet/contact_create" class="btn btn-primary" data-toggle="mainmodal" style="margin-right: 80px;">
+                    <?=$this->lang->line('application_add_contact');?>
+                </a>
+            </div>
+        <?php endif; ?>
 
     </div>
 
