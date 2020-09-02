@@ -262,7 +262,7 @@ class ServiceOrders extends MY_Controller{
                     }
 
                     send_bpm_notification($member->email,
-                                    "[Ordem de compra $last_service_order->id]",
+                                    "[Ordem de serviço $last_service_order->id]",
                                     sprintf($this->lang->line('application_notification_service_order_updated_mail'), base_url().'serviceorders'),
                          null,
                                 base_url().'serviceorders',

@@ -80,8 +80,8 @@ class Intranet extends MY_Controller {
         $home_detail = IntranetHomeDetail::first();
         $this->view_data['home_detail'] = $home_detail;
 
-        $home_fixed = IntranetHomeFixed::first();
-        $this->view_data['home_fixed'] = $home_fixed;
+        $home_fixeds = IntranetHomeFixed::all(['conditions' => ['deleted != ? ORDER BY id DESC', 1]]);
+        $this->view_data['home_fixeds'] = $home_fixeds;
 
         $home_posts = IntranetHomePost::all(['conditions' => ['deleted != ? ORDER BY id DESC', 1], 'include' => ['intranet_file']]);
         $this->view_data['home_posts'] = $home_posts;

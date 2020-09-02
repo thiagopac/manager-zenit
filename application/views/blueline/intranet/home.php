@@ -4,48 +4,58 @@
 
     <div class="col-md-10 col-lg-10" style="margin-bottom: 20px;">
 
-        <?php if ($home_fixed != null) : ?>
-            <div class="col-md-10 col-lg-10">
-                <div class="article-content">
-                    <div class="article">
-                        <div class="article-header">
-                            <div class="article-title">
-                                <span class="tt"><b><?=$home_fixed->title?></b></span>
-                                <small class="article-datetime"> <?=$this->lang->line('application_at');?> <b><?=date($core_settings->date_format . '</b> à\s <b>' . $core_settings->date_time_format, human_to_unix($home_fixed->updated_at)).'</b>'?></small>
+        <?php foreach ($home_fixeds as $idx => $home_fixed) : ?>
+            <?php if ($home_fixed != null) : ?>
+                <div class="col-md-10 col-lg-10">
+                    <div class="article-content">
+                        <div class="article">
+                            <div class="article-header">
+                                <div class="article-title">
+                                    <span class="tt"><b><?=$home_fixed->title?></b></span>
+                                    <small class="article-datetime"> <?=$this->lang->line('application_at');?> <b><?=date($core_settings->date_format . '</b> à\s <b>' . $core_settings->date_time_format, human_to_unix($home_fixed->updated_at)).'</b>'?></small>
+                                </div>
+                            </div>
+                            <div class="article-body">
+                                <p>
+                                    <?=$home_fixed->description;?>
+                                </p>
+
+                                <?php if ($home_fixed->link != null) : ?>
+                                <p>
+                                    <iframe width="100%" height="650" src="<?=$home_fixed->link?>" frameborder="0" allowFullScreen="true"></iframe>
+                                </p>
+                                <?php elseif ($home_fixed->file != null) : ?>
+                                <p>
+                                    <img src="<?=base_url()?>/files/intranet/<?=$home_fixed->file?>" style="width: 100%; height: 100%"/>
+                                </p>
+                                <?php endif; ?>
+
                             </div>
                         </div>
-                        <div class="article-body">
-                            <p>
-                                <?=$home_fixed->description;?>
-                            </p>
-                            <p>
-                                <img src="<?=base_url()?>/files/intranet/<?=$home_fixed->file?>" style="width: 100%; height: 100%"/>
-                            </p>
-
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if ($home_detail->title != null && $idx == 0) : ?>
+                <div class="col-md-2 col-lg-2">
+                    <div class="article-content">
+                        <div class="article">
+                            <div class="article-header">
+                                <div class="article-title">
+                                    <span class="tt"><b><?=$home_detail->title?></b></span>
+                                </div>
+                            </div>
+                            <div class="article-body">
+                                <p style="text-align: center; padding-top: 40px; padding-bottom: 40px">
+                                    <span style="text-align: center; font-size: 50px"><?=$home_detail->description?></span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php endif; ?>
+            <?php endif; ?>
+        <?php endforeach; ?>
 
-        <?php if ($home_detail->title != null) : ?>
-        <div class="col-md-2 col-lg-2">
-            <div class="article-content">
-                <div class="article">
-                    <div class="article-header">
-                        <div class="article-title">
-                            <span class="tt"><b><?=$home_detail->title?></b></span>
-                        </div>
-                    </div>
-                    <div class="article-body">
-                        <p style="text-align: center; padding-top: 40px; padding-bottom: 40px">
-                            <span style="text-align: center; font-size: 50px"><?=$home_detail->description?></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php endif; ?>
+
 
         <?php foreach ($home_posts as $post) : ?>
             <div class="col-md-10 col-lg-10">

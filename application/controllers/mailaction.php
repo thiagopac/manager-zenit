@@ -128,4 +128,131 @@ class MailAction extends MY_Controller {
 
         }
     }
+
+    public function updateserviceorder($username, $service_order_id, $action_id, $step) {
+
+        $this->theme_view = 'blank';
+
+        $updating_service_order = ServiceOrder::find($service_order_id);
+        $flow = json_decode($updating_service_order->flow);
+
+        if ($updating_service_order->canceled == true || $updating_service_order->finished == true || $updating_service_order->step > $step){
+
+            if ($updating_service_order->canceled == true){
+                echo "Esta Ordem de Serviço está com status de cancelada";
+                exit;
+            }else if ($updating_service_order->finished == true){
+                echo "Esta Ordem de Serviço está com status de finalizada";
+                exit;
+            }else if($updating_service_order->step > $step){
+                echo "Esta Ordem de Serviço já teve esta etapa completada previamente";
+                exit;
+            }
+
+        }
+
+        $user = User::getUserByUsername($username);
+        $is_progress = $action_id;
+
+        $history_registry = new stdClass;
+
+        if ($is_progress == false) {
+
+            foreach ($flow->steps as $step) {
+                if ($step->canceled == true) {
+                    $canceled_step = $step;
+                }
+            }
+
+            $_POST['step'] = $canceled_step->id;
+            $_POST['canceled'] = 1;
+
+            $current_step = ServiceOrder::currentStepForServiceOrder($service_order_id);
+
+//criação de registro de histórico
+            ServiceOrder::createHistoryForServiceStepAndUser($service_order_id, $current_step, $user->id, $history_registry, $is_progress);
+
+            if ($_POST['canceled'] == 1) {
+// passo final precisa criar registro de histórico quando o penúltimo passo estiver sendo registrado
+                ServiceOrder::createHistoryForServiceStepAndUser($service_order_id, $canceled_step, $user->id, $is_progress);
+            }
+
+        } else {
+
+            $current_step = ServiceOrder::currentStepForServiceOrder($service_order_id);
+
+            $next_step = ServiceOrder::nextStepForServiceOrderAfterCurrentStep($service_order_id, $current_step->id);
+            $_POST['step'] = $next_step->id;
+
+//criação de registro de histórico
+            ServiceOrder::createHistoryForServiceStepAndUser($service_order_id, $current_step, $user->id, $history_registry, $is_progress);
+
+            if ($next_step->finish == true) {
+// passo final precisa criar registro de histórico quando o penúltimo passo estiver sendo registrado
+                ServiceOrder::createHistoryForServiceStepAndUser($service_order_id, $next_step, $user->id, $is_progress);
+                $_POST['finished'] = 1;
+            }
+        }
+
+        $updating_service_order->update_attributes($_POST);
+
+        $push_receivers = array();
+        if (!$updating_service_order) {
+            $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_edit_error'));
+        } else {
+
+            if ($is_progress == true) {
+                $this->load->helper('notification');
+
+                foreach ($next_step->members as $member) {
+                    if ($member->email == "creator_email") {
+                        $user = User::find($updating_service_order->user_id);
+                    } else {
+                        $user = User::getUserByEmail($member->email);
+                    }
+
+                    if ($user->push_active) {
+                        array_push($push_receivers, $member->email);
+                    }
+
+                    $attributes = array('user_id' => $user->id, 'message' => "[Ordem de serviço $updating_service_order->id] Uma atualização foi feita na Ordem de Serviço", 'url' => base_url() . 'serviceorders');
+                    Notification::create($attributes);
+
+                    $document = ServiceOrder::servicebody($updating_service_order->id);
+                    $history = ServiceOrder::servicehistory($updating_service_order->id);
+
+                    $actions = array();
+                    foreach ($next_step->actions as $action) {
+                        $action->title = $action->name;
+                        $action->href = base_url() . 'mailaction/updateserviceorder/' . str_replace('@ownergy.com.br', '', $member->email) . '/' . $updating_service_order->id . '/' . intval(boolval($action->progress)).'/'.$next_step->id;
+                        array_push($actions, $action);
+                    }
+
+                    send_bpm_notification($member->email,
+                        "[Ordem de serviço $updating_service_order->id]",
+                        sprintf($this->lang->line('application_notification_service_order_updated_mail'), base_url().'serviceorders'),
+                        null,
+                        base_url() . 'serviceorders',
+                        $actions,
+                        $document,
+                        $history);
+                }
+
+                Notification::sendPushNotification($push_receivers, "[Ordem de serviço $updating_service_order->id] Uma atualização foi feita na Ordem de Serviço", base_url() . 'serviceorders');
+
+            } else {
+//Service Order is backing to the creator
+                array_push($push_receivers, $this->user->email);
+
+                $attributes = array('user_id' => $updating_service_order->user_id, 'message' => "[Ordem de serviço $updating_service_order->id] Ordem de serviço cancelada, verifique o histórico", 'url' => base_url() . 'serviceorders');
+                Notification::create($attributes);
+
+                Notification::sendPushNotification($push_receivers, "[Ordem de serviço $updating_service_order->id] Ordem de Serviço cancelada, verifique o histórico", base_url() . 'serviceorders');
+            }
+
+            echo "Ordem de serviço atualizada com sucesso";
+            exit;
+
+        }
+    }
 }
