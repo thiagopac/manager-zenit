@@ -5,7 +5,7 @@
     <div class="col-md-10 col-lg-10">
 
         <div class="col-md-10 col-lg-10">
-            <div class="alert alert-info"><i class="glyphicon glyphicon-exclamation-sign"></i> Aqui vocês encontrará os projetos e eventos da <empresa></empresa> para adicionar fotos, vídeos ou documentos.</div>
+            <div class="alert alert-info"><i class="glyphicon glyphicon-exclamation-sign"></i> Aqui vocês encontrará os projetos e eventos da empresa para adicionar fotos, vídeos ou documentos.</div>
         </div>
 
         <div class="col-md-10 col-lg-10">

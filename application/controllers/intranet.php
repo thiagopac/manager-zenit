@@ -19,49 +19,47 @@ class Intranet extends MY_Controller {
             redirect('login');
         }
 
-        $this->view_data['submenu'] = [
+        $submenu = [
             $this->lang->line('application_home') => 'intranet/home',
             $this->lang->line('application_institutional') => 'intranet/institutional',
             $this->lang->line('application_procedures') => 'intranet/procedures',
             $this->lang->line('application_communication') => 'intranet/communication',
-            $this->lang->line('application_ideas_and_improvements_form') => 'intranet/form',
             $this->lang->line('application_photo_gallery') => 'intranet/photos',
             $this->lang->line('application_videos') => 'intranet/videos'
         ];
 
-        $this->view_data['iconlist'] = [
+        $iconlist = [
             'intranet/home' => 'dripicons-web',
             'intranet/institutional' => 'dripicons-graduation',
             'intranet/procedures' => 'dripicons-clipboard',
             'intranet/communication' => 'dripicons-volume-medium',
-            'intranet/form' => 'dripicons-document-edit',
             'intranet/photos' => 'dripicons-photo-group',
             'intranet/videos' => 'dripicons-media-next'
         ];
 
-        if ($this->user->department_has_user("RH", $this->user) == true) {
-            $this->view_data['submenu'] = [
-                $this->lang->line('application_home') => 'intranet/home',
-                $this->lang->line('application_institutional') => 'intranet/institutional',
-                $this->lang->line('application_procedures') => 'intranet/procedures',
-                $this->lang->line('application_communication') => 'intranet/communication',
-                $this->lang->line('application_ideas_and_improvements_form') => 'intranet/form',
-                $this->lang->line('application_photo_gallery') => 'intranet/photos',
-                $this->lang->line('application_videos') => 'intranet/videos',
-                $this->lang->line('application_projects_events') => 'intranet/project',
-            ];
+        $forms = IntranetForm::find('all', ['conditions' => ['deleted != ? AND active = ? ORDER BY ordered ASC', 1, 1]]);
 
-            $this->view_data['iconlist'] = [
-                'intranet/home' => 'dripicons-web',
-                'intranet/institutional' => 'dripicons-graduation',
-                'intranet/procedures' => 'dripicons-clipboard',
-                'intranet/communication' => 'dripicons-volume-medium',
-                'intranet/form' => 'dripicons-document-edit',
-                'intranet/photos' => 'dripicons-photo-group',
-                'intranet/videos' => 'dripicons-media-next',
-                'intranet/project' => 'dripicons-suitcase'
-            ];
+        $submenu_line = array();
+        $iconlist_line = array();
+
+        foreach ($forms as $form){
+            $submenu_line["$form->name"] = "intranet/form/".$form->id;
+            $iconlist_line["intranet/form/".$form->id] = 'dripicons-document-edit';
         }
+
+        $submenu = array_merge($submenu, $submenu_line);
+        $iconlist = array_merge($iconlist, $iconlist_line);
+
+        if ($this->user->department_has_user("RH", $this->user) == true) {
+            $submenu[$this->lang->line('application_projects_events')] = 'intranet/project';
+            $iconlist['intranet/project'] = 'dripicons-suitcase';
+
+            $submenu['Menus de formulários'] = 'intranet/forms';
+            $iconlist['intranet/forms'] = 'dripicons-duplicate';
+        }
+
+        $this->view_data['submenu'] = $submenu;
+        $this->view_data['iconlist'] = $iconlist;
 
         $this->config->load('defaults');
     }
@@ -126,14 +124,6 @@ class Intranet extends MY_Controller {
         $this->view_data['intranet_contacts'] = $intranet_contacts;
 
         $this->content_view = 'intranet/communication';
-    }
-
-    public function form(){
-
-        $this->view_data['breadcrumb'] = $this->lang->line('application_form');
-        $this->view_data['breadcrumb_id'] = 'intranet/form';
-
-        $this->content_view = 'intranet/form';
     }
 
     public function photos(){
@@ -298,6 +288,87 @@ class Intranet extends MY_Controller {
         $project->save();
         $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_success'));
         redirect('intranet/project');
+    }
+
+    public function form($form_id){
+
+        $form = IntranetForm::find($form_id);
+
+        $this->view_data['breadcrumb'] = $form->name;
+        $this->view_data['breadcrumb_id'] = "intranet/form/".$form->id;
+        $this->view_data['form'] = $form;
+
+        $this->content_view = 'intranet/form';
+    }
+
+    public function forms(){
+        $core_settings = Setting::first();
+        $this->view_data['core_settings'] = $core_settings;
+
+        $this->view_data['breadcrumb'] = 'Menus de formulários';
+        $this->view_data['breadcrumb_id'] = 'intranet/forms';
+
+        $intranet_forms = IntranetForm::all(['conditions' => ['deleted != ?', 1]]);
+        $this->view_data['intranet_forms'] = $intranet_forms;
+
+        $this->content_view = 'intranet/forms';
+    }
+
+    public function form_update($id = false){
+        $form = IntranetForm::find($id);
+
+        if ($_POST) {
+
+            $form->update_attributes($_POST);
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_edit_success'));
+            redirect('intranet/forms');
+        } else {
+            $this->view_data['form'] = $form;
+            $this->theme_view = 'modal';
+
+            $this->view_data['title'] = 'Editar formulário';
+            $this->view_data['form_action'] = 'intranet/form_update/' . $form->id;
+            $this->content_view = 'intranet/_form';
+        }
+    }
+
+    public function form_create(){
+
+        if ($_POST) {
+
+            $options = ['conditions' => ['name = ?', $_POST['name']]];
+            $form_exists = IntranetForm::find($options);
+
+            if (empty($form_exists)) {
+
+                $form = IntranetForm::create($_POST);
+                if (!$form) {
+                    $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_add_error'));
+                } else {
+                    $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_add_success'));
+                }
+            }else{
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_add_exists'));
+            }
+
+            redirect('intranet/forms');
+        } else {
+            $this->theme_view = 'modal';
+
+            $this->view_data['title'] = "Adicionar formulário";
+            $this->view_data['form_action'] = 'intranet/form_create/';
+            $this->content_view = 'intranet/_form';
+        }
+    }
+
+    public function form_delete($form_id = false){
+
+        $options = ['conditions' => ['id = ?', $form_id]];
+        $form = IntranetForm::find($options);
+        $form->deleted = 1;
+        $form->save();
+        $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_success'));
+        redirect('intranet/forms');
     }
 
 

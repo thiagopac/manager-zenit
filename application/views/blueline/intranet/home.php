@@ -1,3 +1,26 @@
+<style>
+
+    .iframe-embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        border: 0;
+    }
+    .iframe-embed-wrapper {
+        position: relative;
+        display: block;
+        height: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    .iframe-embed-responsive-16by9 {
+        padding-bottom: 56.25%;
+    }
+
+</style>
 <div id="row">
 
     <?php include 'intranet_menu.php'; ?>
@@ -21,9 +44,9 @@
                                 </p>
 
                                 <?php if ($home_fixed->link != null) : ?>
-                                <p>
-                                    <iframe width="100%" height="650" src="<?=$home_fixed->link?>" frameborder="0" allowFullScreen="true"></iframe>
-                                </p>
+                                <div class="iframe-embed-wrapper iframe-embed-responsive-16by9">
+                                    <iframe class="iframe-embed" src="<?=$home_fixed->link?>" frameborder="0" allowFullScreen="true"></iframe>
+                                </div>
                                 <?php elseif ($home_fixed->file != null) : ?>
                                 <p>
                                     <img src="<?=base_url()?>/files/intranet/<?=$home_fixed->file?>" style="width: 100%; height: 100%"/>

@@ -5,7 +5,7 @@
     <div class="col-md-10 col-lg-10">
 
         <div class="col-md-10 col-lg-10">
-            <div class="alert alert-info"><i class="glyphicon glyphicon-exclamation-sign"></i> Aqui você pode deixar suas ideias e sugestões.</div>
+            <div class="alert alert-info"><i class="glyphicon glyphicon-exclamation-sign"></i> <?=$form->description?></div>
         </div>
 
         <div class="col-md-10 col-lg-10">
@@ -23,7 +23,7 @@
 <script type="text/javascript">
     (function(d, t) {
         var s = d.createElement(t), options = {
-            'id': 37,
+            'id': <?=$form->auditor_form_id?>,
             'container': 'c37',
             'height': '1536px',
             'form': '//ownergy.com.br/auditor/app/embed'
