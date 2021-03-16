@@ -104,7 +104,7 @@ table thead tr th {
                             </td>
                             <td class="end_time">
                                 <?php  if ($value->end != "") {
-                            echo date($core_settings->date_format.' '.$core_settings->date_time_format, $value->end);
+                                echo date($core_settings->date_format.' '.$core_settings->date_time_format, $value->end);
                         } else {
                             echo "-";
                         }?>    

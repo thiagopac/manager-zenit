@@ -4,7 +4,12 @@
         <div class="overlay"></div>
         <header class="header">
             <h1 class="page-title">
-                <div class="pull-right margin-right-2" style="display: inline-flex">
+                <div class="pull-right margin-right-2" style="display: inline-flex;">
+
+                    <a href="<?=base_url()?>serviceorders/import" class="btn btn-primary" data-toggle="mainmodal" style="margin-right: 4px;">
+                        <?=$this->lang->line('application_csv_file_update')?>
+                    </a>
+
                     <input class="form-control" type="text" id="search" style="height: 30px" name="search" placeholder="Buscar..."/>
                     <a class="btn btn-primary message-list-load all-folder" id="search_button" name="search_button" style="margin-left: 5px" role="button" href="<?=base_url()?>serviceorders/filter/search/">
                         <i class="fa fa-search"></i>

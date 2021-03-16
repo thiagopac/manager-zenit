@@ -597,22 +597,108 @@ class ServiceOrders extends MY_Controller{
         $this->view_data['step_form'] = json_encode($step_form);
     }
 
-    /*public function preview($id = false, $attachment = false) {
-        $this->load->helper(['dompdf', 'file']);
-        $this->load->library('parser');
-        $service_order = ServiceOrder::find($id);
-        $data['service_order'] = $service_order;
-        $data['body'] = InvoiceHasItem::find('all', ['conditions' => ['invoice_id=?', $id]]);
-        $data['core_settings'] = Setting::first();
+    public function update_data(){
 
-        $parse_data = [
-            'company' => $data['core_settings']->company,
-            'logo' => '<img src="' . base_url() . '' . $data['core_settings']->logo . '" alt="' . $data['core_settings']->company . '"/>',
-        ];
-        $html = $this->load->view('blueline/templates/serviceorder/template', $data, true);
-        $html = $this->parser->parse_string($html, $parse_data);
+        $csv = array();
 
-        $filename = 'serviceorder'.'_'.$service_order->id;
-        pdf_create($html, $filename, true, $attachment);
-    }*/
+        if($_FILES['csv']['error'] == 0){
+            $name = $_FILES['csv']['name'];
+            $ext = strtolower(end(explode('.', $_FILES['csv']['name'])));
+            $type = $_FILES['csv']['type'];
+            $tmpName = $_FILES['csv']['tmp_name'];
+
+            // check the file is a csv
+            if($ext === 'csv'){
+                if(($handle = fopen($tmpName, 'r')) !== FALSE) {
+                    // necessary if a large csv file
+                    set_time_limit(0);
+
+                    $row = 0;
+
+                    while(($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
+                        // number of fields in the csv
+                        $col_count = count($data);
+
+                        // get the values from the csv
+                        $csv[$row]['col1'] = $data[0];
+                        $csv[$row]['col2'] = $data[1];
+
+                        // inc the row
+                        $row++;
+                    }
+
+                    var_dump($csv);
+                    fclose($handle);
+                }
+            }
+        }
+
+    }
+
+    public function import() {
+
+        if ($_POST) {
+            unset($_POST['send']);
+            unset($_POST['files']);
+            $config['upload_path'] = './files/temp/';
+            $config['encrypt_name'] = true;
+            $config['allowed_types'] = '*';
+
+            $this->load->library('upload', $config);
+
+            if (! $this->upload->do_upload()) {
+                $error = $this->upload->display_errors('', ' ');
+                $this->session->set_flashdata('message', 'error:'.$error);
+                redirect('serviceorders/');
+            } else {
+                $data = array('upload_data' => $this->upload->data());
+
+                $_POST['filename'] = $data['upload_data']['orig_name'];
+                $savename = $data['upload_data']['file_name'];
+                $this->view_data['csv_file'] = $savename;
+
+                $this->load->library('CSVReader');
+                $result = $this->csvreader->parse_file($config['upload_path'].$savename);
+
+//                var_dump(array_keys($result[1]));
+//                exit;
+
+                foreach ($result[1] as $key => $value){
+                    $service_order = ServiceOrder::find($key);
+
+                    $history = json_decode($service_order->history);
+
+                    foreach ($history->steps as $step){
+
+                        foreach ($step->history_data as $field){
+
+                            if ($field->label == 'Data de pagamento'){
+
+                                $field->value = implode('-', array_reverse(explode('/', $value)));
+                            }
+
+                        }
+                    }
+
+                    $service_order->history = json_encode($history);
+                    $service_order->save();
+
+                    $history = null;
+                }
+
+
+//                exit;
+
+                $this->view_data["form_action"] = 'serviceorders/import';
+                $this->content_view = 'serviceorders/all';
+            }
+        } else {
+            $this->theme_view = 'modal';
+            $this->view_data['title'] = $this->lang->line('application_import');
+            $this->view_data['form_action'] = 'serviceorders/import';
+            $this->view_data['exemple_file'] = 'https://ownergy.com.br/zenit/files/serviceorders/os_atualizar_pagamento.csv';
+            $this->content_view = 'serviceorders/_import';
+        }
+    }
+
 }

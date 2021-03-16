@@ -5,12 +5,12 @@
     <div class="col-md-10 col-lg-10">
 
         <div class="col-md-10 col-lg-10">
-            <div class="alert alert-info"><i class="glyphicon glyphicon-exclamation-sign"></i> Aqui você encontrará as orientações e manuais de procedimentos dos projetos.</div>
+            <div class="alert alert-info"><i class="glyphicon glyphicon-exclamation-sign"></i> Aqui você encontrará as publicações da Ownergy na mídia.</div>
         </div>
 
-        <?php foreach ($procedures_projects as $project) : ?>
+        <?php foreach ($media_projects as $project) : ?>
 
-        <?php $project_posts = IntranetProceduresPost::all(['conditions' => ['deleted != ? AND intranet_project_id = ?', 1, $project->id]]) ?>
+        <?php $project_posts = IntranetMediaPost::all(['conditions' => ['deleted != ? AND intranet_project_id = ?', 1, $project->id]]) ?>
 
             <?php if (count($project_posts) > 0) : ?>
 
@@ -26,10 +26,10 @@
                             <div class="article-body">
                                 <div>
                                     <?php foreach ($project_posts as $post) : ?>
-                                        <p>
-                                            <a target="_blank" href="<?=base_url()?>/files/intranet/<?=$post->file?>"><?=$post->title;?></a>
-                                        </p>
-                                        <p><?=$post->description;?></p>
+                                        <div style="display: grid; max-width: 100px; margin: 12px">
+                                            <a target="_blank" href="<?=base_url()?>/files/intranet/<?=$post->file?>"><img src="<?=base_url()?>/files/intranet/<?=$post->image?>" /></a>
+                                            <a style="margin-top: 5px; text-align: justify" target="_blank" href="<?=base_url()?>/files/intranet/<?=$post->file?>"><?=$post->title;?></a>
+                                        </div>
                                         <hr />
                                     <?php endforeach; ?>
                                 </div>

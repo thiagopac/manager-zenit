@@ -24,6 +24,7 @@ class Intranet extends MY_Controller {
             $this->lang->line('application_institutional') => 'intranet/institutional',
             $this->lang->line('application_procedures') => 'intranet/procedures',
             $this->lang->line('application_communication') => 'intranet/communication',
+            $this->lang->line('application_media') => 'intranet/media',
             $this->lang->line('application_photo_gallery') => 'intranet/photos',
             $this->lang->line('application_videos') => 'intranet/videos'
         ];
@@ -32,30 +33,57 @@ class Intranet extends MY_Controller {
             'intranet/home' => 'dripicons-web',
             'intranet/institutional' => 'dripicons-graduation',
             'intranet/procedures' => 'dripicons-clipboard',
+            'intranet/media' => 'dripicons-feed',
             'intranet/communication' => 'dripicons-volume-medium',
             'intranet/photos' => 'dripicons-photo-group',
             'intranet/videos' => 'dripicons-media-next'
         ];
 
+        $iframes = IntranetIframe::find('all', ['conditions' => ['deleted != ? AND active = ? ORDER BY ordered ASC', 1, 1]]);
         $forms = IntranetForm::find('all', ['conditions' => ['deleted != ? AND active = ? ORDER BY ordered ASC', 1, 1]]);
 
         $submenu_line = array();
         $iconlist_line = array();
 
-        foreach ($forms as $form){
-            $submenu_line["$form->name"] = "intranet/form/".$form->id;
-            $iconlist_line["intranet/form/".$form->id] = 'dripicons-document-edit';
+        if (count($iframes) > 0){
+            $submenu['devider0'] = 'devider';
+
+            foreach ($iframes as $iframe){
+                $submenu_line["$iframe->name"] = "intranet/iframe/".$iframe->id;
+                $iconlist_line["intranet/iframe/".$iframe->id] = 'dripicons-link';
+            }
+        }
+
+        $submenu = array_merge($submenu, $submenu_line);
+        $iconlist = array_merge($iconlist, $iconlist_line);
+
+        if (count($forms) > 0) {
+            $submenu['devider1'] = 'devider';
+
+            foreach ($forms as $form){
+                $submenu_line["$form->name"] = "intranet/form/".$form->id;
+                $iconlist_line["intranet/form/".$form->id] = 'dripicons-document-edit';
+
+                if ($form->id == 1){
+                    $iconlist_line["intranet/form/".$form->id] = 'dripicons-broadcast';
+                }
+            }
         }
 
         $submenu = array_merge($submenu, $submenu_line);
         $iconlist = array_merge($iconlist, $iconlist_line);
 
         if ($this->user->department_has_user("RH", $this->user) == true) {
+            $submenu['devider2'] = 'devider';
+
             $submenu[$this->lang->line('application_projects_events')] = 'intranet/project';
             $iconlist['intranet/project'] = 'dripicons-suitcase';
 
             $submenu['Menus de formulários'] = 'intranet/forms';
             $iconlist['intranet/forms'] = 'dripicons-duplicate';
+
+            $submenu['Menus de iframes'] = 'intranet/iframes';
+            $iconlist['intranet/iframes'] = 'dripicons-link-broken';
         }
 
         $this->view_data['submenu'] = $submenu;
@@ -113,6 +141,19 @@ class Intranet extends MY_Controller {
         $this->content_view = 'intranet/procedures';
     }
 
+    public function media(){
+        $core_settings = Setting::first();
+        $this->view_data['core_settings'] = $core_settings;
+
+        $this->view_data['breadcrumb'] = $this->lang->line('application_media');
+        $this->view_data['breadcrumb_id'] = 'intranet/media';
+
+        $media_projects = IntranetProject::all(['conditions' => ['deleted != ? ORDER BY id DESC', 1]]);
+        $this->view_data['media_projects'] = $media_projects;
+
+        $this->content_view = 'intranet/media';
+    }
+
     public function communication(){
         $core_settings = Setting::first();
         $this->view_data['core_settings'] = $core_settings;
@@ -133,7 +174,7 @@ class Intranet extends MY_Controller {
         $this->view_data['breadcrumb'] = $this->lang->line('application_photo_gallery');
         $this->view_data['breadcrumb_id'] = 'intranet/photos';
 
-        $photo_projects = IntranetProject::all(['conditions' => ['deleted != ? ORDER BY id ASC', 1], 'include' => ['intranet_photo']]);
+        $photo_projects = IntranetProject::all(['conditions' => ['deleted != ? ORDER BY id DESC', 1], 'include' => ['intranet_photo']]);
         $this->view_data['photo_projects'] = $photo_projects;
 
         $this->content_view = 'intranet/photos';
@@ -187,6 +228,9 @@ class Intranet extends MY_Controller {
 
             $options = ['conditions' => ['email = ?', $_POST['email']]];
             $contact_exists = IntranetContact::find($options);
+
+            //tirar verificação de e-mail existente
+            $contact_exists = null;
 
             if (empty($contact_exists)) {
 
@@ -289,6 +333,89 @@ class Intranet extends MY_Controller {
         $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_success'));
         redirect('intranet/project');
     }
+
+    public function iframe($iframe_id){
+
+        $iframe = IntranetIframe::find($iframe_id);
+
+        $this->view_data['breadcrumb'] = $iframe->name;
+        $this->view_data['breadcrumb_id'] = "intranet/iframe/".$iframe->id;
+        $this->view_data['iframe'] = $iframe;
+
+        $this->content_view = 'intranet/iframe';
+    }
+
+    public function iframes(){
+        $core_settings = Setting::first();
+        $this->view_data['core_settings'] = $core_settings;
+
+        $this->view_data['breadcrumb'] = 'Menus de iframes';
+        $this->view_data['breadcrumb_id'] = 'intranet/iframes';
+
+        $intranet_iframes = IntranetIframe::all(['conditions' => ['deleted != ?', 1]]);
+        $this->view_data['intranet_iframes'] = $intranet_iframes;
+
+        $this->content_view = 'intranet/iframes';
+    }
+
+    public function iframe_update($id = false){
+        $iframe = IntranetIframe::find($id);
+
+        if ($_POST) {
+
+            $iframe->update_attributes($_POST);
+            $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_edit_success'));
+            redirect('intranet/iframes');
+        } else {
+            $this->view_data['iframe'] = $iframe;
+            $this->theme_view = 'modal';
+
+            $this->view_data['title'] = 'Editar iframe';
+            $this->view_data['form_action'] = 'intranet/iframe_update/' . $iframe->id;
+            $this->content_view = 'intranet/_iframe';
+        }
+    }
+
+    public function iframe_create(){
+
+        if ($_POST) {
+
+            $options = ['conditions' => ['name = ?', $_POST['name']]];
+            $intranet_exists = IntranetIframe::find($options);
+
+            if (empty($intranet_exists)) {
+
+                $iframe = IntranetIframe::create($_POST);
+                if (!$iframe) {
+                    $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_add_error'));
+                } else {
+                    $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_add_success'));
+                }
+            }else{
+                $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_add_exists'));
+            }
+
+            redirect('intranet/iframes');
+        } else {
+            $this->theme_view = 'modal';
+
+            $this->view_data['title'] = "Adicionar iframe";
+            $this->view_data['form_action'] = 'intranet/iframe_create/';
+            $this->content_view = 'intranet/_iframe';
+        }
+    }
+
+    public function iframe_delete($iframe_id = false){
+
+        $options = ['conditions' => ['id = ?', $iframe_id]];
+        $iframe = IntranetIframe::find($options);
+        $iframe->deleted = 1;
+        $iframe->save();
+        $this->session->set_flashdata('message', 'success:' . $this->lang->line('messages_delete_success'));
+        redirect('intranet/iframes');
+    }
+
+//////
 
     public function form($form_id){
 

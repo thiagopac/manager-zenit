@@ -16,14 +16,14 @@
                     <div class="article">
                         <div class="article-header">
                             <div class="article-title">
-                                <?='<span class="tt"><b>'.ucwords($project->name).'</b></span> '?>
+                                <span class="tt"><b><?=$project->name?></b></span>
                                 <small class="article-datetime"> <?=$this->lang->line('application_at');?> <b><?=date($core_settings->date_format . '</b> à\s <b>' . $core_settings->date_time_format, human_to_unix($project->created_at)).'</b>'?></small>
                             </div>
                         </div>
                         <div class="article-body">
                             <div>
                                 <?php foreach ($photos as $photo) : ?>
-                                    <img data-action="zoom" style="margin: 4px; width: 200px; height: 130px" src="<?=base_url()?>files/intranet/<?=$photo->file?>" />
+                                    <img data-action="zoom" style="margin: 4px; width: auto; height: auto; max-width: 200px; max-height: 120px" src="<?=base_url()?>files/intranet/<?=$photo->file?>" />
                                 <?php endforeach; ?>
                             </div>
 

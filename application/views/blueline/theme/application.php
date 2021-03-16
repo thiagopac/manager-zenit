@@ -79,7 +79,9 @@ $message_icon = false;
 
 <body>
 <div id="mainwrapper" data-turbolinks="false">
-    <div class="side">
+
+    <?php if ($this->user->username != 'ownergy') : ?>
+        <div class="side">
     <div class="sidebar-bg"></div>
         <div class="sidebar">
         <div class="navbar-header">
@@ -212,8 +214,9 @@ $message_icon = false;
 
         </div>
     </div>
+    <?php endif; ?>
 
-    <div class="content-area" onclick="">
+    <div class="content-area" onclick="" <?php if ($this->user->username == 'ownergy') : ?> style="margin-left: 0px" <?php endif; ?>>
       <div class="row mainnavbar">
       <div class="topbar__left noselect">
           <a href="#" class="menu-trigger"><i class="ion-navicon visible-xs"></i></a>
@@ -327,7 +330,8 @@ $message_icon = false;
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="//formbuilder.online/assets/js/form-builder.min.js"></script>
     <script src="//formbuilder.online/assets/js/form-render.min.js"></script>
-        <script>
+
+    <script>
             flatdatepicker(false, langshort);
         </script>
 
