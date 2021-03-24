@@ -2,31 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="498798ec-50f4-449c-872c-6dbc26a6cb09" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/application/models/IntranetIframe.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/models/IntranetMediaPost.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/views/blueline/intranet/_iframe.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/views/blueline/intranet/iframe.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/views/blueline/intranet/iframes.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/views/blueline/intranet/media.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/views/blueline/serviceorders/_import.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/zenit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/zenit.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/intranet.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/intranet.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/controllers/serviceorders.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/serviceorders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/settings.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/language/portuguese/application_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/language/portuguese/application_lang.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/models/IntranetProject.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/models/IntranetProject.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/intranet/forms.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/intranet/forms.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/intranet/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/intranet/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/intranet/photos.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/intranet/photos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/intranet/procedures.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/intranet/procedures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/intranet/videos.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/intranet/videos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/projects/_timesheets.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/projects/_timesheets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/serviceorders/all.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/serviceorders/all.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/settings/themeoptions.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/settings/themeoptions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/blueline/theme/application.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/blueline/theme/application.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database-model/owner398_zenit.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/libraries/CSVReader.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/libraries/CSVReader.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/vendor/composer/" />
@@ -46,45 +25,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/language/portuguese/application_lang.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="798">
-              <caret line="1184" column="42" selection-start-line="1184" selection-start-column="7" selection-end-line="1184" selection-end-column="42" />
+            <state relative-caret-position="414">
+              <caret line="1181" column="357" selection-start-line="1181" selection-start-column="357" selection-end-line="1181" selection-end-column="357" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/serviceorders.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="704" lean-forward="true" selection-start-line="704" selection-end-line="704" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/blueline/serviceorders/all.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#h1#0;n#header#0;n#main#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#div#0;n#h1#0;n#header#0;n#main#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/blueline/serviceorders/_import.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-              <folding>
-                <element signature="e#286#340#0#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="531">
+              <caret line="669" column="17" selection-start-line="669" selection-start-column="17" selection-end-line="669" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -93,13 +47,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>trim</find>
-      <find>ellipsize</find>
-      <find>$intranet_iframes</find>
-      <find>Pedido de conta registrado com sucesso</find>
-      <find>photos</find>
-      <find>gmap_canvas</find>
-      <find>.newst</find>
       <find>application_communication</find>
       <find>proced</find>
       <find>procedures</find>
@@ -123,6 +70,13 @@
       <find>-&gt;save();</find>
       <find>json</find>
       <find>application_import_leads_info</find>
+      <find>mask-date</find>
+      <find>$PROJECT_DIR$/application/controllers/serviceorders.php</find>
+      <find>fgetcsv</find>
+      <find>CSVReader</find>
+      <find>Estamos muito felizes</find>
+      <find>Pedido de conta registrado com sucesso</find>
+      <find>registrado</find>
     </findStrings>
     <replaceStrings>
       <replace>-&gt;project</replace>
@@ -135,10 +89,11 @@
     <dirStrings>
       <dir>$PROJECT_DIR$/application</dir>
       <dir>$PROJECT_DIR$/getStepWithId</dir>
-      <dir>$PROJECT_DIR$/</dir>
       <dir>$PROJECT_DIR$/application/views</dir>
       <dir>$PROJECT_DIR$/application/views/blueline/intranet</dir>
       <dir>$PROJECT_DIR$/application/</dir>
+      <dir>$PROJECT_DIR$//Applications/MAMP/htdocs/zenit/application/controllers/serviceorders.php</dir>
+      <dir>$PROJECT_DIR$/</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -147,17 +102,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/views/blueline/intranet/photos.php" />
         <option value="$PROJECT_DIR$/application/models/IntranetMediaPost.php" />
         <option value="$PROJECT_DIR$/application/models/IntranetProject.php" />
         <option value="$PROJECT_DIR$/application/views/blueline/intranet/media.php" />
         <option value="$PROJECT_DIR$/application/controllers/intranet.php" />
         <option value="$PROJECT_DIR$/application/views/blueline/serviceorders/all.php" />
-        <option value="$PROJECT_DIR$/application/libraries/CSVReader.php" />
-        <option value="$PROJECT_DIR$/application/language/portuguese/application_lang.php" />
         <option value="$PROJECT_DIR$/application/views/blueline/serviceorders/_import.php" />
         <option value="$PROJECT_DIR$/application/views/blueline/projects/_timesheets.php" />
+        <option value="$PROJECT_DIR$/application/views/blueline/serviceorders/view.php" />
+        <option value="$PROJECT_DIR$/application/libraries/CSVReader.php" />
         <option value="$PROJECT_DIR$/application/controllers/serviceorders.php" />
+        <option value="$PROJECT_DIR$/application/language/portuguese/application_lang.php" />
       </list>
     </option>
   </component>
@@ -180,9 +135,9 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="23" />
+    <option name="y" value="25" />
     <option name="width" value="1920" />
-    <option name="height" value="1057" />
+    <option name="height" value="1055" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -207,6 +162,12 @@
               <item name="zenit" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zenit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zenit" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="libraries" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="zenit" type="b2602c69:ProjectViewProjectNode" />
@@ -496,9 +457,10 @@
     <option name="totallyTimeSpent" value="453602000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1920" height="1055" extended-state="6" />
+    <frame x="0" y="25" width="1920" height="1055" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6507772" visible="true" weight="0.18636848" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6507772" visible="true" weight="0.19329074" />
       <window_info id="Structure" order="1" sideWeight="0.3492228" side_tool="true" weight="0.24440895" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Gulp" order="3" side_tool="true" />
@@ -511,10 +473,10 @@
       <window_info anchor="bottom" id="TODO" order="5" />
       <window_info anchor="bottom" id="Database Changes" order="6" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.40103626" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49946752" visible="true" weight="0.32837406" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49946752" weight="0.32837406" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32953367" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5005325" side_tool="true" weight="0.32953367" />
-      <window_info anchor="bottom" id="File Transfer" order="11" sideWeight="0.49946752" weight="0.32837406" />
+      <window_info anchor="bottom" id="File Transfer" order="11" sideWeight="0.49946752" visible="true" weight="0.32837406" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Command Line Tools Console" order="13" weight="0.32953367" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -592,48 +554,10 @@
     <MESSAGE value="Intranet module progress" />
     <MESSAGE value="Service Order module development" />
     <MESSAGE value="Service Order module progress and Intranet module progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="Service Order module progress and Intranet module progress" />
+    <MESSAGE value="Service Order batch payment day change" />
+    <option name="LAST_COMMIT_MESSAGE" value="Service Order batch payment day change" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/blueline/serviceorders/all.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#h1#0;n#header#0;n#main#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#h1#0;n#header#0;n#main#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/leads.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="695">
-          <caret line="754" column="5" lean-forward="true" selection-start-line="701" selection-start-column="4" selection-end-line="754" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/blueline/leads/_import.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="62" selection-start-line="17" selection-start-column="62" selection-end-line="17" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/libraries/CSVReader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="18" column="15" lean-forward="true" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/language/portuguese/application_lang.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
-          <caret line="1184" column="42" selection-start-line="1184" selection-start-column="7" selection-end-line="1184" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/config/constants.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -641,16 +565,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3988">
           <caret line="41" column="11" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/blueline/serviceorders/_import.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="e#286#340#0#HTML" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -668,10 +582,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/ServiceOrder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="385">
+          <caret line="203" column="60" selection-start-line="203" selection-start-column="48" selection-end-line="203" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/blueline/serviceorders/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="639">
+          <caret line="194" selection-start-line="194" selection-end-line="194" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/blueline/serviceorders/all.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/blueline/serviceorders/_import.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/libraries/CSVReader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/serviceorders.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="704" lean-forward="true" selection-start-line="704" selection-end-line="704" />
+        <state relative-caret-position="531">
+          <caret line="669" column="17" selection-start-line="669" selection-start-column="17" selection-end-line="669" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/language/portuguese/application_lang.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="1181" column="357" selection-start-line="1181" selection-start-column="357" selection-end-line="1181" selection-end-column="357" />
         </state>
       </provider>
     </entry>

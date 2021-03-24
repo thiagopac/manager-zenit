@@ -597,44 +597,6 @@ class ServiceOrders extends MY_Controller{
         $this->view_data['step_form'] = json_encode($step_form);
     }
 
-    public function update_data(){
-
-        $csv = array();
-
-        if($_FILES['csv']['error'] == 0){
-            $name = $_FILES['csv']['name'];
-            $ext = strtolower(end(explode('.', $_FILES['csv']['name'])));
-            $type = $_FILES['csv']['type'];
-            $tmpName = $_FILES['csv']['tmp_name'];
-
-            // check the file is a csv
-            if($ext === 'csv'){
-                if(($handle = fopen($tmpName, 'r')) !== FALSE) {
-                    // necessary if a large csv file
-                    set_time_limit(0);
-
-                    $row = 0;
-
-                    while(($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
-                        // number of fields in the csv
-                        $col_count = count($data);
-
-                        // get the values from the csv
-                        $csv[$row]['col1'] = $data[0];
-                        $csv[$row]['col2'] = $data[1];
-
-                        // inc the row
-                        $row++;
-                    }
-
-                    var_dump($csv);
-                    fclose($handle);
-                }
-            }
-        }
-
-    }
-
     public function import() {
 
         if ($_POST) {
@@ -660,34 +622,52 @@ class ServiceOrders extends MY_Controller{
                 $this->load->library('CSVReader');
                 $result = $this->csvreader->parse_file($config['upload_path'].$savename);
 
-//                var_dump(array_keys($result[1]));
-//                exit;
+//                var_dump($result);exit;
 
-                foreach ($result[1] as $key => $value){
-                    $service_order = ServiceOrder::find($key);
+                foreach ($result as $idx => $item){
 
-                    $history = json_decode($service_order->history);
+                    foreach ($item as $item_key => $item_value){
 
-                    foreach ($history->steps as $step){
+                        if ($item_value != 0){
 
-                        foreach ($step->history_data as $field){
+                            $service_order = ServiceOrder::find($item_key);
 
-                            if ($field->label == 'Data de pagamento'){
+                            $response = json_decode($service_order->response);
 
-                                $field->value = implode('-', array_reverse(explode('/', $value)));
+                            foreach ($response as $key => $value){
+
+                                $payment_n = 'payment_date_'.$idx;
+                                if ($key == $payment_n){
+
+                                    $response->$payment_n = implode('-', array_reverse(explode('/', $item_value)));
+//                                var_dump($key);
+//                                var_dump($value);
+                                }
+
                             }
 
                         }
+
+                        $service_order->response = json_encode($response);
+                        $service_order->save();
+//                        var_dump($service_order->id);
+//                        var_dump($service_order->response);
+
                     }
 
-                    $service_order->history = json_encode($history);
-                    $service_order->save();
+//                    exit;
 
-                    $history = null;
+//                    print_r("<hr />");
+
+                    // time spent count
+//                    usleep(mt_rand(100, 10000));
+//                    $time = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+//                    echo "Did nothing in $time seconds\n";
+
+//                    $service_order->response = json_encode($response);
+//                    var_dump($response);exit;
+//                    $service_order->save();
                 }
-
-
-//                exit;
 
                 $this->view_data["form_action"] = 'serviceorders/import';
                 $this->content_view = 'serviceorders/all';

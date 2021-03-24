@@ -13,11 +13,11 @@ class CSVReader
     public function parse_file($p_Filepath)
     {
         $file = fopen($p_Filepath, 'r');
-        $this->fields = fgetcsv($file, $this->max_row_size, $this->separator, $this->enclosure);
+        $this->fields = fgetcsv($file, $this->max_row_size, $this->separator);
         $keys = str_getcsv($this->fields[0]);
 
         $i = 1;
-        while (($row = fgetcsv($file, $this->max_row_size, $this->separator, $this->enclosure)) != false) {
+        while (($row = fgetcsv($file, $this->max_row_size, $this->separator)) != false) {
             if ($row != null) { // skip empty lines
                 $values = str_getcsv($row[0]);
                 if (count($keys) == count($values)) {
