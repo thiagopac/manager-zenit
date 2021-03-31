@@ -84,15 +84,25 @@
                                 <p><?=$this->lang->line('application_made_by');?> <b><?=User::find($reg->user_id)->firstname.' '.User::find($reg->user_id)->lastname?></b> <?=$this->lang->line('application_at'); ?> <b><?=date($core_settings->date_format . '</b> à\s <b>' . $core_settings->date_time_format, human_to_unix($reg->date)).'</b>';?></p>
                                 <?php if ($reg->history_data != null) : ?>
                                     <?php foreach ($reg->history_data as $reg_data) :?>
-                                        <p><b><?=$reg_data->label;?>:</b>
+                                        <p><b><?=implode(' ',(explode('_', $reg_data->label)));?>:</b>
                                             <?php
                                             if ($reg_data->className == "form-control mask-money"){
                                                 $reg_data->value = $core_settings->money_symbol.''.display_money($reg_data->value);
+                                                // echo('echo');
                                             }else if ($reg_data->className == "form-control mask-date"){
                                                 $reg_data->value = date($core_settings->date_format, human_to_unix($reg_data->value.' 00:00'));
+                                            }else if($reg_data->type == "file"){ ?>
+                                                <a href="<?=base_url()?>files/purchaseorders/<?=$reg_data->value?>" target="_blank"><i class="dripicons dripicons-document" style="font-size: 22px"></i>
+                                                    <small>(.<?=explode('.', $reg_data->value)[1] ?>)</small>
+                                                </a>
+                                            <?php
+                                            } 
+                                            if($reg_data->type != 'file'){
+                                                echo($reg_data->value);
                                             }
                                             ?>
-                                            <?=$reg_data->value;?></p>
+
+                                            </p>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                                 <?php if ($reg->history_files != null) : ?>
