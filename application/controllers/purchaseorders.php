@@ -177,7 +177,7 @@ class PurchaseOrders extends MY_Controller{
                     $this->load->library('upload',$config);
 
                     // File upload
-                    if($this->upload->do_upload('file')){
+                    if($this->upload->do_upload('files')){
                         // Get data about the file
                         $uploadData = $this->upload->data();
                         $filename = $uploadData['file_name'];
@@ -298,16 +298,25 @@ class PurchaseOrders extends MY_Controller{
         }
     }
 
-    public function reply($ajax = false){
+    public function reply($ajax = false, $nextStep = null, $purchase_order_id = false){
 
-//        var_dump($_POST);
+        // Method that handles the reply of a Purchase Order, deciding its fate
+        // in the flow
 
+        // First it checks for a POST, and if it exists, it finds de Purchase Order through its ID.
+        // Then the flow is decoded and the current step is stored from the POST variable
 
         if ($_POST) {
             $id = $_POST['id'];
+            if($id == null){
+                $id = $purchase_order_id;
+            }
             $updating_purchase_order = PurchaseOrder::find($id);
             $flow = json_decode($updating_purchase_order->flow);
             $step = $_POST['current_step'];
+
+            // Here it handles some errors. First trying to reply to a cancelled Purchase order, then trying to reply
+            // to a finished Purchase Order, and then trying to update a Purchase Order step that has been already filled
 
             if ($updating_purchase_order->canceled == true || $updating_purchase_order->finished == true || $updating_purchase_order->step > $step){
 
@@ -317,12 +326,15 @@ class PurchaseOrders extends MY_Controller{
                 }else if ($updating_purchase_order->finished == true){
                     $this->session->set_flashdata('message', 'error:'.'Esta Ordem de Compra está com status de finalizada');
                     redirect('purchaseorders');
-                }else if($updating_purchase_order->step > $step){
+                }else if($updating_purchase_order->step > $step && $nextStep == null){
                     $this->session->set_flashdata('message', 'error:'.'Esta Ordem de Compra já teve esta etapa completada previamente');
                     redirect('purchaseorders');
                 }
 
             }
+
+            // Things were dealt in a X way to upload files in the past, but then we needed to deal in the Y way. So the reply
+            // doesn't crack old Purchase Orders that haven't been completed, it checks if it's the old or new structure
 
             $is_new_variation = (count($_FILES['files'])) > 1 ? false : true;
 
@@ -424,7 +436,7 @@ class PurchaseOrders extends MY_Controller{
 
 
             $is_progress = null;
-
+            $is_travel = null;
             $total_price = null;
 
             if ($_POST['total_price'] != null){
@@ -434,10 +446,18 @@ class PurchaseOrders extends MY_Controller{
             }
 
             foreach ($_POST as $key => $value) {
-                if (strpos($key, 'submit_') !== 0) continue;
+                // var_dump($key);
+                if (strpos($key, 'submit_') !== 0 && $key != "travel") continue;
                 $is_progress = substr($key, 7);
+                if($key == "travel"){
+                    $is_progress = 1;
+                    $is_travel = 1;
+                }
                 unset($_POST["$key"]);
             }
+
+            // var_dump($is_progress);
+            // exit;
 
             $history_registry = new stdClass;
 
@@ -448,24 +468,48 @@ class PurchaseOrders extends MY_Controller{
             $history_registry->history_data = array();
 
             $current_step = PurchaseOrder::currentStepForPurchaseOrder($id);
+            unset($_POST["next_step_id"]);
+            if($nextStep == null){
+                foreach ($_POST as $key => $value) {
+                    foreach ($current_step->form as $form_field){
 
-            foreach ($_POST as $key => $value) {
-                foreach ($current_step->form as $form_field){
+                        if ($key == $form_field->name){
+                            $history_reg = new stdClass();
 
-                    if ($key == $form_field->name){
-                        $history_reg = new stdClass();
-
-                        $history_reg->label = $form_field->label;
-                        $history_reg->value = $value;
-                        $history_reg->name = $key;
-                        $history_reg->className = $form_field->className;
-                        if ($value != null){
-                            array_push($history_registry->history_data, $history_reg);
+                            $history_reg->label = $form_field->label;
+                            $history_reg->value = $value;
+                            $history_reg->name = $key;
+                            $history_reg->className = $form_field->className;
+                            if ($value != null){
+                                array_push($history_registry->history_data, $history_reg);
+                            }
                         }
                     }
+                    unset($_POST["$key"]);
                 }
-                unset($_POST["$key"]);
+            }else{
+                foreach ($_POST as $key => $value) {
+                    $history_reg = new stdClass();
+                    $history_reg->label = $key;
+                    $history_reg->value = $value;
+                    $history_reg->name = $key;
+                    if ($value != null){
+                        array_push($history_registry->history_data, $history_reg);
+                    }
+                }
+
+                $history_reg = new stdClass();
+                $history_reg->label = "Retorno";
+                $history_reg->value = "Moveu OC da etapa <strong>".$current_step->name."</strong> para a etapa <strong>".$nextStep->name."</strong>";
+                $history_reg->name = "Retorno";
+                if ($value != null){
+                    array_push($history_registry->history_data, $history_reg);
+                }
+                unset($_POST["Justificativa"]);
             }
+
+            // var_dump($history_registry);
+            // exit;
 
             if($is_new_variation == true){
                 $history_data_and_files = array_merge($history_registry->history_data, $file_names_arr);
@@ -488,26 +532,32 @@ class PurchaseOrders extends MY_Controller{
                 $current_step = PurchaseOrder::currentStepForPurchaseOrder($id);
 
                 //criação de registro de histórico
-                PurchaseOrder::createHistoryForPurchaseStepAndUser($id, $current_step, $this->user->id, $history_registry, $is_progress);
+                PurchaseOrder::createHistoryForPurchaseStepAndUser($id, $current_step, $this->user->id, $history_registry, $is_progress, $is_travel);
 
                 if ($_POST['canceled'] == 1){
                     // passo final precisa criar registro de histórico quando o penúltimo passo estiver sendo registrado
-                    PurchaseOrder::createHistoryForPurchaseStepAndUser($id, $canceled_step, $this->user->id, false, $is_progress);
+                    PurchaseOrder::createHistoryForPurchaseStepAndUser($id, $canceled_step, $this->user->id, false, $is_progress, $is_travel);
                 }
 
             }else{
 
                 $current_step = PurchaseOrder::currentStepForPurchaseOrder($id);
 
-                $next_step = PurchaseOrder::nextStepForPurchaseOrderAfterCurrentStep($id, $current_step->id);
-                $_POST['step']  = $next_step->id;
+                if($nextStep != null){
+                    $next_step = $nextStep;
+                    $_POST['step']  = $next_step->id;
+                }else{
+                    $next_step = PurchaseOrder::nextStepForPurchaseOrderAfterCurrentStep($id, $current_step->id);
+                    $_POST['step']  = $next_step->id;
+                }
+
 
                 //criação de registro de histórico
-                PurchaseOrder::createHistoryForPurchaseStepAndUser($id, $current_step, $this->user->id, $history_registry, $is_progress);
+                PurchaseOrder::createHistoryForPurchaseStepAndUser($id, $current_step, $this->user->id, $history_registry, $is_progress, $is_travel);
 
                 if ($next_step->finish == true){
                     // passo final precisa criar registro de histórico quando o penúltimo passo estiver sendo registrado
-                    PurchaseOrder::createHistoryForPurchaseStepAndUser($id, $next_step, $this->user->id, false, $is_progress);
+                    PurchaseOrder::createHistoryForPurchaseStepAndUser($id, $next_step, $this->user->id, false, $is_progress, $is_travel);
                     $_POST['finished'] = 1;
                 }
             }
@@ -665,6 +715,51 @@ class PurchaseOrders extends MY_Controller{
 
         $step_form =  $flow->steps[$purchase_order->step]->form;
         $this->view_data['step_form'] = json_encode($step_form);
+    }
+
+    public function timetravel($purchase_order_id = false){
+
+        // Gives the possibility to send a Purchase Order back in the flow it's
+        // going if something went wrong in one of the past steps
+
+        if ($_POST) {
+            
+            $stepsToGoBack = PurchaseOrder::getStepsToGoBack($purchase_order_id);
+
+            $wishedStep = $_POST['next_step_id'];
+            $fullFlow = PurchaseOrder::progressStepsForPurchaseOrder($purchase_order_id);
+            $currenthist = PurchaseOrder::getHistoryForPurchase($purchase_order_id);
+
+            foreach($fullFlow as $step){
+                if($step->id == $wishedStep){
+                    $stepForReply = $step;
+                    print_r('</br>');
+                }
+            }
+
+            print_r('</br>');
+
+            $this->reply($ajax = false, $nextStep = $stepForReply, $purchase_order_id);
+            
+            
+            }else{
+
+            // If there's no POST, it renders the modal so the user can
+            // fill the form to send the Purhcase Order back in the flow
+
+            // Here it calls the method to get which steps the Purchase Order
+            // is allowed to go back to
+
+            $stepsToGoBack = PurchaseOrder::getStepsToGoBack($purchase_order_id);
+
+            // And here it prepares for rendering the modal
+
+            $this->view_data['steps_in_flow'] = $stepsToGoBack;
+            $this->view_data['title'] = "Alterar fluxo da Ordem de Compra";
+            $this->theme_view = 'modal';
+            $this->content_view = 'purchaseorders/_timetravel';
+            
+            }
     }
 
     /*public function preview($id = false, $attachment = false) {

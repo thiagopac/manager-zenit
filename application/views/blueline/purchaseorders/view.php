@@ -62,10 +62,8 @@
                                 <button name="submit_1" class="btn btn-success button-loader"><?=$action->name?></button>
                             <?php elseif ($action->progress == false && $action->jump == false) : ?>
                                 <button name="submit_0" class="btn btn-danger button-loader"><?=$action->name?></button>
-                            <?php elseif ($action->jump == true) : ?>
-
+                                <a data-toggle="mainmodal" href="<?= base_url() ?>purchaseorders/timetravel/<?= $purchase_order->id; ?>" class="pull-right btn btn-warning">Alterar destino da OC</a>
                             <?php endif; ?>
-
                         <?php endforeach; ?>
 
                     </div>
