@@ -62,12 +62,10 @@
                                 <button name="submit_1" class="btn btn-success button-loader"><?=$action->name?></button>
                             <?php elseif ($action->progress == false && $action->jump == false) : ?>
                                 <button name="submit_0" class="btn btn-danger button-loader"><?=$action->name?></button>
-                            <?php elseif ($action->jump == true) : ?>
-
                             <?php endif; ?>
 
                         <?php endforeach; ?>
-
+                        <a data-toggle="mainmodal" href="<?= base_url() ?>serviceorders/timetravel/<?= $service_order->id; ?>" class="pull-right btn btn-warning">Alterar destino da OS</a>
                     </div>
                 </div>
                 <?php echo form_close(); ?>
@@ -90,9 +88,16 @@
                                                 $reg_data->value = $core_settings->money_symbol.''.display_money($reg_data->value);
                                             }else if ($reg_data->className == "form-control mask-date"){
                                                 $reg_data->value = date($core_settings->date_format, human_to_unix($reg_data->value.' 00:00'));
+                                            }else if($reg_data->type == "file"){ ?>
+                                                <a href="<?=base_url()?>files/purchaseorders/<?=$reg_data->value?>" target="_blank"><i class="dripicons dripicons-document" style="font-size: 22px"></i>
+                                                    <small>(.<?=explode('.', $reg_data->value)[1] ?>)</small>
+                                                </a>
+                                            <?php
+                                            }
+                                            if($reg_data->type != 'file'){
+                                                echo($reg_data->value);
                                             }
                                             ?>
-                                            <?=$reg_data->value;?></p>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                                 <?php if ($reg->history_files != null) : ?>

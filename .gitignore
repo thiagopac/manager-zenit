@@ -78,4 +78,11 @@ GPUCache
 Cache
 
 #image files
+files/intranet
 files/materials
+files/backup
+files/media
+files/purchaseorders
+files/serviceorders
+files/temp
+files/updates

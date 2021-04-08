@@ -182,7 +182,7 @@ class ServiceOrder extends ActiveRecord\Model{
         return null;
     }
 
-    public static function createHistoryForServiceStepAndUser($service_id = false, $step = false, $user_id, $reply = false, $is_progress = false){
+    public static function createHistoryForServiceStepAndUser($service_id = false, $step = false, $user_id, $reply = false, $is_progress = false, $is_travel = false){
 
         $service_order = ServiceOrder::find($service_id);
 
@@ -204,8 +204,14 @@ class ServiceOrder extends ActiveRecord\Model{
             $new_object->history_data = $reply->history_data;
         }
 
+        if($is_travel == true){
+            $new_object->message = "Retornou a Ordem de Compra";
+        }
+
         foreach ($step->actions as $action){
             if ($action->progress == $is_progress){
+                if($is_travel == false)
+                    $new_object->message = $action->message;
                 $new_object->message = $action->message;
             }
         }
@@ -322,6 +328,42 @@ class ServiceOrder extends ActiveRecord\Model{
         $content.= '</table>';
 
         return $content;
+    }
+
+    static public function getStepsToGoBack($service_order_id){
+
+        // This method gets which steps a Purchase Order is allowed
+        // to go back to in the flow
+
+        // First it searches for all the steps the Purchase Order is gonna
+        // go / went through in the flow and then gets the current step
+
+        $progressSteps = ServiceOrder::progressStepsIdsForServiceOrder($service_order_id);
+        $currentStep = ServiceOrder::currentStepForServiceOrder($service_order_id);
+
+        // Then the array for the steps ID allowed for going back is created and filled
+        // with all the IDs from the full flow that are < than the current step, after all
+        // it can only go backwards, not forward. Also it cannot go back to the first step,
+        // which is the creation of the Purchase Order
+
+        $stepsIdAvailableToGoBack = [];
+        foreach($progressSteps as $key => $value){
+            if($value<$currentStep->id && $value != 0){
+                $stepsIdAvailableToGoBack[$key] = $value;
+            }
+        }
+
+        // Then the array for the steps allowed for going back is created and fiiled with
+        // the stepsIdAvilableToGoBack as keys and the name of the steps as values.
+
+        $stepsAvailableToGoBack = [];
+
+        $fullFlow = ServiceOrder::progressStepsForServiceOrder($service_order_id);
+        foreach($stepsIdAvailableToGoBack as $key => $value){
+            $stepsAvailableToGoBack[$value] = $fullFlow[$key]->name;
+        }
+
+        return $stepsAvailableToGoBack;
     }
 
 }

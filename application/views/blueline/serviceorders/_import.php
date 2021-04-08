@@ -4,7 +4,7 @@ echo form_open_multipart($form_action, $attributes);
 ?>
 
     <div class="alert alert-info"><?= $this->lang->line('application_csv_file_update_info'); ?></div>
-    <div class="alert alert-success">Baixe o CSV de exemplo <b><a style="color: greenyellow; text-decoration: underline" href="<?=$exemple_file?>">clicando aqui</a></b></div>
+    <div class="alert alert-success">Acesse o CSV de exemplo <b><a style="color: greenyellow; text-decoration: underline" target="_blank" href="https://docs.google.com/spreadsheets/d/1lP7xFt_BASDOhzt88DLwIrrlemHII07F89dGcpzvHcA/edit?usp=sharing">clicando aqui</a></b></div>
 
     <div class="form-group">
         <label for="userfile"><?= $this->lang->line('application_file'); ?> .CSV</label>

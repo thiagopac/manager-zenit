@@ -298,13 +298,16 @@ class ServiceOrders extends MY_Controller{
         }
     }
 
-    public function reply($ajax = false){
+    public function reply($ajax = false, $nextStep = null, $service_order_id = false){
 
 //        var_dump($_POST);
 
 
         if ($_POST) {
             $id = $_POST['id'];
+            if($id == null){
+                $id = $service_order_id;
+            }
             $updating_service_order = ServiceOrder::find($id);
             $flow = json_decode($updating_service_order->flow);
             $step = $_POST['current_step'];
@@ -317,53 +320,113 @@ class ServiceOrders extends MY_Controller{
                 }else if ($updating_service_order->finished == true){
                     $this->session->set_flashdata('message', 'error:'.'Esta Ordem de Serviço está com status de finalizada');
                     redirect('serviceorders');
-                }else if($updating_service_order->step > $step){
+                }else if($updating_service_order->step > $step  && $nextStep == false){
                     $this->session->set_flashdata('message', 'error:'.'Esta Ordem de Serviço já teve esta etapa completada previamente');
                     redirect('serviceorders');
                 }
 
             }
 
-            $countfiles = count($_FILES['files']['name']);
-            $file_names_arr = array();
+            $is_new_variation = (count($_FILES['files'])) > 1 ? false : true;
 
-            for($i=0;$i<$countfiles;$i++){
+            if($is_new_variation == false){
 
-                if(!empty($_FILES['files']['name'][$i])){
+                $countfiles = count($_FILES['files']['name']);
+                $file_names_arr = array();
 
-                    // Define new $_FILES array - $_FILES['file']
-                    $_FILES['file']['name'] = $_FILES['files']['name'][$i];
-                    $_FILES['file']['type'] = $_FILES['files']['type'][$i];
-                    $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
-                    $_FILES['file']['error'] = $_FILES['files']['error'][$i];
-                    $_FILES['file']['size'] = $_FILES['files']['size'][$i];
+                for($i=0;$i<$countfiles;$i++){
 
-                    // Set preference
-                    $config['upload_path'] = './files/serviceorders/';
-                    $config['encrypt_name'] = true;
-                    $config['allowed_types'] = '*';
-                    $config['max_size'] = '15000'; // max_size in kb
-                    $config['file_name'] = $_FILES['files']['name']['type'][$i];
+                    if(!empty($_FILES['files']['name'][$i])){
 
-                    //Load upload library
-                    $this->load->library('upload',$config);
+                        // Define new $_FILES array - $_FILES['file']
+                        $_FILES['file']['name'] = $_FILES['files']['name'][$i];
+                        $_FILES['file']['type'] = $_FILES['files']['type'][$i];
+                        $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+                        $_FILES['file']['error'] = $_FILES['files']['error'][$i];
+                        $_FILES['file']['size'] = $_FILES['files']['size'][$i];
 
-                    // File upload
-                    if($this->upload->do_upload('file')){
-                        // Get data about the file
-                        $uploadData = $this->upload->data();
-                        $filename = $uploadData['file_name'];
+                        // Set preference
+                        $config['upload_path'] = './files/purchaseorders/';
+                        $config['encrypt_name'] = true;
+                        $config['allowed_types'] = '*';
+                        $config['max_size'] = '150000'; // max_size in kb
+                        $config['file_name'] = $_FILES['files']['name'][$i];
 
-                        // Initialize array
-                        $data['filenames'][] = $filename;
+                        //Load upload library
+                        $this->load->library('upload',$config);
 
-                        $file_names_arr = $data['filenames'];
+                        $error = array('error' => $this->upload->display_errors());
+
+                        // File upload
+                        if($this->upload->do_upload('files')){
+                            // Get data about the file
+                            $uploadData = $this->upload->data();
+                            $filename = $uploadData['file_name'];
+
+                            // Initialize array
+                            $data['filenames'][] = $filename;
+
+                            $file_names_arr = $data['filenames'];
+                        }
                     }
+                }
+            }else{
+                $file_names_arr = array();
+
+                foreach($_FILES as $key => $value){
+    
+                    $i = 0;
+    
+                    $key_name = array_key_first($_FILES);
+                    $input_name = $_FILES[$key_name];
+    
+                    //if(!empty($_FILES['files']['name'][$i])){
+                    if(!empty($input_name)){
+    
+                        // Define new $_FILES array - $_FILES['file']
+                        $_FILES['file']['name'] = $_FILES[$key_name]['name'];
+                        $_FILES['file']['type'] = $_FILES[$key_name]['type'];
+                        $_FILES['file']['tmp_name'] = $_FILES[$key_name]['tmp_name'];
+                        $_FILES['file']['error'] = $_FILES[$key_name]['error'];
+                        $_FILES['file']['size'] = $_FILES[$key_name]['size'];
+    
+                        //var_dump($_FILES);  exit;
+    
+    
+                        // Set preference
+                        $config['upload_path'] = './files/serviceorders/';
+                        $config['encrypt_name'] = true;
+                        $config['allowed_types'] = '*';
+                        $config['max_size'] = '150000'; // max_size in kb
+                        $config['file_name'] = $_FILES[$key_name]['name'][$i];
+                        $config['file_type'] = $_FILES[$key_name]['type'][$i];
+    
+                        //Load upload library
+                        $this->load->library('upload',$config);
+                        
+                        $error = array('error' => $this->upload->display_errors());
+                        // File upload
+                        if($this->upload->do_upload($key_name)){
+                            // Get data about the file
+                            $uploadData = $this->upload->data();
+                            $filename = $uploadData['file_name'];
+    
+                            // Initialize array
+                            $data['filenames'][] = $filename;
+    
+                            $current_file = new stdClass();
+                            $current_file->label = $key_name;
+                            $current_file->value = $data['filenames'][0];
+                            $current_file->type = 'file';
+                            array_push($file_names_arr, $current_file);
+                        }
+                    }
+                    $i++;
                 }
             }
 
             $is_progress = null;
-
+            $is_travel = null;
             $total_price = null;
 
             if ($_POST['total_price'] != null){
@@ -373,16 +436,27 @@ class ServiceOrders extends MY_Controller{
             }
 
             foreach ($_POST as $key => $value) {
-                if (strpos($key, 'submit_') !== 0) continue;
+                if (strpos($key, 'submit_') !== 0 && $key != "travel") continue;
                 $is_progress = substr($key, 7);
+                if($key == "travel"){
+                    $is_progress = 1;
+                    $is_travel = 1;
+                }
                 unset($_POST["$key"]);
             }
 
             $history_registry = new stdClass;
-            $history_registry->history_files = $file_names_arr;
+
+            if($is_new_variation == false){
+                $history_registry->history_files = $file_names_arr;
+            }
+
             $history_registry->history_data = array();
 
             $current_step = ServiceOrder::currentStepForServiceOrder($id);
+            unset($_POST["next_step_id"]);
+
+            if($nextStep == null){
 
             foreach ($_POST as $key => $value) {
                 foreach ($current_step->form as $form_field){
@@ -401,6 +475,32 @@ class ServiceOrders extends MY_Controller{
                 }
                 unset($_POST["$key"]);
             }
+        }else{
+            foreach ($_POST as $key => $value) {
+                $history_reg = new stdClass();
+                $history_reg->label = $key;
+                $history_reg->value = $value;
+                $history_reg->name = $key;
+                if ($value != null){
+                    array_push($history_registry->history_data, $history_reg);
+                }
+            }
+
+            $history_reg = new stdClass();
+                $history_reg->label = "Retorno";
+                $history_reg->value = "Moveu OC da etapa <strong>".$current_step->name."</strong> para a etapa <strong>".$nextStep->name."</strong>";
+                $history_reg->name = "Retorno";
+                if ($value != null){
+                    array_push($history_registry->history_data, $history_reg);
+                }
+                unset($_POST["Justificativa"]);
+            }
+
+            if($is_new_variation == true){
+                $history_data_and_files = array_merge($history_registry->history_data, $file_names_arr);
+                $history_registry->history_data = $history_data_and_files;
+            }
+
 
             $canceled_step = null;
 
@@ -428,16 +528,21 @@ class ServiceOrders extends MY_Controller{
             }else{
 
                 $current_step = ServiceOrder::currentStepForServiceOrder($id);
-
-                $next_step = ServiceOrder::nextStepForServiceOrderAfterCurrentStep($id, $current_step->id);
-                $_POST['step']  = $next_step->id;
+         
+                if($nextStep != null){
+                    $next_step = $nextStep;
+                    $_POST['step']  = $next_step->id;
+                }else{
+                    $next_step = ServiceOrder::nextStepForServiceOrderAfterCurrentStep($id, $current_step->id);
+                    $_POST['step']  = $next_step->id;
+                }
 
                 //criação de registro de histórico
-                ServiceOrder::createHistoryForServiceStepAndUser($id, $current_step, $this->user->id, $history_registry, $is_progress);
+                ServiceOrder::createHistoryForServiceStepAndUser($id, $current_step, $this->user->id, $history_registry, $is_progress, $is_travel);
 
                 if ($next_step->finish == true){
                     // passo final precisa criar registro de histórico quando o penúltimo passo estiver sendo registrado
-                    ServiceOrder::createHistoryForServiceStepAndUser($id, $next_step, $this->user->id, false, $is_progress);
+                    ServiceOrder::createHistoryForServiceStepAndUser($id, $next_step, $this->user->id, false, $is_progress, $is_travel);
                     $_POST['finished'] = 1;
                 }
             }
@@ -679,6 +784,51 @@ class ServiceOrders extends MY_Controller{
             $this->view_data['exemple_file'] = 'https://ownergy.com.br/zenit/files/serviceorders/os_atualizar_pagamento.csv';
             $this->content_view = 'serviceorders/_import';
         }
+    }
+
+    public function timetravel($service_order_id = false){
+
+        // Gives the possibility to send a Purchase Order back in the flow it's
+        // going if something went wrong in one of the past steps
+
+        if ($_POST) {
+            
+            $stepsToGoBack = ServiceOrder::getStepsToGoBack($service_order_id);
+
+            $wishedStep = $_POST['next_step_id'];
+            $fullFlow = ServiceOrder::progressStepsForServiceOrder($service_order_id);
+            $currenthist = ServiceOrder::getHistoryForService($service_order_id);
+
+            foreach($fullFlow as $step){
+                if($step->id == $wishedStep){
+                    $stepForReply = $step;
+                    print_r('</br>');
+                }
+            }
+
+            print_r('</br>');
+
+            $this->reply($ajax = false, $nextStep = $stepForReply, $service_order_id);
+            
+            
+            }else{
+
+            // If there's no POST, it renders the modal so the user can
+            // fill the form to send the Purhcase Order back in the flow
+
+            // Here it calls the method to get which steps the Purchase Order
+            // is allowed to go back to
+
+            $stepsToGoBack = ServiceOrder::getStepsToGoBack($service_order_id);
+
+            // And here it prepares for rendering the modal
+
+            $this->view_data['steps_in_flow'] = $stepsToGoBack;
+            $this->view_data['title'] = "Alterar fluxo da Ordem de Compra";
+            $this->theme_view = 'modal';
+            $this->content_view = 'serviceorders/_timetravel';
+            
+            }
     }
 
 }
