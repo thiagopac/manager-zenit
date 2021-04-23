@@ -89,7 +89,7 @@
                                             }else if ($reg_data->className == "form-control mask-date"){
                                                 $reg_data->value = date($core_settings->date_format, human_to_unix($reg_data->value.' 00:00'));
                                             }else if($reg_data->type == "file"){ ?>
-                                                <a href="<?=base_url()?>files/purchaseorders/<?=$reg_data->value?>" target="_blank"><i class="dripicons dripicons-document" style="font-size: 22px"></i>
+                                                <a href="<?=base_url()?>files/serviceorders/<?=$reg_data->value?>" target="_blank"><i class="dripicons dripicons-document" style="font-size: 22px"></i>
                                                     <small>(.<?=explode('.', $reg_data->value)[1] ?>)</small>
                                                 </a>
                                             <?php

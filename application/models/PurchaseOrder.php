@@ -19,48 +19,96 @@ class PurchaseOrder extends ActiveRecord\Model{
             $property_value = $purchase_order->$property_name;
             $operator = $condition->operator;
             $target = $condition->target;
+            $payment_type = $purchase_order->payment_type;
 
             $comparisons_made = array();
 
-            switch ($operator) {
-                case "<":
-                    if ($property_value < $target && !in_array("<", $comparisons_made)){
-                        array_push($comparisons_made, "<");
-//                        var_dump($condition->progress_order);
-                        return $condition->progress_order;
-                    }
-                    break;
-                case "<=":
-                    if ($property_value <= $target && !in_array("<=", $comparisons_made)){
-//                        var_dump($condition->progress_order);
-                        return $condition->progress_order;
-                    }
-                    break;
-                case ">":
-                    if ($property_value > $target && !in_array(">", $comparisons_made)){
-                        array_push($comparisons_made, ">");
-//                        var_dump($condition->progress_order);
-                        return $condition->progress_order;
-                    }
-                    break;
-                case ">=":
-                    if ($property_value >= $target && !in_array(">=", $comparisons_made)){
-                        array_push($comparisons_made, ">=");
-                        return $condition->progress_order;
-                    }
-                    break;
-                case "!=":
-                    if ($property_value != $target && !in_array("!=", $comparisons_made)){
-                        array_push($comparisons_made, "!=");
-                        return $condition->progress_order;
-                    }
-                    break;
-                case "==":
-                    if ($property_value == $target && !in_array("==", $comparisons_made)){
-                        array_push($comparisons_made, "==");
-                        return $condition->progress_order;
-                    }
-                    break;
+            $is_new_variation = !is_array($condition->progress_order);
+            if($is_new_variation){
+                switch ($operator) {
+                    case "<":
+                        if ($property_value < $target && !in_array("<", $comparisons_made)){
+                            array_push($comparisons_made, "<");
+                            return $condition->progress_order->avista;
+                        }
+                        break;
+                    case "<=":
+                        if ($property_value <= $target && !in_array("<=", $comparisons_made)){
+                            if($payment_type == "À vista"){
+                                return $condition->progress_order->avista;
+                            }else if ($payment_type == "Faturado"){
+                                return $condition->progress_order->faturado;
+                            }else{
+                                return $condition->progress_order->faturado;
+                            }
+                        }
+                        break;
+                    case ">":
+                        if ($property_value > $target && !in_array(">", $comparisons_made)){
+                            if($payment_type == "À vista"){
+                                return $condition->progress_order->avista;
+                            }else if ($payment_type == "Faturado"){
+                                return $condition->progress_order->faturado;
+                            }else{
+                                return $condition->progress_order->faturado;
+                            }
+                        }
+                        break;
+                    case ">=":
+                        if ($property_value >= $target && !in_array(">=", $comparisons_made)){
+                            return $condition->progress_order;
+                        }
+                        break;
+                    case "!=":
+                        if ($property_value != $target && !in_array("!=", $comparisons_made)){
+                            array_push($comparisons_made, "!=");
+                            return $condition->progress_order;
+                        }
+                        break;
+                    case "==":
+                        if ($property_value == $target && !in_array("==", $comparisons_made)){
+                            array_push($comparisons_made, "==");
+                            return $condition->progress_order;
+                        }
+                        break;
+                }
+            }else{
+                switch ($operator) {
+                    case "<":
+                        if ($property_value < $target && !in_array("<", $comparisons_made)){
+                            array_push($comparisons_made, "<");
+                            return $condition->progress_order;
+                        }
+                        break;
+                    case "<=":
+                        if ($property_value <= $target && !in_array("<=", $comparisons_made)){
+                            return $condition->progress_order;
+                        }
+                        break;
+                    case ">":
+                        if ($property_value > $target && !in_array(">", $comparisons_made)){
+                            array_push($comparisons_made, ">");
+                            return $condition->progress_order;
+                        }
+                        break;
+                    case ">=":
+                        if ($property_value >= $target && !in_array(">=", $comparisons_made)){
+                            return $condition->progress_order;
+                        }
+                        break;
+                    case "!=":
+                        if ($property_value != $target && !in_array("!=", $comparisons_made)){
+                            array_push($comparisons_made, "!=");
+                            return $condition->progress_order;
+                        }
+                        break;
+                    case "==":
+                        if ($property_value == $target && !in_array("==", $comparisons_made)){
+                            array_push($comparisons_made, "==");
+                            return $condition->progress_order;
+                        }
+                        break;
+                }
             }
 
         }

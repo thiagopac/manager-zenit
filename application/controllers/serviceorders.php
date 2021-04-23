@@ -751,6 +751,9 @@ class ServiceOrders extends MY_Controller{
 
                             }
 
+                        }else{
+                            $service_order = ServiceOrder::find($item_key);
+                            $response = json_decode($service_order->response);
                         }
 
                         $service_order->response = json_encode($response);

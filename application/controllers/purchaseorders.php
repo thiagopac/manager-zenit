@@ -70,6 +70,16 @@ class PurchaseOrders extends MY_Controller{
                                 array_push($purchase_orders, $purchase_order);
                             }
                         }
+                        if ($member->name == "technical_manager" && $purchase_order->user_id == $this->user->id){
+                            if(!in_array($purchase_order, $purchase_orders)){
+                                array_push($purchase_orders, $purchase_order);
+                            }
+                        }
+                        if ($member->name == "project_leader" && $purchase_order->user_id == $this->user->id){
+                            if(!in_array($purchase_order, $purchase_orders)){
+                                array_push($purchase_orders, $purchase_order);
+                            }
+                        }
                     }
                 }
             }
@@ -209,6 +219,12 @@ class PurchaseOrders extends MY_Controller{
                 if ($key == 'description'){
                     $subject  = $value;
                 }
+                if ($key == 'project_leader'){
+                    $project_leader = $value;
+                }
+                if ($key == 'technical_manager'){
+                    $technical_manager = $value;
+                }
 
                 unset($_POST["$key"]);
             }
@@ -224,6 +240,9 @@ class PurchaseOrders extends MY_Controller{
 
             $_POST['step'] = $submit_action;
             $_POST['user_id'] = $this->user->id;
+
+            $_POST['technical_manager'] = $technical_manager;
+            $_POST['project_leader'] = $project_leader;
 
             $new_purchase_order = PurchaseOrder::create($_POST);
             $push_receivers = array();
@@ -382,11 +401,12 @@ class PurchaseOrders extends MY_Controller{
             }else{
                 $file_names_arr = array();
 
+                $i = 0;
+
                 foreach($_FILES as $key => $value){
+
     
-                    $i = 0;
-    
-                    $key_name = array_key_first($_FILES);
+                    $key_name = $key;
                     $input_name = $_FILES[$key_name];
     
                     //if(!empty($_FILES['files']['name'][$i])){
@@ -425,7 +445,7 @@ class PurchaseOrders extends MY_Controller{
     
                             $current_file = new stdClass();
                             $current_file->label = $key_name;
-                            $current_file->value = $data['filenames'][0];
+                            $current_file->value = $data['filenames'][$i];
                             $current_file->type = 'file';
                             array_push($file_names_arr, $current_file);
                         }
@@ -438,10 +458,17 @@ class PurchaseOrders extends MY_Controller{
             $is_progress = null;
             $is_travel = null;
             $total_price = null;
+            $payment_type = null;
 
             if ($_POST['total_price'] != null){
                 $total_price = $_POST['total_price'];
                 $updating_purchase_order->total_price = $total_price;
+                $updating_purchase_order->save();
+            }
+
+            if ($_POST['payment_type'] != null){
+                $payment_type = $_POST['payment_type'];
+                $updating_purchase_order->payment_type = $payment_type;
                 $updating_purchase_order->save();
             }
 
@@ -583,6 +610,16 @@ class PurchaseOrders extends MY_Controller{
                             $member->name = $user->firstname.' '.$user->lastname;
                             $member->email = $user->email;
                         }
+                        if ($member->name == 'project_leader'){
+
+                            $member->name = User::getUserByEmail(PurchaseOrder::find($id)->project_leader)->firstname . ' ' . User::getUserByEmail(PurchaseOrder::find($id)->project_leader)->lastname;
+                            $member->email = PurchaseOrder::find($id)->project_leader;
+                        }
+                        if ($member->name == 'technical_manager'){
+
+                            $member->name = User::getUserByEmail(PurchaseOrder::find($id)->technical_manager)->firstname . ' ' . User::getUserByEmail(PurchaseOrder::find($id)->technical_manager)->lastname;
+                            $member->email = PurchaseOrder::find($id)->technical_manager;
+                        }
 
                         array_push($next_step_members, $member);
                     }
@@ -691,6 +728,16 @@ class PurchaseOrders extends MY_Controller{
                     $member->name = $user->firstname.' '.$user->lastname;
                     $member->email = $user->email;
                 }
+                if ($member->name == 'project_leader'){
+
+                    $member->name = User::getUserByEmail(PurchaseOrder::find($id)->project_leader)->firstname . ' ' . User::getUserByEmail(PurchaseOrder::find($id)->project_leader)->lastname;
+                    $member->email = PurchaseOrder::find($id)->project_leader;
+                }
+                if ($member->name == 'technical_manager'){
+
+                    $member->name = User::getUserByEmail(PurchaseOrder::find($id)->technical_manager)->firstname . ' ' . User::getUserByEmail(PurchaseOrder::find($id)->technical_manager)->lastname;
+                    $member->email = PurchaseOrder::find($id)->technical_manager;
+                }
             }
 
             $step_reg->members = $this->my_array_unique($step_reg->members);
@@ -700,7 +747,6 @@ class PurchaseOrders extends MY_Controller{
 
         $actions = BpmFlow::actionsForUserInStep($purchase_order, $this->user->email, $purchase_order->step, $creator);
 
-//        var_dump($actions);
 
         $this->view_data['actions'] = $actions;
 

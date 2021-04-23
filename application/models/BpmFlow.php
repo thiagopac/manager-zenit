@@ -50,6 +50,10 @@ class BpmFlow extends ActiveRecord\Model {
 
     public static function actionsForUserInStep($object = false, $email = false, $desired_step = false, $creator = false){
 
+        // It defines the actions an user can take in determined step. The user has
+        // actions if he's a member of the step, the creator, technical manager or
+        // project leader
+        
         $actions = array();
 
         $flow = json_decode($object->flow);
@@ -70,6 +74,20 @@ class BpmFlow extends ActiveRecord\Model {
                         }
 
                         $got_action = true;
+                    }else if($member->email == 'project_leader_email' && $got_action == false){
+                        if($email == PurchaseOrder::find($object->id)->project_leader){
+                            $actions = $step->actions;
+                            $got_action = true;
+                        }else{
+                            $actions = null;
+                        }
+                    }else if($member->email == 'technical_manager_email' && $got_action == false){
+                        if($email == PurchaseOrder::find($object->id)->technical_manager){
+                            $actions = $step->actions;
+                            $got_action = true;
+                        }else{
+                            $actions = null;
+                        }
                     }
                 }
 
