@@ -255,4 +255,131 @@ class MailAction extends MY_Controller {
 
         }
     }
+
+    public function updatetravelorder($username, $travel_order_id, $action_id, $step) {
+
+        $this->theme_view = 'blank';
+
+        $updating_travel_order = TravelOrder::find($travel_order_id);
+        $flow = json_decode($updating_travel_order->flow);
+
+        if ($updating_travel_order->canceled == true || $updating_travel_order->finished == true || $updating_travel_order->step > $step){
+
+            if ($updating_travel_order->canceled == true){
+                echo "Esta Ordem de Viagem está com status de cancelada";
+                exit;
+            }else if ($updating_travel_order->finished == true){
+                echo "Esta Ordem de Viagem está com status de finalizada";
+                exit;
+            }else if($updating_travel_order->step > $step){
+                echo "Esta Ordem de Viagem já teve esta etapa completada previamente";
+                exit;
+            }
+
+        }
+
+        $user = User::getUserByUsername($username);
+        $is_progress = $action_id;
+
+        $history_registry = new stdClass;
+
+        if ($is_progress == false) {
+
+            foreach ($flow->steps as $step) {
+                if ($step->canceled == true) {
+                    $canceled_step = $step;
+                }
+            }
+
+            $_POST['step'] = $canceled_step->id;
+            $_POST['canceled'] = 1;
+
+            $current_step = TravelOrder::currentStepForTravelOrder($travel_order_id);
+
+//criação de registro de histórico
+            TravelOrder::createHistoryForTravelStepAndUser($travel_order_id, $current_step, $user->id, $history_registry, $is_progress);
+
+            if ($_POST['canceled'] == 1) {
+// passo final precisa criar registro de histórico quando o penúltimo passo estiver sendo registrado
+                TravelOrder::createHistoryForTravelStepAndUser($travel_order_id, $canceled_step, $user->id, $is_progress);
+            }
+
+        } else {
+
+            $current_step = TravelOrder::currentStepForTravelOrder($travel_order_id);
+
+            $next_step = TravelOrder::nextStepForTravelOrderAfterCurrentStep($travel_order_id, $current_step->id);
+            $_POST['step'] = $next_step->id;
+
+//criação de registro de histórico
+            TravelOrder::createHistoryForTravelStepAndUser($travel_order_id, $current_step, $user->id, $history_registry, $is_progress);
+
+            if ($next_step->finish == true) {
+// passo final precisa criar registro de histórico quando o penúltimo passo estiver sendo registrado
+                TravelOrder::createHistoryForTravelStepAndUser($travel_order_id, $next_step, $user->id, $is_progress);
+                $_POST['finished'] = 1;
+            }
+        }
+
+        $updating_travel_order->update_attributes($_POST);
+
+        $push_receivers = array();
+        if (!$updating_travel_order) {
+            $this->session->set_flashdata('message', 'error:' . $this->lang->line('messages_edit_error'));
+        } else {
+
+            if ($is_progress == true) {
+                $this->load->helper('notification');
+
+                foreach ($next_step->members as $member) {
+                    if ($member->email == "creator_email") {
+                        $user = User::find($updating_travel_order->user_id);
+                    } else {
+                        $user = User::getUserByEmail($member->email);
+                    }
+
+                    if ($user->push_active) {
+                        array_push($push_receivers, $member->email);
+                    }
+
+                    $attributes = array('user_id' => $user->id, 'message' => "[Ordem de viagem $updating_travel_order->id] Uma atualização foi feita na Ordem de Viagem", 'url' => base_url() . 'travelorders');
+                    Notification::create($attributes);
+
+                    $document = TravelOrder::travelbody($updating_travel_order->id);
+                    $history = TravelOrder::travelhistory($updating_travel_order->id);
+
+                    $actions = array();
+                    foreach ($next_step->actions as $action) {
+                        $action->title = $action->name;
+                        $action->href = base_url() . 'mailaction/updatetravelorder/' . str_replace('@ownergy.com.br', '', $member->email) . '/' . $updating_travel_order->id . '/' . intval(boolval($action->progress)).'/'.$next_step->id;
+                        array_push($actions, $action);
+                    }
+
+                    send_bpm_notification($member->email,
+                        "[Ordem de viagem $updating_travel_order->id]",
+                        sprintf($this->lang->line('application_notification_travel_order_updated_mail'), base_url().'travelorders'),
+                        null,
+                        base_url() . 'travelorders',
+                        $actions,
+                        $document,
+                        $history);
+                }
+
+                Notification::sendPushNotification($push_receivers, "[Ordem de viagem $updating_travel_order->id] Uma atualização foi feita na Ordem de Viagem", base_url() . 'travelorders');
+
+            } else {
+//Travel Order is backing to the creator
+                array_push($push_receivers, $this->user->email);
+
+                $attributes = array('user_id' => $updating_travel_order->user_id, 'message' => "[Ordem de viagem $updating_travel_order->id] Ordem de viagem cancelada, verifique o histórico", 'url' => base_url() . 'travelorders');
+                Notification::create($attributes);
+
+                Notification::sendPushNotification($push_receivers, "[Ordem de viagem $updating_travel_order->id] Ordem de Viagem cancelada, verifique o histórico", base_url() . 'travelorders');
+            }
+
+            echo "Ordem de viagem atualizada com sucesso";
+            exit;
+
+        }
+    }
 }
