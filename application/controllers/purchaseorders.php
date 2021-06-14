@@ -53,8 +53,42 @@ class PurchaseOrders extends MY_Controller{
             $max_value = false;
         }
 
-        $my_steps = BpmFlow::stepsUserIs(1, $this->user->email);
-        $purchase_orders = PurchaseOrder::find('all', ['conditions' => ['step IN (?) AND canceled != 1 AND finished != 1 ORDER BY id DESC', $my_steps]]);
+        // $my_steps = BpmFlow::stepsUserIs(1, $this->user->email);
+        // $purchase_orders = PurchaseOrder::find('all', ['conditions' => ['step IN (?) AND canceled != 1 AND finished != 1 ORDER BY id DESC', $my_steps]]);
+        $purchase_orders_all = PurchaseOrder::find('all', ['conditions' => ['canceled != 1 AND finished != 1 ORDER BY id DESC']]);
+
+        $purchase_orders_inbox = array();
+        foreach($purchase_orders_all as $po){
+            $po->flow = json_decode($po->flow);
+            foreach ($po->flow->steps as $idx => $step){
+                foreach ($step->members as $member){
+                    // print_r($member->email);
+                    // print_r($this->user->email);
+                    if ($member->email == $this->user->email){
+                        if($po->step == $step->id){
+                            array_push($purchase_orders_inbox, $po->id);
+                            // print_r("Entrou aqui, ". $step->name. ": ".  $po->id . '<br/>');
+                        }
+                    }
+                }
+            }
+        }
+
+        
+
+        // var_dump($purchase_orders_inbox);
+        // print_r('</br> proxima </br>');
+        $purchase_orders_inbox = array_unique($purchase_orders_inbox);
+        $ids_inbox = implode(",", $purchase_orders_inbox);
+        //var_dump($ids_inbox);
+        // print_r("<br/>");
+        $purchase_orders = PurchaseOrder::find('all', ['conditions' => ["id IN ($ids_inbox) AND canceled != 1 AND finished != 1 ORDER BY id DESC"]]);
+        // var_dump($purchase_orders);
+        // print_r("<br/>");    
+        // $query = "SELECT id FROM purchase_order WHERE id IN ($ids_inbox) AND canceled != 1 AND finished != 1 ORDER BY id DESC";
+        // print_r($query);
+        // $purchase_orders = $purchase_orders_inbox;
+
         $progress_purchase_orders = PurchaseOrder::find('all', ['conditions' => ['canceled != 1 AND finished != 1 ORDER BY id DESC'], 'limit' => $limit, 'offset' => $max_value]);
 
         foreach ($progress_purchase_orders as $purchase_order){
@@ -67,16 +101,19 @@ class PurchaseOrders extends MY_Controller{
                     foreach ($step->members as $member){
                         if ($member->name == "creator_name" && $purchase_order->user_id == $this->user->id){
                             if(!in_array($purchase_order, $purchase_orders)){
+                                // print_r("Entrou aqui, creator: ". $purchase_order->id . '<br/>');
                                 array_push($purchase_orders, $purchase_order);
                             }
                         }
-                        if ($member->name == "technical_manager" && $purchase_order->user_id == $this->user->id){
+                        if ($member->name == "technical_manager" && $purchase_order->technical_manager == $this->user->email){
                             if(!in_array($purchase_order, $purchase_orders)){
+                                // print_r("Entrou aqui, technical manager: ". $purchase_order->id . '<br/>');
                                 array_push($purchase_orders, $purchase_order);
                             }
                         }
-                        if ($member->name == "project_leader" && $purchase_order->user_id == $this->user->id){
+                        if ($member->name == "project_leader" && $purchase_order->project_leader == $this->user->email){
                             if(!in_array($purchase_order, $purchase_orders)){
+                                // print_r("Entrou aqui, project leader: ". $purchase_order->id . '</br>');
                                 array_push($purchase_orders, $purchase_order);
                             }
                         }
@@ -97,7 +134,7 @@ class PurchaseOrders extends MY_Controller{
 //        $this->view_data['show_next'] = $show_next;
 
         $this->view_data['purchase_orders'] = $purchase_orders;
-        $this->view_data['my_steps'] = $my_steps;
+        //$this->view_data['my_steps'] = $my_steps;
 
         $this->view_data['filter'] = false;
         $this->theme_view = 'ajax';
