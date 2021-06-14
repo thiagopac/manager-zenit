@@ -7,7 +7,17 @@ if($purchase_orders){
             <div class="col col-1">
                 <p class="title">
                     <strong>[<?=$this->lang->line('application_purchase_order');?> <?=$value->id;?>]</strong>
-                    <?=json_decode($value->response)->work?>
+                    <?php
+                    if(json_decode($value->response)->purchase_class == "Obra"){
+                        echo json_decode($value->response)->work;
+                    }
+                    else if(json_decode($value->response)->purchase_class){
+                        echo json_decode($value->response)->purchase_class;
+                    }else{
+                        echo json_decode($value->response)->work;
+                    }
+                    
+                    ?>
                 </p>
             </div>
             <div class="col col-2">
