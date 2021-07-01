@@ -12,106 +12,108 @@ class TravelOrder extends ActiveRecord\Model{
         $travel_order = TravelOrder::find($travel_order_id);
 
         $flow = json_decode($travel_order->flow);
+        // foreach ($flow->conditions as $condition) {
 
-        foreach ($flow->conditions as $condition) {
+        //     $property_name = $condition->property;
+        //     $property_value = $travel_order->$property_name;
+        //     $operator = $condition->operator;
+        //     $target = $condition->target;
+        //     $comeback_price = $travel_order->total_comeback_price;
 
-            $property_name = $condition->property;
-            $property_value = $travel_order->$property_name;
-            $operator = $condition->operator;
-            $target = $condition->target;
-            $comeback_price = $travel_order->total_comeback_price;
+        //     $comparisons_made = array();
 
-            $comparisons_made = array();
+        //     $is_new_variation = !is_array($condition->progress_order);
+        //     if($is_new_variation){
+        //         switch ($operator) {
+        //             case "<":
+        //                 if ($property_value < $target && !in_array("<", $comparisons_made)){
+        //                     array_push($comparisons_made, "<");
+        //                     return $condition->progress_order->avista;
+        //                 }
+        //                 break;
+        //             case "<=":
+        //                 if ($property_value <= $target && !in_array("<=", $comparisons_made)){
+        //                     if($comeback_price <= 2000){
+        //                         return $condition->progress_order->under_threshold;
+        //                     }else if ($comeback_price > 2000){
+        //                         return $condition->progress_order->above_threshold;
+        //                     }else{
+        //                         return $condition->progress_order->under_threshold;
+        //                     }
+        //                 }
+        //                 break;
+        //             case ">":
+        //                 if ($property_value > $target && !in_array(">", $comparisons_made)){
+        //                     if($comeback_price <= 2000){
+        //                         return $condition->progress_order->under_threshold;
+        //                     }else if ($comeback_price > 2000){
+        //                         return $condition->progress_order->above_threshold;
+        //                     }else{
+        //                         return $condition->progress_order->under_threshold;
+        //                     }
+        //                 }
+        //                 break;
+        //             case ">=":
+        //                 if ($property_value >= $target && !in_array(">=", $comparisons_made)){
+        //                     return $condition->progress_order;
+        //                 }
+        //                 break;
+        //             case "!=":
+        //                 if ($property_value != $target && !in_array("!=", $comparisons_made)){
+        //                     array_push($comparisons_made, "!=");
+        //                     return $condition->progress_order;
+        //                 }
+        //                 break;
+        //             case "==":
+        //                 if ($property_value == $target && !in_array("==", $comparisons_made)){
+        //                     array_push($comparisons_made, "==");
+        //                     return $condition->progress_order;
+        //                 }
+        //                 break;
+        //         }
+        //     }else{
+        //         switch ($operator) {
+        //             case "<":
+        //                 if ($property_value < $target && !in_array("<", $comparisons_made)){
+        //                     array_push($comparisons_made, "<");
+        //                     return $condition->progress_order;
+        //                 }
+        //                 break;
+        //             case "<=":
+        //                 if ($property_value <= $target && !in_array("<=", $comparisons_made)){
+        //                     return $condition->progress_order;
+        //                 }
+        //                 break;
+        //             case ">":
+        //                 if ($property_value > $target && !in_array(">", $comparisons_made)){
+        //                     array_push($comparisons_made, ">");
+        //                     return $condition->progress_order;
+        //                 }
+        //                 break;
+        //             case ">=":
+        //                 if ($property_value >= $target && !in_array(">=", $comparisons_made)){
+        //                     return $condition->progress_order;
+        //                 }
+        //                 break;
+        //             case "!=":
+        //                 if ($property_value != $target && !in_array("!=", $comparisons_made)){
+        //                     array_push($comparisons_made, "!=");
+        //                     return $condition->progress_order;
+        //                 }
+        //                 break;
+        //             case "==":
+        //                 if ($property_value == $target && !in_array("==", $comparisons_made)){
+        //                     array_push($comparisons_made, "==");
+        //                     return $condition->progress_order;
+        //                 }
+        //                 break;
+        //         }
+        //     }
 
-            $is_new_variation = !is_array($condition->progress_order);
-            if($is_new_variation){
-                switch ($operator) {
-                    case "<":
-                        if ($property_value < $target && !in_array("<", $comparisons_made)){
-                            array_push($comparisons_made, "<");
-                            return $condition->progress_order->avista;
-                        }
-                        break;
-                    case "<=":
-                        if ($property_value <= $target && !in_array("<=", $comparisons_made)){
-                            if($comeback_price <= 2000){
-                                return $condition->progress_order->under_threshold;
-                            }else if ($comeback_price > 2000){
-                                return $condition->progress_order->above_threshold;
-                            }else{
-                                return $condition->progress_order->under_threshold;
-                            }
-                        }
-                        break;
-                    case ">":
-                        if ($property_value > $target && !in_array(">", $comparisons_made)){
-                            if($comeback_price <= 2000){
-                                return $condition->progress_order->under_threshold;
-                            }else if ($comeback_price > 2000){
-                                return $condition->progress_order->above_threshold;
-                            }else{
-                                return $condition->progress_order->under_threshold;
-                            }
-                        }
-                        break;
-                    case ">=":
-                        if ($property_value >= $target && !in_array(">=", $comparisons_made)){
-                            return $condition->progress_order;
-                        }
-                        break;
-                    case "!=":
-                        if ($property_value != $target && !in_array("!=", $comparisons_made)){
-                            array_push($comparisons_made, "!=");
-                            return $condition->progress_order;
-                        }
-                        break;
-                    case "==":
-                        if ($property_value == $target && !in_array("==", $comparisons_made)){
-                            array_push($comparisons_made, "==");
-                            return $condition->progress_order;
-                        }
-                        break;
-                }
-            }else{
-                switch ($operator) {
-                    case "<":
-                        if ($property_value < $target && !in_array("<", $comparisons_made)){
-                            array_push($comparisons_made, "<");
-                            return $condition->progress_order;
-                        }
-                        break;
-                    case "<=":
-                        if ($property_value <= $target && !in_array("<=", $comparisons_made)){
-                            return $condition->progress_order;
-                        }
-                        break;
-                    case ">":
-                        if ($property_value > $target && !in_array(">", $comparisons_made)){
-                            array_push($comparisons_made, ">");
-                            return $condition->progress_order;
-                        }
-                        break;
-                    case ">=":
-                        if ($property_value >= $target && !in_array(">=", $comparisons_made)){
-                            return $condition->progress_order;
-                        }
-                        break;
-                    case "!=":
-                        if ($property_value != $target && !in_array("!=", $comparisons_made)){
-                            array_push($comparisons_made, "!=");
-                            return $condition->progress_order;
-                        }
-                        break;
-                    case "==":
-                        if ($property_value == $target && !in_array("==", $comparisons_made)){
-                            array_push($comparisons_made, "==");
-                            return $condition->progress_order;
-                        }
-                        break;
-                }
-            }
+        // }
 
-        }
+        $progress_order = $flow->progress_order;
+        return $progress_order;
 
     }
 
