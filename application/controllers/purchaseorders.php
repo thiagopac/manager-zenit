@@ -70,6 +70,20 @@ class PurchaseOrders extends MY_Controller{
                             // print_r("Entrou aqui, ". $step->name. ": ".  $po->id . '<br/>');
                         }
                     }
+                    if($member->name == 'project_leader'){
+                        if($po->project_leader == $this->user->email){
+                            if($po->step == $step->id){
+                                array_push($purchase_orders_inbox, $po->id);
+                            }
+                        }
+                    }
+                    if($member->name == 'technical_manager'){
+                        if($po->technical_manager == $this->user->email){
+                            if($po->step == $step->id){
+                                array_push($purchase_orders_inbox, $po->id);
+                            }
+                        }
+                    }
                 }
             }
         }
