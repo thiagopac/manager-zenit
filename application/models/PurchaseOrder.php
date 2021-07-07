@@ -20,8 +20,21 @@ class PurchaseOrder extends ActiveRecord\Model{
             $operator = $condition->operator;
             $target = $condition->target;
             $payment_type = $purchase_order->payment_type;
+            $conference = $purchase_order->conference;
 
             $comparisons_made = array();
+
+
+             $flow_avista = $condition->progress_order->avista;
+             $flow_faturado = $condition->progress_order->faturado;
+            if($conference == 'Não'){
+                if (($key = array_search(1, $flow_avista)) !== false) {
+                    unset($flow_avista[$key]);
+                }
+                if (($key = array_search(1, $flow_faturado)) !== false) {
+                    unset($flow_faturado[$key]);
+                }
+            }
 
             $is_new_variation = !is_array($condition->progress_order);
             if($is_new_variation){
@@ -29,28 +42,28 @@ class PurchaseOrder extends ActiveRecord\Model{
                     case "<":
                         if ($property_value < $target && !in_array("<", $comparisons_made)){
                             array_push($comparisons_made, "<");
-                            return $condition->progress_order->avista;
+                            return $flow_avista;
                         }
                         break;
                     case "<=":
                         if ($property_value <= $target && !in_array("<=", $comparisons_made)){
                             if($payment_type == "À vista"){
-                                return $condition->progress_order->avista;
+                                return $flow_avista;
                             }else if ($payment_type == "Faturado"){
-                                return $condition->progress_order->faturado;
+                                return $flow_faturado;
                             }else{
-                                return $condition->progress_order->faturado;
+                                return $flow_faturado;
                             }
                         }
                         break;
                     case ">":
                         if ($property_value > $target && !in_array(">", $comparisons_made)){
                             if($payment_type == "À vista"){
-                                return $condition->progress_order->avista;
+                                return $flow_avista;
                             }else if ($payment_type == "Faturado"){
-                                return $condition->progress_order->faturado;
+                                return $flow_faturado;
                             }else{
-                                return $condition->progress_order->faturado;
+                                return $flow_faturado;
                             }
                         }
                         break;

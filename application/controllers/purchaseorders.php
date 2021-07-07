@@ -258,6 +258,10 @@ class PurchaseOrders extends MY_Controller{
                 unset($_POST["$key"]);
             }
 
+            if($_POST['conference'] == "Não"){
+                $submit_action = 2;
+            }
+
             $response = new stdClass;
             foreach ($_POST as $key => $value) {
 
@@ -275,6 +279,9 @@ class PurchaseOrders extends MY_Controller{
                 }
                 if ($key == 'technical_manager'){
                     $technical_manager = $value;
+                }
+                if($key == 'conference'){
+                    $conference = $value;
                 }
 
                 unset($_POST["$key"]);
@@ -294,6 +301,7 @@ class PurchaseOrders extends MY_Controller{
 
             $_POST['technical_manager'] = $technical_manager;
             $_POST['project_leader'] = $project_leader;
+            $_POST['conference'] = $conference;
 
             $new_purchase_order = PurchaseOrder::create($_POST);
             $push_receivers = array();
