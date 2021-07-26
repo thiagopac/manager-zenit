@@ -221,8 +221,6 @@ class TravelOrders extends MY_Controller{
             $_POST['flow'] = $bpm_flow->flow;
             $_POST['response'] = json_encode($response);
 
-            $_POST['total_going_price'] = $total_going_price;
-            $_POST['total_comeback_price'] = $total_comeback_price;
             $_POST['subject'] = $origin . ' -> ' . $destination;
 
             $_POST['step'] = $submit_action;
@@ -441,19 +439,12 @@ class TravelOrders extends MY_Controller{
 
             $is_progress = null;
             $is_travel = null;
-            $total_going_price = null;
-            $total_comeback_price = null;
+            $total_price = null;
             $payment_type = null;
 
-            if ($_POST['total_going_price'] != null){
-                $total_going_price = $_POST['total_going_price'];
-                $updating_travel_order->total_going_price = $total_going_price;
-                $updating_travel_order->save();
-            }
-
-            if ($_POST['total_comeback_price'] != null){
-                $total_comeback_price = $_POST['total_comeback_price'];
-                $updating_travel_order->total_comeback_price = $total_comeback_price;
+            if ($_POST['total_price'] != null){
+                $total_price = $_POST['total_price'];
+                $updating_travel_order->total_price = $total_price;
                 $updating_travel_order->save();
             }
 
