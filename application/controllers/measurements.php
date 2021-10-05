@@ -207,11 +207,6 @@ class Measurements extends MY_Controller{
     public function write($ajax = false){
         if ($_POST) {
 
-            if ($_POST['price'] == null || $_POST['price'] == ''){
-                $this->session->set_flashdata('message', 'error:'.$this->lang->line('messages_measurement_order_incomplete'));
-                redirect('measurements');
-            }
-
             $countfiles = count($_FILES['files']['name']);
             $file_names_arr = array();
 
@@ -257,10 +252,6 @@ class Measurements extends MY_Controller{
                 unset($_POST["$key"]);
             }
 
-            if($_POST['conference'] == "Não"){
-                $submit_action = 2;
-            }
-
             $response = new stdClass;
             foreach ($_POST as $key => $value) {
 
@@ -270,8 +261,8 @@ class Measurements extends MY_Controller{
                     $price = $value;
                 }
 
-                if ($key == 'description'){
-                    $subject  = $value;
+                if ($key == 'faturamento'){
+                    $faturamento  = $value;
                 }
                 if ($key == 'project_leader'){
                     $project_leader = $value;
@@ -279,8 +270,11 @@ class Measurements extends MY_Controller{
                 if ($key == 'technical_manager'){
                     $technical_manager = $value;
                 }
-                if($key == 'conference'){
-                    $conference = $value;
+                if($key == 'work'){
+                    $work = $value;
+                }
+                if($key == 'requester_company'){
+                    $company = $value;
                 }
 
                 unset($_POST["$key"]);
@@ -293,14 +287,15 @@ class Measurements extends MY_Controller{
             $_POST['response'] = json_encode($response);
 
             $_POST['price'] = $price;
-            $_POST['subject'] = $subject;
+            $_POST['work'] = $work;
 
             $_POST['step'] = $submit_action;
             $_POST['user_id'] = $this->user->id;
 
             $_POST['technical_manager'] = $technical_manager;
             $_POST['project_leader'] = $project_leader;
-            $_POST['conference'] = $conference;
+            $_POST['faturamento'] = $faturamento;
+            $_POST['company'] = $company;
 
             $new_measurement = Measurement::create($_POST);
             $push_receivers = array();
@@ -518,15 +513,21 @@ class Measurements extends MY_Controller{
             $total_price = null;
             $payment_type = null;
 
-            if ($_POST['total_price'] != null){
-                $total_price = $_POST['total_price'];
-                $updating_measurement_order->total_price = $total_price;
+            if ($_POST['price'] != null){
+                $total_price = $_POST['price'];
+                $updating_measurement_order->price = $total_price;
                 $updating_measurement_order->save();
             }
 
-            if ($_POST['payment_type'] != null){
-                $payment_type = $_POST['payment_type'];
-                $updating_measurement_order->payment_type = $payment_type;
+            if ($_POST['work'] != null){
+                $work = $_POST['work'];
+                $updating_measurement_order->work = $work;
+                $updating_measurement_order->save();
+            }
+
+            if ($_POST['faturamento'] != null){
+                $faturamento = $_POST['faturamento'];
+                $updating_measurement_order->faturamento = $faturamento;
                 $updating_measurement_order->save();
             }
 
